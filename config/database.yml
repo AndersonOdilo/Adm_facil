@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: adm_facil_development
+  username: postgres
+  password: 13101994
+  host: localhost
+  port: 5432
+
+production:
+  <<: *default
+  database: adm_facil_production
+  username: postgress
+  password: 13101994
+  host: localhost
+  port: 5432

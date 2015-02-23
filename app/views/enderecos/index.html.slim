@@ -1,0 +1,25 @@
+h1 Listing enderecos
+
+table
+  thead
+    tr
+      th Numero
+      th Complemento
+      th Rua
+      th
+      th
+      th
+
+  tbody
+    - @enderecos.each do |endereco|
+      tr
+        td = endereco.numero
+        td = endereco.complemento
+        td = endereco.rua
+        td = link_to 'Show', endereco
+        td = link_to 'Edit', edit_endereco_path(endereco)
+        td = link_to 'Destroy', endereco, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Endereco', new_endereco_path

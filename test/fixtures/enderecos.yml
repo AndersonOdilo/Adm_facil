@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numero: MyString
+  complemento: MyString
+  rua_id: 
+
+two:
+  numero: MyString
+  complemento: MyString
+  rua_id: 
