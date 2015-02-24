@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Cpf:
+  = @pessoa_fisica.cpf
+p
+  strong Rg:
+  = @pessoa_fisica.rg
+p
+  strong Data nascimento:
+  = @pessoa_fisica.data_nascimento
+
+= link_to 'Edit', edit_pessoa_fisica_path(@pessoa_fisica)
+'|
+= link_to 'Back', pessoas_fisicas_path

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cod: MyString
+  carteira_trabalho: MyString
+  salario: 9.99
+  data_admissao: 2015-02-24
+
+two:
+  cod: MyString
+  carteira_trabalho: MyString
+  salario: 9.99
+  data_admissao: 2015-02-24

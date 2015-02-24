@@ -1,0 +1,21 @@
+h1 Listing categorias_produtos
+
+table
+  thead
+    tr
+      th Descricao
+      th
+      th
+      th
+
+  tbody
+    - @categorias_produtos.each do |categoria_produto|
+      tr
+        td = categoria_produto.descricao
+        td = link_to 'Show', categoria_produto
+        td = link_to 'Edit', edit_categoria_produto_path(categoria_produto)
+        td = link_to 'Destroy', categoria_produto, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Categoria produto', new_categoria_produto_path

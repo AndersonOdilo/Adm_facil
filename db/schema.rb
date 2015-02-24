@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223191809) do
+ActiveRecord::Schema.define(version: 20150224164639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20150223191809) do
 
   add_index "bairros", ["cidade_id"], name: "index_bairros_on_cidade_id", using: :btree
 
+  create_table "categorias_produtos", force: true do |t|
+    t.string   "descricao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "cidades", force: true do |t|
     t.string   "nome"
     t.integer  "estado_id"
@@ -34,11 +40,20 @@ ActiveRecord::Schema.define(version: 20150223191809) do
 
   add_index "cidades", ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
 
+  create_table "clientes", force: true do |t|
+    t.decimal  "limite_credito"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "emails", force: true do |t|
     t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pessoa_id"
   end
+
+  add_index "emails", ["pessoa_id"], name: "index_emails_on_pessoa_id", using: :btree
 
   create_table "enderecos", force: true do |t|
     t.string   "numero"
@@ -46,8 +61,10 @@ ActiveRecord::Schema.define(version: 20150223191809) do
     t.integer  "rua_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pessoa_id"
   end
 
+  add_index "enderecos", ["pessoa_id"], name: "index_enderecos_on_pessoa_id", using: :btree
   add_index "enderecos", ["rua_id"], name: "index_enderecos_on_rua_id", using: :btree
 
   create_table "estados", force: true do |t|
@@ -60,11 +77,48 @@ ActiveRecord::Schema.define(version: 20150223191809) do
 
   add_index "estados", ["pais_id"], name: "index_estados_on_pais_id", using: :btree
 
+  create_table "estoques", force: true do |t|
+    t.integer  "quantidade"
+    t.integer  "nivel_alerta"
+    t.integer  "unidade_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "estoques", ["unidade_id"], name: "index_estoques_on_unidade_id", using: :btree
+
   create_table "fones", force: true do |t|
     t.string   "numero"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pessoa_id"
   end
+
+  add_index "fones", ["pessoa_id"], name: "index_fones_on_pessoa_id", using: :btree
+
+  create_table "fornecedores", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "funcionarios", force: true do |t|
+    t.string   "cod"
+    t.string   "carteira_trabalho"
+    t.decimal  "salario"
+    t.date     "data_admissao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "funcoes", force: true do |t|
+    t.integer  "pessoa_id"
+    t.integer  "papel_id"
+    t.string   "papel_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "funcoes", ["pessoa_id"], name: "index_funcoes_on_pessoa_id", using: :btree
 
   create_table "logradouros", force: true do |t|
     t.string   "nome"
@@ -77,8 +131,64 @@ ActiveRecord::Schema.define(version: 20150223191809) do
 
   add_index "logradouros", ["bairro_id"], name: "index_logradouros_on_bairro_id", using: :btree
 
+  create_table "marcas", force: true do |t|
+    t.string   "nome"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "paises", force: true do |t|
     t.string   "nome"
+    t.string   "sigla"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pessoas", force: true do |t|
+    t.string   "nome"
+    t.integer  "estado_id"
+    t.string   "estado_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pessoas_fisicas", force: true do |t|
+    t.string   "cpf"
+    t.string   "rg"
+    t.date     "data_nascimento"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pessoas_juridicas", force: true do |t|
+    t.string   "nome_fantasia"
+    t.string   "cnpj"
+    t.string   "inscricao_estadual"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "produtos", force: true do |t|
+    t.string   "cod"
+    t.string   "nome"
+    t.string   "descricao"
+    t.decimal  "valor_custo"
+    t.decimal  "valor_venda"
+    t.integer  "marca_id"
+    t.integer  "categoria_produto_id"
+    t.integer  "fornecedor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "estoque_id"
+  end
+
+  add_index "produtos", ["categoria_produto_id"], name: "index_produtos_on_categoria_produto_id", using: :btree
+  add_index "produtos", ["estoque_id"], name: "index_produtos_on_estoque_id", using: :btree
+  add_index "produtos", ["fornecedor_id"], name: "index_produtos_on_fornecedor_id", using: :btree
+  add_index "produtos", ["marca_id"], name: "index_produtos_on_marca_id", using: :btree
+
+  create_table "unidades", force: true do |t|
+    t.string   "descricao"
     t.string   "sigla"
     t.datetime "created_at"
     t.datetime "updated_at"

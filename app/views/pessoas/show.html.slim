@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Nome:
+  = @pessoa.nome
+
+= link_to 'Edit', edit_pessoa_path(@pessoa)
+'|
+= link_to 'Back', pessoas_path

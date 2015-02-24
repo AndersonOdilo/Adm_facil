@@ -1,0 +1,18 @@
+= form_for @pessoa_juridica do |f|
+  - if @pessoa_juridica.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@pessoa_juridica.errors.count, "error")} prohibited this pessoa_juridica from being saved:"
+      ul
+        - @pessoa_juridica.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :nome_fantasia
+    = f.text_field :nome_fantasia
+  .field
+    = f.label :cnpj
+    = f.text_field :cnpj
+  .field
+    = f.label :inscricao_estadual
+    = f.text_field :inscricao_estadual
+  .actions = f.submit 'Save'

@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Nome fantasia:
+  = @pessoa_juridica.nome_fantasia
+p
+  strong Cnpj:
+  = @pessoa_juridica.cnpj
+p
+  strong Inscricao estadual:
+  = @pessoa_juridica.inscricao_estadual
+
+= link_to 'Edit', edit_pessoa_juridica_path(@pessoa_juridica)
+'|
+= link_to 'Back', pessoas_juridicas_path

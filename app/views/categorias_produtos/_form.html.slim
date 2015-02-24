@@ -1,0 +1,12 @@
+= form_for @categoria_produto do |f|
+  - if @categoria_produto.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@categoria_produto.errors.count, "error")} prohibited this categoria_produto from being saved:"
+      ul
+        - @categoria_produto.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :descricao
+    = f.text_field :descricao
+  .actions = f.submit 'Save'

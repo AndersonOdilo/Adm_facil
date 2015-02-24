@@ -1,0 +1,18 @@
+= form_for @pessoa_fisica do |f|
+  - if @pessoa_fisica.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@pessoa_fisica.errors.count, "error")} prohibited this pessoa_fisica from being saved:"
+      ul
+        - @pessoa_fisica.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :cpf
+    = f.text_field :cpf
+  .field
+    = f.label :rg
+    = f.text_field :rg
+  .field
+    = f.label :data_nascimento
+    = f.date_select :data_nascimento
+  .actions = f.submit 'Save'

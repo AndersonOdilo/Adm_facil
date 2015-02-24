@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  resources :estoques
+
+  resources :unidades
+
+  resources :produtos
+
+  resources :categorias_produtos
+
+  resources :marcas
+
+  resources :fornecedores
+
+  resources :funcionarios
+
+  resources :clientes
+
+  resources :funcoes
+
+  resources :pessoas_juridicas
+
+  resources :pessoas_fisicas
+
+  resources :pessoas
+
   resources :enderecos
   match 'estado/cidades/:id', to: "estados#buscar_cidades", via: [:get]
   match 'cidade/bairros/:id', to: "cidades#buscar_bairros", via: [:get]

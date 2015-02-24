@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Limite credito:
+  = @cliente.limite_credito
+
+= link_to 'Edit', edit_cliente_path(@cliente)
+'|
+= link_to 'Back', clientes_path

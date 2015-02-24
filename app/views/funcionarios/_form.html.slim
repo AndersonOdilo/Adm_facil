@@ -1,0 +1,21 @@
+= form_for @funcionario do |f|
+  - if @funcionario.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@funcionario.errors.count, "error")} prohibited this funcionario from being saved:"
+      ul
+        - @funcionario.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :cod
+    = f.text_field :cod
+  .field
+    = f.label :carteira_trabalho
+    = f.text_field :carteira_trabalho
+  .field
+    = f.label :salario
+    = f.text_field :salario
+  .field
+    = f.label :data_admissao
+    = f.date_select :data_admissao
+  .actions = f.submit 'Save'

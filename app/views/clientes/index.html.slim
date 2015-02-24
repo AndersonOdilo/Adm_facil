@@ -1,0 +1,21 @@
+h1 Listing clientes
+
+table
+  thead
+    tr
+      th Limite credito
+      th
+      th
+      th
+
+  tbody
+    - @clientes.each do |cliente|
+      tr
+        td = cliente.limite_credito
+        td = link_to 'Show', cliente
+        td = link_to 'Edit', edit_cliente_path(cliente)
+        td = link_to 'Destroy', cliente, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Cliente', new_cliente_path

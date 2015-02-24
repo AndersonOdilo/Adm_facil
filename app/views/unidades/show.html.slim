@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Descricao:
+  = @unidade.descricao
+p
+  strong Sigla:
+  = @unidade.sigla
+
+= link_to 'Edit', edit_unidade_path(@unidade)
+'|
+= link_to 'Back', unidades_path

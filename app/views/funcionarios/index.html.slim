@@ -1,0 +1,27 @@
+h1 Listing funcionarios
+
+table
+  thead
+    tr
+      th Cod
+      th Carteira trabalho
+      th Salario
+      th Data admissao
+      th
+      th
+      th
+
+  tbody
+    - @funcionarios.each do |funcionario|
+      tr
+        td = funcionario.cod
+        td = funcionario.carteira_trabalho
+        td = funcionario.salario
+        td = funcionario.data_admissao
+        td = link_to 'Show', funcionario
+        td = link_to 'Edit', edit_funcionario_path(funcionario)
+        td = link_to 'Destroy', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Funcionario', new_funcionario_path

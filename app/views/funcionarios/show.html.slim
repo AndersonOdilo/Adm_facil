@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Cod:
+  = @funcionario.cod
+p
+  strong Carteira trabalho:
+  = @funcionario.carteira_trabalho
+p
+  strong Salario:
+  = @funcionario.salario
+p
+  strong Data admissao:
+  = @funcionario.data_admissao
+
+= link_to 'Edit', edit_funcionario_path(@funcionario)
+'|
+= link_to 'Back', funcionarios_path

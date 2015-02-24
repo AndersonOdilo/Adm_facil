@@ -1,0 +1,15 @@
+= form_for @unidade do |f|
+  - if @unidade.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@unidade.errors.count, "error")} prohibited this unidade from being saved:"
+      ul
+        - @unidade.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :descricao
+    = f.text_field :descricao
+  .field
+    = f.label :sigla
+    = f.text_field :sigla
+  .actions = f.submit 'Save'

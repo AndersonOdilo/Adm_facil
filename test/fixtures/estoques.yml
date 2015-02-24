@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantidade: 1
+  nivel_alerta: 1
+  unidade_id: 
+
+two:
+  quantidade: 1
+  nivel_alerta: 1
+  unidade_id: 

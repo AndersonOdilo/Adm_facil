@@ -1,0 +1,30 @@
+p#notice = notice
+
+p
+  strong Cod:
+  = @produto.cod
+p
+  strong Nome:
+  = @produto.nome
+p
+  strong Descricao:
+  = @produto.descricao
+p
+  strong Valor custo:
+  = @produto.valor_custo
+p
+  strong Valor venda:
+  = @produto.valor_venda
+p
+  strong Marca:
+  = @produto.marca
+p
+  strong Categoria produto:
+  = @produto.categoria_produto
+p
+  strong Fornecedor:
+  = @produto.fornecedor
+
+= link_to 'Edit', edit_produto_path(@produto)
+'|
+= link_to 'Back', produtos_path

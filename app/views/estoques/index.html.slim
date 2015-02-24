@@ -1,0 +1,25 @@
+h1 Listing estoques
+
+table
+  thead
+    tr
+      th Quantidade
+      th Nivel alerta
+      th Unidade
+      th
+      th
+      th
+
+  tbody
+    - @estoques.each do |estoque|
+      tr
+        td = estoque.quantidade
+        td = estoque.nivel_alerta
+        td = estoque.unidade
+        td = link_to 'Show', estoque
+        td = link_to 'Edit', edit_estoque_path(estoque)
+        td = link_to 'Destroy', estoque, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Estoque', new_estoque_path

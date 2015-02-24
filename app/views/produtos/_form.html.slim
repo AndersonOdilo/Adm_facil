@@ -1,0 +1,33 @@
+= form_for @produto do |f|
+  - if @produto.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@produto.errors.count, "error")} prohibited this produto from being saved:"
+      ul
+        - @produto.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :cod
+    = f.text_field :cod
+  .field
+    = f.label :nome
+    = f.text_field :nome
+  .field
+    = f.label :descricao
+    = f.text_field :descricao
+  .field
+    = f.label :valor_custo
+    = f.text_field :valor_custo
+  .field
+    = f.label :valor_venda
+    = f.text_field :valor_venda
+  .field
+    = f.label :marca
+    = f.text_field :marca
+  .field
+    = f.label :categoria_produto
+    = f.text_field :categoria_produto
+  .field
+    = f.label :fornecedor
+    = f.text_field :fornecedor
+  .actions = f.submit 'Save'

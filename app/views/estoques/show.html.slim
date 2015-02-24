@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Quantidade:
+  = @estoque.quantidade
+p
+  strong Nivel alerta:
+  = @estoque.nivel_alerta
+p
+  strong Unidade:
+  = @estoque.unidade
+
+= link_to 'Edit', edit_estoque_path(@estoque)
+'|
+= link_to 'Back', estoques_path
