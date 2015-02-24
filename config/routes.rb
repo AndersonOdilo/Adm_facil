@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :usuarios
+
   resources :estoques
 
   resources :unidades
@@ -24,7 +26,9 @@ Rails.application.routes.draw do
   resources :pessoas
 
   resources :enderecos
+
   match 'estado/cidades/:id', to: "estados#buscar_cidades", via: [:get]
+
   match 'cidade/bairros/:id', to: "cidades#buscar_bairros", via: [:get]
   # root 'welcome#index'
 
