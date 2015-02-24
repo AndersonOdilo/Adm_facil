@@ -16,12 +16,16 @@
     = f.label :rua
     = f.collection_select :rua, Logradouro.all, :id, :nome
   .field
-   = select_tag :nome_bairro
+   = label_tag 'Bairro'
+   = select_tag :select_bairro
   .field
-    = select_tag :nome_cidade
+    = label_tag 'Cidade'
+    = select_tag :select_cidade
   .field
-    = select_tag :nome_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados'
+    = label_tag 'Estado'
+    = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados'
   .field
-    = select_tag :nome, options_from_collection_for_select(Pais.all, :id, :sigla)
+    = label_tag 'Pais'
+    = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla)
 
   .actions = f.submit 'Save'

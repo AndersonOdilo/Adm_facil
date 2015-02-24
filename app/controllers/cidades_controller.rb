@@ -5,5 +5,4 @@ class CidadesController < ApplicationController
             format.json {render json: Cidade.find(params[:id]).bairros}
         end
     end
-
 end
