@@ -5,16 +5,27 @@
       ul
         - @pessoa_juridica.errors.full_messages.each do |message|
           li = message
-  .field
+  .form-group
     = f.label :nome
-    = f.text_field :nome
-  .field
+    = f.text_field :nome, class: "form-control"
+  .form-group
     = f.label :nome_fantasia
-    = f.text_field :nome_fantasia
-  .field
+    = f.text_field :nome_fantasia, class: "form-control"
+  .form-group
     = f.label :cnpj
-    = f.text_field :cnpj
-  .field
+    = f.text_field :cnpj, class: "form-control"
+  .form-group
     = f.label :inscricao_estadual
-    = f.text_field :inscricao_estadual
-  .actions = f.submit 'Save'
+    = f.text_field :inscricao_estadual, class: "form-control"
+
+  = f.fields_for :pessoa do |p|
+    = p.hidden_field :id
+    .form-group
+      = p.label :fones
+      = p.fields_for :fones
+    = p.link_to_add 'fone', :fones
+    .form-group
+      = p.label :emails
+      = p.fields_for :emails
+    = p.link_to_add 'email', :emails
+  = f.submit 'Salvar', class: "btn btn-default"

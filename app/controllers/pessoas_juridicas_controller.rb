@@ -1,3 +1,4 @@
+
 class PessoasJuridicasController < ApplicationController
   before_action :set_pessoa_juridica, only: [:show, :edit, :update, :destroy]
 
@@ -15,6 +16,8 @@ class PessoasJuridicasController < ApplicationController
   # GET /pessoas_juridicas/new
   def new
     @pessoa_juridica = PessoaJuridica.new
+    @pessoa_juridica.fones.build
+    @pessoa_juridica.emails.build
   end
 
   # GET /pessoas_juridicas/1/edit
@@ -69,6 +72,8 @@ class PessoasJuridicasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pessoa_juridica_params
-      params.require(:pessoa_juridica).permit(:nome, :nome_fantasia, :cnpj, :inscricao_estadual)
+      params.require(:pessoa_juridica).permit(:nome, :nome_fantasia, :cnpj, :inscricao_estadual,
+        pessoa_attributes: [:id, :nome, :_destroy, fones_attributes: [:id, :numero, :_destroy],
+          emails_attributes: [:id, :descricao, :_destroy]])
     end
 end

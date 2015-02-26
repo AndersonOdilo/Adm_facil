@@ -6,7 +6,8 @@
         - @cliente.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :limite_credito
-    = f.text_field :limite_credito
-  .actions = f.submit 'Save'
+    = f.text_field :limite_credito, class: "form-control"
+
+  = f.submit 'Salvar', class: "btn btn-default"
