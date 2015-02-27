@@ -29,7 +29,7 @@ class PessoasFisicasController < ApplicationController
     respond_to do |format|
       if @pessoa_fisica.save
         format.html { redirect_to @pessoa_fisica, notice: 'Pessoa fisica was successfully created.' }
-        format.json { render :show, status: :created, location: @pessoa_fisica }
+        format.json { render json: @pessoa_fisica.acting_as }
       else
         format.html { render :new }
         format.json { render json: @pessoa_fisica.errors, status: :unprocessable_entity }
@@ -69,6 +69,8 @@ class PessoasFisicasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pessoa_fisica_params
-      params.require(:pessoa_fisica).permit(:nome, :cpf, :rg, :data_nascimento)
+      params.require(:pessoa_fisica).permit(:nome, :cpf, :rg, :data_nascimento, pessoa_attributes: [:id,
+              fones_attributes: [:id, :numero, :_destroy], emails_attributes: [:id, :descricao, :_destroy],
+                enderecos_attributes: [:id, :numero, :complemento, :rua_id, :_destroy]])
     end
 end

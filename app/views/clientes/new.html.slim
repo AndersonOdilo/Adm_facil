@@ -1,5 +1,14 @@
 h1 New cliente
 
+.form-group
+    = label_tag 'Pessoa fisica'
+    = radio_button_tag 'estado', 'pessoas_fisicas', true, class: "radio"
+    = label_tag 'Pessoa fisica'
+    = radio_button_tag 'estado', 'pessoas_juridicas', false, class: "radio"
+
+#pessoa
+    == render 'pessoas_fisicas/form'
+
 == render 'form'
 
 = link_to 'Back', clientes_path

@@ -15,17 +15,21 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores/new
   def new
     @fornecedor = Fornecedor.new
+    @pessoa_juridica = PessoaJuridica.new
+    @pessoa_juridica.fones.build
+    @pessoa_juridica.emails.build
+    @pessoa_juridica.enderecos.build
   end
 
   # GET /fornecedores/1/edit
   def edit
+    @pessoa_juridica = PessoaJuridica.find(@fornecedor.funcao.pessoa.estado)
   end
 
   # POST /fornecedores
   # POST /fornecedores.json
   def create
     @fornecedor = Fornecedor.new(fornecedor_params)
-
     respond_to do |format|
       if @fornecedor.save
         format.html { redirect_to @fornecedor, notice: 'Fornecedor was successfully created.' }
@@ -69,6 +73,6 @@ class FornecedoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fornecedor_params
-      params[:fornecedor]
+      params.require(:fornecedor).permit(:id, :pessoa_id)
     end
 end

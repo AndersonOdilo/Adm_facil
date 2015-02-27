@@ -6,6 +6,7 @@ class Pessoa < ActiveRecord::Base
     has_many :enderecos, dependent: :destroy
     has_many :funcoes, dependent: :destroy
 
-    accepts_nested_attributes_for :fones, :allow_destroy => true
-    accepts_nested_attributes_for :emails, :allow_destroy => true
+    accepts_nested_attributes_for :fones, allow_destroy: true
+    accepts_nested_attributes_for :emails, allow_destroy: true
+    accepts_nested_attributes_for :enderecos, allow_destroy: true
 end

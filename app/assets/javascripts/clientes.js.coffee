@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+    $('#add_cliente').on "click", ->
+        $('#new_pessoa_fisica').submit()
+        $('#new_pessoa_fisica').bind "ajax:success", (event, data, status, xhr) ->
+            $('#cliente_pessoa_id').val(data.id)
+            $('#new_cliente').submit()

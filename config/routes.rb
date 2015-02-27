@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   match 'estado/cidades/:id', to: "estados#buscar_cidades", via: [:get]
 
   match 'cidade/bairros/:id', to: "cidades#buscar_bairros", via: [:get]
+
   # root 'welcome#index'
 
   # Example of regular route:

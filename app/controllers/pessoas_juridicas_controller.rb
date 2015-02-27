@@ -16,8 +16,6 @@ class PessoasJuridicasController < ApplicationController
   # GET /pessoas_juridicas/new
   def new
     @pessoa_juridica = PessoaJuridica.new
-    @pessoa_juridica.fones.build
-    @pessoa_juridica.emails.build
   end
 
   # GET /pessoas_juridicas/1/edit
@@ -32,7 +30,7 @@ class PessoasJuridicasController < ApplicationController
     respond_to do |format|
       if @pessoa_juridica.save
         format.html { redirect_to @pessoa_juridica, notice: 'Pessoa juridica was successfully created.' }
-        format.json { render :show, status: :created, location: @pessoa_juridica }
+        format.json { render json: @pessoa_juridica.acting_as }
       else
         format.html { render :new }
         format.json { render json: @pessoa_juridica.errors, status: :unprocessable_entity }
@@ -46,7 +44,7 @@ class PessoasJuridicasController < ApplicationController
     respond_to do |format|
       if @pessoa_juridica.update(pessoa_juridica_params)
         format.html { redirect_to @pessoa_juridica, notice: 'Pessoa juridica was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pessoa_juridica }
+        format.json { render json: @pessoa_juridica.acting_as }
       else
         format.html { render :edit }
         format.json { render json: @pessoa_juridica.errors, status: :unprocessable_entity }
@@ -74,6 +72,6 @@ class PessoasJuridicasController < ApplicationController
     def pessoa_juridica_params
       params.require(:pessoa_juridica).permit(:nome, :nome_fantasia, :cnpj, :inscricao_estadual,
         pessoa_attributes: [:id, :nome, :_destroy, fones_attributes: [:id, :numero, :_destroy],
-          emails_attributes: [:id, :descricao, :_destroy]])
+          emails_attributes: [:id, :descricao, :_destroy], enderecos_attributes: [:id, :numero, :complemento, :rua_id]])
     end
 end

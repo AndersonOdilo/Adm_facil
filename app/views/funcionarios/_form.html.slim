@@ -5,17 +5,19 @@
       ul
         - @funcionario.errors.full_messages.each do |message|
           li = message
-
-  .field
+  .form-group
+    = f.label :pessoa
+    = f.collection_select :pessoa_id, Pessoa.all, :id, :nome, {}, {class: "form-control"}
+  .form-group
     = f.label :cod
-    = f.text_field :cod
-  .field
+    = f.text_field :cod, class: "form-control"
+  .form-group
     = f.label :carteira_trabalho
-    = f.text_field :carteira_trabalho
-  .field
+    = f.text_field :carteira_trabalho, class: "form-control"
+  .form-group
     = f.label :salario
-    = f.text_field :salario
-  .field
+    = f.text_field :salario, class: "form-control"
+  .form-group
     = f.label :data_admissao
     = f.date_select :data_admissao
-  .actions = f.submit 'Save'
+  = f.submit 'Salvar', class: "btn btn-default"

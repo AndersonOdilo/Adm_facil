@@ -6,26 +6,26 @@
         - @endereco.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :numero
-    = f.text_field :numero
-  .field
+    = f.number_field :numero, class: "form-control"
+  .form-group
     = f.label :complemento
-    = f.text_field :complemento
-  .field
+    = f.text_field :complemento, class: "form-control"
+ .form-group
     = f.label :rua
-    = f.collection_select :rua, Logradouro.all, :id, :nome
-  .field
+    = f.collection_select :rua, Logradouro.all, :id, :nome, {}, {class: "form-control"}
+ .form-group
    = label_tag 'Bairro'
-   = select_tag :select_bairro
-  .field
+   = select_tag :select_bairro, {}, {class: "form-control"}
+ .form-group
     = label_tag 'Cidade'
-    = select_tag :select_cidade
-  .field
+    = select_tag :select_cidade, {}, {class: "form-control"}
+ .form-group
     = label_tag 'Estado'
-    = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados'
-  .field
+    = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados', {class: "form-control"}
+ .form-group
     = label_tag 'Pais'
-    = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla)
+    = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla), {}, {class: "form-control"}
 
   .actions = f.submit 'Save'

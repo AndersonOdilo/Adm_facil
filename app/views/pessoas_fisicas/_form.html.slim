@@ -1,4 +1,4 @@
-= nested_form_for @pessoa_fisica do |f|
+= nested_form_for @pessoa_fisica, remote: true, format: 'json' do |f|
   - if @pessoa_fisica.errors.any?
     #error_explanation
       h2 = "#{pluralize(@pessoa_fisica.errors.count, "error")} prohibited this pessoa_fisica from being saved:"
@@ -6,16 +6,29 @@
         - @pessoa_fisica.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :nome
-    = f.text_field :nome
-  .field
+    = f.text_field :nome, class: 'form-control'
+  .form-group
     = f.label :cpf
-    = f.text_field :cpf
-  .field
+    = f.text_field :cpf, class: 'form-control'
+  .form-group
     = f.label :rg
-    = f.text_field :rg
-  .field
+    = f.text_field :rg, class: 'form-control'
+  .form-group
     = f.label :data_nascimento
     = f.date_select :data_nascimento
-  .actions = f.submit 'Save'
+  = f.fields_for :pessoa do |p|
+    = p.hidden_field :id
+    .form-group
+      = p.label :fones
+      = p.fields_for :fones
+      = p.link_to_add 'Novo fone', :fones
+    .form-group
+      = p.label :emails
+      = p.fields_for :emails
+      = p.link_to_add 'Novo e-mail', :emails
+    .form-group
+      = p.label :enderecos
+      = p.fields_for :enderecos
+      = p.link_to_add 'Novo endereço', :enderecos

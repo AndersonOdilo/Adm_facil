@@ -5,9 +5,9 @@
       ul
         - @cliente.errors.full_messages.each do |message|
           li = message
-
   .form-group
     = f.label :limite_credito
     = f.text_field :limite_credito, class: "form-control"
+  = f.hidden_field :pessoa_id
 
-  = f.submit 'Salvar', class: "btn btn-default"
+  = link_to 'Salvar', '#', class: "btn btn-default", id: 'add_cliente'

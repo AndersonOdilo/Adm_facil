@@ -15,10 +15,20 @@ class ClientesController < ApplicationController
   # GET /clientes/new
   def new
     @cliente = Cliente.new
+    @pessoa_fisica = PessoaFisica.new
+    @pessoa_fisica.fones.build
+    @pessoa_fisica.emails.build
+    @pessoa_fisica.enderecos.build
   end
 
   # GET /clientes/1/edit
   def edit
+    pessoa = @cliente.funcao.pessoa.estado
+    if pessoa.estado_type == PessoaJuridica
+      @pessoa_juridica = pessoa
+    else
+      @pessoa_fisica = pessoa
+    end
   end
 
   # POST /clientes
@@ -69,6 +79,6 @@ class ClientesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cliente_params
-      params.require(:cliente).permit(:limite_credito)
+      params.require(:cliente).permit(:limite_credito, :pessoa_id)
     end
 end
