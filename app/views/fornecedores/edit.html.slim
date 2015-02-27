@@ -1,5 +1,11 @@
 h1 Editing fornecedor
 
+.pessoa
+    - if @pessoa_fisica
+        == render 'pessoas_fisicas/form'
+    - else
+        == render 'pessoas_juridicas/form'
+
 == render 'form'
 
 = link_to 'Show', @fornecedor

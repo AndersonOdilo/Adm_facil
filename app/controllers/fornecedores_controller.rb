@@ -19,11 +19,20 @@ class FornecedoresController < ApplicationController
     @pessoa_juridica.fones.build
     @pessoa_juridica.emails.build
     @pessoa_juridica.enderecos.build
+    @pessoa_fisica = PessoaFisica.new
+    @pessoa_fisica.fones.build
+    @pessoa_fisica.emails.build
+    @pessoa_fisica.enderecos.build
   end
 
   # GET /fornecedores/1/edit
   def edit
-    @pessoa_juridica = PessoaJuridica.find(@fornecedor.funcao.pessoa.estado)
+      pessoa = @fornecedor.funcao.pessoa
+      if pessoa.estado_type == 'PessoaJuridica'
+        @pessoa_juridica = pessoa.specific
+      else
+        @pessoa_fisica = pessoa.specific
+      end
   end
 
   # POST /fornecedores

@@ -15,10 +15,24 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios/new
   def new
     @funcionario = Funcionario.new
+    @pessoa_fisica = PessoaFisica.new
+    @pessoa_fisica.fones.build
+    @pessoa_fisica.emails.build
+    @pessoa_fisica.enderecos.build
+    @pessoa_juridica = PessoaJuridica.new
+    @pessoa_juridica.fones.build
+    @pessoa_juridica.emails.build
+    @pessoa_juridica.enderecos.build
   end
 
   # GET /funcionarios/1/edit
   def edit
+    pessoa = @funcionario.funcao.pessoa
+    if pessoa.estado_type == 'PessoaJuridica'
+      @pessoa_juridica = pessoa.specific
+    else
+      @pessoa_fisica = pessoa.specific
+    end
   end
 
   # POST /funcionarios

@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+    $('#estado_pessoas_fisicas').on "click", ->
+        $('#pessoa_fisica').show()
+        $('#pessoa_juridica').hide()
+        $('#new_pessoa_juridica')[0].reset()
+    $('#estado_pessoas_juridicas').on "click", ->
+        $('#pessoa_fisica').hide()
+        $('#pessoa_juridica').show()
+        $('#new_pessoa_fisica')[0].reset()

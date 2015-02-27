@@ -1,4 +1,16 @@
-h1 New fornecedor
+h1 Novo Fornecedor
+
+.form-group
+    = label_tag 'Pessoa Fisica'
+    = radio_button_tag 'estado', 'pessoas_fisicas', true
+    = label_tag 'Pessoa Juridica'
+    = radio_button_tag 'estado' ,'pessoas_juridicas', false
+
+#pessoa_fisica
+    == render 'pessoas_fisicas/form'
+
+#pessoa_juridica style="display:none"
+    == render 'pessoas_juridicas/form'
 
 == render 'form'
 

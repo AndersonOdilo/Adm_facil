@@ -1,7 +1,4 @@
-
-== render 'pessoas_juridicas/form'
-
-= nested_form_for @fornecedor do |f|
+= form_for @fornecedor do |f|
   - if @fornecedor.errors.any?
     #error_explanation
       h2 = "#{pluralize(@fornecedor.errors.count, "error")} prohibited this fornecedor from being saved:"

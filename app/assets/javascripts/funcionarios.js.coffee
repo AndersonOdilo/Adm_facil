@@ -1,3 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+    $('#add_funcionario').on "click", ->
+        if ($('#estado_pessoas_fisicas').is(':checked'))
+            $('#new_pessoa_fisica').submit()
+        else
+            $('#new_pessoa_juridica').submit()
+
+    $('#new_pessoa_fisica').bind "ajax:success", (event, data, status, xhr) ->
+            $('#funcionario_pessoa_id').val(data.id)
+            $('#new_funcionario').submit()
+
+    $('#new_pessoa_juridica').bind "ajax:success", (event, data, status, xhr) ->
+            $('#funcionario_pessoa_id').val(data.id)
+            $('#new_funcionario').submit()

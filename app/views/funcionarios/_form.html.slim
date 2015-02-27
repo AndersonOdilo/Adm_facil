@@ -6,9 +6,6 @@
         - @funcionario.errors.full_messages.each do |message|
           li = message
   .form-group
-    = f.label :pessoa
-    = f.collection_select :pessoa_id, Pessoa.all, :id, :nome, {}, {class: "form-control"}
-  .form-group
     = f.label :cod
     = f.text_field :cod, class: "form-control"
   .form-group
@@ -20,4 +17,5 @@
   .form-group
     = f.label :data_admissao
     = f.date_select :data_admissao
-  = f.submit 'Salvar', class: "btn btn-default"
+  = f.hidden_field :pessoa_id
+  = link_to 'Salvar', '#', class: "btn btn-default", id: 'add_funcionario'

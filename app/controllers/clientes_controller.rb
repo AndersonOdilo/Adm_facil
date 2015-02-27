@@ -19,15 +19,19 @@ class ClientesController < ApplicationController
     @pessoa_fisica.fones.build
     @pessoa_fisica.emails.build
     @pessoa_fisica.enderecos.build
+    @pessoa_juridica = PessoaJuridica.new
+    @pessoa_juridica.fones.build
+    @pessoa_juridica.emails.build
+    @pessoa_juridica.enderecos.build
   end
 
   # GET /clientes/1/edit
   def edit
-    pessoa = @cliente.funcao.pessoa.estado
-    if pessoa.estado_type == PessoaJuridica
-      @pessoa_juridica = pessoa
+    pessoa = @cliente.funcao.pessoa
+    if pessoa.estado_type == 'PessoaJuridica'
+      @pessoa_juridica = pessoa.specific
     else
-      @pessoa_fisica = pessoa
+      @pessoa_fisica = pessoa.specific
     end
   end
 
