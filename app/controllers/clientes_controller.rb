@@ -27,7 +27,7 @@ class ClientesController < ApplicationController
 
   # GET /clientes/1/edit
   def edit
-    pessoa = @cliente.funcao.pessoa
+    pessoa = @cliente.pessoa
     if pessoa.estado_type == 'PessoaJuridica'
       @pessoa_juridica = pessoa.specific
     else

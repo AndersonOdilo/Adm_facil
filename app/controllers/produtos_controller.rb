@@ -15,6 +15,8 @@ class ProdutosController < ApplicationController
   # GET /produtos/new
   def new
     @produto = Produto.new
+    @marca = Marca.new
+    @categoria_produto = CategoriaProduto.new
   end
 
   # GET /produtos/1/edit

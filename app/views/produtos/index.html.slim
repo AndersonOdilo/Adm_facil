@@ -1,6 +1,6 @@
-h1 Listing produtos
+h1 Produtos
 
-table
+table class="table"
   thead
     tr
       th Cod
@@ -23,13 +23,13 @@ table
         td = produto.descricao
         td = produto.valor_custo
         td = produto.valor_venda
-        td = produto.marca
-        td = produto.categoria_produto
-        td = produto.fornecedor
-        td = link_to 'Show', produto
+        td = produto.marca.nome
+        td = produto.categoria_produto.descricao
+        td = produto.fornecedor.pessoa.nome
+        td = link_to 'Abrir', produto
         td = link_to 'Edit', edit_produto_path(produto)
-        td = link_to 'Destroy', produto, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Excluir', produto, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Produto', new_produto_path
+= link_to 'Novo Produto', new_produto_path

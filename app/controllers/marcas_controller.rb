@@ -29,7 +29,7 @@ class MarcasController < ApplicationController
     respond_to do |format|
       if @marca.save
         format.html { redirect_to @marca, notice: 'Marca was successfully created.' }
-        format.json { render :show, status: :created, location: @marca }
+        format.json { render json: @marca }
       else
         format.html { render :new }
         format.json { render json: @marca.errors, status: :unprocessable_entity }

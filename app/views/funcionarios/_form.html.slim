@@ -1,4 +1,4 @@
-= form_for @funcionario do |f|
+= form_for @funcionario, html: {id: 'new_funcionario'} do |f|
   - if @funcionario.errors.any?
     #error_explanation
       h2 = "#{pluralize(@funcionario.errors.count, "error")} prohibited this funcionario from being saved:"

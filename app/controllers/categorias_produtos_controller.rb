@@ -29,7 +29,7 @@ class CategoriasProdutosController < ApplicationController
     respond_to do |format|
       if @categoria_produto.save
         format.html { redirect_to @categoria_produto, notice: 'Categoria produto was successfully created.' }
-        format.json { render :show, status: :created, location: @categoria_produto }
+        format.json { render json: @categoria_produto }
       else
         format.html { render :new }
         format.json { render json: @categoria_produto.errors, status: :unprocessable_entity }

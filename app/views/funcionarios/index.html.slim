@@ -1,11 +1,11 @@
-h1 Listing funcionarios
+h1 Funcionarios
 
-table
+table class="table"
   thead
     tr
       th Cod
-      th Carteira trabalho
-      th Salario
+      th Nome
+      th CPF/CNPJ
       th Data admissao
       th
       th
@@ -15,13 +15,16 @@ table
     - @funcionarios.each do |funcionario|
       tr
         td = funcionario.cod
-        td = funcionario.carteira_trabalho
-        td = funcionario.salario
+        td = funcionario.pessoa.nome
+        - if funcionario.pessoa.estado_type == "PessoaFisica"
+          td = funcionario.pessoa.specific.cpf
+        - else
+         td = funcionario.pessoa.specific.cnpj
         td = funcionario.data_admissao
-        td = link_to 'Show', funcionario
+        td = link_to 'Abrir', funcionario
         td = link_to 'Edit', edit_funcionario_path(funcionario)
-        td = link_to 'Destroy', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Excluir', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Funcionario', new_funcionario_path
+= link_to 'Novo Funcionario', new_funcionario_path

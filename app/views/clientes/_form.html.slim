@@ -1,4 +1,4 @@
-= form_for @cliente do |f|
+= form_for @cliente, html: {id: 'new_cliente'} do |f|
   - if @cliente.errors.any?
     #error_explanation
       h2 = "#{pluralize(@cliente.errors.count, "error")} prohibited this cliente from being saved:"
@@ -10,4 +10,4 @@
     = f.text_field :limite_credito, class: "form-control"
   = f.hidden_field :pessoa_id
 
-  = link_to 'Salvar', '#', class: "btn btn-default", id: 'add_cliente'
+  = link_to 'Salvar', '#', class: 'btn btn-default', id: 'add_cliente'

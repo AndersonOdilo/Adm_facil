@@ -43,7 +43,7 @@ class PessoasFisicasController < ApplicationController
     respond_to do |format|
       if @pessoa_fisica.update(pessoa_fisica_params)
         format.html { redirect_to @pessoa_fisica, notice: 'Pessoa fisica was successfully updated.' }
-        format.json { render :show, status: :ok, location: @pessoa_fisica }
+        format.json { render json: @pessoa_fisica.acting_as }
       else
         format.html { render :edit }
         format.json { render json: @pessoa_fisica.errors, status: :unprocessable_entity }

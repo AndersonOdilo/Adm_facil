@@ -1,4 +1,4 @@
-= nested_form_for @pessoa_fisica, remote: true, format: 'json' do |f|
+= nested_form_for @pessoa_fisica, remote: true, format: 'json', html: {id: 'new_pessoa_fisica'} do |f|
   - if @pessoa_fisica.errors.any?
     #error_explanation
       h2 = "#{pluralize(@pessoa_fisica.errors.count, "error")} prohibited this pessoa_fisica from being saved:"

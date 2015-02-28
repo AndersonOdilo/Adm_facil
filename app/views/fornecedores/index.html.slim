@@ -1,8 +1,10 @@
-h1 Listing fornecedores
+h1 Fornecedores
 
-table
+table class="table"
   thead
     tr
+      th Nome
+      th CPF/CNPJ
       th
       th
       th
@@ -10,10 +12,16 @@ table
   tbody
     - @fornecedores.each do |fornecedor|
       tr
-        td = link_to 'Show', fornecedor
+        - if fornecedor.pessoa.estado_type == 'PessoaJuridica'
+          td = fornecedor.pessoa.specific.nome_fantasia
+          td = fornecedor.pessoa.specific.cnpj
+        - else
+          td = fornecedor.pessoa.nome
+          td = fornecedor.pessoa.specific.cpf
+        td = link_to 'abrir', fornecedor
         td = link_to 'Edit', edit_fornecedor_path(fornecedor)
-        td = link_to 'Destroy', fornecedor, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Excluir', fornecedor, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Fornecedor', new_fornecedor_path
+= link_to 'Nova Fornecedor', new_fornecedor_path

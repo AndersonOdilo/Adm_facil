@@ -17,8 +17,6 @@ Rails.application.routes.draw do
 
   resources :clientes
 
-  resources :funcoes
-
   resources :pessoas_juridicas
 
   resources :pessoas_fisicas

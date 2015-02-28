@@ -6,28 +6,34 @@
         - @produto.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :cod
-    = f.text_field :cod
-  .field
-    = f.label :nome
-    = f.text_field :nome
-  .field
-    = f.label :descricao
-    = f.text_field :descricao
-  .field
-    = f.label :valor_custo
-    = f.text_field :valor_custo
-  .field
-    = f.label :valor_venda
-    = f.text_field :valor_venda
-  .field
-    = f.label :marca
-    = f.text_field :marca
-  .field
-    = f.label :categoria_produto
-    = f.text_field :categoria_produto
-  .field
+  .form-group
     = f.label :fornecedor
-    = f.text_field :fornecedor
-  .actions = f.submit 'Save'
+    = f.collection_select :fornecedor, Fornecedor.all, :id, :class, {}, class: 'form-control'
+  .form-group
+    = f.label :marca
+    = f.collection_select :marca, Marca.all, :id, :nome, {}, class: 'form-control'
+    br
+    button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nova_marca"
+      'Nova Marca
+  .form-group
+    = f.label :categoria_produto
+    = f.collection_select :categoria_produto, CategoriaProduto.all, :id, :descricao, {}, class: 'form-control'
+    br
+    button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nova_categoria"
+      'Nova Categoria
+  .form-group
+    = f.label :cod
+    = f.text_field :cod, class: 'form-control'
+  .form-group
+    = f.label :nome
+    = f.text_field :nome, class: 'form-control'
+  .form-group
+    = f.label :descricao
+    = f.text_field :descricao, class: 'form-control'
+  .form-group
+    = f.label :valor_custo
+    = f.text_field :valor_custo, class: 'form-control'
+  .form-group
+    = f.label :valor_venda
+    = f.text_field :valor_venda, class: 'form-control'
+  = f.submit 'Salvar', class: 'btn btn-default'

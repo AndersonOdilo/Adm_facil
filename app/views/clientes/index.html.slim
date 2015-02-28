@@ -1,8 +1,10 @@
-h1 Listing clientes
+h1 Clientes
 
-table
+table class="table"
   thead
     tr
+      th Nome
+      th CPF/CNPJ
       th Limite credito
       th
       th
@@ -11,11 +13,17 @@ table
   tbody
     - @clientes.each do |cliente|
       tr
-        td = cliente.limite_credito
-        td = link_to 'Show', cliente
-        td = link_to 'Edit', edit_cliente_path(cliente)
-        td = link_to 'Destroy', cliente, data: {:confirm => 'Are you sure?'}, :method => :delete
+      - if cliente.pessoa.estado_type == 'PessoaFisica'
+          td = cliente.pessoa.nome
+          td = cliente.pessoa.specific.cpf
+      - else
+          td = cliente.pessoa.specific.nome_fantasia
+          td = cliente.pessoa.specific.cnpj
+      td = cliente.limite_credito
+      td = link_to 'Abrir', cliente
+      td = link_to 'Edit', edit_cliente_path(cliente)
+      td = link_to 'Excluir', cliente, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 
-= link_to 'New Cliente', new_cliente_path
+= link_to 'Novo Cliente', new_cliente_path
