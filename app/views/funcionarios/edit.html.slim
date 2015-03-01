@@ -1,13 +1,16 @@
 h1 Editar Funcionario
 
-.pessoa
-    - if @pessoa_fisica
-        == render 'pessoas_fisicas/form'
-    -else
-        == render 'pessoas_juridicas/form'
+- if @pessoa_fisica
+    == render 'pessoas_fisicas/form'
+    == render 'form'
+    = link_to 'Salvar', '#', class: "btn btn-primary", id: 'edit_funcionario_fisica'
 
-== render 'form'
+-else
+    == render 'pessoas_juridicas/form'
+    == render 'form'
+    = link_to 'Salvar', '#', class: "btn btn-primary", id: 'edit_funcionario_juridica'
 
+br
 = link_to 'Abrir', @funcionario
 '|
 = link_to 'Voltar', :back

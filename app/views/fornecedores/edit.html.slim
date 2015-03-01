@@ -1,13 +1,15 @@
 h1 Editar Fornecedor
 
-.pessoa
-    - if @pessoa_fisica
-        == render 'pessoas_fisicas/form'
-    - else
-        == render 'pessoas_juridicas/form'
+- if @pessoa_fisica
+    == render 'pessoas_fisicas/form'
+    == render 'form'
+    = link_to 'Salvar', '#', id: 'edit_fornecedor_fisica', class: 'btn btn-primary'
+- else
+    == render 'pessoas_juridicas/form'
+    == render 'form'
+    = link_to 'Salvar', '#', id: 'edit_fornecedor_juridica', class: 'btn btn-primary'
 
-== render 'form'
-
+br
 = link_to 'Abrir', @fornecedor
 '|
 = link_to 'Voltar', :back

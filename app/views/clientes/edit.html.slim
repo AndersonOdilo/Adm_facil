@@ -1,13 +1,15 @@
 h1 Editar Cliente
 
-.pessoa
-    - if @pessoa_fisica
-        == render 'pessoas_fisicas/form'
-    -else
-        == render 'pessoas_juridicas/form'
+- if @pessoa_fisica
+    == render 'pessoas_fisicas/form'
+    == render 'form'
+    = link_to 'Salvar', '#', class: 'btn btn-primary', id: 'edit_cliente_fisica'
+-else
+    == render 'pessoas_juridicas/form'
+    == render 'form'
+    = link_to 'Salvar', '#', class: 'btn btn-primary', id: 'edit_cliente_juridica'
 
-== render 'form'
-
+br
 = link_to 'Abrir', @cliente
 '|
 = link_to 'voltar', :back

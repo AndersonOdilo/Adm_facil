@@ -1,8 +1,43 @@
 p#notice = notice
 
 p
-  strong Limite credito:
-  = @cliente.limite_credito
+    strong Nome:
+    = @cliente.pessoa.specific.nome
+
+-if @cliente.pessoa.estado_type == 'PessoaFisica'
+    p
+        strong Cpf:
+        = @cliente.pessoa.specific.cpf
+-else
+    p
+        strong CNPJ:
+        = @cliente.pessoa.specific.cnpj
+    p
+        strong Inscricao estadual:
+        = @cliente.pessoa.specific.inscricao_estadual
+p
+    strong Limite credito:
+    = @cliente.limite_credito
+
+p
+    strong Fones:
+    ul
+        - @cliente.pessoa.fones.each do |fone|
+            li
+                = fone.numero
+
+p
+    strong E-mails:
+    ul
+        - @cliente.pessoa.emails.each do |email|
+            li
+                = email.descricao
+
+p
+    strong Endereços:
+    ul
+        - @cliente.pessoa.enderecos.each do |endereco|
+            li
 
 = link_to 'Edit', edit_cliente_path(@cliente)
 '|
