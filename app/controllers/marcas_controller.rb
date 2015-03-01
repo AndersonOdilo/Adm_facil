@@ -15,6 +15,10 @@ class MarcasController < ApplicationController
   # GET /marcas/new
   def new
     @marca = Marca.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /marcas/1/edit

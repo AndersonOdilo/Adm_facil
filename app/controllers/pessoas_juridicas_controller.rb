@@ -16,6 +16,13 @@ class PessoasJuridicasController < ApplicationController
   # GET /pessoas_juridicas/new
   def new
     @pessoa_juridica = PessoaJuridica.new
+    @pessoa_juridica.fones.build
+    @pessoa_juridica.emails.build
+    @pessoa_juridica.enderecos.build
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pessoas_juridicas/1/edit

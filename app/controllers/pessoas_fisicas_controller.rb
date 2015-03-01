@@ -15,6 +15,13 @@ class PessoasFisicasController < ApplicationController
   # GET /pessoas_fisicas/new
   def new
     @pessoa_fisica = PessoaFisica.new
+    @pessoa_fisica.fones.build
+    @pessoa_fisica.emails.build
+    @pessoa_fisica.enderecos.build
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /pessoas_fisicas/1/edit

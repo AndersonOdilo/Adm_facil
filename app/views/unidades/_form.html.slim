@@ -6,10 +6,10 @@
         - @unidade.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :descricao
     = f.text_field :descricao
-  .field
+  .form-group
     = f.label :sigla
     = f.text_field :sigla
   .actions = f.submit 'Save'

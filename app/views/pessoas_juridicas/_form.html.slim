@@ -7,16 +7,16 @@
           li = message
   .form-group
     = f.label :nome
-    = f.text_field :nome, class: "form-control"
+    = f.text_field :nome, class: "form-control input-sm"
   .form-group
     = f.label :nome_fantasia
-    = f.text_field :nome_fantasia, class: "form-control"
+    = f.text_field :nome_fantasia, class: "form-control input-sm"
   .form-group
     = f.label :cnpj
-    = f.text_field :cnpj, class: "form-control"
+    = f.text_field :cnpj, class: "form-control input-sm"
   .form-group
     = f.label :inscricao_estadual
-    = f.text_field :inscricao_estadual, class: "form-control"
+    = f.text_field :inscricao_estadual, class: "form-control input-sm"
 
   = f.fields_for :pessoa do |p|
     = p.hidden_field :id
@@ -32,3 +32,7 @@
       = p.label :enderecos
       = p.fields_for :enderecos
       = p.link_to_add 'Novo endereço', :enderecos
+
+<script src="/assets/funcionarios.js"></script>
+<script src="/assets/clientes.js"></script>
+<script src="/assets/fornecedores.js"></script>

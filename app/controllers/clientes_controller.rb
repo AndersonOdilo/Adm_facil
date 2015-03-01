@@ -15,14 +15,6 @@ class ClientesController < ApplicationController
   # GET /clientes/new
   def new
     @cliente = Cliente.new
-    @pessoa_fisica = PessoaFisica.new
-    @pessoa_fisica.fones.build
-    @pessoa_fisica.emails.build
-    @pessoa_fisica.enderecos.build
-    @pessoa_juridica = PessoaJuridica.new
-    @pessoa_juridica.fones.build
-    @pessoa_juridica.emails.build
-    @pessoa_juridica.enderecos.build
   end
 
   # GET /clientes/1/edit

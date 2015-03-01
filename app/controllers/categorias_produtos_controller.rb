@@ -15,6 +15,10 @@ class CategoriasProdutosController < ApplicationController
   # GET /categorias_produtos/new
   def new
     @categoria_produto = CategoriaProduto.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /categorias_produtos/1/edit

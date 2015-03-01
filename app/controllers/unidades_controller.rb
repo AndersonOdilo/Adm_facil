@@ -15,6 +15,10 @@ class UnidadesController < ApplicationController
   # GET /unidades/new
   def new
     @unidade = Unidade.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /unidades/1/edit
@@ -29,7 +33,7 @@ class UnidadesController < ApplicationController
     respond_to do |format|
       if @unidade.save
         format.html { redirect_to @unidade, notice: 'Unidade was successfully created.' }
-        format.json { render :show, status: :created, location: @unidade }
+        format.json { render json: @unidade }
       else
         format.html { render :new }
         format.json { render json: @unidade.errors, status: :unprocessable_entity }

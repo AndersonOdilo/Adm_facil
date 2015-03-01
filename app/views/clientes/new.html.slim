@@ -1,17 +1,16 @@
 h1 Novo Cliente
 
 .form-group
-    = label_tag 'Pessoa Fisica'
-    = radio_button_tag 'estado', 'pessoas_fisicas', true
-    = label_tag 'Pessoa Juridica'
-    = radio_button_tag 'estado' ,'pessoas_juridicas', false
+    = label_tag 'Pessoa Fisica', nil, class: "checkbox-inline"
+    = radio_button_tag 'estado', 'pessoas_fisicas', false, class: "checkbox-inline"
+    = label_tag 'Pessoa Juridica', nil, class: "checkbox-inline"
+    = radio_button_tag 'estado' ,'pessoas_juridicas', false, class: "checkbox-inline"
 
 #pessoa_fisica
-    == render 'pessoas_fisicas/form'
 
-#pessoa_juridica style="display:none"
-    == render 'pessoas_juridicas/form'
+#pessoa_juridica
 
-== render 'form'
+#funcionario style="display:none"
+    == render 'form'
 
 = link_to 'voltar', :back

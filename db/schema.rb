@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224191448) do
+ActiveRecord::Schema.define(version: 20150301005436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,16 +76,6 @@ ActiveRecord::Schema.define(version: 20150224191448) do
   end
 
   add_index "estados", ["pais_id"], name: "index_estados_on_pais_id", using: :btree
-
-  create_table "estoques", force: true do |t|
-    t.integer  "quantidade"
-    t.integer  "nivel_alerta"
-    t.integer  "unidade_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "estoques", ["unidade_id"], name: "index_estoques_on_unidade_id", using: :btree
 
   create_table "fones", force: true do |t|
     t.string   "numero"
@@ -180,12 +170,15 @@ ActiveRecord::Schema.define(version: 20150224191448) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "estoque_id"
+    t.integer  "unidade_id"
+    t.integer  "quantidade_estoque"
   end
 
   add_index "produtos", ["categoria_produto_id"], name: "index_produtos_on_categoria_produto_id", using: :btree
   add_index "produtos", ["estoque_id"], name: "index_produtos_on_estoque_id", using: :btree
   add_index "produtos", ["fornecedor_id"], name: "index_produtos_on_fornecedor_id", using: :btree
   add_index "produtos", ["marca_id"], name: "index_produtos_on_marca_id", using: :btree
+  add_index "produtos", ["unidade_id"], name: "index_produtos_on_unidade_id", using: :btree
 
   create_table "unidades", force: true do |t|
     t.string   "descricao"

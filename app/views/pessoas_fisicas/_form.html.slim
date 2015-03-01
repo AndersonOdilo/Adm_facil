@@ -8,13 +8,13 @@
 
   .form-group
     = f.label :nome
-    = f.text_field :nome, class: 'form-control'
+    = f.text_field :nome, class: 'form-control input-sm'
   .form-group
     = f.label :cpf
-    = f.text_field :cpf, class: 'form-control'
+    = f.text_field :cpf, class: 'form-control input-sm'
   .form-group
     = f.label :rg
-    = f.text_field :rg, class: 'form-control'
+    = f.text_field :rg, class: 'form-control input-sm'
   .form-group
     = f.label :data_nascimento
     = f.date_select :data_nascimento
@@ -32,3 +32,7 @@
       = p.label :enderecos
       = p.fields_for :enderecos
       = p.link_to_add 'Novo endereço', :enderecos
+
+<script src="/assets/funcionarios.js"></script>
+<script src="/assets/clientes.js"></script>
+<script src="/assets/fornecedores.js"></script>

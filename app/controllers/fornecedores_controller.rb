@@ -15,14 +15,6 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores/new
   def new
     @fornecedor = Fornecedor.new
-    @pessoa_juridica = PessoaJuridica.new
-    @pessoa_juridica.fones.build
-    @pessoa_juridica.emails.build
-    @pessoa_juridica.enderecos.build
-    @pessoa_fisica = PessoaFisica.new
-    @pessoa_fisica.fones.build
-    @pessoa_fisica.emails.build
-    @pessoa_fisica.enderecos.build
   end
 
   # GET /fornecedores/1/edit

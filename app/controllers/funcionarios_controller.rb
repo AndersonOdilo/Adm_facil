@@ -15,14 +15,6 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios/new
   def new
     @funcionario = Funcionario.new
-    @pessoa_fisica = PessoaFisica.new
-    @pessoa_fisica.fones.build
-    @pessoa_fisica.emails.build
-    @pessoa_fisica.enderecos.build
-    @pessoa_juridica = PessoaJuridica.new
-    @pessoa_juridica.fones.build
-    @pessoa_juridica.emails.build
-    @pessoa_juridica.enderecos.build
   end
 
   # GET /funcionarios/1/edit
