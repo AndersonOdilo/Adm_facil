@@ -17,10 +17,10 @@ div class="modal fade" id="nova_marca" tabindex="-1" role="dialog" aria-labelled
 
           .form-group
             = f.label :nome
-            = f.text_field :nome
+            = f.text_field :nome, class: 'form-control input-sm'
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar
         = link_to 'Salvar', '#', class: "btn btn-primary", id: 'add_marca'
 
-<script src="/assets/produtos.js"></script>
+<script src="/assets/marcas.js"></script>

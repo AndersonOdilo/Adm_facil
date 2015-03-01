@@ -1,23 +1,22 @@
 .form-group
+    = label_tag 'Pais'
+    = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla), class: 'form-control input-sm'
+.form-group
+    = label_tag 'Estado'
+    = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados', class: 'form-control input-sm'
+.form-group
+    = label_tag 'Cidade'
+    = select_tag :select_cidade, {}, {class: 'form-control input-sm'}
+.form-group
+   = label_tag 'Bairro'
+   = select_tag :select_bairro, {}, {class: 'form-control input-sm'}
+.form-group
+    = f.label :rua
+    = f.collection_select :rua, Logradouro.all, :id, :nome, {}, {class: 'form-control input-sm'}
+.form-group
     = f.label :numero
     = f.number_field :numero, class: 'form-control input-sm'
 .form-group
     = f.label :complemento
     = f.text_field :complemento, class: 'form-control input-sm'
-.form-group
-    = f.label :rua
-    = f.collection_select :rua, Logradouro.all, :id, :nome, {}, {class: 'form-control input-sm'}
-.form-group
-   = label_tag 'Bairro'
-   = select_tag :select_bairro, {}, {class: 'form-control input-sm'}
-.form-group
-    = label_tag 'Cidade'
-    = select_tag :select_cidade, {}, {class: 'form-control input-sm'}
-.form-group
-    = label_tag 'Estado'
-    = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados', class: 'form-control input-sm'
-
-.form-group
-    = label_tag 'Pais'
-    = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla),  class: 'form-control input-sm'
     = f.link_to_remove "Excluir"

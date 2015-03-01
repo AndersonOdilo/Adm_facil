@@ -3,7 +3,7 @@ h1 Listing pessoas_juridicas
 table
   thead
     tr
-      th Nome fantasia
+      th Nome
       th Cnpj
       th Inscricao estadual
       th
@@ -13,7 +13,7 @@ table
   tbody
     - @pessoas_juridicas.each do |pessoa_juridica|
       tr
-        td = pessoa_juridica.nome_fantasia
+        td = pessoa_juridica.nome
         td = pessoa_juridica.cnpj
         td = pessoa_juridica.inscricao_estadual
         td = link_to 'Show', pessoa_juridica

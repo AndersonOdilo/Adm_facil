@@ -1,0 +1,21 @@
+h1 Listing cargos
+
+table
+  thead
+    tr
+      th Descricao
+      th
+      th
+      th
+
+  tbody
+    - @cargos.each do |cargo|
+      tr
+        td = cargo.descricao
+        td = link_to 'Show', cargo
+        td = link_to 'Edit', edit_cargo_path(cargo)
+        td = link_to 'Destroy', cargo, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Cargo', new_cargo_path

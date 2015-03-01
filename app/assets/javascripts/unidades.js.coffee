@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+    $('#add_unidade').on "click", ->
+        $('#new_unidade').submit()
+
+    $('#new_unidade').bind "ajax:success", (event, data, status, xhr) ->
+        $('#produto_unidade').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected","selected");)
+        $('#nova_unidade').modal('hide')
+        $('#new_unidade')[0].reset()

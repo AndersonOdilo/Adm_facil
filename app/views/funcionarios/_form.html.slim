@@ -6,6 +6,11 @@
         - @funcionario.errors.full_messages.each do |message|
           li = message
   .form-group
+    = f.label :cargo
+    = f.collection_select :cargo, Cargo.all, :id, :descricao,{}, class: 'form-control input-sm'
+    br
+    = link_to 'Novo Cargo', new_cargo_path, remote: true, class: "btn btn-primary btn-xs"
+  .form-group
     = f.label :cod
     = f.text_field :cod, class: 'form-control input-sm'
   .form-group
@@ -17,5 +22,7 @@
   .form-group
     = f.label :data_admissao
     = f.date_select :data_admissao
-  = f.hidden_field :pessoa_id
+  = f.hidden_field :pessoa_id, id: 'pessoa_id'
   = link_to 'Salvar', '#', class: "btn btn-default", id: 'add_funcionario'
+
+#cargo_modal

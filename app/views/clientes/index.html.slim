@@ -13,16 +13,15 @@ table class="table"
   tbody
     - @clientes.each do |cliente|
       tr
-      - if cliente.pessoa.estado_type == 'PessoaFisica'
-          td = cliente.pessoa.nome
+        td = cliente.pessoa.specific.nome
+        - if cliente.pessoa.estado_type == 'PessoaFisica'
           td = cliente.pessoa.specific.cpf
-      - else
-          td = cliente.pessoa.specific.nome_fantasia
+        - else
           td = cliente.pessoa.specific.cnpj
-      td = cliente.limite_credito
-      td = link_to 'Abrir', cliente
-      td = link_to 'Edit', edit_cliente_path(cliente)
-      td = link_to 'Excluir', cliente, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = cliente.limite_credito
+        td = link_to 'Abrir', cliente
+        td = link_to 'Edit', edit_cliente_path(cliente)
+        td = link_to 'Excluir', cliente, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 

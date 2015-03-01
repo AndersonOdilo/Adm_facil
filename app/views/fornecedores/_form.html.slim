@@ -6,5 +6,5 @@
         - @fornecedor.errors.full_messages.each do |message|
           li = message
 
-  = f.hidden_field :pessoa_id
+  = f.hidden_field :pessoa_id, id: 'pessoa_id'
   = link_to 'Salvar', '#', id: 'add_fornecedor', class: 'btn btn-default'

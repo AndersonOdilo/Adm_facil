@@ -1,0 +1,35 @@
+div class="modal fade" id="novo_fornecedor" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+  div class="modal-dialog modal-lg"
+    div class="modal-content"
+      div class="modal-header"
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times
+        h4 class="modal-title" id="myModalLabel"
+            'Nova Marca
+      div class="modal-body"
+        .form-group
+          = label_tag 'Pessoa Fisica', nil, class: "checkbox-inline"
+          = radio_button_tag 'estado', 'pessoas_fisicas', false, class: "checkbox-inline"
+          = label_tag 'Pessoa Juridica', nil, class: "checkbox-inline"
+          = radio_button_tag 'estado' ,'pessoas_juridicas', false, class: "checkbox-inline"
+        #pessoa_fisica
+        #pessoa_juridica
+        #funcionario style="display:none"
+          = form_for @fornecedor, remote: true, format: 'json' do |f|
+            - if @fornecedor.errors.any?
+              #error_explanation
+                h2 = "#{pluralize(@fornecedor.errors.count, "error")} prohibited this fornecedor from being saved:"
+                ul
+                  - @fornecedor.errors.full_messages.each do |message|
+                    li = message
+
+            = f.hidden_field :pessoa_id, id: 'pessoa_id'
+      div class="modal-footer"
+        button type="button" class="btn btn-default" data-dismiss="modal"
+            'Fechar
+        = link_to 'Salvar', '#', class: "btn btn-primary", id: 'add_fornecedor'
+
+<script src="/assets/pessoas.js"></script>
+<script src="/assets/pessoas_fisicas.js"></script>
+<script src="/assets/pessoas_juridicas.js"></script>
+<script src="/assets/fornecedores.js"></script>

@@ -23,16 +23,14 @@
     .form-group
       = p.label :fones
       = p.fields_for :fones
-      = p.link_to_add 'Novo fone', :fones
+      = p.link_to_add 'Novo fone', :fones, class: "btn btn-primary btn-xs"
     .form-group
       = p.label :emails
       = p.fields_for :emails
-      = p.link_to_add 'Novo e-mail', :emails
+      = p.link_to_add 'Novo e-mail', :emails, class: "btn btn-primary btn-xs"
     .form-group
       = p.label :enderecos
       = p.fields_for :enderecos
-      = p.link_to_add 'Novo endereço', :enderecos
+      = p.link_to_add 'Novo endereço', :enderecos, class: "btn btn-primary btn-xs"
 
-<script src="/assets/funcionarios.js"></script>
-<script src="/assets/clientes.js"></script>
-<script src="/assets/fornecedores.js"></script>
+<script src='/assets/pessoas_fisicas.js'></script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301005436) do
+ActiveRecord::Schema.define(version: 20150301011910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,12 @@ ActiveRecord::Schema.define(version: 20150301005436) do
   end
 
   add_index "bairros", ["cidade_id"], name: "index_bairros_on_cidade_id", using: :btree
+
+  create_table "cargos", force: true do |t|
+    t.string   "descricao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categorias_produtos", force: true do |t|
     t.string   "descricao"
@@ -98,7 +104,10 @@ ActiveRecord::Schema.define(version: 20150301005436) do
     t.date     "data_admissao"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "cargo_id"
   end
+
+  add_index "funcionarios", ["cargo_id"], name: "index_funcionarios_on_cargo_id", using: :btree
 
   create_table "funcoes", force: true do |t|
     t.integer  "pessoa_id"

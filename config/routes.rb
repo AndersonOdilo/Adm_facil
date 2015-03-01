@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :usuarios
+  resources :cargos
 
-  resources :estoques
+  devise_for :usuarios
 
   resources :unidades
 
@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   resources :pessoas_juridicas
 
   resources :pessoas_fisicas
-
-  resources :pessoas
 
   resources :enderecos
 

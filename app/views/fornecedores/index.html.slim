@@ -12,11 +12,10 @@ table class="table"
   tbody
     - @fornecedores.each do |fornecedor|
       tr
+        td = fornecedor.pessoa.specific.nome
         - if fornecedor.pessoa.estado_type == 'PessoaJuridica'
-          td = fornecedor.pessoa.specific.nome_fantasia
           td = fornecedor.pessoa.specific.cnpj
         - else
-          td = fornecedor.pessoa.nome
           td = fornecedor.pessoa.specific.cpf
         td = link_to 'abrir', fornecedor
         td = link_to 'Edit', edit_fornecedor_path(fornecedor)

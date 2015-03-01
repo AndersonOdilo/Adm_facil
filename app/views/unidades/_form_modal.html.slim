@@ -17,13 +17,13 @@ div class="modal fade" id="nova_unidade" tabindex="-1" role="dialog" aria-labell
 
           .form-group
             = f.label :descricao
-            = f.text_field :descricao
+            = f.text_field :descricao, class: 'form-control input-sm'
           .form-group
             = f.label :sigla
-            = f.text_field :sigla
+            = f.text_field :sigla, class: 'form-control input-sm'
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar
         = link_to 'Salvar', '#', class: "btn btn-primary", id: 'add_unidade'
 
-<script src="/assets/produtos.js"></script>
+<script src="/assets/unidades.js"></script>

@@ -1,0 +1,26 @@
+div class="modal fade" id="novo_cargo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  div class="modal-dialog"
+    div class="modal-content"
+      div class="modal-header"
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times
+        h4 class="modal-title" id="myModalLabel"
+            'Nova Marca
+      div class="modal-body"
+        = form_for @cargo, remote: true, format: 'json' do |f|
+          - if @cargo.errors.any?
+            #error_explanation
+              h2 = "#{pluralize(@cargo.errors.count, "error")} prohibited this cargo from being saved:"
+              ul
+                - @cargo.errors.full_messages.each do |message|
+                    li = message
+
+          .form-group
+            = f.label :descricao
+            = f.text_field :descricao, class: 'form-control input-sm'
+      div class="modal-footer"
+        button type="button" class="btn btn-default" data-dismiss="modal"
+            'Fechar
+        = link_to 'Salvar', '#', class: "btn btn-primary", id: 'add_cargo'
+
+<script src="/assets/cargos.js"></script>

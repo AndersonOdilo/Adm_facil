@@ -6,7 +6,7 @@ $ ->
                 success: (data) ->
                     $('#pessoa_juridica').hide()
                     $('#pessoa_fisica').show()
-                    $('#funcionario').show()
+                    $('#formulario').show()
 
     $('#estado_pessoas_juridicas').on "click", ->
          $.ajax
@@ -15,5 +15,5 @@ $ ->
             success: (data) ->
                 $('#pessoa_fisica').hide()
                 $('#pessoa_juridica').show()
-                $('#funcionario').show()
+                $('#formulario').show()
 

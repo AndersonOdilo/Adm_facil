@@ -6,42 +6,58 @@
         - @produto.errors.full_messages.each do |message|
           li = message
 
-  .form-group
-    = f.label :fornecedor
-    = f.collection_select :fornecedor, Fornecedor.all, :id, :class, {}, class: 'form-control input-sm'
-  .form-group
-    = f.label :marca
-    = f.collection_select :marca, Marca.all, :id, :nome, {}, class: 'form-control input-sm'
-    br
-    = link_to 'Nova Marca', new_marca_path, remote: true, class: "btn btn-primary btn-xs"
-  .form-group
-    = f.label :categoria_produto
-    = f.collection_select :categoria_produto, CategoriaProduto.all, :id, :descricao, {}, class: 'form-control input-sm'
-    br
-    = link_to 'Nova Categoria', new_categoria_produto_path, remote: true, class: "btn btn-primary btn-xs"
-  .form-group
-    = f.label :cod
-    = f.text_field :cod, class: 'form-control input-sm'
-  .form-group
-    = f.label :nome
-    = f.text_field :nome, class: 'form-control input-sm'
-  .form-group
-    = f.label :descricao
-    = f.text_field :descricao, class: 'form-control input-sm'
-  .form-group
-    = f.label :quantidade_estoque
-    = f.number_field :quantidade_estoque, class: 'form-control input-sm'
-  .form-group
-    = f.label :unidade
-    = f.collection_select :unidade, Unidade.all, :id, :descricao, {}, class: 'form-control input-sm'
-    br
-    = link_to 'Nova Unidade', new_unidade_path, remote: true, class: "btn btn-primary btn-xs"
-  .form-group
-    = f.label :valor_custo
-    = f.text_field :valor_custo, class: 'form-control input-sm'
-  .form-group
-    = f.label :valor_venda
-    = f.text_field :valor_venda, class: 'form-control input-sm'
+  .row
+    .col-xs-7
+      .form-group
+        = f.label :fornecedor
+        = f.collection_select :fornecedor, Fornecedor.all, :id, :nome, {}, class: 'form-control input-sm'
+      = link_to 'Novo Fornecedor', new_fornecedor_path, remote: true, class: "btn btn-primary btn-xs"
+    .col-xs-5
+      .form-group
+        = f.label :marca
+        = f.collection_select :marca, Marca.all, :id, :nome, {}, class: 'form-control input-sm'
+      = link_to 'Nova Marca', new_marca_path, remote: true, class: "btn btn-primary btn-xs"
+  .row
+    .col-xs-5
+      .form-group
+        = f.label :cod
+        = f.text_field :cod, class: 'form-control input-sm'
+    .col-xs-7
+      .form-group
+        = f.label :categoria_produto
+        = f.collection_select :categoria_produto, CategoriaProduto.all, :id, :descricao, {}, class: 'form-control input-sm'
+        br
+        = link_to 'Nova Categoria', new_categoria_produto_path, remote: true, class: "btn btn-primary btn-xs"
+  .row
+    .col-xs-12
+      .form-group
+        = f.label :nome
+        = f.text_field :nome, class: 'form-control input-sm'
+  .row
+    .col-xs-12
+      .form-group
+        = f.label :descricao
+        = f.text_field :descricao, class: 'form-control input-sm'
+  .row
+    .col-xs-2
+      .form-group
+        = f.label :quantidade_estoque
+        = f.number_field :quantidade_estoque, class: 'form-control input-sm'
+    .col-xs-2
+      .form-group
+        = f.label :unidade
+        = f.collection_select :unidade, Unidade.all, :id, :descricao, {}, class: 'form-control input-sm'
+        br
+        = link_to 'Nova Unidade', new_unidade_path, remote: true, class: "btn btn-primary btn-xs"
+    .col-xs-2
+      .form-group
+        = f.label :valor_custo
+        = f.text_field :valor_custo, class: 'form-control input-sm'
+    .col-xs-2
+      .form-group
+        = f.label :valor_venda
+        = f.text_field :valor_venda, class: 'form-control input-sm'
+
   = f.submit 'Salvar', class: 'btn btn-default'
 
 #marca_modal
@@ -49,3 +65,5 @@
 #categoria_modal
 
 #unidade_modal
+
+#fornecedor_modal

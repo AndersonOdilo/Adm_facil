@@ -15,6 +15,10 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores/new
   def new
     @fornecedor = Fornecedor.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /fornecedores/1/edit
