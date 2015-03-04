@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
+  resources :pedidos
+
   resources :cargos
 
   devise_for :usuarios
 
   resources :unidades
 
-  resources :produtos
+  resources :produtos  do
+    collection do
+      get 'autocomplete'
+    end
+  end
 
   resources :categorias_produtos
 

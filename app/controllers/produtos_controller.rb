@@ -1,6 +1,20 @@
 class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
+  def autocomplete
+    @produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
+    produtos = []
+    @produtos.each do |produto|
+      produtos <<  { value: produto.id, label: produto.nome, preco: produto.valor_venda, quantidade: produto.quantidade_estoque}
+    end
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: produtos
+      }
+    end
+  end
+
   # GET /produtos
   # GET /produtos.json
   def index

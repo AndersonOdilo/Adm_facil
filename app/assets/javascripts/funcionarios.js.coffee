@@ -5,10 +5,9 @@ $ ->
         else
             $('#new_pessoa_juridica').submit()
 
-    $('#edit_funcionario_fisica').on "click", ->
-        $('#new_pessoa_fisica').submit()
-
-    $('#edit_funcionario_juridica').on "click", ->
-        $('#new_pessoa_juridica').submit()
-
+    $('#edit_funcionario').on "click", ->
+        if $('#new_pessoa_fisica').length
+            $('#new_pessoa_fisica').submit()
+        else if $('#new_pessoa_juridica').length
+            $('#new_pessoa_juridica').submit()
 

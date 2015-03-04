@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data: 2015-03-04
+  desconto: 9.99
+  obs: MyString
+  cliente_id: 
+  funcionario_id: 
+
+two:
+  data: 2015-03-04
+  desconto: 9.99
+  obs: MyString
+  cliente_id: 
+  funcionario_id: 

@@ -4,8 +4,8 @@ div class="modal fade" id="novo_cargo" tabindex="-1" role="dialog" aria-labelled
       div class="modal-header"
         button type="button" class="close" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times
-        h4 class="modal-title" id="myModalLabel"
-            'Nova Marca
+        h2 class="modal-title" id="myModalLabel"
+            'Novo Cargo
       div class="modal-body"
         = form_for @cargo, remote: true, format: 'json' do |f|
           - if @cargo.errors.any?

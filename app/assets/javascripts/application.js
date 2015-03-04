@@ -12,10 +12,26 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui.min
 //= require jquery.turbolinks
 //= require jquery_nested_form
 //= require turbolinks
 //= require_tree .
 //= require bootstrap.min
 
+var ready;
+ready = (function() {
+  $("#produto_nome").autocomplete({
+    source: '/produtos/autocomplete.json',
+    select: function( event, ui ) {
+        $( "#produto_nome" ).val( ui.item.label );
+        $( "#produto_id" ).val( ui.item.value );
+        $("#produto_preco").val( ui.item.preco );
+        $("#produto_estoque").val( ui.item.quantidade );
+        return false;
+    }
+  });
+});
 
+$(document).ready(ready);
+$(document).on('page:load', ready);

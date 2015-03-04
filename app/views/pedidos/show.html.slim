@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Data:
+  = @pedido.data
+p
+  strong Desconto:
+  = @pedido.desconto
+p
+  strong Obs:
+  = @pedido.obs
+p
+  strong Cliente:
+  = @pedido.cliente
+p
+  strong Funcionario:
+  = @pedido.funcionario
+
+= link_to 'Edit', edit_pedido_path(@pedido)
+'|
+= link_to 'Back', pedidos_path

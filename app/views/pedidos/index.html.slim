@@ -1,0 +1,29 @@
+h1 Listing pedidos
+
+table
+  thead
+    tr
+      th Data
+      th Desconto
+      th Obs
+      th Cliente
+      th Funcionario
+      th
+      th
+      th
+
+  tbody
+    - @pedidos.each do |pedido|
+      tr
+        td = pedido.data
+        td = pedido.desconto
+        td = pedido.obs
+        td = pedido.cliente
+        td = pedido.funcionario
+        td = link_to 'Show', pedido
+        td = link_to 'Edit', edit_pedido_path(pedido)
+        td = link_to 'Destroy', pedido, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Pedido', new_pedido_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301011910) do
+ActiveRecord::Schema.define(version: 20150304143333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,18 @@ ActiveRecord::Schema.define(version: 20150301011910) do
 
   add_index "funcoes", ["pessoa_id"], name: "index_funcoes_on_pessoa_id", using: :btree
 
+  create_table "itens_pedidos", force: true do |t|
+    t.integer  "produto_id"
+    t.integer  "pedido_id"
+    t.integer  "quantidade"
+    t.decimal  "preco"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "itens_pedidos", ["pedido_id"], name: "index_itens_pedidos_on_pedido_id", using: :btree
+  add_index "itens_pedidos", ["produto_id"], name: "index_itens_pedidos_on_produto_id", using: :btree
+
   create_table "logradouros", force: true do |t|
     t.string   "nome"
     t.string   "cep"
@@ -142,6 +154,19 @@ ActiveRecord::Schema.define(version: 20150301011910) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pedidos", force: true do |t|
+    t.date     "data"
+    t.decimal  "desconto"
+    t.string   "obs"
+    t.integer  "cliente_id"
+    t.integer  "funcionario_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pedidos", ["cliente_id"], name: "index_pedidos_on_cliente_id", using: :btree
+  add_index "pedidos", ["funcionario_id"], name: "index_pedidos_on_funcionario_id", using: :btree
 
   create_table "pessoas", force: true do |t|
     t.string   "nome"
