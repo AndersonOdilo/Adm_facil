@@ -21,7 +21,11 @@ Rails.application.routes.draw do
 
   resources :funcionarios
 
-  resources :clientes
+  resources :clientes do
+    collection do
+      get 'autocomplete'
+    end
+  end
 
   resources :pessoas_juridicas
 

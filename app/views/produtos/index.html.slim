@@ -1,35 +1,36 @@
-h1 Produtos
+div class="panel panel-default"
+  <!-- Default panel contents -->
+  div class="panel-heading"
+    h3 Produtos
+  div class="panel-body"
+    table class="table"
+      thead
+        tr
+          th Cod
+          th Nome
+          th Descricao
+          th Valor custo
+          th Valor venda
+          th Marca
+          th Categoria produto
+          th Fornecedor
+          th
+          th
+          th
 
-table class="table"
-  thead
-    tr
-      th Cod
-      th Nome
-      th Descricao
-      th Valor custo
-      th Valor venda
-      th Marca
-      th Categoria produto
-      th Fornecedor
-      th
-      th
-      th
+      tbody
+        - @produtos.each do |produto|
+          tr
+            td = produto.cod
+            td = produto.nome
+            td = produto.descricao
+            td = produto.valor_custo
+            td = produto.valor_venda
+            td = produto.marca.nome
+            td = produto.categoria_produto.descricao
+            td = produto.fornecedor.pessoa.nome
+            td = link_to 'Abrir', produto
+            td = link_to 'Edit', edit_produto_path(produto)
+            td = link_to 'Excluir', produto, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-  tbody
-    - @produtos.each do |produto|
-      tr
-        td = produto.cod
-        td = produto.nome
-        td = produto.descricao
-        td = produto.valor_custo
-        td = produto.valor_venda
-        td = produto.marca.nome
-        td = produto.categoria_produto.descricao
-        td = produto.fornecedor.pessoa.nome
-        td = link_to 'Abrir', produto
-        td = link_to 'Edit', edit_produto_path(produto)
-        td = link_to 'Excluir', produto, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'Novo Produto', new_produto_path
+= link_to 'Novo Produto', new_produto_path, class: 'btn btn-primary btn-xs'

@@ -12,7 +12,7 @@
         .col-xs-6
           .form-group
             = f.label :nome
-            = f.text_field :nome, class: "form-control input-sm"
+            = f.text_field :nome, class: "form-control input-sm", required: true
         .col-xs-6
           .form-group
             = f.label :nome_fantasia
@@ -56,8 +56,8 @@
             .row
                 .col-xs-4
                   .form-group
-                    = endereco.label :rua
-                    = endereco.collection_select :rua, Logradouro.all, :id, :nome, {}, {class: 'form-control input-sm'}
+                    = endereco.label :logradouro
+                    = endereco.collection_select :logradouro, Logradouro.all, :id, :nome, {}, {class: 'form-control input-sm'}
                 .col-xs-2
                   .form-group
                     = endereco.label :numero
@@ -66,7 +66,7 @@
                   .form-group
                     = endereco.label :complemento
                     = endereco.text_field :complemento, class: 'form-control input-sm'
-                  = endereco.link_to_remove 'Excluir'
+                  = endereco.link_to_remove 'Excluir', class: "btn btn-danger btn-xs"
       = p.link_to_add 'Novo endereço', :enderecos, class: "btn btn-primary btn-xs"
 
     .form-group
@@ -77,7 +77,7 @@
           = p.fields_for :fones do |fone|
               .col-xs-2
                 = fone.text_field :numero, class: 'form-control input-sm'
-                = fone.link_to_remove 'Excluir'
+                = fone.link_to_remove 'Excluir', class: "btn btn-danger btn-xs"
           = p.link_to_add 'Novo fone', :fones, class: "btn btn-primary btn-xs"
 
     .form-group
@@ -88,7 +88,7 @@
             = p.fields_for :emails do |email|
                 .col-xs-4
                   = email.text_field :descricao, class: 'form-control input-sm'
-                  = email.link_to_remove 'Excluir'
+                  = email.link_to_remove 'Excluir', class: "btn btn-danger btn-xs"
             .form-group
               = p.link_to_add 'Novo e-mail', :emails, class: "btn btn-primary btn-xs"
 

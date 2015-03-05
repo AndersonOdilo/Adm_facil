@@ -11,8 +11,12 @@
  * file per style scope.
  *
  *
+ *= require bootstrap.min
  *= require jquery-ui.min
  *= require_tree
  *= require_self
- *= require bootstrap.min
  */
+
+body {
+    background-color: #FCFCFC
+}

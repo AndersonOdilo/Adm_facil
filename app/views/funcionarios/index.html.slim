@@ -1,30 +1,31 @@
-h1 Funcionarios
+div class="panel panel-default"
+  <!-- Default panel contents -->
+  div class="panel-heading"
+    h3 Funcionarios
+  div class="panel-body"
+    table class="table"
+      thead
+        tr
+          th Cod
+          th Nome
+          th CPF/CNPJ
+          th Data admissao
+          th
+          th
+          th
 
-table class="table"
-  thead
-    tr
-      th Cod
-      th Nome
-      th CPF/CNPJ
-      th Data admissao
-      th
-      th
-      th
-
-  tbody
-    - @funcionarios.each do |funcionario|
-      tr
-        td = funcionario.cod
-        td = funcionario.pessoa.specific.nome
-        - if funcionario.pessoa.estado_type == "PessoaFisica"
-          td = funcionario.pessoa.specific.cpf
-        - else
-         td = funcionario.pessoa.specific.cnpj
-        td = funcionario.data_admissao
-        td = link_to 'Abrir', funcionario
-        td = link_to 'Edit', edit_funcionario_path(funcionario)
-        td = link_to 'Excluir', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
+      tbody
+        - @funcionarios.each do |funcionario|
+          tr
+            td = funcionario.cod
+            td = funcionario.pessoa.specific.nome
+            - if funcionario.pessoa.estado_type == "PessoaFisica"
+              td = funcionario.pessoa.specific.cpf
+            - else
+             td = funcionario.pessoa.specific.cnpj
+            td = funcionario.data_admissao
+            td = link_to 'Abrir', funcionario
+            td = link_to 'Edit', edit_funcionario_path(funcionario)
+            td = link_to 'Excluir', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 = link_to 'Novo Funcionario', new_funcionario_path, class: "btn btn-primary btn-xs"

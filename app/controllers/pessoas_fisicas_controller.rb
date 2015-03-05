@@ -78,6 +78,6 @@ class PessoasFisicasController < ApplicationController
     def pessoa_fisica_params
       params.require(:pessoa_fisica).permit(:nome, :cpf, :rg, :data_nascimento, pessoa_attributes: [:id,
               fones_attributes: [:id, :numero, :_destroy], emails_attributes: [:id, :descricao, :_destroy],
-                enderecos_attributes: [:id, :numero, :complemento, :rua_id, :_destroy]])
+                enderecos_attributes: [:id, :numero, :complemento, :logradouro_id, :_destroy]])
     end
 end

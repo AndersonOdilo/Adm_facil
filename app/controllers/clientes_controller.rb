@@ -1,10 +1,24 @@
 class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
+  def autocomplete
+    @clientes = Pessoa.joins("LEFT OUTER JOIN funcoes on pessoas.id = funcoes.pessoa_id
+        LEFT OUTER JOIN clientes on funcoes.papel_id = clientes.id where funcoes.papel_type = 'Cliente'")
+    clientes = []
+    @clientes.each do |cliente|
+      clientes <<  { value: cliente.id, label: cliente.nome}
+    end
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: clientes
+      }
+    end
+  end
   # GET /clientes
   # GET /clientes.json
   def index
-    @clientes = Cliente.all
+    @clientes = Cliente.paginate(:page => params[:page])
   end
 
   # GET /clientes/1

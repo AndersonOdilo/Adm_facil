@@ -79,6 +79,6 @@ class PessoasJuridicasController < ApplicationController
     def pessoa_juridica_params
       params.require(:pessoa_juridica).permit(:nome, :nome_fantasia, :cnpj, :inscricao_estadual,
         pessoa_attributes: [:id, :nome, :_destroy, fones_attributes: [:id, :numero, :_destroy],
-          emails_attributes: [:id, :descricao, :_destroy], enderecos_attributes: [:id, :numero, :complemento, :rua_id, :_destroy]])
+          emails_attributes: [:id, :descricao, :_destroy], enderecos_attributes: [:id, :numero, :complemento, :logradouro_id, :_destroy]])
     end
 end

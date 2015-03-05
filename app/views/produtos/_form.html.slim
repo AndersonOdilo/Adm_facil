@@ -16,53 +16,53 @@
         .col-xs-6
           .form-group
             = f.label :fornecedor
-            = f.collection_select :fornecedor_id, Fornecedor.all, :id, :nome, {}, class: 'form-control input-sm'
+            = f.collection_select :fornecedor_id, Fornecedor.all, :id, :nome, {}, class: 'form-control input-sm', required: true
         = link_to 'Novo Fornecedor', new_fornecedor_path, remote: true, class: "btn btn-primary btn-xs"
 
       .row
         .col-xs-4
           .form-group
             = f.label :marca
-            = f.collection_select :marca_id, Marca.all, :id, :nome, {}, class: 'form-control input-sm'
+            = f.collection_select :marca_id, Marca.all, :id, :nome, {}, class: 'form-control input-sm, required: true'
           = link_to 'Nova Marca', new_marca_path, remote: true, class: "btn btn-primary btn-xs"
         .col-xs-6
           .form-group
             = f.label :categoria_produto
-            = f.collection_select :categoria_produto_id, CategoriaProduto.all, :id, :descricao, {}, class: 'form-control input-sm'
+            = f.collection_select :categoria_produto_id, CategoriaProduto.all, :id, :descricao, {}, class: 'form-control input-sm', required: true
           = link_to 'Nova Categoria', new_categoria_produto_path, remote: true, class: "btn btn-primary btn-xs"
 
       .row
         .col-xs-12
           .form-group
             = f.label :nome
-            = f.text_field :nome, class: 'form-control input-sm'
+            = f.text_field :nome, class: 'form-control input-sm', required: true
 
       .row
         .col-xs-12
           .form-group
             = f.label :descricao
-            = f.text_field :descricao, class: 'form-control input-sm'
+            = f.text_field :descricao, class: 'form-control input-sm', required: true
 
       .row
         .col-xs-2
           .form-group
             = f.label :quantidade_estoque
-            = f.number_field :quantidade_estoque, class: 'form-control input-sm'
+            = f.number_field :quantidade_estoque, class: 'form-control input-sm', required: true
         .col-xs-2
           .form-group
             = f.label :unidade
-            = f.collection_select :unidade_id, Unidade.all, :id, :descricao, {}, class: 'form-control input-sm'
+            = f.collection_select :unidade_id, Unidade.all, :id, :descricao, {}, class: 'form-control input-sm', required: true
           = link_to 'Nova Unidade', new_unidade_path, remote: true, class: "btn btn-primary btn-xs"
         .col-xs-2
           .form-group
             = f.label :valor_custo
-            = f.text_field :valor_custo, class: 'form-control input-sm'
+            = f.text_field :valor_custo, class: 'form-control input-sm', required: true
         .col-xs-2
           .form-group
             = f.label :valor_venda
-            = f.text_field :valor_venda, class: 'form-control input-sm'
+            = f.text_field :valor_venda, class: 'form-control input-sm', required: true
 
-  = f.submit 'Salvar', class: 'btn btn-primary'
+  = f.submit 'Salvar', class: "btn btn-success btn-lg btn-block"
 
 #marca_modal
 

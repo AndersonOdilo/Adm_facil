@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require jquery.turbolinks
+//= require jquery.mask.min
 //= require jquery_nested_form
 //= require turbolinks
 //= require_tree .
@@ -31,6 +32,23 @@ ready = (function() {
         return false;
     }
   });
+  $("#cliente_nome").autocomplete({
+    source: '/clientes/autocomplete.json',
+    select: function( event, ui ) {
+        $( "#cliente_nome" ).val( ui.item.label );
+        $( "#pedido_cliente_id" ).val( ui.item.value );
+        return false;
+    }
+  });
+  $( "#datepicker" ).datepicker({
+    dateFormat : 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true
+  });
+  $("#pessoa_juridica_cnpj").mask("99.999.999/9999-99");
+  $("#pessoa_juridica_inscricao_estadual").mask("99999999-99");
+  $("#pessoa_fisica_cpf").mask("999.999.999-99");
+  $("#pessoa_fisica_rg").mask("99.999.999-9");
 });
 
 $(document).ready(ready);

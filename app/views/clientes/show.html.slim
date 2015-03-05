@@ -1,44 +1,58 @@
 p#notice = notice
 
-p
-    strong Nome:
-    = @cliente.pessoa.specific.nome
+div class="panel panel-info"
+    div class="panel-heading"
+        h2 class="panel-title"
+            = @cliente.pessoa.specific.nome
+    div class="panel-body"
+        h2
+            = @cliente.pessoa.specific.nome
 
--if @cliente.pessoa.estado_type == 'PessoaFisica'
-    p
-        strong Cpf:
-        = @cliente.pessoa.specific.cpf
--else
-    p
-        strong CNPJ:
-        = @cliente.pessoa.specific.cnpj
-    p
-        strong Inscricao estadual:
-        = @cliente.pessoa.specific.inscricao_estadual
-p
-    strong Limite credito:
-    = @cliente.limite_credito
+        -if @cliente.pessoa.estado_type == 'PessoaFisica'
+            p
+                strong Cpf:
+                = @cliente.pessoa.specific.cpf
+            p
+                strong Rg:
+                = @cliente.pessoa.specific.rg
+        -else
+            p
+                strong CNPJ:
+                = @cliente.pessoa.specific.cnpj
+            p
+                strong Inscricao estadual:
+                = @cliente.pessoa.specific.inscricao_estadual
+        p
+            strong Limite credito:
+            = " R$ #{@cliente.limite_credito}"
 
-p
-    strong Fones:
-    ul
-        - @cliente.pessoa.fones.each do |fone|
-            li
-                = fone.numero
+        .row
+            .col-xs-12
+                p
+                    strong Endereços:
+                    ul class="list-group"
+                        - @cliente.pessoa.enderecos.each do |endereco|
+                            li class="list-group-item"
+                                = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
+                                     bairro: #{Bairro.first.nome}, cidade: #{Cidade.first.nome}, estado: #{Estado.first.nome}, pais: #{Pais.first.nome} "
 
-p
-    strong E-mails:
-    ul
-        - @cliente.pessoa.emails.each do |email|
-            li
-                = email.descricao
+        .row
+            .col-xs-4
+                p
+                    strong Fones:
+                    ul class="list-group"
+                        - @cliente.pessoa.fones.each do |fone|
+                            li class="list-group-item"
+                                = fone.numero
 
-p
-    strong Endereços:
-    ul
-        - @cliente.pessoa.enderecos.each do |endereco|
-            li
+            .col-xs-4
+                p
+                    strong E-mails:
+                    ul class="list-group"
+                        - @cliente.pessoa.emails.each do |email|
+                            li class="list-group-item"
+                                = email.descricao
 
 = link_to 'Edit', edit_cliente_path(@cliente)
 '|
-= link_to 'Voltar',
+= link_to 'Voltar', :back
