@@ -1,0 +1,24 @@
+div class="panel panel-default"
+  div class="panel-heading"
+    h3
+      'Orçamentos
+  div class="panel-body"
+    table class="table"
+      thead
+        tr
+          th Cliente
+          th Data
+          th Obs
+          th
+
+      tbody
+        - @orcamentos.each do |orcamento|
+          tr
+            td = orcamento.cliente.pessoa.specific.nome rescue ""
+            td = orcamento.data
+            td = orcamento.obs
+            td = link_to 'Abrir', orcamento
+            td = link_to 'Edit', edit_orcamento_path(orcamento)
+            td = link_to 'Excluir', orcamento, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+= link_to 'Novo Orçamento', new_orcamento_path

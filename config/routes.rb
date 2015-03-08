@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :pedidos
+  resources :orcamentos
 
   resources :cargos
 
@@ -36,6 +36,12 @@ Rails.application.routes.draw do
   match 'estado/cidades/:id', to: "estados#buscar_cidades", via: [:get]
 
   match 'cidade/bairros/:id', to: "cidades#buscar_bairros", via: [:get]
+
+  match 'orcamento/add_item', to: "orcamentos#add_item", via: [:post]
+
+  match 'orcamento/remover_item/:produto/:quantidade', to: "orcamentos#remover_item", via: [:get]
+
+  match 'orcamento/sub_total', to: "orcamentos#sub_total", via: [:get]
 
   # root 'welcome#index'
 

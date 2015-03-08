@@ -1,0 +1,18 @@
+tr
+    td
+        = item.produto.cod
+        = hidden_field_tag 'orcamento[pedido_attributes][itens_pedidos_attributes][0][produto_id]', item.produto_id
+    td
+        = item.produto.nome
+    td
+        = item.preco_unidade
+        = hidden_field_tag 'orcamento[pedido_attributes][itens_pedidos_attributes][0][preco]', item.preco
+    td
+        = number_field_tag 'orcamento[pedido_attributes][itens_pedidos_attributes][0][quantidade]', item.quantidade, min: 0
+    td
+        = item.produto.unidade.sigla
+    td
+        = item.preco_total
+    td
+        a href='#' onclick="window.remover_item(this)"
+            'Excluir

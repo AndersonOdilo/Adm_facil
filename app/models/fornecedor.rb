@@ -3,6 +3,6 @@ class Fornecedor < ActiveRecord::Base
     has_many :produtos
 
     def nome
-        self.pessoa.specific.nome
+        "#{self.pessoa.specific.nome}"
     end
 end

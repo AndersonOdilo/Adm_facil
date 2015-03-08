@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+  // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -27,28 +27,32 @@ ready = (function() {
     select: function( event, ui ) {
         $( "#produto_nome" ).val( ui.item.label );
         $( "#produto_id" ).val( ui.item.value );
-        $("#produto_preco").val( ui.item.preco );
-        $("#produto_estoque").val( ui.item.quantidade );
+        $("#quantidade_estoque").html("<h3>"+ui.item.quantidade+" "+ui.item.unidade+"</h3>" );
+        $("#preco").html("<h3>"+ui.item.preco+"</h3>" );
         return false;
     }
   });
+
   $("#cliente_nome").autocomplete({
     source: '/clientes/autocomplete.json',
     select: function( event, ui ) {
         $( "#cliente_nome" ).val( ui.item.label );
-        $( "#pedido_cliente_id" ).val( ui.item.value );
+        $( "#cliente_id" ).val( ui.item.value );
         return false;
     }
   });
+
   $( "#datepicker" ).datepicker({
     dateFormat : 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
+
   $("#pessoa_juridica_cnpj").mask("99.999.999/9999-99");
   $("#pessoa_juridica_inscricao_estadual").mask("99999999-99");
   $("#pessoa_fisica_cpf").mask("999.999.999-99");
   $("#pessoa_fisica_rg").mask("99.999.999-9");
+
 });
 
 $(document).ready(ready);

@@ -4,6 +4,6 @@ class PessoaJuridica < ActiveRecord::Base
     accepts_nested_attributes_for :pessoa
 
     def nome
-        self.acting_as.nome+', '+self.nome_fantasia
+        "#{self.acting_as.nome}, #{self.nome_fantasia}"
     end
 end

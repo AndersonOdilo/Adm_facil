@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304143333) do
+ActiveRecord::Schema.define(version: 20150307022247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,11 @@ ActiveRecord::Schema.define(version: 20150304143333) do
     t.datetime "updated_at"
   end
 
+  create_table "orcamentos", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "paises", force: true do |t|
     t.string   "nome"
     t.string   "sigla"
@@ -163,6 +168,8 @@ ActiveRecord::Schema.define(version: 20150304143333) do
     t.integer  "funcionario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "actable_id"
+    t.string   "actable_type"
   end
 
   add_index "pedidos", ["cliente_id"], name: "index_pedidos_on_cliente_id", using: :btree
@@ -196,8 +203,8 @@ ActiveRecord::Schema.define(version: 20150304143333) do
     t.string   "cod"
     t.string   "nome"
     t.string   "descricao"
-    t.decimal  "valor_custo"
-    t.decimal  "valor_venda"
+    t.decimal  "valor_custo",          precision: 15, scale: 2, null: false
+    t.decimal  "valor_venda",          precision: 15, scale: 2, null: false
     t.integer  "marca_id"
     t.integer  "categoria_produto_id"
     t.integer  "fornecedor_id"

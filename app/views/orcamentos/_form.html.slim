@@ -1,19 +1,24 @@
-= form_for @pedido do |f|
-  - if @pedido.errors.any?
+= nested_form_for @orcamento do |f|
+  - if @orcamento.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@pedido.errors.count, "error")} prohibited this pedido from being saved:"
+      h2 = "#{pluralize(@orcamento.errors.count, "error")} prohibited this pedido from being saved:"
       ul
-        - @pedido.errors.full_messages.each do |message|
+        - @orcamento.errors.full_messages.each do |message|
           li = message
 
+  = hidden_field_tag 'orcamento[pedido_attributes][id]', ''
   div class="panel panel-default"
     div class="panel-body"
+
       .row
         .col-xs-10
           .form-group
             = f.label :cliente
             = text_field_tag :cliente_nome, nil, class: 'form-control input-sm'
-        = link_to 'Cadastrar Novo Cliente', new_cliente_path, remote: true, class: 'btn btn-primary btn-xs'
+        .col-xs-1
+          br
+          = link_to 'Cadastrar Novo Cliente', new_cliente_path, remote: true, class: 'btn btn-primary btn-xs'
+
       .row
         .col-xs-2
           .form-group
@@ -22,6 +27,7 @@
 
   div class="panel panel-default"
     div class="panel-body"
+
       .row
         .col-xs-5
           .form-group
@@ -29,14 +35,20 @@
             = label_tag 'Buscar Produto'
             = text_field_tag :produto_nome, params[:query], class: 'form-control input-sm'
         .col-xs-2
-          .form-group
-            = label_tag 'Preço'
-            = text_field_tag :produto_preco, nil, class: 'form-control input-sm'
+          strong Preço
+          #preco
+
+        .col-xs-2
+          strong
+            'Quant. estoq.
+          #quantidade_estoque
+
         .col-xs-2
           .form-group
-            = label_tag 'Quant. estoq.'
-            = text_field_tag :produto_estoque, nil, class: 'form-control input-sm'
-        = link_to 'Add item', '#', class: 'btn btn-primary btn-xs'
+            = label_tag 'Quant.'
+            = number_field_tag :produto_quantidade, nil, class: 'form-control input-sm', min: 0
+        br
+        = link_to 'Add item', '#', class: 'btn btn-primary btn-xs', id: 'add_item_orcamento'
 
   div class="panel panel-default"
     div class="panel-body"
@@ -49,15 +61,17 @@
               th Nome
               th Valor Unid.
               th Quant.
+              th Unid.
               th Valor Total
-          tbody
-            tr
-              td '1
-              td 'Produto teste
-              td '100
-              td '2
-              td '200
-
+              th
+          tbody id="itens"
+    div class="panel-footer"
+      .row
+        .col-xs-9
+        .col-xs-1
+          h4 Total
+        .col-xs-2
+          #valor_total
 
   div class="panel panel-default"
     div class="panel-body"
@@ -74,7 +88,7 @@
 
   .field
     = f.hidden_field :funcionario_id, value: current_usuario.funcionario_id
-    = f.hidden_field :cliente_id
-  .actions = f.submit 'Finalizar Pedido', class: "btn btn-success btn-lg btn-block"
+    = f.hidden_field :cliente_id, id: 'cliente_id'
+  .actions = f.submit 'Finalizar orçamento', class: "btn btn-success btn-lg btn-block"
 
 #cliente_modal

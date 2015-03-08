@@ -1,6 +1,60 @@
 p#notice = notice
 
+div class="panel panel-info"
+    div class="panel-heading"
+        h2 class="panel-title"
+            'Fornecedor
+    div class="panel-body"
+        h2
+            = @fornecedor.pessoa.specific.nome
+
+        .row
+            -if @fornecedor.pessoa.estado_type == 'PessoaFisica'
+                .col-xs-2
+                    strong Cpf:
+                    = @fornecedor.pessoa.specific.cpf
+                .col-xs-2
+                    strong Rg:
+                    = @fornecedor.pessoa.specific.rg
+            -else
+                .col-xs-2
+                    strong CNPJ:
+                    = @fornecedor.pessoa.specific.cnpj
+                .col-xs-2
+                    strong Inscricao estadual:
+                    = @fornecedor.pessoa.specific.inscricao_estadual
+
+        br
+        - if !@fornecedor.pessoa.enderecos.empty?
+            .row
+                .col-xs-12
+                    p
+                        strong Endereços:
+                        ul class="list-group"
+                            - @fornecedor.pessoa.enderecos.each do |endereco|
+                                li class="list-group-item"
+                                    = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
+                                         bairro: #{Bairro.first.nome}, cidade: #{Cidade.first.nome}, estado: #{Estado.first.nome}, pais: #{Pais.first.nome} "
+
+        - if !@fornecedor.pessoa.fones.empty?
+            .row
+                .col-xs-4
+                    p
+                        strong Fones:
+                        ul class="list-group"
+                            - @fornecedor.pessoa.fones.each do |fone|
+                                li class="list-group-item"
+                                    = fone.numero
+
+                - if !@fornecedor.pessoa.emails.empty?
+                        .col-xs-4
+                            p
+                                strong E-mails:
+                                ul class="list-group"
+                                    - @fornecedor.pessoa.emails.each do |email|
+                                        li class="list-group-item"
+                                            = email.descricao
 
 = link_to 'Edit', edit_fornecedor_path(@fornecedor)
 '|
-= link_to 'Back', fornecedores_path
+= link_to 'Voltar', :back

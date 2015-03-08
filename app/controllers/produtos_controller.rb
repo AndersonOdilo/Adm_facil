@@ -5,7 +5,8 @@ class ProdutosController < ApplicationController
     @produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
     produtos = []
     @produtos.each do |produto|
-      produtos <<  { value: produto.id, label: produto.nome, preco: produto.valor_venda, quantidade: produto.quantidade_estoque}
+      produtos <<  { value: produto.id, label: produto.nome, preco: produto.preco_venda,
+        quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}
     end
     respond_to do |format|
       format.html

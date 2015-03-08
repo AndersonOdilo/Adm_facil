@@ -16,7 +16,7 @@
         .col-xs-4
           .form-group
             = f.label :cargo
-            = f.collection_select :cargo, Cargo.all, :id, :descricao,{}, class: 'form-control input-sm'
+            = f.collection_select :cargo_id, Cargo.all, :id, :descricao,{}, class: 'form-control input-sm'
         = link_to 'Novo Cargo', new_cargo_path, remote: true, class: "btn btn-primary btn-xs"
 
       .row

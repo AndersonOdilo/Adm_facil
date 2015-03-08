@@ -1,18 +1,76 @@
 p#notice = notice
 
-p
-  strong Cod:
-  = @funcionario.cod
-p
-  strong Carteira trabalho:
-  = @funcionario.carteira_trabalho
-p
-  strong Salario:
-  = @funcionario.salario
-p
-  strong Data admissao:
-  = @funcionario.data_admissao
+div class="panel panel-info"
+    div class="panel-heading"
+        h2 class="panel-title"
+            'Funcionario
+    div class="panel-body"
+        h2
+            = @funcionario.pessoa.specific.nome
+
+        .row
+            .col-xs-2
+                 strong Codigo:
+                 = @funcionario.cod
+            .col-xs-3
+                strong Cargo:
+                = @funcionario.cargo.descricao
+            .col-xs-3
+                strong Carteira Trabalho:
+                = @funcionario.carteira_trabalho
+        br
+        .row
+            .col-xs-2
+                strong Salario:
+                = "R$ #{@funcionario.salario}"
+            .col-xs-3
+                strong Data admissao:
+                = @funcionario.data_admissao
+            -if @funcionario.pessoa.estado_type == 'PessoaFisica'
+                .col-xs-2
+                    strong Cpf:
+                    = @funcionario.pessoa.specific.cpf
+                .col-xs-2
+                    strong Rg:
+                    = @funcionario.pessoa.specific.rg
+            - else
+                .col-xs-3
+                    strong CNPJ:
+                    = @funcionario.pessoa.specific.cnpj
+                .col-xs-3
+                    strong Inscricao estadual:
+                    = @funcionario.pessoa.specific.inscricao_estadual
+        br
+        - if !@funcionario.pessoa.enderecos.empty?
+            .row
+                .col-xs-12
+                    p
+                        strong Endereços:
+                        ul class="list-group"
+                            - @funcionario.pessoa.enderecos.each do |endereco|
+                                li class="list-group-item"
+                                    = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
+                                         bairro: #{Bairro.first.nome}, cidade: #{Cidade.first.nome}, estado: #{Estado.first.nome}, pais: #{Pais.first.nome} "
+
+        - if !@funcionario.pessoa.fones.empty?
+            .row
+                .col-xs-4
+                    p
+                        strong Fones:
+                        ul class="list-group"
+                            - @funcionario.pessoa.fones.each do |fone|
+                                li class="list-group-item"
+                                    = fone.numero
+
+                - if !@funcionario.pessoa.emails.empty?
+                        .col-xs-4
+                            p
+                                strong E-mails:
+                                ul class="list-group"
+                                    - @funcionario.pessoa.emails.each do |email|
+                                        li class="list-group-item"
+                                            = email.descricao
 
 = link_to 'Edit', edit_funcionario_path(@funcionario)
 '|
-= link_to 'Back', funcionarios_path
+= link_to 'Voltar', :back

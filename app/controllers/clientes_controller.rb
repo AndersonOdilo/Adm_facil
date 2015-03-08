@@ -2,11 +2,10 @@ class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
   def autocomplete
-    @clientes = Pessoa.joins("LEFT OUTER JOIN funcoes on pessoas.id = funcoes.pessoa_id
-        LEFT OUTER JOIN clientes on funcoes.papel_id = clientes.id where funcoes.papel_type = 'Cliente'")
+    @clientes = Cliente.joins("LEFT OUTER JOIN pessoas on funcoes.pessoa_id = pessoas.id where (pessoas.nome ILIKE '#{params[:term]}%')")
     clientes = []
     @clientes.each do |cliente|
-      clientes <<  { value: cliente.id, label: cliente.nome}
+      clientes <<  { value: cliente.id , label: cliente.pessoa.specific.nome}
     end
     respond_to do |format|
       format.html
