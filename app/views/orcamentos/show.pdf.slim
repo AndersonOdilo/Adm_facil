@@ -1,6 +1,3 @@
-p#notice = notice
-
-= link_to 'Imprimir', orcamento_path(@orcamento, format: 'pdf'), class: 'btn btn-warning btn-xs', target: "_blank"
 div class="panel panel-default"
     div class="panel-heading"
         h2
@@ -12,6 +9,9 @@ div class="panel panel-default"
             .col-xs-3
                 strong Data emissao: </strog>
                 = @orcamento.data
+            .col-xs-3
+                strong Data validade: </strog>
+                = @orcamento.data + 30.day
         br
         div class="panel panel-default"
             div class="panel-body"
@@ -59,7 +59,3 @@ div class="panel panel-default"
           'Observacoes:
         p
             = @orcamento.obs
-
-= link_to 'Edit', edit_orcamento_path(@orcamento)
-'|
-= link_to 'Voltar', :back

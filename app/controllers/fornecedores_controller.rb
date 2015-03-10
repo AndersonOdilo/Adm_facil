@@ -37,7 +37,7 @@ class FornecedoresController < ApplicationController
     @fornecedor = Fornecedor.new(fornecedor_params)
     respond_to do |format|
       if @fornecedor.save
-        format.html { redirect_to @fornecedor, notice: 'Fornecedor was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Fornecedor was successfully created.' }
         format.json { render :show, status: :created, location: @fornecedor }
       else
         format.html { render :new }

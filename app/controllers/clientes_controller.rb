@@ -51,7 +51,7 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
-        format.html { redirect_to @cliente, notice: 'Cliente was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Cliente was successfully created.' }
         format.json { render json: @cliente.pessoa}
       else
         format.html { render :new }

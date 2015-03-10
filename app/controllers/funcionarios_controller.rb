@@ -34,7 +34,7 @@ class FuncionariosController < ApplicationController
 
     respond_to do |format|
       if @funcionario.save
-        format.html { redirect_to @funcionario, notice: 'Funcionario was successfully created.' }
+        format.html { redirect_to actions: "index", notice: 'Funcionario was successfully created.' }
         format.json { render :show, status: :created, location: @funcionario }
       else
         format.html { render :new }

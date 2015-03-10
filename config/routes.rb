@@ -39,9 +39,7 @@ Rails.application.routes.draw do
 
   match 'orcamento/add_item', to: "orcamentos#add_item", via: [:post]
 
-  match 'orcamento/remover_item/:produto/:quantidade', to: "orcamentos#remover_item", via: [:get]
-
-  match 'orcamento/sub_total', to: "orcamentos#sub_total", via: [:get]
+  match 'orcamento/remover_item', to: "orcamentos#remover_item", via: [:post]
 
   # root 'welcome#index'
 

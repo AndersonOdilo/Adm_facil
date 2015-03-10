@@ -11,14 +11,18 @@ class OrcamentosController < ApplicationController
     item_pedido.preco = produto.valor_venda
     item_pedido.quantidade = params[:quantidade]
     sub_total = session[:sub_total]
-    session[:sub_total] = (sub_total.to_f + item_pedido.quantidade * item_pedido.preco).to_s
+    session[:sub_total] = sub_total.to_f + item_pedido.quantidade * item_pedido.preco
     respond_to do |format|
       format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total] }}
     end
   end
 
-  def sub_total
-
+  def remover_item
+    produto = Produto.find(params[:produto])
+    session[:sub_total] = session[:sub_total].to_f - produto.valor_venda * params[:quantidade].to_f
+    respond_to do |format|
+      format.json {render json: (number_to_currency(session[:sub_total].to_f, unit: 'R$', separator: ",", delimiter: ".")).to_json }
+    end
   end
 
   def index
@@ -28,11 +32,16 @@ class OrcamentosController < ApplicationController
   # GET /orcamentos/1
   # GET /orcamentos/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf {render pdf: 'Orcamento'}
+    end
   end
 
   # GET /orcamentos/new
   def new
     @orcamento = Orcamento.new
+    @orcamento.itens_pedidos.build
     session[:sub_total] = nil
   end
 

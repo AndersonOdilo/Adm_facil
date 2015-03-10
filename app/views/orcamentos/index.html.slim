@@ -8,6 +8,7 @@ div class="panel panel-default"
         tr
           th Cliente
           th Data
+          th Total
           th Obs
           th
 
@@ -16,9 +17,10 @@ div class="panel panel-default"
           tr
             td = orcamento.cliente.pessoa.specific.nome rescue ""
             td = orcamento.data
+            td = (number_to_currency(orcamento.total, unit: 'R$', separator: ",", delimiter: "."))
             td = orcamento.obs
             td = link_to 'Abrir', orcamento
             td = link_to 'Edit', edit_orcamento_path(orcamento)
             td = link_to 'Excluir', orcamento, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'Novo Orçamento', new_orcamento_path
+= link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-primary btn-xs'

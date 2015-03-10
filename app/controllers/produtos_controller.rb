@@ -5,7 +5,7 @@ class ProdutosController < ApplicationController
     @produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
     produtos = []
     @produtos.each do |produto|
-      produtos <<  { value: produto.id, label: produto.nome, preco: produto.preco_venda,
+      produtos <<  { value: produto.id, label: "#{produto.nome}, #{produto.marca.nome}", preco: produto.preco_venda,
         quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}
     end
     respond_to do |format|
@@ -43,7 +43,7 @@ class ProdutosController < ApplicationController
 
     respond_to do |format|
       if @produto.save
-        format.html { redirect_to @produto, notice: 'Produto was successfully created.' }
+        format.html { redirect_to action: "index", notice: 'Produto salvo com sucesso.' }
         format.json { render :show, status: :created, location: @produto }
       else
         format.html { render :new }
