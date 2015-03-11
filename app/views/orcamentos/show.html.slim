@@ -7,11 +7,23 @@ div class="panel panel-default"
             'Orcamento
     div class="panel-body"
         h3
-            =@orcamento.cliente.pessoa.nome
+            =link_to @orcamento.cliente.pessoa.nome, "/clientes/#{@orcamento.cliente.id}"
         .row
-            .col-xs-3
-                strong Data emissao: </strog>
-                = @orcamento.data
+          .col-xs-4
+            strong Funcionario: </strong>
+            = @orcamento.funcionario.pessoa.specific.nome
+          .col-xs-4
+            strong fone: </strong>
+            = @orcamento.funcionario.pessoa.fones.first.numero
+
+        .row
+          .col-xs-4
+            strong Data emissao: </strog>
+            = @orcamento.data
+          .col-xs-4
+            strong Data validade: </strog>
+            = @orcamento.data + 30.day
+
         br
         div class="panel panel-default"
             div class="panel-body"

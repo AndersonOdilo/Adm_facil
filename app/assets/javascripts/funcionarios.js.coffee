@@ -1,13 +1,13 @@
 $ ->
     $('#add_funcionario').on "click", ->
         if ($('#estado_pessoas_fisicas').is(':checked'))
-            $('#new_pessoa_fisica').submit()
+            $('#submit_pessoa_fisica').click()
         else
-            $('#new_pessoa_juridica').submit()
+            $('#submit_pessoa_juridica').click()
 
     $('#edit_funcionario').on "click", ->
         if $('#new_pessoa_fisica').length
-            $('#new_pessoa_fisica').submit()
+            $('#submit_pessoa_fisica').click()
         else if $('#new_pessoa_juridica').length
-            $('#new_pessoa_juridica').submit()
+            $('#submit_pessoa_juridica').click()
 

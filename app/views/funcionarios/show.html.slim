@@ -18,14 +18,15 @@ div class="panel panel-info"
             .col-xs-3
                 strong Carteira Trabalho:
                 = @funcionario.carteira_trabalho
+            .col-xs-3
+                strong Carga horaria:
+                = @funcionario.carga_horaria
         br
         .row
             .col-xs-2
                 strong Salario:
                 = "R$ #{@funcionario.salario}"
-            .col-xs-3
-                strong Data admissao:
-                = @funcionario.data_admissao
+
             -if @funcionario.pessoa.estado_type == 'PessoaFisica'
                 .col-xs-2
                     strong Cpf:
@@ -33,6 +34,9 @@ div class="panel panel-info"
                 .col-xs-2
                     strong Rg:
                     = @funcionario.pessoa.specific.rg
+                .col-xs-3
+                     strong Data nascimento:
+                     = @funcionario.pessoa.specific.data_nascimento
             - else
                 .col-xs-3
                     strong CNPJ:
@@ -40,6 +44,16 @@ div class="panel panel-info"
                 .col-xs-3
                     strong Inscricao estadual:
                     = @funcionario.pessoa.specific.inscricao_estadual
+                .col-xs-3
+                    strong Data abertura:
+                    = @funcionario.pessoa.specific.data_abertura
+
+        br
+        .row
+            .col-xs-3
+                strong Data admissao:
+                = @funcionario.data_admissao
+
         br
         - if !@funcionario.pessoa.enderecos.empty?
             .row
@@ -48,9 +62,13 @@ div class="panel panel-info"
                         strong Endereços:
                         ul class="list-group"
                             - @funcionario.pessoa.enderecos.each do |endereco|
-                                li class="list-group-item"
+                                  li class="list-group-item"
                                     = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
-                                         bairro: #{Bairro.first.nome}, cidade: #{Cidade.first.nome}, estado: #{Estado.first.nome}, pais: #{Pais.first.nome} "
+                                         rua: #{endereco.logradouro.nome},
+                                         bairro: #{endereco.bairro},
+                                         cidade: #{endereco.cidade},
+                                         estado: #{endereco.estado},
+                                         pais: #{endereco.pais} " rescue 'Nem um endereço cadastrado'
 
         - if !@funcionario.pessoa.fones.empty?
             .row

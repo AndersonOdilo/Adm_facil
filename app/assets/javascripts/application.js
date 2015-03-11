@@ -42,16 +42,17 @@ ready = (function() {
     }
   });
 
-  $( "#datepicker" ).datepicker({
+  $( ".datepicker" ).datepicker({
     dateFormat : 'yy-mm-dd',
     changeMonth: true,
     changeYear: true
   });
 
-  $("#pessoa_juridica_cnpj").mask("99.999.999/9999-99");
-  $("#pessoa_juridica_inscricao_estadual").mask("99999999-99");
-  $("#pessoa_fisica_cpf").mask("999.999.999-99");
-  $("#pessoa_fisica_rg").mask("99.999.999-9");
+  $(".cnpj").mask("99.999.999/9999-99");
+  $(".inscricao_estadual").mask("99999999-99");
+  $(".cpf").mask("999.999.999-99");
+  $(".rg").mask("99.999.999-9");
+  $(".fone").mask("(99)9999-9999");
 
 });
 

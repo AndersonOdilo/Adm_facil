@@ -16,19 +16,25 @@ div class="panel panel-info"
                 .col-xs-2
                     strong Rg:
                     = @cliente.pessoa.specific.rg
+                .col-xs-3
+                     strong Data nascimento:
+                     = @cliente.pessoa.specific.data_nascimento
             -else
-                .col-xs-2
+                .col-xs-3
                     strong CNPJ:
                     = @cliente.pessoa.specific.cnpj
-                .col-xs-2
+                .col-xs-3
                     strong Inscricao estadual:
                     = @cliente.pessoa.specific.inscricao_estadual
+                .col-xs-3
+                     strong Data abertura:
+                     = @cliente.pessoa.specific.data_abertura
             .col-xs-3
                 strong Limite credito:
-                = " R$ #{@cliente.limite_credito}"
+                = (number_to_currency(@cliente.limite_credito, unit: 'R$', separator: ",", delimiter: "."))
 
         br
-        - if !@cliente.pessoa.enderecos.empty?
+        - if !@cliente.pessoa.enderecos.blank?
             .row
                 .col-xs-12
                     p
@@ -37,9 +43,13 @@ div class="panel panel-info"
                             - @cliente.pessoa.enderecos.each do |endereco|
                                 li class="list-group-item"
                                     = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
-                                         bairro: #{Bairro.first.nome}, cidade: #{Cidade.first.nome}, estado: #{Estado.first.nome}, pais: #{Pais.first.nome} "
+                                         rua: #{endereco.logradouro.nome},
+                                         bairro: #{endereco.bairro},
+                                         cidade: #{endereco.cidade},
+                                         estado: #{endereco.estado},
+                                         pais: #{endereco.pais} " rescue 'Nem um endereço cadastrado'
 
-        - if !@cliente.pessoa.fones.empty?
+        - if !@cliente.pessoa.fones.blank?
             .row
                 .col-xs-4
                     p
@@ -49,7 +59,7 @@ div class="panel panel-info"
                                 li class="list-group-item"
                                     = fone.numero
 
-                - if !@cliente.pessoa.emails.empty?
+                - if !@cliente.pessoa.emails.blank?
                     .col-xs-4
                         p
                             strong E-mails:

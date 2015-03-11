@@ -19,4 +19,3 @@ $ ->
 
       else if $('#new_funcionario').length
         $('#new_funcionario').submit()
-

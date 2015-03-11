@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   match 'cidade/bairros/:id', to: "cidades#buscar_bairros", via: [:get]
 
+  match 'bairro/ruas/:id', to: "bairros#buscar_ruas", via: [:get]
+
   match 'orcamento/add_item', to: "orcamentos#add_item", via: [:post]
 
   match 'orcamento/remover_item', to: "orcamentos#remover_item", via: [:post]

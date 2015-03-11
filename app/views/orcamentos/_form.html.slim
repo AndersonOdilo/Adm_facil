@@ -23,7 +23,7 @@
         .col-xs-2
           .form-group
             = f.label :data
-            = f.text_field :data, id: 'datepicker', class:  'form-control input-sm', value: DateTime.now.to_date
+            = f.text_field :data, class:  'form-control input-sm datepicker', value: DateTime.now.to_date
 
   div class="panel panel-default"
     div class="panel-body"

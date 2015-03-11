@@ -19,14 +19,18 @@
             = f.text_field :nome_fantasia, class: "form-control input-sm"
 
       .row
-        .col-xs-6
+        .col-xs-3
           .form-group
             = f.label :cnpj
-            = f.text_field :cnpj, class: "form-control input-sm"
-        .col-xs-6
+            = f.text_field :cnpj, class: "form-control input-sm cnpj"
+        .col-xs-3
           .form-group
             = f.label :inscricao_estadual
-            = f.text_field :inscricao_estadual, class: "form-control input-sm"
+            = f.text_field :inscricao_estadual, class: "form-control input-sm inscricao_estadual"
+        .col-xs-3
+          .form-group
+            = f.label :data_abertura
+            = f.text_field :data_abertura, class: "form-control input-sm datepicker"
 
   = f.fields_for :pessoa do |p|
     = p.hidden_field :id
@@ -35,39 +39,40 @@
       = p.fields_for :enderecos do |endereco|
         div class="panel panel-default"
           div class="panel-body"
-            = p.label 'Endereço'
+            = label_tag 'Endereço'
             .row
-                .col-xs-2
-                  .form-group
-                    = label_tag 'Pais'
-                    = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla), class: 'form-control input-sm'
-                .col-xs-2
-                  .form-group
-                    = label_tag 'Estado'
-                    = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados', class: 'form-control input-sm'
-                .col-xs-4
-                  .form-group
-                    = label_tag 'Cidade'
-                    = select_tag :select_cidade, {}, {class: 'form-control input-sm'}
-                .col-xs-4
-                  .form-group
-                    = label_tag 'Bairro'
-                    = select_tag :select_bairro, {}, {class: 'form-control input-sm'}
+              .col-xs-2
+                .form-group
+                  = label_tag 'Pais'
+                  = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla), class: 'form-control input-sm'
+              .col-xs-2
+                .form-group
+                  = label_tag 'Estado'
+                  = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados', class: 'form-control input-sm'
+              .col-xs-4
+                .form-group
+                  = label_tag 'Cidade'
+                  = select_tag :select_cidade, {}, {class: 'form-control input-sm'}
+              .col-xs-4
+                .form-group
+                  = label_tag 'Bairro'
+                  = select_tag :select_bairro, {}, {class: 'form-control input-sm'}
             .row
-                .col-xs-4
-                  .form-group
-                    = endereco.label :logradouro
-                    = endereco.collection_select :logradouro, Logradouro.all, :id, :nome, {}, {class: 'form-control input-sm'}
-                .col-xs-2
-                  .form-group
-                    = endereco.label :numero
+              .col-xs-4
+                .form-group
+                  = label_tag 'Logradouro'
+                  = endereco.collection_select :logradouro_id, {}, :id, :nome, {}, {class: 'form-control input-sm', id: 'select_rua'}
+              .col-xs-2
+                .form-group
+                    = label_tag 'Numero'
                     = endereco.number_field :numero, class: 'form-control input-sm'
-                .col-xs-6
+              .col-xs-6
                   .form-group
-                    = endereco.label :complemento
+                    = label_tag 'Complemento'
                     = endereco.text_field :complemento, class: 'form-control input-sm'
-                  = endereco.link_to_remove 'Excluir', class: "btn btn-danger btn-xs"
-      = p.link_to_add 'Novo endereço', :enderecos, class: "btn btn-primary btn-xs"
+              = endereco.link_to_remove 'Excluir', class: 'btn btn-danger btn-xs'
+      = p.link_to_add 'Novo endereço', :enderecos, class: 'btn btn-primary btn-xs'
+
 
     .form-group
     div class="panel panel-default"
@@ -76,7 +81,7 @@
         .row
           = p.fields_for :fones do |fone|
               .col-xs-2
-                = fone.text_field :numero, class: 'form-control input-sm'
+                = fone.text_field :numero, class: 'form-control input-sm fone'
                 = fone.link_to_remove 'Excluir', class: "btn btn-danger btn-xs"
           = p.link_to_add 'Novo fone', :fones, class: "btn btn-primary btn-xs"
 
@@ -89,8 +94,10 @@
                 .col-xs-4
                   = email.text_field :descricao, class: 'form-control input-sm'
                   = email.link_to_remove 'Excluir', class: "btn btn-danger btn-xs"
-            .form-group
-              = p.link_to_add 'Novo e-mail', :emails, class: "btn btn-primary btn-xs"
+            = p.link_to_add 'Novo e-mail', :emails, class: "btn btn-primary btn-xs"
+
+  div style="display:none"
+    = f.submit 'savel', id: 'submit_pessoa_juridica'
 
 <script src='/assets/enderecos.js'></script>
 <script src='/assets/pessoas_juridicas.js'></script>

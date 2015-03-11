@@ -31,3 +31,23 @@ $ ->
                     $('#select_bairro').append(op)
               error: (data) ->
                 alert('erro')
+
+     $('#select_bairro').on "change", ->
+        id = $('#select_bairro').val()
+        if id != ""
+            $.ajax
+              url: '/bairro/ruas/'+id
+              dataType: 'json'
+              type: 'GET'
+              success: (data) ->
+                 $('#select_rua').empty()
+                 $('#select_rua').append($("<option/>").attr("value", "").text("Selecione um rua").select())
+                 for rua in data
+                    op = $("<option/>").attr("value", rua.id).text(rua.nome)
+                    $('#select_rua').append(op)
+              error: (data) ->
+                alert('erro')
+
+  remover_endereco =(elemento) ->
+    elemento.parentElement.parentElement.parentElement.remove()
+  window.remover_endereco = remover_endereco

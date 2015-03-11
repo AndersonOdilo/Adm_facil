@@ -19,7 +19,7 @@ div class="panel panel-default"
               td = cliente.pessoa.specific.cpf
             - else
               td = cliente.pessoa.specific.cnpj
-            td = cliente.limite_credito
+            td = (number_to_currency(cliente.limite_credito, unit: 'R$', separator: ",", delimiter: "."))
             td = link_to 'Abrir', cliente
             td = link_to 'Edit', edit_cliente_path(cliente)
             td = link_to 'Excluir', cliente, data: {:confirm => 'Deseja excluir?'}, :method => :delete

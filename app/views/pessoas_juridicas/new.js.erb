@@ -1,3 +1,9 @@
  $("#pessoa_juridica").html("<%= escape_javascript(render partial: 'form') %>");
- $("#pessoa_juridica_cnpj").mask("99.999.999/9999-99");
- $("#pessoa_juridica_inscricao_estadual").mask("99999999-99");
+ $(".cnpj").mask("99.999.999/9999-99");
+ $(".inscricao_estadual").mask("99999999-99");
+ $(".fone").mask("(99)9999-9999");
+ $( ".datepicker" ).datepicker({
+    dateFormat : 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true
+ });

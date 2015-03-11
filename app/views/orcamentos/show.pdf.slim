@@ -6,10 +6,18 @@ div class="panel panel-default"
         h3
             =@orcamento.cliente.pessoa.nome
         .row
-            .col-xs-3
+          .col-xs-6
+            strong Funcionario: </strong>
+            = @orcamento.funcionario.pessoa.specific.nome
+          .col-xs-4
+            strong fone: </strong>
+            = @orcamento.funcionario.pessoa.fones.first.numero
+
+        .row
+            .col-xs-6
                 strong Data emissao: </strog>
                 = @orcamento.data
-            .col-xs-3
+            .col-xs-4
                 strong Data validade: </strog>
                 = @orcamento.data + 30.day
         br

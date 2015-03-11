@@ -15,6 +15,10 @@ class EnderecosController < ApplicationController
   # GET /enderecos/new
   def new
     @endereco = Endereco.new
+    respond_to do |format|
+      format.html
+      format.js {render locals: {local: params[:local]}}
+    end
   end
 
   # GET /enderecos/1/edit

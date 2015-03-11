@@ -17,7 +17,9 @@ div class="modal fade" id="novo_cargo" tabindex="-1" role="dialog" aria-labelled
 
           .form-group
             = f.label :descricao
-            = f.text_field :descricao, class: 'form-control input-sm'
+            = f.text_field :descricao, class: 'form-control input-sm', required: true
+          div style="display:none"
+            = f.submit 'save', id: 'submit_cargo'
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar

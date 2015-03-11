@@ -17,10 +17,13 @@ div class="modal fade" id="nova_unidade" tabindex="-1" role="dialog" aria-labell
 
           .form-group
             = f.label :descricao
-            = f.text_field :descricao, class: 'form-control input-sm'
+            = f.text_field :descricao, class: 'form-control input-sm', required: true
           .form-group
             = f.label :sigla
-            = f.text_field :sigla, class: 'form-control input-sm'
+            = f.text_field :sigla, class: 'form-control input-sm', required: true
+
+          div style="display:none"
+            = f.submit 'Save', id: 'submit_unidade'
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar

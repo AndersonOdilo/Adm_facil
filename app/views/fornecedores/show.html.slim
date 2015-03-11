@@ -16,13 +16,19 @@ div class="panel panel-info"
                 .col-xs-2
                     strong Rg:
                     = @fornecedor.pessoa.specific.rg
+                .col-xs-3
+                     strong Data nascimento:
+                     = @fornecedor.pessoa.specific.data_nascimento
             -else
-                .col-xs-2
+                .col-xs-3
                     strong CNPJ:
                     = @fornecedor.pessoa.specific.cnpj
-                .col-xs-2
+                .col-xs-3
                     strong Inscricao estadual:
                     = @fornecedor.pessoa.specific.inscricao_estadual
+                .col-xs-3
+                     strong Data abertura:
+                     = @fornecedor.pessoa.specific.data_abertura
 
         br
         - if !@fornecedor.pessoa.enderecos.empty?
