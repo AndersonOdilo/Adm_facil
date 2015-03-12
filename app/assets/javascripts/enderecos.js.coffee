@@ -47,7 +47,3 @@ $ ->
                     $('#select_rua').append(op)
               error: (data) ->
                 alert('erro')
-
-  remover_endereco =(elemento) ->
-    elemento.parentElement.parentElement.parentElement.remove()
-  window.remover_endereco = remover_endereco

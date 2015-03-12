@@ -4,8 +4,6 @@ $ ->
                 url: '/pessoas_fisicas/new.js'
                 type: 'GET'
                 success: (data) ->
-                    $('#pessoa_juridica').hide()
-                    $('#pessoa_fisica').show()
                     $('#formulario').show()
 
     $('#estado_pessoas_juridicas').on "click", ->
@@ -13,7 +11,5 @@ $ ->
             url: '/pessoas_juridicas/new.js'
             type: 'GET'
             success: (data) ->
-                $('#pessoa_fisica').hide()
-                $('#pessoa_juridica').show()
                 $('#formulario').show()
 

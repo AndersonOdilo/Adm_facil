@@ -12,11 +12,10 @@
  *
  *
  *= require bootstrap.min
+ *= require simple-sidebar
  *= require jquery-ui.min
  *= require_tree
  *= require_self
  */
 
-body {
-    background-color: #FCFCFC
-}
+

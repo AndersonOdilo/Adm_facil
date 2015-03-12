@@ -7,11 +7,7 @@ div class="modal fade" id="novo_cliente" tabindex="-1" role="dialog" aria-labell
         h2 class="modal-title" id="myModalLabel"
             'Novo Cliente
       div class="modal-body"
-        .form-group
-          = label_tag 'Pessoa Fisica', nil, class: "checkbox-inline"
-          = radio_button_tag 'estado', 'pessoas_fisicas', false, class: "checkbox-inline"
-          = label_tag 'Pessoa Juridica', nil, class: "checkbox-inline"
-          = radio_button_tag 'estado' ,'pessoas_juridicas', false, class: "checkbox-inline"
+        == render 'pessoas/pessoa_fisica_ou_juridica'
         #pessoa_fisica
         #pessoa_juridica
         #formulario style="display:none"
@@ -29,7 +25,7 @@ div class="modal fade" id="novo_cliente" tabindex="-1" role="dialog" aria-labell
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar
-        = link_to 'Salvar', '#', class: "btn btn-success", id: 'add_cliente'
+        = link_to 'Salvar', '#', class: "btn btn-success", id: 'salvar_cliente'
 
 <script src="/assets/pessoas.js"></script>
 <script src="/assets/clientes.js"></script>

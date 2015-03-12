@@ -7,11 +7,7 @@ div class="modal fade" id="novo_fornecedor" tabindex="-1" role="dialog" aria-lab
         h2 class="modal-title" id="myModalLabel"
             'Novo Fornecedor
       div class="modal-body"
-        .form-group
-          = label_tag 'Pessoa Fisica', nil, class: "checkbox-inline"
-          = radio_button_tag 'estado', 'pessoas_fisicas', false, class: "checkbox-inline"
-          = label_tag 'Pessoa Juridica', nil, class: "checkbox-inline"
-          = radio_button_tag 'estado' ,'pessoas_juridicas', false, class: "checkbox-inline"
+        == render 'pessoas/pessoa_fisica_ou_juridica'
         #pessoa_fisica
         #pessoa_juridica
         #formulario style="display:none"
@@ -27,7 +23,7 @@ div class="modal fade" id="novo_fornecedor" tabindex="-1" role="dialog" aria-lab
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar
-        = link_to 'Salvar', '#', class: "btn btn-success", id: 'add_fornecedor'
+        = link_to 'Salvar', '#', class: "btn btn-success", id: 'salvar_fornecedor'
 
 <script src="/assets/pessoas.js"></script>
 <script src="/assets/fornecedores.js"></script>

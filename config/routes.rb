@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
   match 'orcamento/remover_item', to: "orcamentos#remover_item", via: [:post]
 
-  # root 'welcome#index'
+  root 'clientes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

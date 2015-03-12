@@ -1,0 +1,47 @@
+ <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/">
+                        AdmFacil
+                    </a>
+                </li>
+                <li>
+                    <div onclick="history.go(-1)">
+                        <%= image_tag "botao_voltar.png" %>
+                    </div>
+                </li>
+                <li>
+                    <a href="/clientes">Clientes</a>
+                </li>
+                <li>
+                    <a href="/funcionarios">Funcionarios</a>
+                </li>
+                <li>
+                    <a href="/fornecedores">Fornecedores</a>
+                </li>
+                <li>
+                    <a href="/orcamentos">Orçamentos</a>
+                </li>
+                <li>
+                    <a href="/produtos">Produtos</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <%= link_to('Sair', destroy_usuario_session_path, method: :delete) %>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+         <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <%= yield %>
+            </div>
+        </div>
+</div>

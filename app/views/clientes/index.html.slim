@@ -24,6 +24,6 @@ div class="panel panel-default"
             td = link_to 'Edit', edit_cliente_path(cliente)
             td = link_to 'Excluir', cliente, data: {:confirm => 'Deseja excluir?'}, :method => :delete
 
-= link_to 'Novo Cliente', new_cliente_path, class: "btn btn-primary btn-xs"
+= link_to 'Novo Cliente', new_cliente_path, class: "btn btn-primary btn-sm"
 
 = will_paginate @clientes
