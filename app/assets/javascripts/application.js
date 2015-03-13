@@ -22,31 +22,6 @@
 
 var ready;
 ready = (function() {
-  $("#produto_nome").autocomplete({
-    source: '/produtos/autocomplete.json',
-    select: function( event, ui ) {
-        $( "#produto_nome" ).val( ui.item.label );
-        $( "#produto_id" ).val( ui.item.value );
-        $("#quantidade_estoque").html("<h3>"+ui.item.quantidade+" "+ui.item.unidade+"</h3>" );
-        $("#preco").html("<h3>"+ui.item.preco+"</h3>" );
-        return false;
-    }
-  });
-
-  $("#cliente_nome").autocomplete({
-    source: '/clientes/autocomplete.json',
-    select: function( event, ui ) {
-        $( "#cliente_nome" ).val( ui.item.label );
-        $( "#cliente_id" ).val( ui.item.value );
-        return false;
-    }
-  });
-
-  $( ".datepicker" ).datepicker({
-    dateFormat : 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true
-  });
 
   $(".cnpj").mask("99.999.999/9999-99");
   $(".inscricao_estadual").mask("99999999-99");

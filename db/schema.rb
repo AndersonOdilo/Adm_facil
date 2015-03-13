@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310233007) do
+ActiveRecord::Schema.define(version: 20150313170148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,12 @@ ActiveRecord::Schema.define(version: 20150310233007) do
   end
 
   add_index "fones", ["pessoa_id"], name: "index_fones_on_pessoa_id", using: :btree
+
+  create_table "formas_pagamentos", force: true do |t|
+    t.string   "descricao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "fornecedores", force: true do |t|
     t.datetime "created_at"
@@ -248,5 +254,13 @@ ActiveRecord::Schema.define(version: 20150310233007) do
 
   add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree
   add_index "usuarios", ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vendas", force: true do |t|
+    t.integer  "forma_pagamento_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vendas", ["forma_pagamento_id"], name: "index_vendas_on_forma_pagamento_id", using: :btree
 
 end

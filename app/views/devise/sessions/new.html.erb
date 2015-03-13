@@ -6,7 +6,6 @@ body{
 *{
     font-family: 'Raleway', sans-serif;
     color : #FFF;
-
 }
 
 
@@ -171,13 +170,13 @@ h1{
 
     <div class="col-md-12 col-xs-12" align="center">
         <div class="line"><h3><%= DateTime.now.to_date%></h3></div>
-        <div class="outter"><img src="" class="image-circle"/></div>
         <h1>Arco-Iris</h1>
         <span>Login</span>
     </div>
 
     <div class="col-md-12 col-xs-12 login_control">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
             <div class="control">
                 <div class="label">Email</div>
                 <%= f.text_field :email, autofocus: true, class: 'form-control' %>

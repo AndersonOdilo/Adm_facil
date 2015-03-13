@@ -36,7 +36,7 @@ class PessoasFisicasController < ApplicationController
     respond_to do |format|
       if @pessoa_fisica.save
         format.html { redirect_to @pessoa_fisica, notice: 'Pessoa fisica was successfully created.' }
-        format.json { render json: @pessoa_fisica.acting_as }
+        format.json { render json: @pessoa_fisica.acting_as}
       else
         format.html { render :new }
         format.json { render json: @pessoa_fisica.errors, status: :unprocessable_entity }

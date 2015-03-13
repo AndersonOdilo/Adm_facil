@@ -6,6 +6,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
     inflect.irregular 'fornecedor', 'fornecedores'
     inflect.irregular 'categoria_produto', 'categorias_produtos'
     inflect.irregular 'item_pedido', 'itens_pedidos'
+    inflect.irregular 'forma_pagamento', 'formas_pagamentos'
+    inflect.irregular 'pagamento_venda', 'pagamentos_vendas'
+
 #   inflect.plural /^(ox)$/i, '\1en'
 #   inflect.singular /^(ox)en/i, '\1'
 #   inflect.irregular 'person', 'people'

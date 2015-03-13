@@ -10,7 +10,6 @@ div class="panel panel-default"
           th CPF/CNPJ
           th
           th
-          th
 
       tbody
         - @fornecedores.each do |fornecedor|
@@ -21,7 +20,6 @@ div class="panel panel-default"
             - else
               td = fornecedor.pessoa.specific.cpf
             td = link_to 'abrir', fornecedor
-            td = link_to 'Edit', edit_fornecedor_path(fornecedor)
             td = link_to 'Excluir', fornecedor, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 = link_to 'Nova Fornecedor', new_fornecedor_path, class: "btn btn-primary btn-sm"

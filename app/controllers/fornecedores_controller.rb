@@ -38,7 +38,7 @@ class FornecedoresController < ApplicationController
     respond_to do |format|
       if @fornecedor.save
         format.html { redirect_to action: "index", notice: 'Fornecedor was successfully created.' }
-        format.json { render :show, status: :created, location: @fornecedor }
+        format.json { render json: @fornecedor.to_json(include: [:pessoa]) }
       else
         format.html { render :new }
         format.json { render json: @fornecedor.errors, status: :unprocessable_entity }

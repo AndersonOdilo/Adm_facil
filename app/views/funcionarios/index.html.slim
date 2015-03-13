@@ -11,7 +11,6 @@ div class="panel panel-default"
           th Data admissao
           th
           th
-          th
 
       tbody
         - @funcionarios.each do |funcionario|
@@ -24,7 +23,6 @@ div class="panel panel-default"
              td = funcionario.pessoa.specific.cnpj
             td = funcionario.data_admissao
             td = link_to 'Abrir', funcionario
-            td = link_to 'Edit', edit_funcionario_path(funcionario)
             td = link_to 'Excluir', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 = link_to 'Novo Funcionario', new_funcionario_path, class: "btn btn-primary btn-sm"

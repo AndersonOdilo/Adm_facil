@@ -1,0 +1,21 @@
+h1 Listing formas_pagamentos
+
+table
+  thead
+    tr
+      th Descricao
+      th
+      th
+      th
+
+  tbody
+    - @formas_pagamentos.each do |forma_pagamento|
+      tr
+        td = forma_pagamento.descricao
+        td = link_to 'Show', forma_pagamento
+        td = link_to 'Edit', edit_forma_pagamento_path(forma_pagamento)
+        td = link_to 'Destroy', forma_pagamento, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Forma pagamento', new_forma_pagamento_path

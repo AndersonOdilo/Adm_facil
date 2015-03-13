@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :vendas
+
+  resources :formas_pagamentos
+
   resources :orcamentos
 
   resources :cargos
@@ -42,6 +46,10 @@ Rails.application.routes.draw do
   match 'orcamento/add_item', to: "orcamentos#add_item", via: [:post]
 
   match 'orcamento/remover_item', to: "orcamentos#remover_item", via: [:post]
+
+  match 'venda/add_item', to: "vendas#add_item", via: [:post]
+
+  match 'venda/remover_item', to: "vendas#remover_item", via: [:post]
 
   root 'clientes#index'
 

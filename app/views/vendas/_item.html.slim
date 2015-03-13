@@ -1,0 +1,18 @@
+tr
+    td
+        = item.produto.cod
+        = hidden_field_tag 'venda[pedido_attributes][itens_pedidos_attributes][][produto_id]', item.produto_id
+    td
+        = item.produto.nome
+    td
+        = item.preco_unidade
+        = hidden_field_tag 'venda[pedido_attributes][itens_pedidos_attributes][][preco]', item.preco
+    td
+        = number_field_tag 'venda[pedido_attributes][itens_pedidos_attributes][][quantidade]', item.quantidade, min: 0
+    td
+        = item.produto.unidade.sigla
+    td
+        = item.preco_total
+    td
+        a href='#' onclick="window.remover_item_venda(this, #{item.produto_id}, #{item.quantidade})"
+            'Excluir

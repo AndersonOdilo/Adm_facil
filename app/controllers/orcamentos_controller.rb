@@ -2,8 +2,6 @@ class OrcamentosController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :set_orcamento, only: [:show, :edit, :update, :destroy]
 
-  # GET /orcamentos
-  # GET /orcamentos.json
   def add_item
     item_pedido = ItemPedido.new
     produto = Produto.find(params[:produto])
@@ -25,6 +23,8 @@ class OrcamentosController < ApplicationController
     end
   end
 
+  # GET /orcamentos
+  # GET /orcamentos.json
   def index
     @orcamentos = Orcamento.all
   end

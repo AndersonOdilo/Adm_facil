@@ -68,6 +68,4 @@ div class="panel panel-info"
                                     li class="list-group-item"
                                         = email.descricao
 
-= link_to 'Edit', edit_cliente_path(@cliente)
-'|
-= link_to 'Voltar', :back
+= link_to 'Editar', edit_cliente_path(@cliente), class: 'btn btn-info'

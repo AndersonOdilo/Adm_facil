@@ -1,0 +1,26 @@
+div class="panel panel-default"
+  div class="panel-heading"
+    h3
+      'Vendas
+  div class="panel-body"
+    table class="table"
+      thead
+        tr
+          th Cliente
+          th Data
+          th Total
+          th Obs
+          th
+
+      tbody
+        - @vendas.each do |venda|
+          tr
+            td = venda.cliente.pessoa.specific.nome rescue ""
+            td = venda.data
+            td = (number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: "."))
+            td = venda.obs
+            td = link_to 'Abrir', venda
+            td = link_to 'Edit', edit_venda_path(venda)
+            td = link_to 'Excluir', venda, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+= link_to 'Nova Venda', new_venda_path, class: 'btn btn-primary btn-sm'
