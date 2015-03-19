@@ -1,9 +1,14 @@
+.page-header
+    .row
+        .col-lg-8
+            h1 Fornecedores
+        .col-lg-4
+          br
+          = link_to 'Cadastrar Fornecedor', new_fornecedor_path, class: "btn btn-primary btn-md right"
+
 div class="panel panel-default"
-  <!-- Default panel contents -->
-  div class="panel-heading"
-    h3 Fornecedores
   div class="panel-body"
-    table class="table"
+    table class="table table-hover"
       thead
         tr
           th Nome
@@ -21,5 +26,3 @@ div class="panel panel-default"
               td = fornecedor.pessoa.specific.cpf
             td = link_to 'abrir', fornecedor
             td = link_to 'Excluir', fornecedor, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-= link_to 'Nova Fornecedor', new_fornecedor_path, class: "btn btn-primary btn-sm"

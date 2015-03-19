@@ -1,13 +1,16 @@
-p#notice = notice
+.page-header
+    .row
+        .col-lg-8
+            h1
+                = @funcionario.pessoa.specific.nome
+        .col-lg-4
+          br
+          = link_to 'Editar', edit_funcionario_path(@funcionario), class: 'btn btn-warning right'
 
-div class="panel panel-info"
-    div class="panel-heading"
-        h2 class="panel-title"
-            'Funcionario
+
+
+div class="panel panel-default"
     div class="panel-body"
-        h2
-            = @funcionario.pessoa.specific.nome
-
         .row
             .col-xs-2
                  strong Codigo:
@@ -88,5 +91,3 @@ div class="panel panel-info"
                                     - @funcionario.pessoa.emails.each do |email|
                                         li class="list-group-item"
                                             = email.descricao
-
-= link_to 'Edit', edit_funcionario_path(@funcionario), class: 'btn btn-info'

@@ -4,7 +4,7 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores
   # GET /fornecedores.json
   def index
-    @fornecedores = Fornecedor.all
+    @fornecedores = Fornecedor.includes(funcao: :pessoa).all
   end
 
   # GET /fornecedores/1
@@ -73,7 +73,7 @@ class FornecedoresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_fornecedor
-      @fornecedor = Fornecedor.find(params[:id])
+      @fornecedor = Fornecedor.includes(funcao: [pessoa: [:fones, :enderecos, :emails]]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

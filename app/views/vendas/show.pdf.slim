@@ -1,14 +1,10 @@
-.page-header
-    .row
-        .col-lg-8
-            h1 Venda
-        .col-lg-4
-          br
-          = link_to 'Imprimir', venda_path(@venda, format: 'pdf'), class: 'btn btn-warning btn-md right', target: "_blank"
 div class="panel panel-default"
-    div class="panel-body"
+    div class="panel-heading"
         h2
-            =link_to @venda.cliente.pessoa.nome, "/clientes/#{@venda.cliente.id}"
+            'Venda #{@venda.id}
+    div class="panel-body"
+        h3
+            =@venda.cliente.pessoa.nome
         .row
           .col-xs-4
             strong Funcionario: </strong>
@@ -96,7 +92,7 @@ div class="panel panel-default"
                           td = pagamento.data_pagamento
                           td = (number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: "."))
 
-          .col-lg-6
+          .col-lg-4
             div class="panel panel-default"
                 div class="panel-body"
                   h4

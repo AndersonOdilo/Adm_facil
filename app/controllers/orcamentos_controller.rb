@@ -26,7 +26,7 @@ class OrcamentosController < ApplicationController
   # GET /orcamentos
   # GET /orcamentos.json
   def index
-    @orcamentos = Orcamento.all
+    @orcamentos = Orcamento.includes(pedido: [cliente: [funcao: [:pessoa]]]).all
   end
 
   # GET /orcamentos/1
@@ -91,7 +91,7 @@ class OrcamentosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orcamento
-      @orcamento = Orcamento.find(params[:id])
+      @orcamento = Orcamento.includes(pedido: [:itens_pedidos, cliente: [funcao: [:pessoa]], funcionario:[funcao: [:pessoa]]]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -123,3 +123,9 @@
         margin-right: 0;
     }
 }
+
+h1,h2,h3 {
+   font-weight:800;
+   font-family:'Open Sans',arial,sans-serif;
+}
+

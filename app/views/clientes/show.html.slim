@@ -1,13 +1,14 @@
-p#notice = notice
+.page-header
+    .row
+        .col-lg-8
+            h1
+                = @cliente.pessoa.specific.nome
+        .col-lg-4
+          br
+          = link_to 'Editar', edit_cliente_path(@cliente), class: 'btn btn-warning right'
 
-div class="panel panel-info"
-    div class="panel-heading"
-        h2 class="panel-title"
-            'Cliente
+div class="panel panel-default"
     div class="panel-body"
-        h2
-            = @cliente.pessoa.specific.nome
-
         .row
             -if @cliente.pessoa.estado_type == 'PessoaFisica'
                 .col-xs-2
@@ -68,4 +69,4 @@ div class="panel panel-info"
                                     li class="list-group-item"
                                         = email.descricao
 
-= link_to 'Editar', edit_cliente_path(@cliente), class: 'btn btn-info'
+

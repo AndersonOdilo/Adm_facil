@@ -12,10 +12,24 @@
  *
  *
  *= require bootstrap.min
- *= require simple-sidebar
  *= require jquery-ui.min
+ *= require simple-sidebar
  *= require_tree
  *= require_self
  */
+
+ .page-header {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top:1px solid #eeeeee;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.right {
+    float: right !important;
+}
+
 
 

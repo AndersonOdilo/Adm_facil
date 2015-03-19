@@ -51,6 +51,8 @@ Rails.application.routes.draw do
 
   match 'venda/remover_item', to: "vendas#remover_item", via: [:post]
 
+  match 'venda/valor_parcela', to: "vendas#calcular_parcela", via: [:post]
+
   root 'clientes#index'
 
   # Example of regular route:

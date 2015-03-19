@@ -1,12 +1,15 @@
-p#notice = notice
+.page-header
+    .row
+        .col-lg-8
+            h1 Orcamento
+        .col-lg-4
+          br
+          = link_to 'Imprimir', orcamento_path(@orcamento, format: 'pdf'), class: 'btn btn-warning btn-md right', target: "_blank"
 
-= link_to 'Imprimir', orcamento_path(@orcamento, format: 'pdf'), class: 'btn btn-warning btn-xs', target: "_blank"
 div class="panel panel-default"
-    div class="panel-heading"
-        h2
-            'Orcamento
     div class="panel-body"
-        h3
+        h2
+          -if @orcamento.cliente
             =link_to @orcamento.cliente.pessoa.nome, "/clientes/#{@orcamento.cliente.id}"
         .row
           .col-xs-4
@@ -14,7 +17,7 @@ div class="panel panel-default"
             = @orcamento.funcionario.pessoa.specific.nome
           .col-xs-4
             strong fone: </strong>
-            = @orcamento.funcionario.pessoa.fones.first.numero
+            = @orcamento.funcionario.pessoa.fones.first.numero rescue ''
 
         .row
           .col-xs-4
@@ -73,5 +76,3 @@ div class="panel panel-default"
             = @orcamento.obs
 
 = link_to 'Edit', edit_orcamento_path(@orcamento)
-'|
-= link_to 'Voltar', :back

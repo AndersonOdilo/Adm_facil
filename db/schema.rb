@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313170148) do
+ActiveRecord::Schema.define(version: 20150319160309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,17 @@ ActiveRecord::Schema.define(version: 20150313170148) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pagamentos_vendas", force: true do |t|
+    t.date     "data_vencimento"
+    t.date     "data_pagamento"
+    t.decimal  "valor"
+    t.integer  "venda_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pagamentos_vendas", ["venda_id"], name: "index_pagamentos_vendas_on_venda_id", using: :btree
 
   create_table "paises", force: true do |t|
     t.string   "nome"

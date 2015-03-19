@@ -18,8 +18,6 @@ div class="modal fade" id="nova_categoria" tabindex="-1" role="dialog" aria-labe
           .form-group
             = f.label :descricao
             = f.text_field :descricao, class: 'form-control input-sm', required: true
-          div style="display:none"
-            = f.submit 'save', id: 'submit_categoria_produto'
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar

@@ -1,9 +1,14 @@
+.page-header
+    .row
+        .col-lg-8
+            h1 Orcamentos
+        .col-lg-4
+          br
+          = link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-primary btn-md right'
+
 div class="panel panel-default"
-  div class="panel-heading"
-    h3
-      'Orçamentos
   div class="panel-body"
-    table class="table"
+    table class="table  table-hover"
       thead
         tr
           th Cliente
@@ -22,5 +27,3 @@ div class="panel panel-default"
             td = link_to 'Abrir', orcamento
             td = link_to 'Edit', edit_orcamento_path(orcamento)
             td = link_to 'Excluir', orcamento, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-= link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-primary btn-sm'

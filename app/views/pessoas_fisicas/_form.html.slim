@@ -8,23 +8,25 @@
 
   div class="panel panel-default"
     div class="panel-body"
-        .form-group
-          = f.label :nome
-          = f.text_field :nome, class: 'form-control input-sm', required: true
+      .row
+        .col-xs-12
+          .form-group
+            = f.label :nome
+            = f.text_field :nome, class: 'form-control input-sm', required: true
 
-        .row
-          .col-xs-3
-            .form-group
-              = f.label :cpf
-              = f.text_field :cpf, class: 'form-control input-sm cpf'
-          .col-xs-3
-            .form-group
-              = f.label :rg
-              = f.text_field :rg, class: 'form-control input-sm rg'
-          .col-xs-3
-            .form-group
-              = f.label :data_nascimento
-              = f.text_field :data_nascimento, class: 'form-control input-sm datepicker', required: true
+      .row
+        .col-xs-3
+          .form-group
+            = f.label :cpf
+            = f.text_field :cpf, class: 'form-control input-sm cpf'
+        .col-xs-3
+          .form-group
+            = f.label :rg
+            = f.text_field :rg, class: 'form-control input-sm rg'
+        .col-xs-3
+          .form-group
+            = f.label :data_nascimento
+            = f.text_field :data_nascimento, class: 'form-control input-sm datepicker', required: true
 
   = f.fields_for :pessoa do |p|
     = p.hidden_field :id
@@ -88,9 +90,6 @@
                   = email.email_field :descricao, class: 'form-control input-sm'
                   = email.link_to_remove 'Excluir', class: "btn btn-danger btn-xs"
             = p.link_to_add 'Novo e-mail', :emails, class: "btn btn-primary btn-xs"
-
-  div style="display:none"
-    = f.submit 'save', id:'submit_pessoa_fisica'
 
 <script src='/assets/enderecos.js'></script>
 <script src='/assets/pessoas_fisicas.js'></script>

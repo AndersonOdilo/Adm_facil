@@ -19,7 +19,7 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.all
+    @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).all
   end
 
   # GET /produtos/1
@@ -79,7 +79,7 @@ class ProdutosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_produto
-      @produto = Produto.find(params[:id])
+      @produto = Produto.includes(:unidade, :fornecedor, :marca, :categoria_produto).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

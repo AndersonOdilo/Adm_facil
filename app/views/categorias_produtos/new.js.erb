@@ -2,7 +2,8 @@ $("#categoria_modal").html("<%= escape_javascript(render partial: 'form_modal') 
 $('#nova_categoria').modal('show');
 $(function() {
   $('#add_categoria').on("click", function() {
-    return $('#submit_categoria_produto').click();
+    $('#new_categoria_produto').validate();
+    return $('#new_categoria_produto').submit();
   });
   return $('#new_categoria_produto').bind("ajax:success", function(event, data, status, xhr) {
     $('#produto_categoria_produto_id').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected", "selected"));

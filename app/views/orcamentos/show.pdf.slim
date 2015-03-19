@@ -4,6 +4,7 @@ div class="panel panel-default"
             'Orcamento
     div class="panel-body"
         h3
+          -if @orcamento.cliente
             =@orcamento.cliente.pessoa.nome
         .row
           .col-xs-6
@@ -11,7 +12,7 @@ div class="panel panel-default"
             = @orcamento.funcionario.pessoa.specific.nome
           .col-xs-4
             strong fone: </strong>
-            = @orcamento.funcionario.pessoa.fones.first.numero
+            = @orcamento.funcionario.pessoa.fones.first.numero rescue ''
 
         .row
             .col-xs-6

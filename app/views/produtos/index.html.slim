@@ -1,9 +1,14 @@
+.page-header
+    .row
+        .col-lg-8
+            h1 Produtos
+        .col-lg-4
+          br
+          = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-primary btn-md right'
+
 div class="panel panel-default"
-  <!-- Default panel contents -->
-  div class="panel-heading"
-    h3 Produtos
   div class="panel-body"
-    table class="table"
+    table class="table table-hover"
       thead
         tr
           th Cod
@@ -33,4 +38,3 @@ div class="panel panel-default"
             td = link_to 'Edit', edit_produto_path(produto)
             td = link_to 'Excluir', produto, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'Novo Produto', new_produto_path, class: 'btn btn-primary btn-sm'

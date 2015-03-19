@@ -2,7 +2,8 @@
  $('#nova_unidade').modal('show');
  $(function() {
   $('#add_unidade').on("click", function() {
-    return $('#submit_unidade').click();
+    $('#new_unidade').validate();
+    return $('#new_unidade').submit();
   });
   return $('#new_unidade').bind("ajax:success", function(event, data, status, xhr) {
     $('#produto_unidade_id').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected", "selected"));

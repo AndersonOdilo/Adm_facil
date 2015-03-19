@@ -1,8 +1,14 @@
+.page-header
+    .row
+        .col-lg-8
+            h1 Fornecedores
+        .col-lg-4
+          br
+          = link_to 'Cadastrar Funcionario', new_funcionario_path, class: "btn btn-primary btn-md right"
+
 div class="panel panel-default"
-  div class="panel-heading"
-    h3 Funcionarios
   div class="panel-body"
-    table class="table"
+    table class="table table-hover"
       thead
         tr
           th Cod
@@ -24,5 +30,3 @@ div class="panel panel-default"
             td = funcionario.data_admissao
             td = link_to 'Abrir', funcionario
             td = link_to 'Excluir', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-= link_to 'Novo Funcionario', new_funcionario_path, class: "btn btn-primary btn-sm"

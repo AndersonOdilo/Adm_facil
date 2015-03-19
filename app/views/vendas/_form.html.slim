@@ -27,7 +27,16 @@
         .col-xs-2
           .form-group
             = f.label :forma_pagamento
-            = f.collection_select :forma_pagamento, FormaPagamento.all, :id, :descricao, {}, class: 'form-control'
+            = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control'
+        .col-xs-3
+          .form-group
+            br
+            div class="btn-group" role="group" aria-label="..."
+              button type="button" class="btn btn-default btn-sm" id="retirada_local"
+                'Retirada Local
+              button type="button" class="btn btn-default btn-sm" id="entrega"
+                'Entregar
+
 
   div class="panel panel-default"
     div class="panel-body"
@@ -46,6 +55,7 @@
           strong
             'Quant. estoq.
           #quantidade_estoque
+          = hidden_field_tag :quantidade_estoque_value
 
         .col-xs-2
           .form-group
@@ -85,14 +95,47 @@
             = f.label :desconto
             = f.text_field :desconto, class: 'form-control input-sm'
       .row
-        .col-xs-6
+        .col-xs-12
           .form-group
             = f.label :obs
             = f.text_area :obs, class: 'form-control input-sm'
 
+  #pagamento_parcelado_modal
+   div class="modal fade" id="pagamento_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    div class="modal-dialog modal-lg"
+      div class="modal-content"
+        div class="modal-header"
+          button type="button" class="close" data-dismiss="modal" aria-label="Close"
+              span aria-hidden="true" &times
+          h2 class="modal-title" id="myModalLabel"
+              'Pagamento
+        div class="modal-body"
+          .row
+            .col-xs-3
+              .form-group
+                = label_tag "Valor de Entrada"
+                = text_field_tag :valor_entrada, nil, class: 'form-control input-sm'
+            .col-xs-3
+              .form-group
+                = label_tag "Numero de parcelas:"
+                = select_tag :numero_parcela, options_for_select((2..12).to_a.map{|s| ["#{s}x", s]}), class:  'form-control input-sm datepicker', prompt: 'Selecione N° parcelas'
+            .col-xs-2
+              .form-group
+                = label_tag "Intervalo:"
+                = select_tag :intervalo_parcela, options_for_select((15..90).step(15).to_a.map{|s| ["#{s} dias", s]}), class:  'form-control input-sm datepicker'
+            .col-xs-4
+              .form-group
+                = label_tag "Valor da parcela"
+                h3 id="valor_parcela"
+
+        div class="modal-footer"
+          button type="button" class="btn btn-default" data-dismiss="modal"
+              'Fechar
+          = link_to 'Salvar', '#', class: "btn btn-success", id: 'finalizar_pagamento'
+
   .field
     = f.hidden_field :funcionario_id, value: current_usuario.funcionario_id
     = f.hidden_field :cliente_id, id: 'cliente_id'
-  .actions = f.submit 'Finalizar pedido', class: "btn btn-success btn-lg btn-block"
+  = link_to 'Finalizar pedido', '#', class: "btn btn-success btn-lg btn-block", id: 'finalizar_pedido'
 
 #cliente_modal

@@ -1,9 +1,12 @@
-p#notice = notice
+.page-header
+    .row
+        .col-lg-8
+            h1 Produto
+        .col-lg-4
+          br
+          = link_to 'Editar', edit_produto_path(@produto), class: 'btn btn-warning right'
 
-div class="panel panel-info"
-    div class="panel-heading"
-        h2 class="panel-title"
-            'Produto
+div class="panel panel-default"
     div class="panel-body"
 
       .row
@@ -37,8 +40,6 @@ div class="panel panel-info"
         .col-xs-3
           strong Valor venda:
           = @produto.preco_venda
-
-
-= link_to 'Edit', edit_produto_path(@produto)
-'|
-= link_to 'Voltar', :back
+        .col-xs-3
+          strong Quantidade estoque:
+          = "#{@produto.quantidade_estoque} #{@produto.unidade.sigla}"

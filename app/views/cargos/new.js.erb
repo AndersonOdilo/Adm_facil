@@ -2,7 +2,8 @@
  $('#novo_cargo').modal('show');
  $(function() {
   $('#add_cargo').on("click", function() {
-    return $('#submit_cargo').click();
+    $('#new_cargo').validate();
+    return $('#new_cargo').submit();
   });
   return $('#new_cargo').bind("ajax:success", function(event, data, status, xhr) {
     $('#funcionario_cargo').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected", "selected"));

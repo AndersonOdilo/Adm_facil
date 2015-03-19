@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data_vencimento: 2015-03-19
+  data_pagamento: 2015-03-19
+  valor: 9.99
+  venda_id: 
+
+two:
+  data_vencimento: 2015-03-19
+  data_pagamento: 2015-03-19
+  valor: 9.99
+  venda_id: 

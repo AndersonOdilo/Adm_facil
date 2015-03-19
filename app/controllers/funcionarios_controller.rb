@@ -4,7 +4,7 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios
   # GET /funcionarios.json
   def index
-    @funcionarios = Funcionario.all
+    @funcionarios = Funcionario.includes(funcao: :pessoa).all
   end
 
   # GET /funcionarios/1
@@ -70,7 +70,7 @@ class FuncionariosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_funcionario
-      @funcionario = Funcionario.find(params[:id])
+      @funcionario = Funcionario.includes(funcao: [pessoa: [:fones, :enderecos, :emails]]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
