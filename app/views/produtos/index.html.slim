@@ -36,5 +36,5 @@ div class="panel panel-default"
             td = produto.fornecedor.pessoa.nome
             td = link_to 'Abrir', produto
             td = link_to 'Edit', edit_produto_path(produto)
-            td = link_to 'Excluir', produto, data: {:confirm => 'Are you sure?'}, :method => :delete
+            td = link_to 'Excluir', produto, data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete
 

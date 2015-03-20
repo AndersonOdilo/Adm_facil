@@ -10,7 +10,7 @@ $ ->
                     produto: $('#produto_id').val()
                     quantidade: $('#produto_quantidade').val()
         else
-            alert('Nao ha estoque')
+            alert('Nao')
 
     remover_item_venda =(elemento, produto, quantidade) ->
           $.ajax
@@ -27,10 +27,13 @@ $ ->
 
 
     $('#finalizar_pedido'). on "click", ->
-        if $('#venda_forma_pagamento_id').val() == '5'
-            $('#pagamento_modal').modal('show')
+        if $('#cliente_id').val() != ""
+            if $('#venda_forma_pagamento_id').val() == '5'
+                $('#pagamento_modal').modal('show')
+            else
+                $('#new_venda').submit()
         else
-            $('#new_venda').submit()
+            alert('Cliente')
 
     $('#numero_parcela').on "change", ->
         $.ajax

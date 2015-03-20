@@ -19,7 +19,7 @@ class FuncionariosController < ApplicationController
 
   # GET /funcionarios/1/edit
   def edit
-    pessoa = @funcionario.funcao.pessoa
+    pessoa = @funcionario.pessoa
     if pessoa.estado_type == 'PessoaJuridica'
       @pessoa_juridica = pessoa.specific
     else

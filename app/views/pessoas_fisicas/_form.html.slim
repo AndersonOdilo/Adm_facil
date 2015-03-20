@@ -26,7 +26,7 @@
         .col-xs-3
           .form-group
             = f.label :data_nascimento
-            = f.text_field :data_nascimento, class: 'form-control input-sm datepicker', required: true
+            = f.date_field :data_nascimento, class: 'form-control input-sm', max: Date.today - 18.year, required: true
 
   = f.fields_for :pessoa do |p|
     = p.hidden_field :id

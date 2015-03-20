@@ -58,7 +58,7 @@ div class="panel panel-default"
                 = @funcionario.data_admissao
 
         br
-        - if !@funcionario.pessoa.enderecos.empty?
+        - if !@funcionario.pessoa.enderecos.blank?
             .row
                 .col-xs-12
                     p
@@ -73,7 +73,7 @@ div class="panel panel-default"
                                          estado: #{endereco.estado},
                                          pais: #{endereco.pais} " rescue 'Nem um endereço cadastrado'
 
-        - if !@funcionario.pessoa.fones.empty?
+        - if !@funcionario.pessoa.fones.blank?
             .row
                 .col-xs-4
                     p
@@ -83,7 +83,7 @@ div class="panel panel-default"
                                 li class="list-group-item"
                                     = fone.numero
 
-                - if !@funcionario.pessoa.emails.empty?
+                - if !@funcionario.pessoa.emails.blank?
                         .col-xs-4
                             p
                                 strong E-mails:

@@ -25,4 +25,4 @@ div class="panel panel-default"
             - else
               td = fornecedor.pessoa.specific.cpf
             td = link_to 'abrir', fornecedor
-            td = link_to 'Excluir', fornecedor, data: {:confirm => 'Are you sure?'}, :method => :delete
+            td = link_to 'Excluir', fornecedor, data: {:confirm => "Deseja excluir o fornecedor #{fornecedor.pessoa.nome}?"}, :method => :delete

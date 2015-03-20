@@ -23,11 +23,11 @@
         .col-xs-2
           .form-group
             = f.label :data
-            = f.text_field :data, class:  'form-control input-sm datepicker', value: Date.today
+            = f.date_field :data, class:  'form-control input-sm', value: Date.today
         .col-xs-2
           .form-group
             = f.label 'Data validade'
-            = f.text_field :data_validade, class:  'form-control input-sm datepicker', value: Date.today + 30.day
+            = f.date_field :data_validade, class:  'form-control input-sm', value: Date.today + 30.day
 
   div class="panel panel-default"
     div class="panel-body"

@@ -11,3 +11,6 @@ $ ->
       else if $('#new_funcionario').length
         $('#new_funcionario').submit()
 
+    $(".cnpj").mask("99.999.999/9999-99");
+    $(".inscricao_estadual").mask("99999999-99");
+    $(".fone").mask("(99)9999-9999");

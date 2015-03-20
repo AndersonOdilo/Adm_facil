@@ -1,7 +1,7 @@
 .page-header
     .row
         .col-lg-8
-            h1 Venda
+            h1 Venda #{@venda.id}
         .col-lg-4
           br
           = link_to 'Imprimir', venda_path(@venda, format: 'pdf'), class: 'btn btn-warning btn-md right', target: "_blank"
@@ -13,9 +13,12 @@ div class="panel panel-default"
           .col-xs-4
             strong Funcionario: </strong>
             = @venda.funcionario.pessoa.specific.nome
-          .col-xs-4
+          .col-xs-3
             strong fone: </strong>
             = @venda.funcionario.pessoa.fones.first.numero rescue ''
+          .col-xs-4
+            strong e-mail: </strong>
+            = @venda.funcionario.pessoa.emails.first.descricao rescue ''
 
         .row
           .col-xs-4

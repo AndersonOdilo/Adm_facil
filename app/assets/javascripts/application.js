@@ -25,18 +25,12 @@
 var ready;
 ready = (function() {
 
-  $(".cnpj").mask("99.999.999/9999-99");
-  $(".inscricao_estadual").mask("99999999-99");
-  $(".cpf").mask("999.999.999-99");
-  $(".rg").mask("99.999.999-9");
-  $(".fone").mask("(99)9999-9999");
-
   jQuery.extend(jQuery.validator.messages, {
         required: "Campo obrigatorio.",
         remote: "Please fix this field.",
         email: "Please enter a valid email address.",
         url: "Please enter a valid URL.",
-        date: "Please enter a valid date.",
+        date: "Data deve ser",
         dateISO: "Please enter a valid date (ISO).",
         number: "Please enter a valid number.",
         digits: "Please enter only digits.",
@@ -47,9 +41,14 @@ ready = (function() {
         minlength: jQuery.validator.format("Please enter at least {0} characters."),
         rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
         range: jQuery.validator.format("Please enter a value between {0} and {1}."),
-        max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+        max: jQuery.validator.format("O valor deve ser menor ou igual a {0}."),
         min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
   });
+
+  $(document).on('nested:fieldAdded', function(event){
+    $(".fone").mask("(99)9999-9999");
+  });
+
 });
 
 $(document).ready(ready);

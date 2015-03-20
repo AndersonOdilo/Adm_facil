@@ -1,10 +1,2 @@
 $("#pessoa_juridica").empty("");
 $("#pessoa_fisica").html("<%= escape_javascript(render partial: 'form') %>");
-$(".cpf").mask("999.999.999-99");
-$(".rg").mask("99.999.999-9");
-$(".fone").mask("(99)9999-9999");
-$( ".datepicker" ).datepicker({
-    dateFormat : 'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true
-});

@@ -1,7 +1,7 @@
 .page-header
     .row
         .col-lg-8
-            h1 Fornecedores
+            h1 Funcionarios
         .col-lg-4
           br
           = link_to 'Cadastrar Funcionario', new_funcionario_path, class: "btn btn-primary btn-md right"
@@ -26,7 +26,7 @@ div class="panel panel-default"
             - if funcionario.pessoa.estado_type == "PessoaFisica"
               td = funcionario.pessoa.specific.cpf
             - else
-             td = funcionario.pessoa.specific.cnpj
+              td = funcionario.pessoa.specific.cnpj
             td = funcionario.data_admissao
             td = link_to 'Abrir', funcionario
-            td = link_to 'Excluir', funcionario, data: {:confirm => 'Are you sure?'}, :method => :delete
+            td = link_to 'Excluir', funcionario, data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete
