@@ -32,11 +32,11 @@ class CargosController < ApplicationController
 
     respond_to do |format|
       if @cargo.save
-        format.html { redirect_to @cargo, notice: 'Cargo was successfully created.' }
+        format.html { redirect_to @cargo}
         format.json { render :show, status: :created, location: @cargo }
       else
         format.html { render :new }
-        format.json { render json: @cargo.errors, status: :unprocessable_entity }
+        format.json { render json: @cargo.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

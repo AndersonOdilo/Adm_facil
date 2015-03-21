@@ -51,7 +51,8 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
-        format.html { redirect_to action: "index", notice: 'Cliente was successfully created.' }
+        flash[:success] = "Cliente cadastrado com sucesso."
+        format.html { redirect_to action: "index"}
         format.json { render json: @cliente.to_json(include: [:pessoa]) }
       else
         format.html { render :new }
@@ -65,7 +66,8 @@ class ClientesController < ApplicationController
   def update
     respond_to do |format|
       if @cliente.update(cliente_params)
-        format.html { redirect_to @cliente, notice: 'Cliente was successfully updated.' }
+        flash[:success] = "Cliente alterado com sucesso."
+        format.html { redirect_to @cliente}
         format.json { render :show, status: :ok, location: @cliente }
       else
         format.html { render :edit }
@@ -79,7 +81,8 @@ class ClientesController < ApplicationController
   def destroy
     @cliente.destroy
     respond_to do |format|
-      format.html { redirect_to clientes_url, notice: 'Cliente was successfully destroyed.' }
+      flash[:success] = "Cliente excluido com sucesso."
+      format.html { redirect_to clientes_url}
       format.json { head :no_content }
     end
   end

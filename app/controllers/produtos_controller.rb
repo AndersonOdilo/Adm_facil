@@ -43,7 +43,8 @@ class ProdutosController < ApplicationController
 
     respond_to do |format|
       if @produto.save
-        format.html { redirect_to action: "index", notice: 'Produto salvo com sucesso.' }
+        flash[:success] = "Produto salvo com sucesso"
+        format.html { redirect_to action: "index", success: 'Produto salvo com sucesso.' }
         format.json { render :show, status: :created, location: @produto }
       else
         format.html { render :new }
@@ -57,7 +58,8 @@ class ProdutosController < ApplicationController
   def update
     respond_to do |format|
       if @produto.update(produto_params)
-        format.html { redirect_to @produto, notice: 'Produto was successfully updated.' }
+        flash[:success] = "Produto foi alterado com sucesso"
+        format.html { redirect_to @produto}
         format.json { render :show, status: :ok, location: @produto }
       else
         format.html { render :edit }
@@ -71,7 +73,8 @@ class ProdutosController < ApplicationController
   def destroy
     @produto.destroy
     respond_to do |format|
-      format.html { redirect_to produtos_url, notice: 'Produto was successfully destroyed.' }
+      flash[:success] = "Produto foi excluido com sucesso"
+      format.html { redirect_to produtos_url}
       format.json { head :no_content }
     end
   end

@@ -5,9 +5,12 @@
     $('#new_unidade').validate();
     return $('#new_unidade').submit();
   });
-  return $('#new_unidade').bind("ajax:success", function(event, data, status, xhr) {
+  $('#new_unidade').bind("ajax:success", function(event, data, status, xhr) {
     $('#produto_unidade_id').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected", "selected"));
     return $('#nova_unidade').modal('hide');
+  });
+  $('#new_unidade').bind("ajax:error", function(event, data, status, xhr) {
+    return alert('Esta unidade ja existe');
   });
 });
 

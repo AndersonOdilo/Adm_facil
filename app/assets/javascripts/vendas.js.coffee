@@ -10,7 +10,7 @@ $ ->
                     produto: $('#produto_id').val()
                     quantidade: $('#produto_quantidade').val()
         else
-            alert('Nao')
+            alert('aqui')
 
     remover_item_venda =(elemento, produto, quantidade) ->
           $.ajax
@@ -33,7 +33,7 @@ $ ->
             else
                 $('#new_venda').submit()
         else
-            alert('Cliente')
+           alert('erro')
 
     $('#numero_parcela').on "change", ->
         $.ajax
@@ -47,6 +47,9 @@ $ ->
                 $('#valor_parcela').html(data)
 
     $('#finalizar_pagamento').on "click", ->
-        $('#new_venda').submit()
+        if $("#numero_parcela").val() != ""
+            $('#new_venda').submit()
+        else
+            alert('nao')
 
 

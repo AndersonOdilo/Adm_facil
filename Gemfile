@@ -18,6 +18,7 @@ gem 'devise'
 gem 'will_paginate', '~> 3.0.6'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem "chartkick"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

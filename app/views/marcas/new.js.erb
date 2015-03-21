@@ -5,8 +5,11 @@
     $('#new_marca').validate();
     return $('#new_marca').submit();
   });
-  return $('#new_marca').bind("ajax:success", function(event, data, status, xhr) {
+  $('#new_marca').bind("ajax:success", function(event, data, status, xhr) {
     $('#produto_marca_id').append($("<option/>").attr("value", data.id).text(data.nome).attr("selected", "selected"));
     return $('#nova_marca').modal('hide');
+  });
+  $('#new_marca').bind("ajax:error", function(event, data, status, xhr) {
+    return alert('Esta marca ja existe');
   });
 });

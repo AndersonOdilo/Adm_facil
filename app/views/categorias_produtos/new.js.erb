@@ -5,8 +5,11 @@ $(function() {
     $('#new_categoria_produto').validate();
     return $('#new_categoria_produto').submit();
   });
-  return $('#new_categoria_produto').bind("ajax:success", function(event, data, status, xhr) {
+  $('#new_categoria_produto').bind("ajax:success", function(event, data, status, xhr) {
     $('#produto_categoria_produto_id').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected", "selected"));
     return $('#nova_categoria').modal('hide');
+  });
+  $('#new_categoria_produto').bind("ajax:error", function(event, data, status, xhr) {
+    return alert('Este cargo ja existe');
   });
 });

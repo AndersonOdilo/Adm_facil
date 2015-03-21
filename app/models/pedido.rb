@@ -19,4 +19,5 @@ class Pedido < ActiveRecord::Base
     total = self.total
     total_desconto = total - (total * desconto / 100)
   end
+
 end

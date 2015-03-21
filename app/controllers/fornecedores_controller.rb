@@ -37,7 +37,8 @@ class FornecedoresController < ApplicationController
     @fornecedor = Fornecedor.new(fornecedor_params)
     respond_to do |format|
       if @fornecedor.save
-        format.html { redirect_to action: "index", notice: 'Fornecedor was successfully created.' }
+        flash[:success] = "Fornecedor cadastrado com sucesso."
+        format.html { redirect_to action: "index"}
         format.json { render json: @fornecedor.to_json(include: [:pessoa]) }
       else
         format.html { render :new }
@@ -51,7 +52,8 @@ class FornecedoresController < ApplicationController
   def update
     respond_to do |format|
       if @fornecedor.update(fornecedor_params)
-        format.html { redirect_to @fornecedor, notice: 'Fornecedor was successfully updated.' }
+        flash[:success] = "Fornecedor alterado com sucesso."
+        format.html { redirect_to @fornecedor}
         format.json { render :show, status: :ok, location: @fornecedor }
       else
         format.html { render :edit }
@@ -65,7 +67,8 @@ class FornecedoresController < ApplicationController
   def destroy
     @fornecedor.destroy
     respond_to do |format|
-      format.html { redirect_to fornecedores_url, notice: 'Fornecedor was successfully destroyed.' }
+      flash[:success] = "Fornecedor excluido com sucesso."
+      format.html { redirect_to fornecedores_url}
       format.json { head :no_content }
     end
   end

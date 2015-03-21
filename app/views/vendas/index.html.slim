@@ -25,3 +25,11 @@ div class="panel panel-default"
             td = (number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: "."))
             td = venda.obs
             td = link_to 'Abrir', venda
+.row
+  .col-lg-6
+    div class="panel panel-default"
+      div class="panel title"
+        h3 Total Vendido e Orçado
+      div class="panel-body"
+        = pie_chart [["Vendas", Venda.total_geral],["Orcamento", Orcamento.total_geral]]
+

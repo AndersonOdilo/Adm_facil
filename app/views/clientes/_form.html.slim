@@ -5,6 +5,7 @@
       ul
         - @cliente.errors.full_messages.each do |message|
           li = message
+
   .form-group
     = f.label :limite_credito
     = f.text_field :limite_credito, class: "form-control input-sm"
