@@ -30,3 +30,8 @@ div class="panel panel-default"
             td = funcionario.data_admissao
             td = link_to 'Abrir', funcionario
             td = link_to 'Excluir', funcionario, data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete
+
+div class="digg_pagination"
+    div class="page_info"
+      = page_entries_info @clientes
+= will_paginate @clientes

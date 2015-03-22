@@ -19,7 +19,7 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).all
+    @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /produtos/1

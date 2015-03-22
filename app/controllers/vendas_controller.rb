@@ -11,7 +11,7 @@ class VendasController < ApplicationController
     sub_total = session[:sub_total]
     session[:sub_total] = sub_total.to_f + item_pedido.quantidade * item_pedido.preco
     respond_to do |format|
-      format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total] }}
+      format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total].to_f }}
     end
   end
 
@@ -19,7 +19,7 @@ class VendasController < ApplicationController
     produto = Produto.find(params[:produto])
     session[:sub_total] = session[:sub_total].to_f - produto.valor_venda * params[:quantidade].to_f
     respond_to do |format|
-      format.json {render json: (number_to_currency(session[:sub_total].to_f, unit: 'R$', separator: ",", delimiter: ".")).to_json }
+      format.json {render json: number_to_currency(session[:sub_total].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json }
     end
   end
 
@@ -27,14 +27,14 @@ class VendasController < ApplicationController
     valor_parcela = (session[:sub_total].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i
     valor_parcela.round(2)
     respond_to do |format|
-      format.json {render json: (number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".")).to_json}
+      format.json {render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json}
     end
   end
 
   # GET /vendas
   # GET /vendas.json
   def index
-    @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).all
+    @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /vendas/1

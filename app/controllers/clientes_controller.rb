@@ -17,7 +17,7 @@ class ClientesController < ApplicationController
   # GET /clientes
   # GET /clientes.json
   def index
-    @clientes = Cliente.includes(funcao: :pessoa).all.paginate(:page => params[:page])
+    @clientes = Cliente.includes(funcao: :pessoa).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /clientes/1

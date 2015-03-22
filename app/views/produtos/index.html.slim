@@ -38,3 +38,7 @@ div class="panel panel-default"
             td = link_to 'Edit', edit_produto_path(produto)
             td = link_to 'Excluir', produto, data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete
 
+div class="digg_pagination"
+    div class="page_info"
+      = page_entries_info @produtos
+= will_paginate @produtos

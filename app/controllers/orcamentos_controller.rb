@@ -26,7 +26,7 @@ class OrcamentosController < ApplicationController
   # GET /orcamentos
   # GET /orcamentos.json
   def index
-    @orcamentos = Orcamento.includes(pedido: [cliente: [funcao: [:pessoa]]]).all
+    @orcamentos = Orcamento.includes(pedido: [cliente: [funcao: [:pessoa]]]).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /orcamentos/1

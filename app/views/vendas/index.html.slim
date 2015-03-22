@@ -33,3 +33,7 @@ div class="panel panel-default"
       div class="panel-body"
         = pie_chart [["Vendas", Venda.total_geral],["Orcamento", Orcamento.total_geral]]
 
+div class="digg_pagination"
+    div class="page_info"
+      = page_entries_info @clientes
+= will_paginate @clientes
