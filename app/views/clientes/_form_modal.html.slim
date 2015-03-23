@@ -8,8 +8,6 @@ div class="modal fade" id="novo_cliente" tabindex="-1" role="dialog" aria-labell
             'Novo Cliente
       div class="modal-body"
         == render 'pessoas/pessoa_fisica_ou_juridica'
-        #pessoa_fisica
-        #pessoa_juridica
         #formulario style="display:none"
           = form_for @cliente, remote: true, format: 'json', html: {id: 'new_cliente'} do |f|
             - if @cliente.errors.any?

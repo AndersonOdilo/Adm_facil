@@ -58,36 +58,4 @@ div class="panel panel-default"
                 = @funcionario.data_admissao
 
         br
-        - if !@funcionario.pessoa.enderecos.blank?
-            .row
-                .col-xs-12
-                    p
-                        strong Endereços:
-                        ul class="list-group"
-                            - @funcionario.pessoa.enderecos.each do |endereco|
-                                  li class="list-group-item"
-                                    = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
-                                         rua: #{endereco.logradouro.nome},
-                                         bairro: #{endereco.bairro},
-                                         cidade: #{endereco.cidade},
-                                         estado: #{endereco.estado},
-                                         pais: #{endereco.pais} " rescue 'Nem um endereço cadastrado'
-
-        - if !@funcionario.pessoa.fones.blank?
-            .row
-                .col-xs-4
-                    p
-                        strong Fones:
-                        ul class="list-group"
-                            - @funcionario.pessoa.fones.each do |fone|
-                                li class="list-group-item"
-                                    = fone.numero
-
-                - if !@funcionario.pessoa.emails.blank?
-                        .col-xs-4
-                            p
-                                strong E-mails:
-                                ul class="list-group"
-                                    - @funcionario.pessoa.emails.each do |email|
-                                        li class="list-group-item"
-                                            = email.descricao
+        == render partial: 'pessoas/show', locals: {pessoa: @funcionario.pessoa}

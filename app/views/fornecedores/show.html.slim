@@ -32,33 +32,6 @@ div class="panel panel-default"
                      = @fornecedor.pessoa.specific.data_abertura
 
         br
-        - if !@fornecedor.pessoa.enderecos.empty?
-            .row
-                .col-xs-12
-                    p
-                        strong Endereços:
-                        ul class="list-group"
-                            - @fornecedor.pessoa.enderecos.each do |endereco|
-                                li class="list-group-item"
-                                    = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
-                                         bairro: #{Bairro.first.nome}, cidade: #{Cidade.first.nome}, estado: #{Estado.first.nome}, pais: #{Pais.first.nome} "
+        == render partial: 'pessoas/show', locals: {pessoa: @fornecedor.pessoa}
 
-        - if !@fornecedor.pessoa.fones.empty?
-            .row
-                .col-xs-4
-                    p
-                        strong Fones:
-                        ul class="list-group"
-                            - @fornecedor.pessoa.fones.each do |fone|
-                                li class="list-group-item"
-                                    = fone.numero
-
-                - if !@fornecedor.pessoa.emails.empty?
-                        .col-xs-4
-                            p
-                                strong E-mails:
-                                ul class="list-group"
-                                    - @fornecedor.pessoa.emails.each do |email|
-                                        li class="list-group-item"
-                                            = email.descricao
 

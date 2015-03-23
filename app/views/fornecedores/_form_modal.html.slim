@@ -8,8 +8,6 @@ div class="modal fade" id="novo_fornecedor" tabindex="-1" role="dialog" aria-lab
             'Novo Fornecedor
       div class="modal-body"
         == render 'pessoas/pessoa_fisica_ou_juridica'
-        #pessoa_fisica
-        #pessoa_juridica
         #formulario style="display:none"
           = form_for @fornecedor, remote: true, format: 'json' do |f|
             - if @fornecedor.errors.any?

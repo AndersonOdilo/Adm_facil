@@ -1,0 +1,11 @@
+.row
+  .col-xs-12
+    p
+      strong Endereços:
+      ul class="list-group"
+        - enderecos.each do |endereco|
+          li class="list-group-item"
+            = "Nº #{endereco.numero}, complemento: #{endereco.complemento},
+              rua: #{endereco.logradouro.nome},
+              bairro: #{endereco.bairro},
+              cidade: #{endereco.cidade} - #{endereco.estado} - #{endereco.pais} "

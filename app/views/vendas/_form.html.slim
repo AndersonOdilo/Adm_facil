@@ -27,7 +27,7 @@
         .col-xs-2
           .form-group
             = f.label :forma_pagamento
-            = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control produto_nome_autocomplete'
+            = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control'
         .col-xs-4
             br
             .form-group
@@ -44,7 +44,7 @@
           .form-group
             = hidden_field_tag :produto_id
             = label_tag 'Buscar Produto'
-            = text_field_tag :produto_nome, params[:query], class: 'form-control input-sm'
+            = text_field_tag :produto_nome, params[:query], class: 'form-control input-sm produto_nome_autocomplete'
         .col-xs-2
           strong Preço
           #preco
@@ -61,7 +61,6 @@
             = number_field_tag :produto_quantidade, nil, class: 'form-control input-sm numero', min: 0
         br
         = link_to 'Add item', '#', class: 'btn btn-primary btn-xs', id: 'add_item_venda'
-
 
   div class="panel panel-default"
     div class="panel-body"
