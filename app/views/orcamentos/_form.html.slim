@@ -14,7 +14,7 @@
         .col-xs-10
           .form-group
             = f.label :cliente
-            = text_field_tag :cliente_nome, nil, class: 'form-control input-sm'
+            = text_field_tag :cliente_nome, nil, class: 'form-control input-sm cliente_nome_autocomplete'
         .col-xs-1
           br
           = link_to 'Cadastrar Novo Cliente', new_cliente_path, remote: true, class: 'btn btn-primary btn-xs'
@@ -37,7 +37,7 @@
           .form-group
             = hidden_field_tag :produto_id
             = label_tag 'Buscar Produto'
-            = text_field_tag :produto_nome, params[:query], class: 'form-control input-sm'
+            = text_field_tag :produto_nome, params[:query], class: 'form-control input-sm produto_nome_autocomplete'
         .col-xs-2
           strong Preço
           #preco

@@ -14,7 +14,7 @@
         .col-xs-10
           .form-group
             = f.label :cliente
-            = text_field_tag :cliente_nome, nil, class: 'form-control input-sm'
+            = text_field_tag :cliente_nome, nil, class: 'form-control input-sm cliente_nome_autocomplete'
         .col-xs-1
           br
           = link_to 'Cadastrar Novo Cliente', new_cliente_path, remote: true, class: 'btn btn-primary btn-xs'
@@ -27,15 +27,14 @@
         .col-xs-2
           .form-group
             = f.label :forma_pagamento
-            = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control'
-        .col-xs-3
-          .form-group
+            = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control produto_nome_autocomplete'
+        .col-xs-4
             br
-            div class="btn-group" role="group" aria-label="..."
-              button type="button" class="btn btn-default btn-sm" id="retirada_local"
-                'Retirada Local
-              button type="button" class="btn btn-default btn-sm" id="entrega"
-                'Entregar
+            .form-group
+            = radio_button_tag :entrega, false,  checked= true, options: {class: 'form-control'}
+            = label_tag 'Retirada no Local'
+            = radio_button_tag :entrega, true, checked = false, options: {class: "form-control"}
+            = label_tag 'Entregar'
 
 
   div class="panel panel-default"

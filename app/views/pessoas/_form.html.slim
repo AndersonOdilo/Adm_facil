@@ -1,0 +1,26 @@
+= p.hidden_field :id
+.form-group
+  = p.fields_for :enderecos do |endereco|
+    == render partial: 'enderecos/endereco_fields', locals: {endereco: endereco}
+
+  = p.link_to_add 'Novo endereço', :enderecos, class: 'btn btn-primary btn-xs'
+
+.form-group
+  div class="panel panel-default"
+    div class="panel-body"
+      = p.label :fones
+      .row
+        = p.fields_for :fones do |fone|
+          == render partial: 'fones/fone_fields', locals: {fone: fone}
+
+        = p.link_to_add 'Novo fone', :fones, class: "btn btn-primary btn-xs"
+
+.form-group
+  div class="panel panel-default"
+    div class="panel-body"
+      = p.label :emails
+      .row
+        = p.fields_for :emails do |email|
+          == render partial: 'emails/email_fields', locals: {email: email}
+
+        = p.link_to_add 'Novo e-mail', :emails, class: "btn btn-primary btn-xs"

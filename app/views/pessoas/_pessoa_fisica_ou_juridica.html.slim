@@ -1,6 +1,4 @@
 .form-group
     div class="btn-group" role="group" aria-label="..."
-        button type="button" class="btn btn-default" id="estado_pessoas_fisicas"
-            'Pessoa Fisica
-        button type="button" class="btn btn-default" id="estado_pessoas_juridicas"
-            'Pessoa Juridica
+        = link_to 'Pessoa Fisica', new_pessoa_fisica_path, remote: true, class: 'btn btn-default'
+        = link_to 'Pessoa Juridica', new_pessoa_juridica_path, remote: true, class: 'btn btn-default'

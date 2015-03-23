@@ -1,26 +1,12 @@
 $ ->
-    $('#estado_pessoas_fisicas').on "click", ->
-            $.ajax
-                url: '/pessoas_fisicas/new.js'
-                type: 'GET'
-                success: (data) ->
-                    $('#formulario').show()
-
-    $('#estado_pessoas_juridicas').on "click", ->
-         $.ajax
-            url: '/pessoas_juridicas/new.js'
-            type: 'GET'
-            success: (data) ->
-                $('#formulario').show()
-
-    $('#cliente_nome').autocomplete
+    $('.cliente_nome_autocomplete').autocomplete
         source: '/clientes/autocomplete.json'
         select: (event, ui) ->
             $('#cliente_nome').val ui.item.label
             $('#cliente_id').val ui.item.value
             false
 
-    $('#produto_nome').autocomplete
+    $('.produto_nome_autocomplete').autocomplete
         source: '/produtos/autocomplete.json'
         select: (event, ui) ->
             $('#produto_nome').val ui.item.label
