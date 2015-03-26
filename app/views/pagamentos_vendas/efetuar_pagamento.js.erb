@@ -1,0 +1,5 @@
+$("#tr_"+<%= pagamento.id %>+"").removeClass();
+$("#tr_"+<%= pagamento.id %>+"").addClass("success");
+var data = new Date(""+<%=data.year%>+","+<%=data.month%>+","+<%=data.day%>+"");
+$("#data_pagamento_"+<%= pagamento.id %>+"").html(data.getDate()+"/"+(data.getMonth()+1)+"/"+data.getFullYear());
+$("#botao_"+<%= pagamento.id %>+"").remove();

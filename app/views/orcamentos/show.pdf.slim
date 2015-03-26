@@ -8,18 +8,22 @@ div class="panel panel-default"
             =@orcamento.cliente.pessoa.nome
         .row
           .col-xs-6
-            strong Funcionario: </strong>
+            strong
+              'Funcionario:
             = @orcamento.funcionario.pessoa.specific.nome
           .col-xs-4
-            strong fone: </strong>
+            strong
+              'fone:
             = @orcamento.funcionario.pessoa.fones.first.numero rescue ''
 
         .row
             .col-xs-6
-                strong Data emissao: </strog>
+                strong
+                  'Data emissao:
                 = @orcamento.data
             .col-xs-4
-                strong Data validade: </strog>
+                strong
+                  'Data validade:
                 = @orcamento.data + 30.day
         br
         div class="panel panel-default"
@@ -36,13 +40,12 @@ div class="panel panel-default"
                       th Quant.
                       th Unid.
                       th Valor Total
-                      th
                   tbody id="itens"
                   - @orcamento.itens_pedidos.each do |item|
                     tr
                         td = item.produto.cod
                         td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-                        td = item.produto.preco_venda
+                        td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
                         td = item.quantidade
                         td = item.produto.unidade.sigla
                         td = item.preco_total
@@ -51,7 +54,7 @@ div class="panel panel-default"
                 - if @orcamento.desconto
                     .col-xs-3
                         h4
-                            = "desconto #{@orcamento.desconto} %"
+                            = "Desconto: #{number_to_percentage(@venda.desconto, precision: 0)}"
                     .col-xs-4
                         h4
                             ="Total desc.  #{(number_to_currency(@orcamento.total_desconto, unit: 'R$', separator: ",", delimiter: "."))}"

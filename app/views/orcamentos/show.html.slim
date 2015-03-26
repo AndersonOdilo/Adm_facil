@@ -13,66 +13,29 @@ div class="panel panel-default"
             =link_to @orcamento.cliente.pessoa.nome, "/clientes/#{@orcamento.cliente.id}"
         .row
           .col-xs-4
-            strong Funcionario: </strong>
+            strong
+              'Funcionario:
             = @orcamento.funcionario.pessoa.specific.nome
           .col-xs-4
-            strong fone: </strong>
+            strong
+              'fone:
             = @orcamento.funcionario.pessoa.fones.first.numero rescue ''
 
         .row
           .col-xs-4
-            strong Data emissao: </strog>
+            strong
+              'Data emissao:
             = @orcamento.data
           .col-xs-4
-            strong Data validade: </strog>
+            strong
+              'Data validade:
             = @orcamento.data + 30.day
 
         br
-        div class="panel panel-default"
-            div class="panel-body"
-              h3 class="panel-title"
-                'Itens Pedido
-              #itens_pedido
-                table class="table table-striped"
-                  thead
-                    tr
-                      th Cod.
-                      th Nome
-                      th Valor Unid.
-                      th Quant.
-                      th Unid.
-                      th Valor Total
-                      th
-                  tbody id="itens"
-                  - @orcamento.itens_pedidos.each do |item|
-                    tr
-                        td = item.produto.cod
-                        td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-                        td = item.produto.preco_venda
-                        td = item.quantidade
-                        td = item.produto.unidade.sigla
-                        td = item.preco_total
-            div class="panel-footer"
-              .row
-                - if @orcamento.desconto
-                    .col-xs-3
-                        h4
-                            = "desconto #{@orcamento.desconto} %"
-                    .col-xs-4
-                        h4
-                            ="Total desc.  #{(number_to_currency(@orcamento.total_desconto, unit: 'R$', separator: ",", delimiter: "."))}"
-                    .col-xs-1
-                - else
-                    .col-xs-9
-                .col-xs-1
-                  h4 Total
-                .col-xs-2
-                  h4
-                    = (number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: "."))
+        == render partial: 'pedidos/show_itens_pedidos', locals: {pedido: @orcamento}
 
         h4
           'Observacoes:
         p
             = @orcamento.obs
 
-= link_to 'Edit', edit_orcamento_path(@orcamento)

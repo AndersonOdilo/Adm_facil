@@ -41,6 +41,7 @@ class FornecedoresController < ApplicationController
         format.html { redirect_to action: "index"}
         format.json { render json: @fornecedor.to_json(include: [:pessoa]) }
       else
+        @fornecedor.destroy
         format.html { render :new }
         format.json { render json: @fornecedor.errors, status: :unprocessable_entity }
       end

@@ -1,11 +1,13 @@
 $ ->
     $('#salvar_funcionario').on "click", ->
         if $('#new_pessoa_fisica').length
-            $('#new_pessoa_fisica').validate()
-            $('#new_funcionario').validate()
+          pessoa = $('#new_pessoa_fisica').valid()
+          funcionario = $('#new_funcionario').valid()
+          if pessoa && funcionario
             $('#new_pessoa_fisica').submit()
         else if $('#new_pessoa_juridica').length
-            $('#new_pessoa_juridica').validate()
-            $('#new_funcionario').validate()
+          pessoa = $('#new_pessoa_juridica').valid()
+          funcionario = $('#new_funcionario').valid()
+          if pessoa && funcionario
             $('#new_pessoa_juridica').submit()
 

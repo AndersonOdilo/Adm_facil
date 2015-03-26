@@ -7,6 +7,9 @@ class Pedido < ActiveRecord::Base
 
   accepts_nested_attributes_for :itens_pedidos
 
+  scope :vendas, -> {where(actable_type: 'Venda' )}
+  scope :orcamentos, -> {where(actable_type: 'Orcamento' )}
+
   def total
     total = 0
     self.itens_pedidos.each do |item|

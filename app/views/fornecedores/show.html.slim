@@ -12,23 +12,29 @@ div class="panel panel-default"
         .row
             -if @fornecedor.pessoa.estado_type == 'PessoaFisica'
                 .col-xs-2
-                    strong Cpf:
+                    strong
+                        'Cpf:
                     = @fornecedor.pessoa.specific.cpf
                 .col-xs-2
-                    strong Rg:
+                    strong
+                        'Rg:
                     = @fornecedor.pessoa.specific.rg
                 .col-xs-3
-                     strong Data nascimento:
+                     strong
+                        'Data nascimento:
                      = @fornecedor.pessoa.specific.data_nascimento
             -else
                 .col-xs-3
-                    strong CNPJ:
+                    strong
+                        'CNPJ:
                     = @fornecedor.pessoa.specific.cnpj
                 .col-xs-3
-                    strong Inscricao estadual:
+                    strong
+                        'Inscricao estadual:
                     = @fornecedor.pessoa.specific.inscricao_estadual
                 .col-xs-3
-                     strong Data abertura:
+                     strong
+                        'Data abertura:
                      = @fornecedor.pessoa.specific.data_abertura
 
         br

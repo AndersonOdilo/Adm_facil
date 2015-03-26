@@ -1,7 +1,7 @@
 .page-header
     .row
         .col-lg-8
-            h1 Orcamentos
+            h1 Orçamentos
         .col-lg-4
           br
           = link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-primary btn-md right'
@@ -25,7 +25,6 @@ div class="panel panel-default"
             td = (number_to_currency(orcamento.total, unit: 'R$', separator: ",", delimiter: "."))
             td = orcamento.obs
             td = link_to 'Abrir', orcamento
-            td = link_to 'Edit', edit_orcamento_path(orcamento)
             td = link_to 'Excluir', orcamento, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 div class="digg_pagination"

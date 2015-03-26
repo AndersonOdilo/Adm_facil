@@ -38,6 +38,7 @@ class FuncionariosController < ApplicationController
         format.html { redirect_to actions: "index"}
         format.json { render :show, status: :created, location: @funcionario }
       else
+        @funcionario.pessoa.destroy
         format.html { render :new }
         format.json { render json: @funcionario.errors, status: :unprocessable_entity }
       end

@@ -1,12 +1,14 @@
 $ ->
     $('#salvar_cliente').on "click", ->
         if $('#new_pessoa_fisica').length
-            $('#new_pessoa_fisica').validate()
-            $('#new_cliente').validate()
+          pessoa = $('#new_pessoa_fisica').valid()
+          cliente = $('#new_cliente').valid()
+          if pessoa && cliente
             $('#new_pessoa_fisica').submit()
         else if $('#new_pessoa_juridica').length
-            $('#new_pessoa_juridica').validate()
-            $('#new_cliente').validate()
+          pessoa = $('#new_pessoa_juridica').valid()
+          cliente = $('#new_cliente').valid()
+          if pessoa && cliente
             $('#new_pessoa_juridica').submit()
 
     $('#new_cliente').bind 'ajax:success', (event, data, status, xhr) ->

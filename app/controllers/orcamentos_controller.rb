@@ -23,10 +23,17 @@ class OrcamentosController < ApplicationController
     end
   end
 
+  def calcular_desconto
+    desconto = session[:sub_total].to_f - (session[:sub_total].to_f * params[:desconto].to_f / 100)
+    respond_to do |format|
+      format.json {render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json}
+    end
+  end
+
   # GET /orcamentos
   # GET /orcamentos.json
   def index
-    @orcamentos = Orcamento.includes(pedido: [cliente: [funcao: [:pessoa]]]).paginate(page: params[:page], per_page: 10)
+    @orcamentos = Orcamento.includes(pedido: [cliente: [funcao: [:pessoa]]]).paginate(page: params[:page], per_page: 10).order("orcamentos.created_at desc")
   end
 
   # GET /orcamentos/1
@@ -54,12 +61,17 @@ class OrcamentosController < ApplicationController
   def create
     @orcamento = Orcamento.new(orcamento_params)
     respond_to do |format|
-      if @orcamento.save
-        format.html { redirect_to @orcamento, notice: 'Orcamento was successfully created.' }
-        format.json { render :show, status: :created, location: @orcamento }
+      if !@orcamento.itens_pedidos.blank?
+        if @orcamento.save
+          format.html { redirect_to @orcamento, notice: 'Orcamento was successfully created.' }
+          format.json { render :show, status: :created, location: @orcamento }
+        else
+          format.html { render :new }
+          format.json { render json: @orcamento.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :new }
-        format.json { render json: @orcamento.errors, status: :unprocessable_entity }
+          flash[:danger] = 'Adicione itens ao Orçamento'
+          format.html { render :new }
       end
     end
   end

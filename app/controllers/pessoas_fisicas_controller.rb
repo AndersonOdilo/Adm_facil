@@ -39,7 +39,7 @@ class PessoasFisicasController < ApplicationController
         format.json { render json: @pessoa_fisica.acting_as}
       else
         format.html { render :new }
-        format.json { render json: @pessoa_fisica.errors, status: :unprocessable_entity }
+        format.json { render json: {error: @pessoa_fisica.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end

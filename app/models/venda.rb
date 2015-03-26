@@ -6,6 +6,8 @@ class Venda < ActiveRecord::Base
   before_save :baixar_estoque
   accepts_nested_attributes_for :pedido
 
+  scope :cliente, ->(id) {where(cliente_id: id)}
+
   def baixar_estoque
     self.itens_pedidos.each do |item|
         if item.produto.quantidade_estoque >= item.quantidade
@@ -15,6 +17,43 @@ class Venda < ActiveRecord::Base
         else
             item.destroy
         end
+    end
+  end
+
+  def gerar_duplicatas(entrada, numero_parcelas, intervalo_parcela)
+    if self.desconto?
+      total = self.desconto
+    else
+      total = self.total
+    end
+    if self.forma_pagamento.id == 5
+      if entrada != nil and entrada != 0
+        pagamento = PagamentoVenda.new
+        pagamento.data_vencimento = Date.today
+        pagamento.data_pagamento = Date.today
+        pagamento.valor = entrada
+        pagamento.venda_id = self.id
+        pagamento.save
+        total = total - entrada
+      end
+      data = Date.today
+      valor_parcela =  total  / numero_parcelas
+      for i in 1..numero_parcelas
+        pagamento = PagamentoVenda.new
+        pagamento.numero_parcela = i
+        pagamento.data_vencimento = data + intervalo_parcela.day
+        data = data + intervalo_parcela.day
+        pagamento.venda_id = self.id
+        pagamento.valor = valor_parcela
+        pagamento.save
+      end
+    else
+      pagamento = PagamentoVenda.new
+      pagamento.data_vencimento = Date.today
+      pagamento.data_pagamento = Date.today
+      pagamento.valor = total
+      pagamento.venda_id = self.id
+      pagamento.save
     end
   end
 

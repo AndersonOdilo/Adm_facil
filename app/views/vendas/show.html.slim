@@ -11,68 +11,33 @@ div class="panel panel-default"
             =link_to @venda.cliente.pessoa.nome, "/clientes/#{@venda.cliente.id}"
         .row
           .col-xs-4
-            strong Funcionario: </strong>
+            strong
+              'Funcionario:
             = @venda.funcionario.pessoa.specific.nome
           .col-xs-3
-            strong fone: </strong>
+            strong
+              'fone:
             = @venda.funcionario.pessoa.fones.first.numero rescue ''
           .col-xs-4
-            strong e-mail: </strong>
+            strong
+              'e-mail:
             = @venda.funcionario.pessoa.emails.first.descricao rescue ''
 
         .row
           .col-xs-4
-            strong Data emissao: </strog>
+            strong
+              'Data emissao:
             = @venda.data
           .col-xs-4
-            strong Forma pagamento: </strog>
+            strong
+              'Forma pagamento:
             = @venda.forma_pagamento.descricao
 
         br
-        div class="panel panel-default"
-            div class="panel-body"
-              h4
-                'Itens Pedido
-              #itens_pedido
-                table class="table table-striped"
-                  thead
-                    tr
-                      th Cod.
-                      th Nome
-                      th Valor Unid.
-                      th Quant.
-                      th Unid.
-                      th Valor Total
-                      th
-                  tbody id="itens"
-                  - @venda.itens_pedidos.each do |item|
-                    tr
-                        td = item.produto.cod
-                        td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-                        td = item.produto.preco_venda
-                        td = item.quantidade
-                        td = item.produto.unidade.sigla
-                        td = item.preco_total
-            div class="panel-footer"
-              .row
-                - if @venda.desconto
-                    .col-xs-3
-                        h4
-                            = "desconto #{@venda.desconto} %"
-                    .col-xs-4
-                        h4
-                            ="Total desc.  #{(number_to_currency(@venda.total_desconto, unit: 'R$', separator: ",", delimiter: "."))}"
-                    .col-xs-1
-                - else
-                    .col-xs-9
-                .col-xs-1
-                  h4 Total
-                .col-xs-2
-                  h4
-                    = (number_to_currency(@venda.total, unit: 'R$', separator: ",", delimiter: "."))
+        == render partial: 'pedidos/show_itens_pedidos', locals: {pedido: @venda}
 
         .row
-          .col-lg-6
+          .col-lg-7
             div class="panel panel-default"
                 div class="panel-body"
                   h4
@@ -84,8 +49,9 @@ div class="panel panel-default"
                         th Data vencimento
                         th Data pagamento
                         th Valor
+                        th
                     tbody id="itens"
-                      - @venda.pagamentos_vendas.each do |pagamento|
+                      - @venda.pagamentos_vendas.order(:id).each do |pagamento|
                         - if pagamento.data_pagamento != nil
                           - classe = "success"
                         - elsif pagamento.data_vencimento < Date.today
@@ -93,13 +59,19 @@ div class="panel panel-default"
                         - else
                           - classe ="info"
 
-                        tr class="#{classe}"
-                          td = pagamento.id
+                        tr class="#{classe}" id="tr_#{pagamento.id}"
+                          td = pagamento.numero_parcela
                           td = pagamento.data_vencimento
-                          td = pagamento.data_pagamento
-                          td = (number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: "."))
+                          td id="data_pagamento_#{pagamento.id}"
+                            = pagamento.data_pagamento
+                          td = pagamento.preco
+                          td
+                            -if !pagamento.data_pagamento?
+                               = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
+                                data: {:confirm => "Deseja efetuar o pagamento no valor de #{pagamento.preco}?"},
+                               remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
 
-          .col-lg-6
+          .col-lg-5
             div class="panel panel-default"
                 div class="panel-body"
                   h4

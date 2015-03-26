@@ -39,13 +39,12 @@ div class="panel panel-default"
                       th Quant.
                       th Unid.
                       th Valor Total
-                      th
                   tbody id="itens"
                   - @venda.itens_pedidos.each do |item|
                     tr
                         td = item.produto.cod
                         td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-                        td = item.produto.preco_venda
+                        td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
                         td = item.quantidade
                         td = item.produto.unidade.sigla
                         td = item.preco_total
@@ -54,7 +53,7 @@ div class="panel panel-default"
                 - if @venda.desconto
                     .col-xs-3
                         h4
-                            = "desconto #{@venda.desconto} %"
+                            = "Desconto: #{number_to_percentage(@venda.desconto, precision: 0)}"
                     .col-xs-4
                         h4
                             ="Total desc.  #{(number_to_currency(@venda.total_desconto, unit: 'R$', separator: ",", delimiter: "."))}"
@@ -93,7 +92,7 @@ div class="panel panel-default"
                           td = pagamento.id
                           td = pagamento.data_vencimento
                           td = pagamento.data_pagamento
-                          td = (number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: "."))
+                          td = pagamento.preco
 
           .col-lg-4
             div class="panel panel-default"

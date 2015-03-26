@@ -14,6 +14,7 @@ class ClientesController < ApplicationController
       }
     end
   end
+
   # GET /clientes
   # GET /clientes.json
   def index
@@ -55,6 +56,7 @@ class ClientesController < ApplicationController
         format.html { redirect_to action: "index"}
         format.json { render json: @cliente.to_json(include: [:pessoa]) }
       else
+        @cliente.pessoa.destroy
         format.html { render :new }
         format.json { render json: @cliente.errors, status: :unprocessable_entity }
       end

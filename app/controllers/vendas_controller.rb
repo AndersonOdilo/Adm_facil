@@ -8,33 +8,44 @@ class VendasController < ApplicationController
     item_pedido.produto_id = produto.id
     item_pedido.preco = produto.valor_venda
     item_pedido.quantidade = params[:quantidade]
-    sub_total = session[:sub_total]
-    session[:sub_total] = sub_total.to_f + item_pedido.quantidade * item_pedido.preco
+    sub_total = session[:sub_total_venda]
+    session[:sub_total_venda] = sub_total.to_f + item_pedido.quantidade * item_pedido.preco
     respond_to do |format|
-      format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total].to_f }}
+      format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total_venda].to_f }}
     end
   end
 
   def remover_item
     produto = Produto.find(params[:produto])
-    session[:sub_total] = session[:sub_total].to_f - produto.valor_venda * params[:quantidade].to_f
+    session[:sub_total_venda] = session[:sub_total_venda].to_f - produto.valor_venda * params[:quantidade].to_f
     respond_to do |format|
-      format.json {render json: number_to_currency(session[:sub_total].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json }
+      format.json {render json: number_to_currency(session[:sub_total_venda].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json }
     end
   end
 
   def calcular_parcela
-    valor_parcela = (session[:sub_total].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i
+    valor_parcela = (session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i
     valor_parcela.round(2)
     respond_to do |format|
       format.json {render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json}
     end
   end
 
+  def calcular_desconto
+    desconto = session[:sub_total_venda].to_f - (session[:sub_total_venda].to_f * params[:desconto].to_f / 100)
+    respond_to do |format|
+      format.json {render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json}
+    end
+  end
+
   # GET /vendas
   # GET /vendas.json
   def index
-    @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).paginate(page: params[:page], per_page: 10)
+    if params[:cliente]
+      @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).cliente(params[:cliente]).paginate(page: params[:page], per_page: 10).order("vendas.created_at desc")
+    else
+      @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).paginate(page: params[:page], per_page: 10).order("vendas.created_at desc")
+    end
   end
 
   # GET /vendas/1
@@ -49,7 +60,7 @@ class VendasController < ApplicationController
   # GET /vendas/new
   def new
     @venda = Venda.new
-    session[:sub_total] = nil
+    session[:sub_total_venda] = nil
   end
 
   # GET /vendas/1/edit
@@ -60,43 +71,10 @@ class VendasController < ApplicationController
   # POST /vendas.json
   def create
     @venda = Venda.new(venda_params)
-
     respond_to do |format|
       if @venda.save!
-        if @venda.desconto
-          total = @venda.desconto
-        else
-          total = @venda.total
-        end
-        if @venda.forma_pagamento.id == 5
-          if params[:valor_entrada] != ""
-            pagamento = PagamentoVenda.new
-            pagamento.data_vencimento = Date.today
-            pagamento.data_pagamento = Date.today
-            pagamento.valor = params[:valor_entrada].to_f
-            pagamento.venda_id = @venda.id
-            pagamento.save
-            total = total - params[:valor_entrada].to_f
-          end
-          data = Date.today
-          valor_parcela =  total  / params[:numero_parcela].to_i
-          for i in 1..params[:numero_parcela].to_i
-            pagamento = PagamentoVenda.new
-            pagamento.data_vencimento = data + params[:intervalo_parcela].to_i.day
-            data = data + params[:intervalo_parcela].to_i.day
-            pagamento.venda_id = @venda.id
-            pagamento.valor = valor_parcela
-            pagamento.save
-          end
-        else
-            pagamento = PagamentoVenda.new
-            pagamento.data_vencimento = Date.today
-            pagamento.data_pagamento = Date.today
-            pagamento.valor = total
-            pagamento.venda_id = @venda.id
-            pagamento.save
-        end
-        format.html { redirect_to @venda, notice: 'Venda was successfully created.' }
+        @venda.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i)
+        format.html { redirect_to @venda}
         format.json { render :show, status: :created, location: @venda }
       else
         format.html { render :new }

@@ -47,11 +47,17 @@ Rails.application.routes.draw do
 
   match 'orcamento/remover_item', to: "orcamentos#remover_item", via: [:post]
 
+  match 'orcamento/calcular_desconto', to: "orcamentos#calcular_desconto", via: [:post]
+
   match 'venda/add_item', to: "vendas#add_item", via: [:post]
 
   match 'venda/remover_item', to: "vendas#remover_item", via: [:post]
 
   match 'venda/valor_parcela', to: "vendas#calcular_parcela", via: [:post]
+
+  match 'venda/calcular_desconto', to: "vendas#calcular_desconto", via: [:post]
+
+  match 'pagamentos_vendas/efetuar_pagamento/:id', to: "pagamentos_vendas#efetuar_pagamento", via: [:get]
 
   root 'clientes#index'
 

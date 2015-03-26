@@ -17,8 +17,23 @@ $ ->
                 produto: produto
                 quantidade: quantidade
             success: (data) ->
-                $('#valor_total').html("<h4>"+data+"</h4>")
+                $('#valor_total').html(data)
                 elemento.parentElement.parentElement.remove()
     window.remover_item = remover_item
+
+    $('#orcamento_desconto').keyup (e) ->
+        valor =  $('#orcamento_desconto').val()
+        parseInt(valor)
+        if (valor < 100 && valor > 0)
+            $.ajax
+                url: '/orcamento/calcular_desconto'
+                type: 'post'
+                dataType: 'json'
+                data:
+                    desconto: valor
+                success: (data) ->
+                    $('#valor_total_desconto').html(data)
+        else
+            $('#valor_total_desconto').html('')
 
 

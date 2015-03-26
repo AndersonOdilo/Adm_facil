@@ -5,7 +5,7 @@ class Produto < ActiveRecord::Base
   belongs_to :fornecedor
   belongs_to :unidade
 
-  validates_uniqueness_of :cod, :case_sensitive => false
+  validates_uniqueness_of :cod, allow_blank: true
 
   def preco_custo
     number_to_currency(self.valor_custo, unit: 'R$', separator: ",", delimiter: ".")

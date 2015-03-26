@@ -40,7 +40,7 @@ class PessoasJuridicasController < ApplicationController
         format.json { render json: @pessoa_juridica.acting_as }
       else
         format.html { render :new }
-        format.json { render json: @pessoa_juridica.errors, status: :unprocessable_entity }
+        format.json { render json: {error: @pessoa_juridica.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +54,7 @@ class PessoasJuridicasController < ApplicationController
         format.json { render json: @pessoa_juridica.acting_as }
       else
         format.html { render :edit }
-        format.json { render json: @pessoa_juridica.errors, status: :unprocessable_entity }
+        format.json { render json: {error: @pessoa_juridica.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
