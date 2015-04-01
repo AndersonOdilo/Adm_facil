@@ -15,6 +15,7 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores/new
   def new
     @fornecedor = Fornecedor.new
+    @fornecedor.funcao = Funcao.new
     respond_to do |format|
       format.html
       format.js
@@ -23,18 +24,20 @@ class FornecedoresController < ApplicationController
 
   # GET /fornecedores/1/edit
   def edit
-      pessoa = @fornecedor.funcao.pessoa
-      if pessoa.estado_type == 'PessoaJuridica'
-        @pessoa_juridica = pessoa.specific
-      else
-        @pessoa_fisica = pessoa.specific
-      end
+    @fornecedor.pessoa = @fornecedor.pessoa.specific
   end
 
   # POST /fornecedores
   # POST /fornecedores.json
   def create
-    @fornecedor = Fornecedor.new(fornecedor_params)
+    @forncedor = Fornecedor.new
+    if params[:type] == "PessoaFisica"
+      @fornecedor.pessoa = PessoaFisica.new
+    else
+      @fornecedor.pessoa = PessoaJuridica.new
+    end
+    @fornecedor.update(fornecedor_params)
+
     respond_to do |format|
       if @fornecedor.save
         flash[:success] = "Fornecedor cadastrado com sucesso."
@@ -51,6 +54,7 @@ class FornecedoresController < ApplicationController
   # PATCH/PUT /fornecedores/1
   # PATCH/PUT /fornecedores/1.json
   def update
+    @fornecedor.pessoa = @fornecedor.pessoa.specific
     respond_to do |format|
       if @fornecedor.update(fornecedor_params)
         flash[:success] = "Fornecedor alterado com sucesso."
@@ -82,6 +86,11 @@ class FornecedoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fornecedor_params
-      params.require(:fornecedor).permit(:id, :pessoa_id)
+      params.require(:fornecedor).permit(:id,
+         funcao_attributes: [:id, :pessoa_id,
+        pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
+          enderecos_attributes: [:id, :logradouro_id, :numero, :complemento, :_destroy],
+          fones_attributes: [:id, :numero, :_destroy],
+          emails_attributes: [:id, :descricao, :_destroy]]])
     end
 end

@@ -15,22 +15,24 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios/new
   def new
     @funcionario = Funcionario.new
+    @funcionario.funcao = Funcao.new
   end
 
   # GET /funcionarios/1/edit
   def edit
-    pessoa = @funcionario.pessoa
-    if pessoa.estado_type == 'PessoaJuridica'
-      @pessoa_juridica = pessoa.specific
-    else
-      @pessoa_fisica = pessoa.specific
-    end
+    @funcionario.pessoa = @funcionario.pessoa.specific
   end
 
   # POST /funcionarios
   # POST /funcionarios.json
   def create
-    @funcionario = Funcionario.new(funcionario_params)
+    @funcionario = Funcionario.new
+    if params[:type] == "PessoaFisica"
+      @funcionario.pessoa = PessoaFisica.new
+    else
+      @funcionario.pessoa = PessoaJuridica.new
+    end
+    @funcionario.update(cliente_params)
 
     respond_to do |format|
       if @funcionario.save
@@ -38,7 +40,6 @@ class FuncionariosController < ApplicationController
         format.html { redirect_to actions: "index"}
         format.json { render :show, status: :created, location: @funcionario }
       else
-        @funcionario.pessoa.destroy
         format.html { render :new }
         format.json { render json: @funcionario.errors, status: :unprocessable_entity }
       end
@@ -48,6 +49,7 @@ class FuncionariosController < ApplicationController
   # PATCH/PUT /funcionarios/1
   # PATCH/PUT /funcionarios/1.json
   def update
+    @funcionario.pessoa = @funcionario.pessoa.specific
     respond_to do |format|
       if @funcionario.update(funcionario_params)
         flash[:success] = "Funcionario alterado com sucesso."
@@ -80,6 +82,11 @@ class FuncionariosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def funcionario_params
       params.require(:funcionario).permit(:cod, :carteira_trabalho, :salario, :data_admissao, :pessoa_id,
-        :cargo_id, :carga_horaria, usuario_attributes: [:email, :password, :funcionario_id, :_destroy])
+        :cargo_id, :carga_horaria, usuario_attributes: [:email, :password, :funcionario_id, :_destroy],
+          funcao_attributes: [:id, :pessoa_id,
+          pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
+          enderecos_attributes: [:id, :logradouro_id, :numero, :complemento, :_destroy],
+          fones_attributes: [:id, :numero, :_destroy],
+          emails_attributes: [:id, :descricao, :_destroy]]])
     end
 end

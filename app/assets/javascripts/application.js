@@ -16,8 +16,8 @@
 //= require jquery.mask.min
 //= require jquery.validate.min
 //= require jquery.turbolinks
-//= require jquery_nested_form
 //= require turbolinks
+//= require cocoon
 //= require_tree .
 //= require bootstrap.min
 
@@ -45,8 +45,12 @@ ready = (function() {
         min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
   });
 
-  $(document).on('nested:fieldAdded', function(event){
-    $(".fone").mask("(99)9999-9999");
+  $(document).on('cocoon:after-insert', function(e, insertedItem) {
+    $(".cpf").mask("999.999.999-99")
+    $(".rg").mask("99.999.999-9")
+    $(".fone").mask("(99)9999-9999")
+    $(".cnpj").mask("99.999.999/9999-99");
+    $(".inscricao_estadual").mask("99999999-99");
   });
 
 });

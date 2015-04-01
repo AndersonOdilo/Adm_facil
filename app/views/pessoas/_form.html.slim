@@ -1,26 +1,26 @@
-= p.hidden_field :id
 .form-group
   = p.fields_for :enderecos do |endereco|
-    == render partial: 'enderecos/endereco_fields', locals: {endereco: endereco}
-
-  = p.link_to_add 'Novo endereço', :enderecos, class: 'btn btn-primary btn-xs'
+    = render 'enderecos/endereco_fields', f: endereco
+  .links
+    = link_to_add_association 'Novo endereço', p, :enderecos,
+      partial: 'enderecos/endereco_fields',  class: 'btn btn-primary btn-xs'
 
 .form-group
   div class="panel panel-default"
     div class="panel-body"
       = p.label :fones
       .row
-        = p.fields_for :fones do |fone|
-          == render partial: 'fones/fone_fields', locals: {fone: fone}
-
-        = p.link_to_add 'Novo fone', :fones, class: "btn btn-primary btn-xs"
+        = p.simple_fields_for :fones do |fone|
+          =render '/fones/fone_fields', f: fone
+        .links
+          = link_to_add_association 'Novo fone', p, :fones, partial: 'fones/fone_fields', class: 'btn btn-primary btn-xs'
 
 .form-group
   div class="panel panel-default"
     div class="panel-body"
       = p.label :emails
       .row
-        = p.fields_for :emails do |email|
-          == render partial: 'emails/email_fields', locals: {email: email}
-
-        = p.link_to_add 'Novo e-mail', :emails, class: "btn btn-primary btn-xs"
+        = p.simple_fields_for :emails do |email|
+          =render '/emails/email_fields', f: email
+        .links
+          = link_to_add_association 'Novo email', p, :emails, partial: 'emails/email_fields', class: 'btn btn-primary btn-xs'

@@ -1,4 +1,18 @@
 $ ->
+    $('#add_pessoa_fisica').on "click", ->
+      $('#new_pessoa_fisica').click()
+      $(this).attr('disabled','disabled')
+      $('#add_pessoa_juridica').removeAttr('disabled');
+      $('#pessoa_juridica').remove()
+      $('#formulario').show()
+
+    $('#add_pessoa_juridica').on "click", ->
+      $('#new_pessoa_juridica').click()
+      $(this).attr('disabled','disabled')
+      $('#add_pessoa_fisica').removeAttr('disabled');
+      $('#pessoa_fisica').remove()
+      $('#formulario').show()
+
     $('.cliente_nome_autocomplete').autocomplete
         source: '/clientes/autocomplete.json'
         select: (event, ui) ->

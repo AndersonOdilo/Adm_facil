@@ -7,4 +7,5 @@ class Funcionario < ActiveRecord::Base
     validates_uniqueness_of :carteira_trabalho
 
     accepts_nested_attributes_for :usuario, limit: 1
+    accepts_nested_attributes_for :funcao, limit: 1
 end

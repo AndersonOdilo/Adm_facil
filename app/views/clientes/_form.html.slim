@@ -1,4 +1,4 @@
-= form_for @cliente, html: {id: 'new_cliente'} do |f|
+= simple_form_for @cliente, html: {id: 'new_cliente'} do |f|
   - if @cliente.errors.any?
     #error_explanation
       h2 = "#{pluralize(@cliente.errors.count, "error")} prohibited this cliente from being saved:"
@@ -6,10 +6,15 @@
         - @cliente.errors.full_messages.each do |message|
           li = message
 
-  .form-group
-    = f.label :limite_credito
-    = f.text_field :limite_credito, class: "form-control input-sm"
-  = f.hidden_field :pessoa_id, id: 'pessoa_id'
+  == render partial: 'pessoas/pessoa_fisica_ou_juridica', locals: {f: f}
 
-  = link_to 'Salvar', '#', id: 'salvar_cliente', class: "btn btn-success btn-lg btn-block"
+  - style = ""
+  - if f.object.id == nil
+    - style = "display:none"
+
+  div style="#{style}" id="formulario"
+    .form-group
+      = f.label :limite_credito
+      = f.text_field :limite_credito, class: "form-control input-sm"
+    = link_to 'Salvar', '#', id: 'salvar_cliente', class: "btn btn-success btn-lg btn-block"
 

@@ -29,6 +29,7 @@ class ClientesController < ApplicationController
   # GET /clientes/new
   def new
     @cliente = Cliente.new
+    @cliente.funcao = Funcao.new
     respond_to do |format|
       format.html
       format.js
@@ -37,18 +38,19 @@ class ClientesController < ApplicationController
 
   # GET /clientes/1/edit
   def edit
-    pessoa = @cliente.pessoa
-    if pessoa.estado_type == 'PessoaJuridica'
-      @pessoa_juridica = pessoa.specific
-    else
-      @pessoa_fisica = pessoa.specific
-    end
+    @cliente.pessoa = @cliente.pessoa.specific
   end
 
   # POST /clientes
   # POST /clientes.json
   def create
-    @cliente = Cliente.new(cliente_params)
+    @cliente = Cliente.new
+    if params[:type] == "PessoaFisica"
+      @cliente.pessoa = PessoaFisica.new
+    else
+      @cliente.pessoa = PessoaJuridica.new
+    end
+    @cliente.update(cliente_params)
 
     respond_to do |format|
       if @cliente.save
@@ -56,7 +58,6 @@ class ClientesController < ApplicationController
         format.html { redirect_to action: "index"}
         format.json { render json: @cliente.to_json(include: [:pessoa]) }
       else
-        @cliente.pessoa.destroy
         format.html { render :new }
         format.json { render json: @cliente.errors, status: :unprocessable_entity }
       end
@@ -66,6 +67,7 @@ class ClientesController < ApplicationController
   # PATCH/PUT /clientes/1
   # PATCH/PUT /clientes/1.json
   def update
+    @cliente.pessoa = @cliente.pessoa.specific
     respond_to do |format|
       if @cliente.update(cliente_params)
         flash[:success] = "Cliente alterado com sucesso."
@@ -97,6 +99,11 @@ class ClientesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cliente_params
-      params.require(:cliente).permit(:limite_credito, :pessoa_id)
+      params.require(:cliente).permit(:limite_credito,
+       funcao_attributes: [:id, :pessoa_id,
+        pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
+          enderecos_attributes: [:id, :logradouro_id, :numero, :complemento, :_destroy],
+          fones_attributes: [:id, :numero, :_destroy],
+          emails_attributes: [:id, :descricao, :_destroy]]])
     end
 end
