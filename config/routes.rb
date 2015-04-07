@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :despesas
+
   resources :vendas
 
   resources :formas_pagamentos
@@ -58,6 +60,8 @@ Rails.application.routes.draw do
   match 'venda/calcular_desconto', to: "vendas#calcular_desconto", via: [:post]
 
   match 'pagamentos_vendas/efetuar_pagamento/:id', to: "pagamentos_vendas#efetuar_pagamento", via: [:get]
+
+  match 'despesas_pagamentos/efetuar_pagamento/:id', to: "despesas_pagamentos#efetuar_pagamento", via: [:get]
 
   root 'clientes#index'
 

@@ -1,0 +1,44 @@
+= form_for @despesa do |f|
+  - if @despesa.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@despesa.errors.count, "error")} prohibited this despesa from being saved:"
+      ul
+        - @despesa.errors.full_messages.each do |message|
+          li = message
+
+  div class="panel panel-default"
+    div class="panel-body"
+      .row
+        div class="form-group col-xs-12"
+          = f.label :descricao
+          = f.text_field :descricao, class: "form-control input-sm"
+      .row
+        div class="form-group col-xs-4"
+          = label_tag 'Valor'
+          = text_field_tag :valor, nil, class: "form-control input-sm"
+        div class="form-group col-xs-4"
+          = f.label :tipo_despesa
+          = f.collection_select :tipo_despesa_id, TipoDespesa.all, :id, :descricao, {}, class: "form-control input-sm"
+        div class="form-group col-xs-4"
+          = f.label :forma_pagamento
+          = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: "form-control input-sm"
+
+  div class="panel panel-default"
+    div class="panel-body"
+      fieldset id="parcelado"
+        .row
+          .col-xs-3
+            .form-group
+              = label_tag "Valor de Entrada"
+              = text_field_tag :valor_entrada, nil, class: 'form-control input-sm', disabled: true
+          .col-xs-3
+            .form-group
+              = label_tag "Numero de parcelas:"
+              = select_tag :numero_parcela, options_for_select((1..12).to_a.map{|s| ["#{s}x", s]}), class:  'form-control input-sm datepicker', prompt: 'Selecione N° parcelas', disabled: true
+          .col-xs-2
+            .form-group
+              = label_tag "Intervalo:"
+              = select_tag :intervalo_parcela, options_for_select((15..90).step(15).to_a.map{|s| ["#{s} dias", s]}), class:  'form-control input-sm datepicker', disabled: true
+
+  .form-group
+    = f.submit 'Salvar', class: "btn btn-success btn-lg btn-block"

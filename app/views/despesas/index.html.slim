@@ -1,0 +1,30 @@
+.page-header
+    .row
+        .col-lg-8
+            h1 Despesas
+        .col-lg-4
+          br
+          = link_to 'Cadastrar Despesa', new_despesa_path, class: "btn btn-primary btn-md right"
+
+div class="panel panel-default"
+  div class="panel-body"
+    table class="table  table-hover"
+      thead
+        tr
+          th Descricao
+          th Tipo despesa
+          th Forma pagamento
+          th
+          th
+          th
+
+      tbody
+        - @despesas.each do |despesa|
+          tr
+            td = despesa.descricao
+            td = despesa.tipo_despesa.descricao
+            td = despesa.forma_pagamento.descricao
+            td = link_to 'Abrir', despesa
+            td = link_to 'Edit', edit_despesa_path(despesa)
+            td = link_to 'Destroy', despesa, data: {:confirm => 'Are you sure?'}, :method => :delete
+

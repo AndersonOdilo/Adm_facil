@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324123242) do
+ActiveRecord::Schema.define(version: 20150407170958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,28 @@ ActiveRecord::Schema.define(version: 20150324123242) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "despesas", force: true do |t|
+    t.string   "descricao"
+    t.integer  "tipo_despesa_id"
+    t.integer  "forma_pagamento_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "despesas", ["forma_pagamento_id"], name: "index_despesas_on_forma_pagamento_id", using: :btree
+  add_index "despesas", ["tipo_despesa_id"], name: "index_despesas_on_tipo_despesa_id", using: :btree
+
+  create_table "despesas_pagamentos", force: true do |t|
+    t.date     "data_vencimento"
+    t.date     "data_pagamento"
+    t.decimal  "valor"
+    t.integer  "despesa_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "despesas_pagamentos", ["despesa_id"], name: "index_despesas_pagamentos_on_despesa_id", using: :btree
 
   create_table "emails", force: true do |t|
     t.string   "descricao"
@@ -240,6 +262,12 @@ ActiveRecord::Schema.define(version: 20150324123242) do
   add_index "produtos", ["fornecedor_id"], name: "index_produtos_on_fornecedor_id", using: :btree
   add_index "produtos", ["marca_id"], name: "index_produtos_on_marca_id", using: :btree
   add_index "produtos", ["unidade_id"], name: "index_produtos_on_unidade_id", using: :btree
+
+  create_table "tipos_despesas", force: true do |t|
+    t.string   "descricao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "unidades", force: true do |t|
     t.string   "descricao"

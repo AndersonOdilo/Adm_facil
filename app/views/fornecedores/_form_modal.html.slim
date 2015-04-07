@@ -7,17 +7,16 @@ div class="modal fade" id="novo_fornecedor" tabindex="-1" role="dialog" aria-lab
         h2 class="modal-title" id="myModalLabel"
             'Novo Fornecedor
       div class="modal-body"
-        == render 'pessoas/pessoa_fisica_ou_juridica'
-        #formulario style="display:none"
-          = form_for @fornecedor, remote: true, format: 'json' do |f|
-            - if @fornecedor.errors.any?
-              #error_explanation
-                h2 = "#{pluralize(@fornecedor.errors.count, "error")} prohibited this fornecedor from being saved:"
-                ul
-                  - @fornecedor.errors.full_messages.each do |message|
-                    li = message
+        = simple_form_for @fornecedor, remote: true, format: 'json', html: {id: 'new_fornecedor'} do |f|
+          - if @fornecedor.errors.any?
+            #error_explanation
+              h2 = "#{pluralize(@fornecedor.errors.count, "error")} prohibited this fornecedor from being saved:"
+              ul
+                - @fornecedor.errors.full_messages.each do |message|
+                  li = message
 
-            = f.hidden_field :pessoa_id, id: 'pessoa_id'
+          == render partial: 'pessoas/pessoa_fisica_ou_juridica', locals: {f: f}
+
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar

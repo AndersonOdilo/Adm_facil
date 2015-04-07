@@ -1,4 +1,4 @@
-= simple_form_for @cliente, html: {id: 'new_cliente'} do |f|
+= simple_form_for @cliente, remote: true, format: 'json', html: {id: 'new_cliente'} do |f|
   - if @cliente.errors.any?
     #error_explanation
       h2 = "#{pluralize(@cliente.errors.count, "error")} prohibited this cliente from being saved:"

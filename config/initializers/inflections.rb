@@ -8,6 +8,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
     inflect.irregular 'item_pedido', 'itens_pedidos'
     inflect.irregular 'forma_pagamento', 'formas_pagamentos'
     inflect.irregular 'pagamento_venda', 'pagamentos_vendas'
+    inflect.irregular 'despesa_pagamento', 'despesas_pagamentos'
+    inflect.irregular 'tipo_despesa', 'tipos_despesas'
 
 #   inflect.plural /^(ox)$/i, '\1en'
 #   inflect.singular /^(ox)en/i, '\1'
