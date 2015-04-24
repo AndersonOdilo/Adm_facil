@@ -22,8 +22,8 @@ class DespesasController < ApplicationController
 
   def create
     @despesa = Despesa.new(despesa_params)
-    @despesa.save
     @despesa.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i, params[:valor].to_f)
+    @despesa.save
     respond_with(@despesa)
   end
 

@@ -15,7 +15,7 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios/new
   def new
     @funcionario = Funcionario.new
-    @funcionario.funcao = Funcao.new
+    @funcionario.funcao= Funcao.new
   end
 
   # GET /funcionarios/1/edit

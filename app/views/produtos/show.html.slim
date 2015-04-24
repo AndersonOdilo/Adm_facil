@@ -43,11 +43,11 @@ div class="panel panel-default"
         .col-xs-3
           strong
             'Valor custo:
-          = @produto.preco_custo
+          = number_to_currency(@produto.valor_custo, unit: 'R$', separator: ",", delimiter: ".")
         .col-xs-4
           strong
             'Valor venda:
-          = @produto.preco_venda
+          = number_to_currency(@produto.valor_venda, unit: 'R$', separator: ",", delimiter: ".")
         .col-xs-3
           strong
             'Quantidade estoque:

@@ -8,8 +8,7 @@ class VendasController < ApplicationController
     item_pedido.produto_id = produto.id
     item_pedido.preco = produto.valor_venda
     item_pedido.quantidade = params[:quantidade]
-    sub_total = session[:sub_total_venda]
-    session[:sub_total_venda] = sub_total.to_f + item_pedido.quantidade * item_pedido.preco
+    session[:sub_total_venda] = session[:sub_total_venda].to_f + item_pedido.quantidade * item_pedido.preco
     respond_to do |format|
       format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total_venda].to_f }}
     end
@@ -71,9 +70,9 @@ class VendasController < ApplicationController
   # POST /vendas.json
   def create
     @venda = Venda.new(venda_params)
+    @venda.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i)
     respond_to do |format|
       if @venda.save!
-        @venda.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i)
         format.html { redirect_to @venda}
         format.json { render :show, status: :created, location: @venda }
       else

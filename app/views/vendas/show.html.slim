@@ -64,11 +64,11 @@ div class="panel panel-default"
                           td = pagamento.data_vencimento
                           td id="data_pagamento_#{pagamento.id}"
                             = pagamento.data_pagamento
-                          td = pagamento.preco
+                          td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
                           td
                             -if !pagamento.data_pagamento?
                                = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
-                                data: {:confirm => "Deseja efetuar o pagamento no valor de #{pagamento.preco}?"},
+                                data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
                                remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
 
           .col-lg-5

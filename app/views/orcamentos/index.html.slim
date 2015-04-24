@@ -22,7 +22,7 @@ div class="panel panel-default"
           tr
             td = orcamento.cliente.pessoa.specific.nome rescue ""
             td = orcamento.data
-            td = (number_to_currency(orcamento.total, unit: 'R$', separator: ",", delimiter: "."))
+            td = number_to_currency(orcamento.total, unit: 'R$', separator: ",", delimiter: ".")
             td = orcamento.obs
             td = link_to 'Abrir', orcamento
             td = link_to 'Excluir', orcamento, data: {:confirm => 'Are you sure?'}, :method => :delete

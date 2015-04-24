@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407170958) do
+ActiveRecord::Schema.define(version: 20150414173451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150407170958) do
   create_table "despesas_pagamentos", force: true do |t|
     t.date     "data_vencimento"
     t.date     "data_pagamento"
-    t.decimal  "valor"
+    t.decimal  "valor",           precision: 15, scale: 2
     t.integer  "despesa_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 20150407170958) do
     t.integer  "produto_id"
     t.integer  "pedido_id"
     t.integer  "quantidade"
-    t.decimal  "preco"
+    t.decimal  "preco",      precision: 15, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20150407170958) do
   create_table "pagamentos_vendas", force: true do |t|
     t.date     "data_vencimento"
     t.date     "data_pagamento"
-    t.decimal  "valor"
+    t.decimal  "valor",           precision: 15, scale: 2
     t.integer  "venda_id"
     t.datetime "created_at"
     t.datetime "updated_at"

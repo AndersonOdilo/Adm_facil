@@ -47,7 +47,7 @@ div class="panel panel-default"
                         td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
                         td = item.quantidade
                         td = item.produto.unidade.sigla
-                        td = item.preco_total
+                        td = number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: ".")
             div class="panel-footer"
               .row
                 - if @venda.desconto
@@ -56,7 +56,7 @@ div class="panel panel-default"
                             = "Desconto: #{number_to_percentage(@venda.desconto, precision: 0)}"
                     .col-xs-4
                         h4
-                            ="Total desc.  #{(number_to_currency(@venda.total_desconto, unit: 'R$', separator: ",", delimiter: "."))}"
+                            ="Total desc.  #{number_to_currency(@venda.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
                     .col-xs-1
                 - else
                     .col-xs-9
@@ -64,7 +64,7 @@ div class="panel panel-default"
                   h4 Total
                 .col-xs-2
                   h4
-                    = (number_to_currency(@venda.total, unit: 'R$', separator: ",", delimiter: "."))
+                    = number_to_currency(@venda.total, unit: 'R$', separator: ",", delimiter: ".")
 
         .row
           .col-lg-6
@@ -92,7 +92,7 @@ div class="panel panel-default"
                           td = pagamento.id
                           td = pagamento.data_vencimento
                           td = pagamento.data_pagamento
-                          td = pagamento.preco
+                          td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
 
           .col-lg-4
             div class="panel panel-default"

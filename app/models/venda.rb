@@ -22,18 +22,17 @@ class Venda < ActiveRecord::Base
 
   def gerar_duplicatas(entrada, numero_parcelas, intervalo_parcela)
     if self.desconto?
-      total = self.desconto
+      total = self.total_desconto
     else
       total = self.total
     end
     if self.forma_pagamento.id == 5
-      if entrada != nil and entrada != 0
+      if entrada > 0
         pagamento = PagamentoVenda.new
         pagamento.data_vencimento = Date.today
         pagamento.data_pagamento = Date.today
         pagamento.valor = entrada
-        pagamento.venda_id = self.id
-        pagamento.save
+        self.pagamentos_vendas << pagamento
         total = total - entrada
       end
       data = Date.today
@@ -43,17 +42,15 @@ class Venda < ActiveRecord::Base
         pagamento.numero_parcela = i
         pagamento.data_vencimento = data + intervalo_parcela.day
         data = data + intervalo_parcela.day
-        pagamento.venda_id = self.id
         pagamento.valor = valor_parcela
-        pagamento.save
+        self.pagamentos_vendas << pagamento
       end
     else
       pagamento = PagamentoVenda.new
       pagamento.data_vencimento = Date.today
       pagamento.data_pagamento = Date.today
       pagamento.valor = total
-      pagamento.venda_id = self.id
-      pagamento.save
+      self.pagamentos_vendas << pagamento
     end
   end
 

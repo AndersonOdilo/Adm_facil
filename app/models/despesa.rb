@@ -10,8 +10,7 @@ class Despesa < ActiveRecord::Base
         pagamento.data_vencimento = Date.today
         pagamento.data_pagamento = Date.today
         pagamento.valor = entrada
-        pagamento.despesa_id = self.id
-        pagamento.save
+        self.despesas_pagamentos << pagamento
         total = total - entrada
       end
       data = Date.today
@@ -20,17 +19,15 @@ class Despesa < ActiveRecord::Base
         pagamento = DespesaPagamento.new
         pagamento.data_vencimento = data + intervalo_parcela.day
         data = data + intervalo_parcela.day
-        pagamento.despesa_id = self.id
         pagamento.valor = valor_parcela
-        pagamento.save
+        self.despesas_pagamentos << pagamento
       end
     else
       pagamento = DespesaPagamento.new
       pagamento.data_vencimento = Date.today
       pagamento.data_pagamento = Date.today
       pagamento.valor = total
-      pagamento.despesa_id = self.id
-      pagamento.save
+      self.despesas_pagamentos << pagamento
     end
   end
 

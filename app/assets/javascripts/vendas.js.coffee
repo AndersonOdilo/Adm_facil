@@ -64,15 +64,15 @@ $ ->
     window.calcular_parcela = calcular_parcela
 
    remover_item_venda =(elemento, produto, quantidade) ->
-          $.ajax
-            url: '/venda/remover_item'
-            type: 'post'
-            dataType: 'json'
-            data:
-                produto: produto
-                quantidade: quantidade
-            success: (data) ->
-                $('#valor_total').html(data)
-                elemento.parentElement.parentElement.remove()
+      $.ajax
+        url: '/venda/remover_item'
+        type: 'post'
+        dataType: 'json'
+        data:
+            produto: produto
+            quantidade: quantidade
+        success: (data) ->
+            $('#valor_total').html(data)
+            elemento.parentElement.parentElement.remove()
     window.remover_item_venda = remover_item_venda
 

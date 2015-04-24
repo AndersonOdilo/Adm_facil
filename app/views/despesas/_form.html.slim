@@ -13,13 +13,16 @@
           = f.label :descricao
           = f.text_field :descricao, class: "form-control input-sm"
       .row
-        div class="form-group col-xs-4"
+        div class="form-group col-xs-3"
           = label_tag 'Valor'
           = text_field_tag :valor, nil, class: "form-control input-sm"
+        div class="form-group col-xs-2"
+          = label_tag 'Data vencimento'
+          = date_field :data, nil, class: "form-control input-sm"
         div class="form-group col-xs-4"
           = f.label :tipo_despesa
           = f.collection_select :tipo_despesa_id, TipoDespesa.all, :id, :descricao, {}, class: "form-control input-sm"
-        div class="form-group col-xs-4"
+        div class="form-group col-xs-3"
           = f.label :forma_pagamento
           = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: "form-control input-sm"
 

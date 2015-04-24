@@ -8,8 +8,7 @@ class OrcamentosController < ApplicationController
     item_pedido.produto_id = produto.id
     item_pedido.preco = produto.valor_venda
     item_pedido.quantidade = params[:quantidade]
-    sub_total = session[:sub_total]
-    session[:sub_total] = sub_total.to_f + item_pedido.quantidade * item_pedido.preco
+    session[:sub_total] = session[:sub_total].to_f + item_pedido.quantidade * item_pedido.preco
     respond_to do |format|
       format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total] }}
     end

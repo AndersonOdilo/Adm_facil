@@ -1,18 +1,16 @@
 class ProdutosController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def autocomplete
     @produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
     produtos = []
     @produtos.each do |produto|
-      produtos <<  { value: produto.id, label: "#{produto.nome}, #{produto.marca.nome}", preco: produto.preco_venda,
+      produtos <<  { value: produto.id, label: "#{produto.nome}, #{produto.marca.nome}", preco: number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: "."),
         quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}
     end
     respond_to do |format|
-      format.html
-      format.json {
-        render json: produtos
-      }
+      format.json { render json: produtos}
     end
   end
 
