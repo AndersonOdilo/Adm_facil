@@ -63,6 +63,8 @@ Rails.application.routes.draw do
 
   match 'despesas_pagamentos/efetuar_pagamento/:id', to: "despesas_pagamentos#efetuar_pagamento", via: [:get]
 
+  match 'venda/finalizar', to: "vendas#finalizar", via: [:post]
+
   root 'clientes#index'
 
   # Example of regular route:

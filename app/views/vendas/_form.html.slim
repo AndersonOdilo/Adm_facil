@@ -28,14 +28,10 @@
           .form-group
             = f.label :forma_pagamento
             = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control'
-        .col-xs-4
-            br
-            .form-group
-            = radio_button_tag :entrega, false,  checked= true, options: {class: 'form-control'}
-            = label_tag 'Retirada no Local'
-            = radio_button_tag :entrega, true, checked = false, options: {class: "form-control"}
-            = label_tag 'Entregar'
-
+        .col-xs-3
+          .form-group
+            = label_tag 'Entrega'
+            = select_tag :forma_entrega, options_for_select([["Retirar no local", "1"], ["Entrega domicilio", "2"]]), class: 'form-control'
 
   div class="panel panel-default"
     div class="panel-body"
@@ -53,7 +49,6 @@
           strong
             'Quant. estoq.
           #quantidade_estoque
-          = hidden_field_tag :quantidade_estoque_value
 
         .col-xs-2
           .form-group
@@ -106,12 +101,12 @@
             = f.label :obs
             = f.text_area :obs, class: 'form-control input-sm'
 
-  #pagamento_parcelado_modal
-    == render partial: 'pagamentos_vendas/form'
-
-  .field
-    = f.hidden_field :funcionario_id, value: current_usuario.funcionario_id
-    = f.hidden_field :cliente_id, id: 'cliente_id'
+  = f.hidden_field :funcionario_id, value: current_usuario.funcionario_id
+  = f.hidden_field :cliente_id, id: 'cliente_id'
   = link_to 'Finalizar pedido', '#', class: "btn btn-success btn-lg btn-block", id: 'finalizar_pedido'
+
+  #pagamento_parcelado_modal
+
+  #endereco_entrega
 
 #cliente_modal

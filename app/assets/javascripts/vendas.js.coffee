@@ -1,17 +1,12 @@
 $ ->
     $('#add_item_venda').on "click", ->
-        quantidade = $('#produto_quantidade').val()
-        parseInt(quantidade)
-        if parseInt($('#quantidade_estoque_value').val()) >=  quantidade && quantidade > 0
-            $.ajax
-                url: '/venda/add_item'
-                type: 'post'
-                dataType: 'script'
-                data:
-                    produto: $('#produto_id').val()
-                    quantidade: $('#produto_quantidade').val()
-        else
-            alert('Nao a estoque')
+        $.ajax
+            url: '/venda/add_item'
+            type: 'post'
+            dataType: 'script'
+            data:
+                produto: $('#produto_id').val()
+                quantidade: $('#produto_quantidade').val()
 
     $('#venda_desconto').keyup (e) ->
         valor =  $('#venda_desconto').val()
@@ -28,40 +23,15 @@ $ ->
         else
             $('#valor_total_desconto').html('')
 
-    $('#numero_parcela').on "change", ->
-        window.calcular_parcela($('#valor_entrada').val(), $('#numero_parcela').val())
-
-    $('#valor_entrada').keyup ->
-        window.calcular_parcela($('#valor_entrada').val(), $('#numero_parcela').val())
-
     $('#finalizar_pedido'). on "click", ->
-        if $('#cliente_id').val() != ""
-            if $('#venda_forma_pagamento_id').val() == '5'
-                $('#pagamento_modal').modal('show')
-            else
-                $('#new_venda').submit()
-        else
-           alert('Busque ou cadastre um cliente')
-
-
-    $('#finalizar_pagamento').on "click", ->
-        if $("#numero_parcela").val() != ""
-            $('#new_venda').submit()
-        else
-            alert('Selecione o numero de parcelas')
-
-
-    calcular_parcela =(valor_entrada, numero_parcelas) ->
         $.ajax
-            url: '/venda/valor_parcela'
+            url: '/venda/finalizar/'
             type: 'post'
-            dataType: 'json'
+            dataType: 'script'
             data:
-                entrada: valor_entrada
-                numero_parcelas: numero_parcelas
-            success: (data) ->
-                $('#valor_parcela').html(data)
-    window.calcular_parcela = calcular_parcela
+                forma_pagamento: $('#venda_forma_pagamento_id').val()
+                cliente: $('#cliente_id').val()
+                entrega: $('#forma_entrega').val()
 
    remover_item_venda =(elemento, produto, quantidade) ->
       $.ajax

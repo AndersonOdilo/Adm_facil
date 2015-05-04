@@ -1,6 +1,6 @@
 $ ->
     $('#select_estado').on "change", ->
-        id = $('#select_estado').val()
+        id = $(this).val()
         if id != ""
             $.ajax
               url: '/estado/cidades/'+id
@@ -9,6 +9,7 @@ $ ->
               success: (data) ->
                  $('#select_cidade').empty()
                  $('#select_bairro').empty()
+                 $('#select_rua').empty()
                  $('#select_cidade').append($("<option/>").attr("value", "").text("Selecione uma cidade").select())
                  for cidade in data
                     op = $("<option/>").attr("value", cidade.id).text(cidade.nome)
@@ -17,7 +18,7 @@ $ ->
                 alert('erro')
 
     $('#select_cidade').on "change", ->
-        id = $('#select_cidade').val()
+        id = $(this).val()
         if id != ""
             $.ajax
               url: '/cidade/bairros/'+id
@@ -25,6 +26,7 @@ $ ->
               type: 'GET'
               success: (data) ->
                  $('#select_bairro').empty()
+                 $('#select_rua').empty()
                  $('#select_bairro').append($("<option/>").attr("value", "").text("Selecione um bairro").select())
                  for bairro in data
                     op = $("<option/>").attr("value", bairro.id).text(bairro.nome)
@@ -33,7 +35,7 @@ $ ->
                 alert('erro')
 
      $('#select_bairro').on "change", ->
-        id = $('#select_bairro').val()
+        id = $(this).val()
         if id != ""
             $.ajax
               url: '/bairro/ruas/'+id

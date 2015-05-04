@@ -1,0 +1,37 @@
+$("#pagamento_parcelado_modal").html("<%= escape_javascript(render partial: 'pagamentos_vendas/form', locals: {entrega: entrega}) %>");
+$('#pagamento_modal').modal('show');
+
+var calcular_parcela;
+
+$('#numero_parcela').on("change", function() {
+  return window.calcular_parcela($('#valor_entrada').val(), $('#numero_parcela').val());
+});
+
+$('#valor_entrada').keyup(function() {
+  return window.calcular_parcela($('#valor_entrada').val(), $('#numero_parcela').val());
+});
+
+calcular_parcela = function(valor_entrada, numero_parcelas) {
+  return $.ajax({
+    url: '/venda/valor_parcela',
+    type: 'post',
+    dataType: 'json',
+    data: {
+      entrada: valor_entrada,
+      numero_parcelas: numero_parcelas
+    },
+    success: function(data) {
+      return $('#valor_parcela').html(data);
+    }
+  });
+};
+
+window.calcular_parcela = calcular_parcela;
+
+$('#finalizar_pagamento').on("click", function() {
+  if ($("#numero_parcela").val() !== "") {
+    return $('#new_venda').submit();
+  } else {
+    return alert('Selecione o numero de parcelas');
+  }
+});

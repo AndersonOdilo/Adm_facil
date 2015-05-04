@@ -26,7 +26,6 @@ $ ->
             $('#produto_nome').val ui.item.label
             $('#produto_id').val ui.item.value
             $('#quantidade_estoque').html '<h3>' + ui.item.quantidade + ' ' + ui.item.unidade + '</h3>'
-            $('#quantidade_estoque_value').val(ui.item.quantidade)
             $('#preco').html '<h3>' + ui.item.preco + '</h3>'
             false
 

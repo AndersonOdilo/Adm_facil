@@ -28,4 +28,7 @@ div class="modal fade" id="pagamento_modal" tabindex="-1" role="dialog" aria-lab
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
           'Fechar
-        = link_to 'Salvar', '#', class: "btn btn-success", id: 'finalizar_pagamento'
+        - if entrega == 1
+          = link_to 'Salvar', '#', class: "btn btn-success", id: 'finalizar_pagamento'
+        - else
+          = link_to 'Salvar', '#', class: "btn btn-success", id: 'endereco_entrega'

@@ -5,36 +5,52 @@ class VendasController < ApplicationController
   def add_item
     item_pedido = ItemPedido.new
     produto = Produto.find(params[:produto])
-    item_pedido.produto_id = produto.id
-    item_pedido.preco = produto.valor_venda
-    item_pedido.quantidade = params[:quantidade]
-    session[:sub_total_venda] = session[:sub_total_venda].to_f + item_pedido.quantidade * item_pedido.preco
-    respond_to do |format|
-      format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total_venda].to_f }}
+    if produto.quantidade_estoque >= params[:quantidade].to_i
+      item_pedido.produto_id = produto.id
+      item_pedido.preco = produto.valor_venda
+      item_pedido.quantidade = params[:quantidade]
+      session[:sub_total_venda] = session[:sub_total_venda].to_f + item_pedido.preco_total
+      render locals: {item_pedido: item_pedido, sub_total: session[:sub_total_venda].to_f }
+    else
+        render 'erro', locals: {msg: 'Nao a estoque suficiente.'}
     end
   end
 
   def remover_item
     produto = Produto.find(params[:produto])
     session[:sub_total_venda] = session[:sub_total_venda].to_f - produto.valor_venda * params[:quantidade].to_f
-    respond_to do |format|
-      format.json {render json: number_to_currency(session[:sub_total_venda].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json }
-    end
+      render json: number_to_currency(session[:sub_total_venda].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json
   end
 
   def calcular_parcela
     valor_parcela = (session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i
     valor_parcela.round(2)
-    respond_to do |format|
-      format.json {render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json}
-    end
+      render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json
   end
 
   def calcular_desconto
     desconto = session[:sub_total_venda].to_f - (session[:sub_total_venda].to_f * params[:desconto].to_f / 100)
-    respond_to do |format|
-      format.json {render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json}
-    end
+    render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json
+  end
+
+  def finalizar
+      if session[:sub_total_venda].to_f > 0
+        if params[:cliente] != ""
+          if params[:forma_pagamento].to_i == 5
+            if Cliente.find(params[:cliente]).limite_credito >= session[:sub_total_venda].to_f
+              render 'pagamento', locals: {entrega: params[:entrega]}
+            else
+              render 'erro', locals: {msg: 'Nao limite' }
+            end
+          else
+            render 'finalizar', locals: {entrega: params[:entrega]}
+          end
+        else
+          render 'erro', locals: {msg: 'Busque ou cadastre um cliente' }
+        end
+      else
+        render 'erro', locals: {msg: 'Adicione produtos ao pedido.'}
+      end
   end
 
   # GET /vendas

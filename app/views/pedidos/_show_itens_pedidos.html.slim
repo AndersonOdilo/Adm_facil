@@ -27,14 +27,14 @@ div class="panel panel-default"
         .col-xs-3
           h4
             = "Desconto: #{number_to_percentage(pedido.desconto, precision: 0)}"
-        .col-xs-4
+        .col-xs-5
           h4
             ="Total desc.  #{(number_to_currency(pedido.total_desconto, unit: 'R$', separator: ",", delimiter: "."))}"
-          .col-xs-1
-      - else
-        .col-xs-9
-        .col-xs-1
-          h4 Total
         .col-xs-2
           h4
-            = (number_to_currency(pedido.total, unit: 'R$', separator: ",", delimiter: "."))
+            = "Total #{(number_to_currency(pedido.total, unit: 'R$', separator: ",", delimiter: "."))}"
+      - else
+        .col-xs-10
+        .col-xs-2
+          h4
+            = "Total #{(number_to_currency(pedido.total, unit: 'R$', separator: ",", delimiter: "."))}"

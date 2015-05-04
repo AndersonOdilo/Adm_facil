@@ -14,6 +14,7 @@
 //= require jquery-ui.min
 //= require jquery_ujs
 //= require jquery.mask.min
+//= require jquery-price.min
 //= require jquery.validate.min
 //= require jquery.turbolinks
 //= require turbolinks
