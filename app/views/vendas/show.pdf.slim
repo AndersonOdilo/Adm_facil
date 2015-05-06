@@ -94,11 +94,12 @@ div class="panel panel-default"
                           td = pagamento.data_pagamento
                           td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
 
-          .col-lg-4
-            div class="panel panel-default"
-                div class="panel-body"
-                  h4
-                    'Observacoes
-                  p
-                    = @venda.obs
+          - if !@venda.obs.blank?
+            .col-lg-4
+              div class="panel panel-default"
+                  div class="panel-body"
+                    h4
+                      'Observacoes
+                    p
+                      = @venda.obs
 

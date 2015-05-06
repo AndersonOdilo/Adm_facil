@@ -19,13 +19,13 @@ class VendasController < ApplicationController
   def remover_item
     produto = Produto.find(params[:produto])
     session[:sub_total_venda] = session[:sub_total_venda].to_f - produto.valor_venda * params[:quantidade].to_f
-      render json: number_to_currency(session[:sub_total_venda].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json
+    render json: number_to_currency(session[:sub_total_venda].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json
   end
 
   def calcular_parcela
     valor_parcela = (session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i
     valor_parcela.round(2)
-      render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json
+    render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json
   end
 
   def calcular_desconto
@@ -58,6 +58,8 @@ class VendasController < ApplicationController
   def index
     if params[:cliente]
       @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).cliente(params[:cliente]).paginate(page: params[:page], per_page: 10).order("vendas.created_at desc")
+    elsif params[:funcionario]
+      @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).funcionario(params[:funcionario]).paginate(page: params[:page], per_page: 10).order("vendas.created_at desc")
     else
       @vendas = Venda.includes(pedido: [cliente: [funcao:[:pessoa]]]).paginate(page: params[:page], per_page: 10).order("vendas.created_at desc")
     end

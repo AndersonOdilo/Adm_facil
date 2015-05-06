@@ -7,17 +7,13 @@ div class="modal fade" id="novo_cargo" tabindex="-1" role="dialog" aria-labelled
         h2 class="modal-title" id="myModalLabel"
             'Novo Cargo
       div class="modal-body"
+
         = form_for @cargo, remote: true, format: 'json' do |f|
-          - if @cargo.errors.any?
-            #error_explanation
-              h2 = "#{pluralize(@cargo.errors.count, "error")} prohibited this cargo from being saved:"
-              ul
-                - @cargo.errors.full_messages.each do |message|
-                    li = message
 
           .form-group
             = f.label :descricao
             = f.text_field :descricao, class: 'form-control input-sm', required: true
+
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
             'Fechar

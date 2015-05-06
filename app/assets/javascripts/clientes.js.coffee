@@ -9,10 +9,14 @@ $ ->
     $('#pedido_cliente_id').val(data.id)
     $('#novo_cliente').modal('hide')
 
-  $('#cliente_limite_credito').priceFormat
-    prefix: 'R$ ',
-    centsSeparator: ',',
-    thousandsSeparator: '.'
+  $('.cliente_nome_autocomplete').autocomplete
+    source: '/clientes/autocomplete.json'
+    select: (event, ui) ->
+      $('#cliente_nome').val(ui.item.label)
+      $('#cliente_id').val(ui.item.value)
+      false
+
+
 
 
 

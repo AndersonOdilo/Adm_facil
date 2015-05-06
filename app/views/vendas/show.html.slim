@@ -71,11 +71,12 @@ div class="panel panel-default"
                                 data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
                                remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
 
-          .col-lg-5
-            div class="panel panel-default"
-                div class="panel-body"
-                  h4
-                    'Observacoes
-                  p
-                    = @venda.obs
+          - if !@venda.obs.blank?
+            .col-lg-5
+              div class="panel panel-default"
+                  div class="panel-body"
+                    h4
+                      'Observacoes
+                    p
+                      = @venda.obs
 

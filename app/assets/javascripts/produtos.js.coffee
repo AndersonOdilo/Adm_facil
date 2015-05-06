@@ -5,13 +5,13 @@ $ ->
       $('#produto_valor_custo').val($('#produto_valor_custo').unmask())
       $('#new_produto').submit()
 
-    $('#produto_valor_custo').priceFormat
-      prefix: 'R$ ',
-      centsSeparator: ',',
-      thousandsSeparator: '.'
+    $('.produto_nome_autocomplete').autocomplete
+        source: '/produtos/autocomplete.json'
+        select: (event, ui) ->
+            $('#produto_nome').val(ui.item.label)
+            $('#produto_id').val(ui.item.value)
+            $('#quantidade_estoque').html('<h3>' + ui.item.quantidade + ' ' + ui.item.unidade + '</h3>')
+            $('#preco').html('<h3>' + ui.item.preco + '</h3>')
+            false
 
-    $('#produto_valor_venda').priceFormat
-      prefix: 'R$ ',
-      centsSeparator: ',',
-      thousandsSeparator: '.'
 

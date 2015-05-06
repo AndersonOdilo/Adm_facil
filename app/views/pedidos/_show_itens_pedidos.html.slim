@@ -24,17 +24,17 @@ div class="panel panel-default"
   div class="panel-footer"
     .row
       - if pedido.desconto
-        .col-xs-3
+        .col-xs-4
           h4
             = "Desconto: #{number_to_percentage(pedido.desconto, precision: 0)}"
-        .col-xs-5
-          h4
-            ="Total desc.  #{(number_to_currency(pedido.total_desconto, unit: 'R$', separator: ",", delimiter: "."))}"
-        .col-xs-2
-          h4
-            = "Total #{(number_to_currency(pedido.total, unit: 'R$', separator: ",", delimiter: "."))}"
+        .col-xs-4
+          h4 class="right"
+            ="Total desc.  #{number_to_currency(pedido.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
+        .col-xs-3
+          h4 class="right"
+            = "Total #{number_to_currency(pedido.total, unit: 'R$', separator: ",", delimiter: ".")}"
       - else
-        .col-xs-10
-        .col-xs-2
-          h4
-            = "Total #{(number_to_currency(pedido.total, unit: 'R$', separator: ",", delimiter: "."))}"
+        .col-xs-8
+        .col-xs-3
+          h4 class="right"
+            = "Total #{number_to_currency(pedido.total, unit: 'R$', separator: ",", delimiter: ".")}"

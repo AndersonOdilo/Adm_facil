@@ -7,12 +7,7 @@ class ClientesController < ApplicationController
     @clientes.each do |cliente|
       clientes <<  { value: cliente.id , label: cliente.pessoa.specific.nome}
     end
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: clientes
-      }
-    end
+    render json: clientes
   end
 
   # GET /clientes

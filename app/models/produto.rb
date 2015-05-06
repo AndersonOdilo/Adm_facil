@@ -5,4 +5,6 @@ class Produto < ActiveRecord::Base
   belongs_to :unidade
 
   validates_uniqueness_of :cod, allow_blank: true
+
+  scope :fornecedor, ->(id) {where(fornecedor_id: id)}
 end

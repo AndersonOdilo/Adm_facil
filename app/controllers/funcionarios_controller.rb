@@ -32,7 +32,7 @@ class FuncionariosController < ApplicationController
     else
       @funcionario.pessoa = PessoaJuridica.new
     end
-    @funcionario.update(cliente_params)
+    @funcionario.update(funcionario_params)
 
     respond_to do |format|
       if @funcionario.save

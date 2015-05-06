@@ -7,6 +7,7 @@ class Venda < ActiveRecord::Base
   accepts_nested_attributes_for :pedido
 
   scope :cliente, ->(id) {where(cliente_id: id)}
+  scope :funcionario, ->(id) {where(funcionario_id: id)}
 
   def baixar_estoque
     self.itens_pedidos.each do |item|

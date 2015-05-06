@@ -8,25 +8,19 @@ class OrcamentosController < ApplicationController
     item_pedido.produto_id = produto.id
     item_pedido.preco = produto.valor_venda
     item_pedido.quantidade = params[:quantidade]
-    session[:sub_total] = session[:sub_total].to_f + item_pedido.quantidade * item_pedido.preco
-    respond_to do |format|
-      format.js { render locals: {item_pedido: item_pedido, sub_total: session[:sub_total] }}
-    end
+    session[:sub_total] = session[:sub_total].to_f + item_pedido.preco_total
+    render locals: {item_pedido: item_pedido, sub_total: session[:sub_total] }
   end
 
   def remover_item
     produto = Produto.find(params[:produto])
     session[:sub_total] = session[:sub_total].to_f - produto.valor_venda * params[:quantidade].to_f
-    respond_to do |format|
-      format.json {render json: (number_to_currency(session[:sub_total].to_f, unit: 'R$', separator: ",", delimiter: ".")).to_json }
-    end
+    render json: (number_to_currency(session[:sub_total].to_f, unit: 'R$', separator: ",", delimiter: ".")).to_json
   end
 
   def calcular_desconto
     desconto = session[:sub_total].to_f - (session[:sub_total].to_f * params[:desconto].to_f / 100)
-    respond_to do |format|
-      format.json {render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json}
-    end
+    render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json
   end
 
   # GET /orcamentos

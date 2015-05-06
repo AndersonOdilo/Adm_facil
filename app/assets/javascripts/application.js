@@ -51,7 +51,7 @@ ready = (function() {
     $(".rg").mask("99.999.999-9")
     $(".fone").mask("(99)9999-9999")
     $(".cnpj").mask("99.999.999/9999-99");
-    $(".inscricao_estadual").mask("99999999-99");
+    $(".inscricao_estadual").mask("99999999-99")
   });
 
 });

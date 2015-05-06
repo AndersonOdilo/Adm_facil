@@ -9,15 +9,17 @@ class ProdutosController < ApplicationController
       produtos <<  { value: produto.id, label: "#{produto.nome}, #{produto.marca.nome}", preco: number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: "."),
         quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}
     end
-    respond_to do |format|
-      format.json { render json: produtos}
-    end
+    render json: produtos
   end
 
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).paginate(page: params[:page], per_page: 10)
+    if params[:fornecedor]
+      @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).fornecedor(params[:fornecedor]).paginate(page: params[:page], per_page: 10)
+    else
+      @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).paginate(page: params[:page], per_page: 10)
+    end
   end
 
   # GET /produtos/1

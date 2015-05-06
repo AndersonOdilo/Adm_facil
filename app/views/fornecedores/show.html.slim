@@ -40,4 +40,31 @@ div class="panel panel-default"
         br
         == render partial: 'pessoas/show', locals: {pessoa: @fornecedor.pessoa}
 
-
+- if !@fornecedor.produtos.blank?
+    .row
+        .col-lg-7
+            div class="panel panel-default"
+                div class="panel-body"
+                    .col-xs-6
+                        h4
+                            'Alguns produtos deste fornecedor
+                    .col-xs-6
+                        = link_to 'Todos Produtos', produtos_path(fornecedor: @fornecedor.id), class: 'btn btn-warning btn-xs right'
+                    table class="table table-striped"
+                        thead
+                            tr
+                                th Cod
+                                th Nome
+                                th Descricao
+                                th Marca
+                                th Valor custo
+                                th
+                        tbody
+                            - @fornecedor.produtos.order('produtos.created_at desc').limit(5).each do |produto|
+                                tr
+                                    td = produto.cod
+                                    td = produto.nome
+                                    td = produto.descricao
+                                    td = produto.marca.nome
+                                    td = number_to_currency(produto.valor_custo, unit: 'R$', separator: ",", delimiter: ".")
+                                    td = link_to 'Abrir', produto_path(produto.id)

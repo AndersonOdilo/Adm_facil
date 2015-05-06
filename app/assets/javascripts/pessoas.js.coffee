@@ -13,22 +13,6 @@ $ ->
       $('#pessoa_fisica').remove()
       $('#formulario').show()
 
-    $('.cliente_nome_autocomplete').autocomplete
-        source: '/clientes/autocomplete.json'
-        select: (event, ui) ->
-            $('#cliente_nome').val ui.item.label
-            $('#cliente_id').val ui.item.value
-            false
-
-    $('.produto_nome_autocomplete').autocomplete
-        source: '/produtos/autocomplete.json'
-        select: (event, ui) ->
-            $('#produto_nome').val ui.item.label
-            $('#produto_id').val ui.item.value
-            $('#quantidade_estoque').html '<h3>' + ui.item.quantidade + ' ' + ui.item.unidade + '</h3>'
-            $('#preco').html '<h3>' + ui.item.preco + '</h3>'
-            false
-
     $('.numero').keypress (event) ->
         tecla = if window.event then event.keyCode else event.which
         if tecla > 47 and tecla < 58
@@ -39,6 +23,20 @@ $ ->
             else
                 true
 
+    $(".cpf").mask("999.999.999-99")
+
+    $(".rg").mask("99.999.999-9")
+
+    $(".fone").mask("(99)9999-9999")
+
+    $(".cnpj").mask("99.999.999/9999-99")
+
+    $(".inscricao_estadual").mask("99999999-99")
+
+    $('.moeda').priceFormat
+      prefix: 'R$ ',
+      centsSeparator: ',',
+      thousandsSeparator: '.'
 
   $.rails.allowAction = (link) ->
     return true unless link.attr('data-confirm')

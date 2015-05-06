@@ -1,6 +1,7 @@
 class Funcionario < ActiveRecord::Base
     acts_as :funcao, as: :papel
     has_one :usuario, dependent: :destroy
+    has_many :pedidos
     belongs_to :cargo
 
     validates_uniqueness_of :cod, allow_blank: true

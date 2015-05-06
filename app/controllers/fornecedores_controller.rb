@@ -30,7 +30,7 @@ class FornecedoresController < ApplicationController
   # POST /fornecedores
   # POST /fornecedores.json
   def create
-    @forncedor = Fornecedor.new
+    @fornecedor = Fornecedor.new
     if params[:type] == "PessoaFisica"
       @fornecedor.pessoa = PessoaFisica.new
     else

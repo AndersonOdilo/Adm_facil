@@ -36,7 +36,7 @@ div class="panel panel-default"
         .col-xs-3
           strong
             'Fornecedor:
-          = @produto.fornecedor.nome
+          = link_to @produto.fornecedor.nome, fornecedor_path(@produto.fornecedor)
 
       br
       .row

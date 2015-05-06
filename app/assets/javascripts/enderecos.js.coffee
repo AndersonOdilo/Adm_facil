@@ -1,4 +1,6 @@
 $ ->
+  $(document).on 'cocoon:after-insert', (e, insertedItem) ->
+
     $('#select_estado').on "change", ->
         id = $(this).val()
         if id != ""

@@ -45,33 +45,34 @@ div class="panel panel-default"
         == render partial: 'pessoas/show', locals: {pessoa: @cliente.pessoa}
 
 .row
-  .col-lg-7
-    div class="panel panel-default"
-        div class="panel-body"
-            h4
-                'Pagamentos vencidos e vincedos
-            table class="table table-striped"
-                thead
-                    tr
-                        th N°.
-                        th Data vencimento
-                        th Data pagamento
-                        th Valor
-                        th
-                        th
-                tbody
-                        - PagamentoVenda.vencido(@cliente.id).each do |pagamento|
-                          tr class="danger" id="tr_#{pagamento.id}"
-                            td = pagamento.numero_parcela
-                            td = pagamento.data_vencimento
-                            td id="data_pagamento_#{pagamento.id}"
-                              = pagamento.data_pagamento
-                            td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
-                            td
-                                = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
-                                   data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
-                                   remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
-                            td = link_to "Pedido", venda_path(pagamento.venda.id), class: "btn btn-default btn-xs"
+  - if !PagamentoVenda.vencido(@cliente.id).blank?
+      .col-lg-7
+        div class="panel panel-default"
+            div class="panel-body"
+                h4
+                    'Pagamentos vencidos e vincedos
+                table class="table table-striped"
+                    thead
+                        tr
+                            th N°.
+                            th Data vencimento
+                            th Data pagamento
+                            th Valor
+                            th
+                            th
+                    tbody
+                            - PagamentoVenda.vencido(@cliente.id).each do |pagamento|
+                              tr class="danger" id="tr_#{pagamento.id}"
+                                td = pagamento.numero_parcela
+                                td = pagamento.data_vencimento
+                                td id="data_pagamento_#{pagamento.id}"
+                                  = pagamento.data_pagamento
+                                td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
+                                td
+                                    = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
+                                       data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
+                                       remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
+                                td = link_to "Pedido", venda_path(pagamento.venda.id), class: "btn btn-default btn-xs"
 
   .col-lg-5
     div class="panel panel-default"
@@ -92,7 +93,7 @@ div class="panel panel-default"
                     - @cliente.pedidos.vendas.order("pedidos.created_at desc").limit(5).each do |venda|
                         tr
                             td = venda.data
-                            td = (number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: "."))
+                            td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
                             td = link_to "Abrir", venda_path(venda.specific)
 
 
