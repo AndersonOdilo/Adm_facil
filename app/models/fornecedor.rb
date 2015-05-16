@@ -1,7 +1,8 @@
 class Fornecedor < ActiveRecord::Base
-  acts_as :funcao, as: :papel
   has_many :produtos, dependent: :restrict_with_error
-  accepts_nested_attributes_for :funcao
+  belongs_to :pessoa
+
+  accepts_nested_attributes_for :pessoa
 
   def nome
     "#{self.pessoa.specific.nome}"

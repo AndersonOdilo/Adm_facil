@@ -68,7 +68,7 @@ div class="panel panel-default"
         br
         == render partial: 'pessoas/show', locals: {pessoa: @funcionario.pessoa}
 
-- if !@funcionario.pedidos.vendas.blank?
+- if !@funcionario.pedidos.blank?
     .row
       .col-lg-7
         div class="panel panel-default"
@@ -77,7 +77,7 @@ div class="panel panel-default"
                     h4
                         'Ultimas Vendas
                 .col-xs-6
-                    = link_to 'Todas Vendas', vendas_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs right'
+                    = link_to 'Todas Vendas', pedidos_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs right'
                 table class="table table-striped"
                     thead
                         tr
@@ -86,10 +86,10 @@ div class="panel panel-default"
                             th Total
                             th
                     tbody
-                        - @funcionario.pedidos.vendas.order('pedidos.created_at desc').limit(5).each do |venda|
+                        - @funcionario.pedidos.order('pedidos.created_at desc').limit(5).each do |venda|
                             tr
                                 td = venda.cliente.pessoa.specific.nome
                                 td = venda.data
                                 td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
-                                td = link_to 'Abrir', venda_path(venda.specific)
+                                td = link_to 'Abrir', pedido_path(venda)
 

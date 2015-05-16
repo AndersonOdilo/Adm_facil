@@ -24,7 +24,7 @@ div class="panel panel-default"
             .col-xs-4
                 strong
                   'Data validade:
-                = @orcamento.data + 30.day
+                = @orcamento.data_validade
         br
         div class="panel panel-default"
             div class="panel-body"
@@ -41,7 +41,7 @@ div class="panel panel-default"
                       th Unid.
                       th Valor Total
                   tbody id="itens"
-                  - @orcamento.itens_pedidos.each do |item|
+                  - @orcamento.itens_orcamentos.each do |item|
                     tr
                         td = item.produto.cod
                         td ="#{item.produto.nome}, #{item.produto.marca.nome}"
@@ -54,7 +54,7 @@ div class="panel panel-default"
                 - if @orcamento.desconto
                     .col-xs-3
                         h4
-                            = "Desconto: #{number_to_percentage(@venda.desconto, precision: 0)}"
+                            = "Desconto: #{number_to_percentage(@orcamento.desconto, precision: 0)}"
                     .col-xs-4
                         h4
                             ="Total desc.  #{number_to_currency(@orcamento.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"

@@ -1,12 +1,11 @@
-= nested_form_for @venda do |f|
-  - if @venda.errors.any?
+= nested_form_for @pedido do |f|
+  - if @pedido.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@venda.errors.count, "error")} prohibited this pedido from being saved:"
+      h2 = "#{pluralize(@pedido.errors.count, "error")} prohibited this pedido from being saved:"
       ul
-        - @venda.errors.full_messages.each do |message|
+        - @pedido.errors.full_messages.each do |message|
           li = message
 
-  = hidden_field_tag 'venda[pedido_attributes][id]', ''
   div class="panel panel-default"
     div class="panel-body"
 

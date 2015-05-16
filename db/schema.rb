@@ -11,19 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414173451) do
+ActiveRecord::Schema.define(version: 20150516030819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "bairros", force: true do |t|
-    t.string   "nome"
-    t.integer  "cidade_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "bairros", ["cidade_id"], name: "index_bairros_on_cidade_id", using: :btree
 
   create_table "cargos", force: true do |t|
     t.string   "descricao"
@@ -50,7 +41,10 @@ ActiveRecord::Schema.define(version: 20150414173451) do
     t.decimal  "limite_credito"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pessoa_id"
   end
+
+  add_index "clientes", ["pessoa_id"], name: "index_clientes_on_pessoa_id", using: :btree
 
   create_table "despesas", force: true do |t|
     t.string   "descricao"
@@ -90,6 +84,7 @@ ActiveRecord::Schema.define(version: 20150414173451) do
     t.datetime "updated_at"
     t.integer  "pessoa_id"
     t.integer  "logradouro_id"
+    t.string   "bairro"
   end
 
   add_index "enderecos", ["logradouro_id"], name: "index_enderecos_on_logradouro_id", using: :btree
@@ -123,7 +118,10 @@ ActiveRecord::Schema.define(version: 20150414173451) do
   create_table "fornecedores", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pessoa_id"
   end
+
+  add_index "fornecedores", ["pessoa_id"], name: "index_fornecedores_on_pessoa_id", using: :btree
 
   create_table "funcionarios", force: true do |t|
     t.string   "cod"
@@ -134,19 +132,23 @@ ActiveRecord::Schema.define(version: 20150414173451) do
     t.datetime "updated_at"
     t.integer  "cargo_id"
     t.float    "carga_horaria"
+    t.integer  "pessoa_id"
   end
 
   add_index "funcionarios", ["cargo_id"], name: "index_funcionarios_on_cargo_id", using: :btree
+  add_index "funcionarios", ["pessoa_id"], name: "index_funcionarios_on_pessoa_id", using: :btree
 
-  create_table "funcoes", force: true do |t|
-    t.integer  "pessoa_id"
-    t.integer  "papel_id"
-    t.string   "papel_type"
+  create_table "itens_orcamentos", force: true do |t|
+    t.integer  "quantidade"
+    t.decimal  "preco"
+    t.integer  "orcamento_id"
+    t.integer  "produto_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "funcoes", ["pessoa_id"], name: "index_funcoes_on_pessoa_id", using: :btree
+  add_index "itens_orcamentos", ["orcamento_id"], name: "index_itens_orcamentos_on_orcamento_id", using: :btree
+  add_index "itens_orcamentos", ["produto_id"], name: "index_itens_orcamentos_on_produto_id", using: :btree
 
   create_table "itens_pedidos", force: true do |t|
     t.integer  "produto_id"
@@ -165,11 +167,12 @@ ActiveRecord::Schema.define(version: 20150414173451) do
     t.string   "cep"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "CD_TIPO_LOGRADOUROS"
     t.integer  "bairro_id"
+    t.integer  "cidade_id"
   end
 
   add_index "logradouros", ["bairro_id"], name: "index_logradouros_on_bairro_id", using: :btree
+  add_index "logradouros", ["cidade_id"], name: "index_logradouros_on_cidade_id", using: :btree
 
   create_table "marcas", force: true do |t|
     t.string   "nome"
@@ -180,7 +183,16 @@ ActiveRecord::Schema.define(version: 20150414173451) do
   create_table "orcamentos", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "data"
+    t.date     "data_validade"
+    t.string   "obs"
+    t.integer  "funcionario_id"
+    t.integer  "cliente_id"
+    t.float    "desconto"
   end
+
+  add_index "orcamentos", ["cliente_id"], name: "index_orcamentos_on_cliente_id", using: :btree
+  add_index "orcamentos", ["funcionario_id"], name: "index_orcamentos_on_funcionario_id", using: :btree
 
   create_table "pagamentos_vendas", force: true do |t|
     t.date     "data_vencimento"
@@ -190,8 +202,10 @@ ActiveRecord::Schema.define(version: 20150414173451) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "numero_parcela"
+    t.integer  "pedido_id"
   end
 
+  add_index "pagamentos_vendas", ["pedido_id"], name: "index_pagamentos_vendas_on_pedido_id", using: :btree
   add_index "pagamentos_vendas", ["venda_id"], name: "index_pagamentos_vendas_on_venda_id", using: :btree
 
   create_table "paises", force: true do |t|
@@ -211,9 +225,11 @@ ActiveRecord::Schema.define(version: 20150414173451) do
     t.datetime "updated_at"
     t.integer  "actable_id"
     t.string   "actable_type"
+    t.integer  "forma_pagamento_id"
   end
 
   add_index "pedidos", ["cliente_id"], name: "index_pedidos_on_cliente_id", using: :btree
+  add_index "pedidos", ["forma_pagamento_id"], name: "index_pedidos_on_forma_pagamento_id", using: :btree
   add_index "pedidos", ["funcionario_id"], name: "index_pedidos_on_funcionario_id", using: :btree
 
   create_table "pessoas", force: true do |t|

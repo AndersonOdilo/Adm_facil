@@ -1,20 +1,83 @@
 class PedidosController < ApplicationController
+  include ActionView::Helpers::NumberHelper
   before_action :set_pedido, only: [:show, :edit, :update, :destroy]
+
+  def add_item
+    item_pedido = ItemPedido.new
+    produto = Produto.find(params[:produto])
+    if produto.quantidade_estoque >= params[:quantidade].to_i
+      item_pedido.produto_id = produto.id
+      item_pedido.preco = produto.valor_venda
+      item_pedido.quantidade = params[:quantidade]
+      session[:sub_total_venda] = session[:sub_total_venda].to_f + item_pedido.preco_total
+      render locals: {item_pedido: item_pedido, sub_total: session[:sub_total_venda].to_f }
+    else
+        render 'erro', locals: {msg: 'Nao a estoque suficiente.'}
+    end
+  end
+
+  def remover_item
+    produto = Produto.find(params[:produto])
+    session[:sub_total_venda] = session[:sub_total_venda].to_f - produto.valor_venda * params[:quantidade].to_f
+    render json: number_to_currency(session[:sub_total_venda].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json
+  end
+
+  def calcular_parcela
+    valor_parcela = (session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i
+    valor_parcela.round(2)
+    render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json
+  end
+
+  def calcular_desconto
+    desconto = session[:sub_total_venda].to_f - (session[:sub_total_venda].to_f * params[:desconto].to_f / 100)
+    render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json
+  end
+
+  def finalizar
+      if session[:sub_total_venda].to_f > 0
+        if params[:cliente] != ""
+          if params[:forma_pagamento].to_i == 5
+            if Cliente.find(params[:cliente]).limite_credito >= session[:sub_total_venda].to_f
+              render 'pagamento', locals: {entrega: params[:entrega]}
+            else
+              render 'erro', locals: {msg: 'Nao limite' }
+            end
+          else
+            render 'finalizar', locals: {entrega: params[:entrega]}
+          end
+        else
+          render 'erro', locals: {msg: 'Busque ou cadastre um cliente' }
+        end
+      else
+        render 'erro', locals: {msg: 'Adicione produtos ao pedido.'}
+      end
+  end
 
   # GET /pedidos
   # GET /pedidos.json
   def index
-    @pedidos = Pedido.all
+    if params[:cliente]
+      @pedido = Pedido.includes(cliente: [:pessoa]).cliente(params[:cliente]).paginate(page: params[:page], per_page: 10).order("pedidos.created_at desc")
+    elsif params[:funcionario]
+      @pedido = Pedido.includes(cliente: [:pessoa]).funcionario(params[:funcionario]).paginate(page: params[:page], per_page: 10).order("pedidos.created_at desc")
+    else
+      @pedido = Pedido.includes(cliente: [:pessoa]).paginate(page: params[:page], per_page: 10).order("pedidos.created_at desc")
+    end
   end
 
   # GET /pedidos/1
   # GET /pedidos/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf {render pdf: 'Pedido'}
+    end
   end
 
   # GET /pedidos/new
   def new
     @pedido = Pedido.new
+    session[:sub_total_venda] = nil
   end
 
   # GET /pedidos/1/edit
@@ -25,7 +88,7 @@ class PedidosController < ApplicationController
   # POST /pedidos.json
   def create
     @pedido = Pedido.new(pedido_params)
-
+    @pedido.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i)
     respond_to do |format|
       if @pedido.save
         format.html { redirect_to @pedido, notice: 'Pedido was successfully created.' }
@@ -64,11 +127,12 @@ class PedidosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pedido
-      @pedido = Pedido.find(params[:id])
+      @pedido = Pedido.includes(:pagamentos_vendas, :itens_pedidos, cliente: [:pessoa], funcionario:[:pessoa]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pedido_params
-      params.require(:pedido).permit(:data, :desconto, :obs, :cliente_id, :funcionario_id)
+      params.require(:pedido).permit(:forma_pagamento_id, :cliente_id, :desconto, :obs, :funcionario_id, :data,
+        itens_pedidos_attributes: [:id, :produto_id, :quantidade, :preco])
     end
 end

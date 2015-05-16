@@ -1,28 +1,28 @@
 div class="panel panel-default"
     div class="panel-heading"
         h2
-            'Venda #{@venda.id}
+            'Venda #{@pedido.id}
     div class="panel-body"
         h3
-            =@venda.cliente.pessoa.nome
+            =@pedido.cliente.pessoa.nome
         .row
           .col-xs-4
             strong Funcionario: </strong>
-            = @venda.funcionario.pessoa.specific.nome
+            = @pedido.funcionario.pessoa.specific.nome
           .col-xs-3
             strong fone: </strong>
-            = @venda.funcionario.pessoa.fones.first.numero rescue ''
+            = @pedido.funcionario.pessoa.fones.first.numero rescue ''
           .col-xs-4
             strong e-mail: </strong>
-            = @venda.funcionario.pessoa.emails.first.descricao rescue ''
+            = @pedido.funcionario.pessoa.emails.first.descricao rescue ''
 
         .row
           .col-xs-4
             strong Data emissao: </strog>
-            = @venda.data
+            = @pedido.data
           .col-xs-4
             strong Forma pagamento: </strog>
-            = @venda.forma_pagamento.descricao
+            = @pedido.forma_pagamento.descricao
 
         br
         div class="panel panel-default"
@@ -40,7 +40,7 @@ div class="panel panel-default"
                       th Unid.
                       th Valor Total
                   tbody id="itens"
-                  - @venda.itens_pedidos.each do |item|
+                  - @pedido.itens_pedidos.each do |item|
                     tr
                         td = item.produto.cod
                         td ="#{item.produto.nome}, #{item.produto.marca.nome}"
@@ -50,13 +50,13 @@ div class="panel panel-default"
                         td = number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: ".")
             div class="panel-footer"
               .row
-                - if @venda.desconto
+                - if @pedido.desconto
                     .col-xs-3
                         h4
-                            = "Desconto: #{number_to_percentage(@venda.desconto, precision: 0)}"
+                            = "Desconto: #{number_to_percentage(@pedido.desconto, precision: 0)}"
                     .col-xs-4
                         h4
-                            ="Total desc.  #{number_to_currency(@venda.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
+                            ="Total desc.  #{number_to_currency(@pedido.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
                     .col-xs-1
                 - else
                     .col-xs-9
@@ -64,7 +64,7 @@ div class="panel panel-default"
                   h4 Total
                 .col-xs-2
                   h4
-                    = number_to_currency(@venda.total, unit: 'R$', separator: ",", delimiter: ".")
+                    = number_to_currency(@pedido.total, unit: 'R$', separator: ",", delimiter: ".")
 
         .row
           .col-lg-6
@@ -80,7 +80,7 @@ div class="panel panel-default"
                         th Data pagamento
                         th Valor
                     tbody id="itens"
-                      - @venda.pagamentos_vendas.each do |pagamento|
+                      - @pedido.pagamentos_vendas.each do |pagamento|
                         - if pagamento.data_pagamento != nil
                           - classe = "success"
                         - elsif pagamento.data_vencimento < Date.today
@@ -94,12 +94,12 @@ div class="panel panel-default"
                           td = pagamento.data_pagamento
                           td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
 
-          - if !@venda.obs.blank?
+          - if !@pedido.obs.blank?
             .col-lg-4
               div class="panel panel-default"
                   div class="panel-body"
                     h4
                       'Observacoes
                     p
-                      = @venda.obs
+                      = @pedido.obs
 

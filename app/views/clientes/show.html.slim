@@ -82,7 +82,7 @@ div class="panel panel-default"
                     h4
                         'Ultimas Compras
                 .col-xs-6
-                    = link_to 'Todas Compras', vendas_path(cliente: @cliente.id), class: 'btn btn-warning btn-xs right'
+                    = link_to 'Todas Compras', pedidos_path(cliente: @cliente.id), class: 'btn btn-warning btn-xs right'
             table class="table table-striped"
                 thead
                     tr
@@ -90,11 +90,11 @@ div class="panel panel-default"
                         th Valor Total
                         th
                 tbody
-                    - @cliente.pedidos.vendas.order("pedidos.created_at desc").limit(5).each do |venda|
+                    - @cliente.pedidos.order("pedidos.created_at desc").limit(5).each do |venda|
                         tr
                             td = venda.data
                             td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
-                            td = link_to "Abrir", venda_path(venda.specific)
+                            td = link_to "Abrir", pedido_path(venda)
 
 
 

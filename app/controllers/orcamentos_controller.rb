@@ -3,13 +3,13 @@ class OrcamentosController < ApplicationController
   before_action :set_orcamento, only: [:show, :edit, :update, :destroy]
 
   def add_item
-    item_pedido = ItemPedido.new
+    item_orcamento = ItemOrcamento.new
     produto = Produto.find(params[:produto])
-    item_pedido.produto_id = produto.id
-    item_pedido.preco = produto.valor_venda
-    item_pedido.quantidade = params[:quantidade]
-    session[:sub_total] = session[:sub_total].to_f + item_pedido.preco_total
-    render locals: {item_pedido: item_pedido, sub_total: session[:sub_total] }
+    item_orcamento.produto_id = produto.id
+    item_orcamento.preco = produto.valor_venda
+    item_orcamento.quantidade = params[:quantidade]
+    session[:sub_total] = session[:sub_total].to_f + item_orcamento.preco_total
+    render locals: {item_orcamento: item_orcamento, sub_total: session[:sub_total] }
   end
 
   def remover_item
@@ -26,7 +26,7 @@ class OrcamentosController < ApplicationController
   # GET /orcamentos
   # GET /orcamentos.json
   def index
-    @orcamentos = Orcamento.includes(pedido: [cliente: [funcao: [:pessoa]]]).paginate(page: params[:page], per_page: 10).order("orcamentos.created_at desc")
+    @orcamentos = Orcamento.includes(cliente: [:pessoa]).paginate(page: params[:page], per_page: 10).order("orcamentos.created_at desc")
   end
 
   # GET /orcamentos/1
@@ -41,7 +41,7 @@ class OrcamentosController < ApplicationController
   # GET /orcamentos/new
   def new
     @orcamento = Orcamento.new
-    @orcamento.itens_pedidos.build
+    @orcamento.itens_orcamentos.build
     session[:sub_total] = nil
   end
 
@@ -54,7 +54,7 @@ class OrcamentosController < ApplicationController
   def create
     @orcamento = Orcamento.new(orcamento_params)
     respond_to do |format|
-      if !@orcamento.itens_pedidos.blank?
+      if !@orcamento.itens_orcamentos.blank?
         if @orcamento.save
           format.html { redirect_to @orcamento, notice: 'Orcamento was successfully created.' }
           format.json { render :show, status: :created, location: @orcamento }
@@ -96,12 +96,12 @@ class OrcamentosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orcamento
-      @orcamento = Orcamento.includes(pedido: [:itens_pedidos, cliente: [funcao: [:pessoa]], funcionario:[funcao: [:pessoa]]]).find(params[:id])
+      @orcamento = Orcamento.includes(:itens_orcamentos, cliente: [:pessoa], funcionario:[:pessoa]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def orcamento_params
-      params.require(:orcamento).permit(:data, :desconto, :obs, :cliente_id, :funcionario_id,
-        pedido_attributes: [:id, :_destroy, itens_pedidos_attributes: [:id, :produto_id, :quantidade, :preco]])
+      params.require(:orcamento).permit(:data_validade, :data, :desconto, :obs, :cliente_id, :funcionario_id,
+        itens_orcamentos_attributes: [:id, :produto_id, :quantidade, :preco])
     end
 end

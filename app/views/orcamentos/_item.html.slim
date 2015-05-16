@@ -1,14 +1,14 @@
 tr
     td
         = item.produto.cod
-        = hidden_field_tag 'orcamento[pedido_attributes][itens_pedidos_attributes][][produto_id]', item.produto_id
+        = hidden_field_tag 'orcamento[itens_orcamentos_attributes][][produto_id]', item.produto_id
     td
         = item.produto.nome
     td
         = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
-        = hidden_field_tag 'orcamento[pedido_attributes][itens_pedidos_attributes][][preco]', item.preco
+        = hidden_field_tag 'orcamento[itens_orcamentos_attributes][][preco]', item.preco
     td
-        = number_field_tag 'orcamento[pedido_attributes][itens_pedidos_attributes][][quantidade]', item.quantidade, min: 0
+        = number_field_tag 'orcamento[itens_orcamentos_attributes][][quantidade]', item.quantidade, min: 0
     td
         = item.produto.unidade.sigla
     td

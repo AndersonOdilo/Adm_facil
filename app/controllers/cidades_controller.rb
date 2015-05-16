@@ -1,7 +1,7 @@
 class CidadesController < ApplicationController
 
-  def buscar_bairros
-    render json: Cidade.find(params[:id]).bairros
+  def buscar_ruas
+    render json: Cidade.find(params[:id]).logradouros
   end
 
 end

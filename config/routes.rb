@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :despesas
 
-  resources :vendas
+  resources :pedidos
 
   resources :formas_pagamentos
 
@@ -41,9 +41,7 @@ Rails.application.routes.draw do
 
   match 'estado/cidades/:id', to: "estados#buscar_cidades", via: [:get]
 
-  match 'cidade/bairros/:id', to: "cidades#buscar_bairros", via: [:get]
-
-  match 'bairro/ruas/:id', to: "bairros#buscar_ruas", via: [:get]
+  match 'cidade/ruas/:id', to: "cidades#buscar_ruas", via: [:get]
 
   match 'orcamento/add_item', to: "orcamentos#add_item", via: [:post]
 
@@ -51,19 +49,19 @@ Rails.application.routes.draw do
 
   match 'orcamento/calcular_desconto', to: "orcamentos#calcular_desconto", via: [:post]
 
-  match 'venda/add_item', to: "vendas#add_item", via: [:post]
+  match 'pedido/add_item', to: "pedidos#add_item", via: [:post]
 
-  match 'venda/remover_item', to: "vendas#remover_item", via: [:post]
+  match 'pedido/remover_item', to: "pedidos#remover_item", via: [:post]
 
-  match 'venda/valor_parcela', to: "vendas#calcular_parcela", via: [:post]
+  match 'pedido/valor_parcela', to: "pedidos#calcular_parcela", via: [:post]
 
-  match 'venda/calcular_desconto', to: "vendas#calcular_desconto", via: [:post]
+  match 'pedido/calcular_desconto', to: "pedidos#calcular_desconto", via: [:post]
 
   match 'pagamentos_vendas/efetuar_pagamento/:id', to: "pagamentos_vendas#efetuar_pagamento", via: [:get]
 
   match 'despesas_pagamentos/efetuar_pagamento/:id', to: "despesas_pagamentos#efetuar_pagamento", via: [:get]
 
-  match 'venda/finalizar', to: "vendas#finalizar", via: [:post]
+  match 'pedido/finalizar', to: "pedidos#finalizar", via: [:post]
 
   root 'clientes#index'
 

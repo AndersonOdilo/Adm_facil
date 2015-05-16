@@ -4,7 +4,7 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores
   # GET /fornecedores.json
   def index
-    @fornecedores = Fornecedor.includes(funcao: :pessoa).paginate(page: params[:page], per_page: 10)
+    @fornecedores = Fornecedor.includes(:pessoa).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /fornecedores/1
@@ -15,7 +15,6 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores/new
   def new
     @fornecedor = Fornecedor.new
-    @fornecedor.funcao = Funcao.new
     respond_to do |format|
       format.html
       format.js
@@ -80,16 +79,15 @@ class FornecedoresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_fornecedor
-      @fornecedor = Fornecedor.includes(funcao: [pessoa: [:fones, :enderecos, :emails]]).find(params[:id])
+      @fornecedor = Fornecedor.includes(pessoa: [:fones, :enderecos, :emails]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fornecedor_params
       params.require(:fornecedor).permit(:id,
-         funcao_attributes: [:id, :pessoa_id,
         pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
-          enderecos_attributes: [:id, :logradouro_id, :numero, :complemento, :_destroy],
+          enderecos_attributes: [:id, :logradouro_id, :bairro, :numero, :complemento, :_destroy],
           fones_attributes: [:id, :numero, :_destroy],
-          emails_attributes: [:id, :descricao, :_destroy]]])
+          emails_attributes: [:id, :descricao, :_destroy]])
     end
 end

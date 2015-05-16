@@ -24,7 +24,7 @@ div class="panel panel-default"
           th
 
       tbody
-        - @produtos.each do |produto|
+        - @produtos.order("quantidade_estoque desc").each do |produto|
           tr
             td = produto.cod
             td = produto.nome

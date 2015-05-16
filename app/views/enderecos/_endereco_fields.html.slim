@@ -17,13 +17,13 @@
             = select_tag :select_cidade, {}, {class: 'form-control input-sm'}
         .col-xs-4
           .form-group
-            = label_tag 'Bairro'
-            = select_tag :select_bairro, {}, {class: 'form-control input-sm'}
+            = label_tag 'Logradouro'
+            = f.collection_select :logradouro_id, {}, :id, :nome, {}, {class: 'form-control input-sm', id: 'select_rua'}
       .row
         .col-xs-4
           .form-group
-            = label_tag 'Logradouro'
-            = f.collection_select :logradouro_id, {}, :id, :nome, {}, {class: 'form-control input-sm', id: 'select_rua'}
+            = label_tag 'Bairro'
+            = f.text_field :bairro, class: 'form-control input-sm'
         .col-xs-2
           .form-group
             = label_tag 'Numero'

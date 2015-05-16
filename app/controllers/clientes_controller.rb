@@ -2,7 +2,7 @@ class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
   def autocomplete
-    @clientes = Cliente.joins("LEFT OUTER JOIN pessoas on funcoes.pessoa_id = pessoas.id where (pessoas.nome ILIKE '#{params[:term]}%')")
+    @clientes = Cliente.joins("LEFT OUTER JOIN pessoas on pessoa_id = pessoas.id where (pessoas.nome ILIKE '#{params[:term]}%')")
     clientes = []
     @clientes.each do |cliente|
       clientes <<  { value: cliente.id , label: cliente.pessoa.specific.nome}
@@ -13,7 +13,7 @@ class ClientesController < ApplicationController
   # GET /clientes
   # GET /clientes.json
   def index
-    @clientes = Cliente.includes(funcao: :pessoa).paginate(page: params[:page], per_page: 10)
+    @clientes = Cliente.includes(:pessoa).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /clientes/1
@@ -24,7 +24,6 @@ class ClientesController < ApplicationController
   # GET /clientes/new
   def new
     @cliente = Cliente.new
-    @cliente.funcao = Funcao.new
     respond_to do |format|
       format.html
       format.js
@@ -89,16 +88,15 @@ class ClientesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cliente
-      @cliente = Cliente.includes(funcao: [pessoa: [:fones, :enderecos, :emails]]).find(params[:id])
+      @cliente = Cliente.includes(pessoa: [:fones, :enderecos, :emails]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cliente_params
       params.require(:cliente).permit(:limite_credito,
-       funcao_attributes: [:id, :pessoa_id,
         pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
-          enderecos_attributes: [:id, :logradouro_id, :numero, :complemento, :_destroy],
+          enderecos_attributes: [:id, :logradouro_id, :bairro, :numero, :complemento, :_destroy],
           fones_attributes: [:id, :numero, :_destroy],
-          emails_attributes: [:id, :descricao, :_destroy]]])
+          emails_attributes: [:id, :descricao, :_destroy]])
     end
 end

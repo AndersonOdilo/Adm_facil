@@ -29,10 +29,49 @@ div class="panel panel-default"
           .col-xs-4
             strong
               'Data validade:
-            = @orcamento.data + 30.day
+            = @orcamento.data_validade
 
         br
-        == render partial: 'pedidos/show_itens_pedidos', locals: {pedido: @orcamento}
+        div class="panel panel-default"
+          div class="panel-body"
+            h3 class="panel-title"
+              'Itens Pedido
+            #itens_pedido
+              table class="table table-striped"
+                thead
+                  tr
+                    th Cod.
+                    th Nome
+                    th Valor Unid.
+                    th Quant.
+                    th Unid.
+                    th Valor Total
+                tbody id="itens"
+                  - @orcamento.itens_orcamentos.each do |item|
+                    tr
+                      td = item.produto.cod
+                      td ="#{item.produto.nome}, #{item.produto.marca.nome}"
+                      td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
+                      td = item.quantidade
+                      td = item.produto.unidade.sigla
+                      td = (number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: "."))
+          div class="panel-footer"
+            .row
+              - if @orcamento.desconto
+                .col-xs-4
+                  h4
+                    = "Desconto: #{number_to_percentage(@orcamento.desconto, precision: 0)}"
+                .col-xs-4
+                  h4 class="right"
+                    ="Total desc.  #{number_to_currency(@orcamento.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
+                .col-xs-3
+                  h4 class="right"
+                    = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
+              - else
+                .col-xs-8
+                .col-xs-3
+                  h4 class="right"
+                    = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
 
         h4
           'Observacoes:

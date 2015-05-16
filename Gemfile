@@ -22,6 +22,7 @@ gem "chartkick"
 gem "rails_12factor", group: :production
 gem 'simple_form'
 gem 'cocoon'
+gem 'has_scope'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

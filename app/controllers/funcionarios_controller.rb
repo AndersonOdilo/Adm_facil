@@ -4,7 +4,7 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios
   # GET /funcionarios.json
   def index
-    @funcionarios = Funcionario.includes(funcao: :pessoa).paginate(page: params[:page], per_page: 10)
+    @funcionarios = Funcionario.includes(:pessoa).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /funcionarios/1
@@ -76,17 +76,16 @@ class FuncionariosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_funcionario
-      @funcionario = Funcionario.includes(funcao: [pessoa: [:fones, :enderecos, :emails]]).find(params[:id])
+      @funcionario = Funcionario.includes(pessoa: [:fones, :enderecos, :emails]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def funcionario_params
       params.require(:funcionario).permit(:cod, :carteira_trabalho, :salario, :data_admissao, :pessoa_id,
         :cargo_id, :carga_horaria, usuario_attributes: [:email, :password, :funcionario_id, :_destroy],
-          funcao_attributes: [:id, :pessoa_id,
           pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
-          enderecos_attributes: [:id, :logradouro_id, :numero, :complemento, :_destroy],
+          enderecos_attributes: [:id, :logradouro_id, :bairro, :numero, :complemento, :_destroy],
           fones_attributes: [:id, :numero, :_destroy],
-          emails_attributes: [:id, :descricao, :_destroy]]])
+          emails_attributes: [:id, :descricao, :_destroy]])
     end
 end
