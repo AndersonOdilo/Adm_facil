@@ -29,7 +29,7 @@ $ ->
             type: 'post'
             dataType: 'script'
             data:
-                forma_pagamento: $('#venda_forma_pagamento_id').val()
+                forma_pagamento: $('#pedido_forma_pagamento_id').val()
                 cliente: $('#cliente_id').val()
                 entrega: $('#forma_entrega').val()
 

@@ -13,7 +13,7 @@ $('#valor_entrada').keyup(function() {
 
 calcular_parcela = function(valor_entrada, numero_parcelas) {
   return $.ajax({
-    url: '/venda/valor_parcela',
+    url: '/pedido/valor_parcela',
     type: 'post',
     dataType: 'json',
     data: {
@@ -30,7 +30,17 @@ window.calcular_parcela = calcular_parcela;
 
 $('#finalizar_pagamento').on("click", function() {
   if ($("#numero_parcela").val() !== "") {
-    return $('#new_venda').submit();
+    return $('#new_pedido').submit();
+  } else {
+    return alert('Selecione o numero de parcelas');
+  }
+});
+
+$('#endereco_entrega').on("click", function() {
+  if ($("#numero_parcela").val() !== "") {
+    $('#pagamento_modal').modal('hide');
+    $("#endereco_entrega_modal").html("<%= escape_javascript(render partial: 'enderecos/endereco_entrega', locals: {cliente: cliente}) %>");
+    return $('#entrega_modal').modal('show');
   } else {
     return alert('Selecione o numero de parcelas');
   }

@@ -16,9 +16,9 @@ $ ->
       $('#cliente_id').val(ui.item.value)
       false
 
-
-
-
-
-
-
+  $('.cliente_nome_autocomplete').on "keydown", ->
+    key = event.keyCode || event.charCode
+    if( key == 8 || key == 46 )
+      $('#cliente_nome').val('')
+      $('#cliente_id').val('')
+      false

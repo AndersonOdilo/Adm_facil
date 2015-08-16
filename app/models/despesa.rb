@@ -11,14 +11,14 @@ class Despesa < ActiveRecord::Base
         pagamento.data_pagamento = Date.today
         pagamento.valor = entrada
         self.despesas_pagamentos << pagamento
-        total = total - entrada
+        total -= entrada
       end
       data = Date.today
       valor_parcela =  total  / numero_parcelas
       for i in 1..numero_parcelas
         pagamento = DespesaPagamento.new
-        pagamento.data_vencimento = data + intervalo_parcela.day
-        data = data + intervalo_parcela.day
+        data += intervalo_parcela.day
+        pagamento.data_vencimento = data 
         pagamento.valor = valor_parcela
         self.despesas_pagamentos << pagamento
       end
@@ -32,21 +32,11 @@ class Despesa < ActiveRecord::Base
   end
 
   def total
-    total = 0
-    self.despesas_pagamentos.each do |pagamento|
-      total += pagamento.valor
-    end
-    return total
+    self.despesas_pagamentos.collect {|pagamento| pagamento.valor}.sum
   end
 
   def total_pago
-    total = 0
-    self.despesas_pagamentos.each do |pagamento|
-      if pagamento.data_pagamento != nil
-        total += pagamento.valor
-      end
-    end
-    return total
+    self.despesas_pagamentos.reject{|pagamento| !pagamento.data_pagamento.nil}.collect{|pagamento| pagamento.valor}.sum
   end
 
 end

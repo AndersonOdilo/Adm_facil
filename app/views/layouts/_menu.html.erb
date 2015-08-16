@@ -8,25 +8,28 @@
                 </a>
             </li>
             <li>
-                <a href="/clientes">Clientes</a>
+                <%= link_to 'Clientes', clientes_path %>
             </li>
             <li>
-                <a href="/funcionarios">Funcionarios</a>
+                <%= link_to 'Funcionarios', funcionarios_path %>
             </li>
             <li>
-                <a href="/fornecedores">Fornecedores</a>
+                <%= link_to 'Fornecedores', fornecedores_path %>
             </li>
              <li>
-                <a href="/pedidos">Vendas</a>
+                <%= link_to 'Pedidos', pedidos_path %>
             </li>
             <li>
-                <a href="/orcamentos">Orçamentos</a>
+                <%= link_to 'Orçamentos', orcamentos_path %>
             </li>
             <li>
-                <a href="/produtos">Produtos</a>
+                <%= link_to 'Produtos', produtos_path %>
             </li>
               <li>
-                <a href="/despesas">Despesas</a>
+                <%= link_to 'Despesas', despesas_path %>
+            </li>
+            <li>
+                <%= link_to 'Registrar Ponto', pontos_registro_path %>
             </li>
             <li>
                 <%= link_to('Sair', destroy_usuario_session_path, method: :delete) %>

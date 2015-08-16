@@ -10,17 +10,19 @@
     div class="panel-body"
       = p.label :fones
       .row
-        = p.simple_fields_for :fones do |fone|
-          =render '/fones/fone_fields', f: fone
-        .links
-          = link_to_add_association 'Novo fone', p, :fones, partial: 'fones/fone_fields', class: 'btn btn-primary btn-xs'
+        .col-lg-12
+          = p.simple_fields_for :fones do |fone|
+            =render '/fones/fone_fields', f: fone
+          .links
+            = link_to_add_association 'Novo fone', p, :fones, partial: 'fones/fone_fields', class: 'btn btn-primary btn-xs'
 
 .form-group
   div class="panel panel-default"
     div class="panel-body"
       = p.label :emails
       .row
-        = p.simple_fields_for :emails do |email|
-          =render '/emails/email_fields', f: email
-        .links
-          = link_to_add_association 'Novo email', p, :emails, partial: 'emails/email_fields', class: 'btn btn-primary btn-xs'
+        .col-lg-12
+          = p.simple_fields_for :emails do |email|
+            =render '/emails/email_fields', f: email
+          .links
+            = link_to_add_association 'Novo email', p, :emails, partial: 'emails/email_fields', class: 'btn btn-primary btn-xs'

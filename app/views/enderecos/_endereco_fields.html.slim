@@ -3,32 +3,32 @@
     div class="panel-body"
       = label_tag 'Endereço'
       .row
-        .col-xs-2
+        .col-lg-2
           .form-group
             = label_tag 'Pais'
             = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla), class: 'form-control input-sm'
-        .col-xs-2
+        .col-lg-2
           .form-group
             = label_tag 'Estado'
             = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados', class: 'form-control input-sm'
-        .col-xs-4
+        .col-lg-4
           .form-group
             = label_tag 'Cidade'
             = select_tag :select_cidade, {}, {class: 'form-control input-sm'}
-        .col-xs-4
+        .col-lg-4
           .form-group
             = label_tag 'Logradouro'
             = f.collection_select :logradouro_id, {}, :id, :nome, {}, {class: 'form-control input-sm', id: 'select_rua'}
       .row
-        .col-xs-4
+        .col-lg-4
           .form-group
             = label_tag 'Bairro'
             = f.text_field :bairro, class: 'form-control input-sm'
-        .col-xs-2
+        .col-lg-2
           .form-group
             = label_tag 'Numero'
             = f.number_field :numero, class: 'form-control input-sm'
-        .col-xs-6
+        .col-lg-6
           .form-group
             = label_tag 'Complemento'
             = f.text_field :complemento, class: 'form-control input-sm'

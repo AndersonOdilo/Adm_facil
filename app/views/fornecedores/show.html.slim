@@ -2,7 +2,7 @@
     .row
         .col-lg-8
             h1
-                = @fornecedor.pessoa.specific.nome
+                'fornecedor
         .col-lg-4
           br
           = link_to 'Editar', edit_fornecedor_path(@fornecedor), class: 'btn btn-warning right'
@@ -11,44 +11,56 @@ div class="panel panel-default"
     div class="panel-body"
         .row
             -if @fornecedor.pessoa.estado_type == 'PessoaFisica'
-                .col-xs-2
+                .col-lg-6
+                    strong
+                        'Nome:
+                    = @fornecedor.pessoa.specific.nome
+                .col-lg-5
                     strong
                         'Cpf:
                     = @fornecedor.pessoa.specific.cpf
-                .col-xs-2
+                .col-lg-4
                     strong
                         'Rg:
                     = @fornecedor.pessoa.specific.rg
-                .col-xs-3
+                .col-lg-3
                      strong
                         'Data nascimento:
                      = @fornecedor.pessoa.specific.data_nascimento
             -else
-                .col-xs-3
+                .col-lg-6
+                    strong
+                        'Razão social:
+                    = @fornecedor.pessoa.specific.nome
+                .col-lg-5
                     strong
                         'CNPJ:
                     = @fornecedor.pessoa.specific.cnpj
-                .col-xs-3
+                .col-lg-6
+                    strong
+                        'Nome fantasia:
+                    = @fornecedor.pessoa.specific.nome_fantasia
+                .col-lg-5
                     strong
                         'Inscricao estadual:
                     = @fornecedor.pessoa.specific.inscricao_estadual
-                .col-xs-3
+                .col-lg-3
                      strong
                         'Data abertura:
                      = @fornecedor.pessoa.specific.data_abertura
 
-        br
-        == render partial: 'pessoas/show', locals: {pessoa: @fornecedor.pessoa}
+        
+== render partial: 'pessoas/show', locals: {pessoa: @fornecedor.pessoa}
 
 - if !@fornecedor.produtos.blank?
     .row
         .col-lg-7
             div class="panel panel-default"
                 div class="panel-body"
-                    .col-xs-6
+                    .col-lg-6
                         h4
                             'Alguns produtos deste fornecedor
-                    .col-xs-6
+                    .col-lg-6
                         = link_to 'Todos Produtos', produtos_path(fornecedor: @fornecedor.id), class: 'btn btn-warning btn-xs right'
                     table class="table table-striped"
                         thead

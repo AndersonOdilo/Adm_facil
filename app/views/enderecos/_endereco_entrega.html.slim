@@ -1,0 +1,29 @@
+div class="modal fade" id="entrega_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  div class="modal-dialog modal-lg"
+    div class="modal-content"
+      div class="modal-header"
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times
+        h2 class="modal-title" id="myModalLabel"
+          'Endereco de Entrega
+      div class="modal-body"
+        .row
+          strong Selecione uma opçao:
+          ul class="list-group"
+            .col-xs-12
+              - Cliente.find(cliente.to_i).pessoa.enderecos.each do |endereco|
+                  li class="list-group-item"
+                    = radio_button("pedido", "endereco", endereco.id)
+                    = "Logradouro: #{endereco.logradouro.nome},
+                     Nº #{endereco.numero},
+                     Complemento: #{endereco.complemento},
+                      Bairro: #{endereco.bairro},
+                      Cidade: #{endereco.cidade} - #{endereco.estado} - #{endereco.pais} "
+
+      div class="modal-footer"
+        button type="button" class="btn btn-default" data-dismiss="modal"
+          'Fechar
+        = link_to 'Finalizar', '#', class: "btn btn-success", id: 'finalizar_pagamento'
+
+
+

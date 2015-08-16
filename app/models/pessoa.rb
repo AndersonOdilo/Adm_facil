@@ -12,22 +12,9 @@ class Pessoa < ActiveRecord::Base
     before_save :remover_nulos
 
     def remover_nulos
-        self.fones.each do |fone|
-            if fone.numero == ""
-                fone.destroy
-            end
-        end
-         self.emails.each do |email|
-            if email.descricao == ""
-                email.destroy
-            end
-        end
-         self.enderecos.each do |endereco|
-            if endereco.logradouro == nil
-                endereco.destroy
-            end
-        end
-
+        self.fones.select{|fone| fone.numero.blank?}.collect{|fone| fone.destroy}
+        self.emails.select{|email| email.descricao.blank?}.collect{|email| email.destroy}
+        self.enderecos.select{|endereco| endereco.blank?}.collect{|endereco| endereco.destroy}
     end
 
 end

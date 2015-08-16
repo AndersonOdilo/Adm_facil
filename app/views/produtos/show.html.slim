@@ -1,54 +1,52 @@
 .page-header
-    .row
-        .col-lg-8
-            h1 Produto
-        .col-lg-4
-          br
-          = link_to 'Editar', edit_produto_path(@produto), class: 'btn btn-warning right'
+  .row
+    .col-lg-8
+      h1 Produto
+    .col-lg-4
+      br
+      = link_to 'Editar', edit_produto_path(@produto), class: 'btn btn-warning right'
 
 div class="panel panel-default"
-    div class="panel-body"
+  div class="panel-body"
+    .row
+      .col-lg-5
+        strong
+          'Cod:
+        = @produto.cod
+      .col-lg-7
+        strong
+          'Nome:
+        = @produto.nome
 
-      .row
-        .col-xs-3
-          strong
-            'Cod:
-          = @produto.cod
-        .col-xs-4
-          strong
-            'Nome:
-          = @produto.nome
-        .col-xs-5
-          strong
-            'Descriçao:
-          = @produto.descricao
+    .row
+      .col-lg-5
+        strong
+          'Marca:
+        = @produto.marca.nome
+      .col-lg-7
+        strong
+          'Descriçao:
+        = @produto.descricao
+    .row
+      .col-lg-5
+        strong
+          'Categoria produto:
+        = @produto.categoria_produto.descricao
+      .col-lg-7
+        strong
+          'Fornecedor:
+        = link_to @produto.fornecedor.nome, fornecedor_path(@produto.fornecedor)
 
-      br
-      .row
-        .col-xs-3
-          strong
-            'Marca:
-          = @produto.marca.nome
-        .col-xs-4
-          strong
-            'Categoria produto:
-          = @produto.categoria_produto.descricao
-        .col-xs-3
-          strong
-            'Fornecedor:
-          = link_to @produto.fornecedor.nome, fornecedor_path(@produto.fornecedor)
-
-      br
-      .row
-        .col-xs-3
-          strong
-            'Valor custo:
-          = number_to_currency(@produto.valor_custo, unit: 'R$', separator: ",", delimiter: ".")
-        .col-xs-4
-          strong
-            'Valor venda:
-          = number_to_currency(@produto.valor_venda, unit: 'R$', separator: ",", delimiter: ".")
-        .col-xs-3
-          strong
-            'Quantidade estoque:
-          = "#{@produto.quantidade_estoque} #{@produto.unidade.sigla}"
+    .row
+      .col-lg-5
+        strong
+          'Quantidade estoque:
+        = "#{@produto.quantidade_estoque} #{@produto.unidade.sigla}"
+      .col-lg-3
+        strong
+          'Valor custo:
+        = number_to_currency(@produto.valor_custo, unit: 'R$', separator: ",", delimiter: ".")
+      .col-lg-4
+        strong
+          'Valor venda:
+        = number_to_currency(@produto.valor_venda, unit: 'R$', separator: ",", delimiter: ".")

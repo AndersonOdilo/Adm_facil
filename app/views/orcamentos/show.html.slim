@@ -1,80 +1,81 @@
 .page-header
-    .row
-        .col-lg-8
-            h1 Orcamento
-        .col-lg-4
-          br
-          = link_to 'Imprimir', orcamento_path(@orcamento, format: 'pdf'), class: 'btn btn-warning btn-md right', target: "_blank"
+  .row
+    .col-lg-10
+      h1 Orcamento
+    .col-lg-2
+      br
+      = link_to 'Imprimir', orcamento_path(@orcamento, format: 'pdf'), class: 'btn btn-warning btn-md right', target: "_blank"
 
 div class="panel panel-default"
-    div class="panel-body"
-        h2
-          -if @orcamento.cliente
-            =link_to @orcamento.cliente.pessoa.nome, "/clientes/#{@orcamento.cliente.id}"
-        .row
-          .col-xs-4
-            strong
-              'Funcionario:
-            = @orcamento.funcionario.pessoa.specific.nome
-          .col-xs-4
-            strong
-              'fone:
-            = @orcamento.funcionario.pessoa.fones.first.numero rescue ''
+  div class="panel-body"
+    - if !@orcamento.cliente.nil?
+      .row
+        .col-lg-6
+          strong
+            'Cliente:
+          =link_to @orcamento.cliente.pessoa.nome, cliente_path(@orcamento.cliente.id)
+        .col-lg-4
+          strong
+            'Data emissao:
+          = @orcamento.data
+      .row
+        .col-lg-6
+          strong
+            'Funcionario:
+          = link_to @orcamento.funcionario.pessoa.specific.nome, funcionario_path(@orcamento.funcionario.id)
+        .col-lg-6
+          strong
+            'Data validade:
+          = @orcamento.data_validade
 
-        .row
-          .col-xs-4
-            strong
-              'Data emissao:
-            = @orcamento.data
-          .col-xs-4
-            strong
-              'Data validade:
-            = @orcamento.data_validade
+div class="panel panel-default"
+  div class="panel-body"
+    h3 class="panel-title"
+      'Itens Pedido
+    .table-responsive
+      table class="table table-striped"
+        thead
+          tr
+            th Cod.
+            th Nome
+            th Valor Unid.
+            th Quant.
+            th Unid.
+            th Valor Total
+        tbody id="itens"
+          - @orcamento.itens_orcamentos.each do |item|
+            tr
+              td = item.produto.cod
+              td ="#{item.produto.nome}, #{item.produto.marca.nome}"
+              td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
+              td = item.quantidade
+              td = item.produto.unidade.sigla
+              td = (number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: "."))
+  div class="panel-footer"
+    .row
+      - if @orcamento.desconto
+        .col-lg-4
+          h4
+            = "Desconto: #{number_to_percentage(@orcamento.desconto, precision: 0)}"
+        .col-lg-4
+          h4 class="right"
+            ="Total desc.  #{number_to_currency(@orcamento.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
+        .col-lg-3
+          h4 class="right"
+            = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
+      - else
+        .col-lg-8
+        .col-lg-3
+          h4 class="right"
+            = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
 
-        br
-        div class="panel panel-default"
-          div class="panel-body"
-            h3 class="panel-title"
-              'Itens Pedido
-            #itens_pedido
-              table class="table table-striped"
-                thead
-                  tr
-                    th Cod.
-                    th Nome
-                    th Valor Unid.
-                    th Quant.
-                    th Unid.
-                    th Valor Total
-                tbody id="itens"
-                  - @orcamento.itens_orcamentos.each do |item|
-                    tr
-                      td = item.produto.cod
-                      td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-                      td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
-                      td = item.quantidade
-                      td = item.produto.unidade.sigla
-                      td = (number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: "."))
-          div class="panel-footer"
-            .row
-              - if @orcamento.desconto
-                .col-xs-4
-                  h4
-                    = "Desconto: #{number_to_percentage(@orcamento.desconto, precision: 0)}"
-                .col-xs-4
-                  h4 class="right"
-                    ="Total desc.  #{number_to_currency(@orcamento.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
-                .col-xs-3
-                  h4 class="right"
-                    = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
-              - else
-                .col-xs-8
-                .col-xs-3
-                  h4 class="right"
-                    = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
-
+- if !@orcamento.obs.blank?
+  .col-lg-5
+    div class="panel panel-default"
+      div class="panel-body"
         h4
-          'Observacoes:
+          'Observações
         p
-            = @orcamento.obs
+          = @orcamento.obs
+
 

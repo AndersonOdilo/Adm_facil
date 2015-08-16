@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pontos/registro'
+
   resources :despesas
 
   resources :pedidos
@@ -33,10 +35,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :pessoas_juridicas
-
-  resources :pessoas_fisicas
-
   resources :enderecos
 
   match 'estado/cidades/:id', to: "estados#buscar_cidades", via: [:get]
@@ -62,6 +60,8 @@ Rails.application.routes.draw do
   match 'despesas_pagamentos/efetuar_pagamento/:id', to: "despesas_pagamentos#efetuar_pagamento", via: [:get]
 
   match 'pedido/finalizar', to: "pedidos#finalizar", via: [:post]
+
+  match 'pontos/registrar', to: "pontos#save", via: [:post]
 
   root 'clientes#index'
 

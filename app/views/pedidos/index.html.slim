@@ -4,11 +4,11 @@
             h1 Vendas
         .col-lg-4
           br
-          = link_to 'Iniciar Venda', new_pedido_path, class: 'btn btn-primary btn-md right'
+          = link_to 'Iniciar Venda', new_pedido_path, class: 'btn btn-primary right'
 
 div class="panel panel-default"
   div class="panel-body"
-    table class="table table-hover"
+    table id="tabela" class="display" cellspacing="0" width="100%"
       thead
         tr
           th Cliente
@@ -25,8 +25,3 @@ div class="panel panel-default"
             td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
             td = venda.obs
             td = link_to 'Abrir', venda
-
-div class="digg_pagination"
-    div class="page_info"
-      = page_entries_info @pedido
-= will_paginate @pedido

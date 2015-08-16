@@ -7,7 +7,4 @@ class PessoaJuridica < ActiveRecord::Base
     validates_uniqueness_of :cnpj, allow_blank: true, message: 'ja existe'
     validates_uniqueness_of :inscricao_estadual, allow_blank: true, message: 'ja existe'
 
-    def nome
-        "#{self.acting_as.nome}, #{self.nome_fantasia}"
-    end
 end

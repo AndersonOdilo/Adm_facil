@@ -6,20 +6,12 @@ class Orcamento < ActiveRecord::Base
 
   accepts_nested_attributes_for :itens_orcamentos
 
-    def self.total_geral
-        total = 0
-        Orcamento.all.each do |orcamento|
-            total+= orcamento.total
-        end
-        return total
-    end
+  def self.total_geral
+      Orcamento.all.collect {|orcamento| orcamento.total}.sum
+  end
 
   def total
-    total = 0
-    self.itens_orcamentos.each do |item|
-      total += item.quantidade * item.preco.to_f
-    end
-    return total
+    self.itens_orcamentos.collect {|item| item.preco_total}.sum
   end
 
   def total_desconto

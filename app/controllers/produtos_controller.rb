@@ -3,22 +3,20 @@ class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def autocomplete
-    @produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
-    produtos = []
-    @produtos.each do |produto|
-      produtos <<  { value: produto.id, label: "#{produto.nome}, #{produto.marca.nome}", preco: number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: "."),
-        quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}
-    end
-    render json: produtos
+    produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
+    produtos_json = []
+    produtos.collect{|produto|  produtos_json <<  { value: produto.id, label: "#{produto.nome}, #{produto.marca.nome}", preco: number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: "."),
+        quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}}
+    render json: produtos_json
   end
 
   # GET /produtos
   # GET /produtos.json
   def index
     if params[:fornecedor]
-      @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).fornecedor(params[:fornecedor]).paginate(page: params[:page], per_page: 10)
+      @produtos = Produto.all.includes(:marca, :fornecedor, :categoria_produto).fornecedor(params[:fornecedor])
     else
-      @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).paginate(page: params[:page], per_page: 10)
+      @produtos = Produto.all.includes(:marca, :fornecedor, :categoria_produto)
     end
   end
 

@@ -2,7 +2,7 @@
     .row
         .col-lg-8
             h1
-                = @funcionario.pessoa.specific.nome
+                'Funcionario
         .col-lg-4
           br
           = link_to 'Editar', edit_funcionario_path(@funcionario), class: 'btn btn-warning right'
@@ -10,63 +10,67 @@
 div class="panel panel-default"
     div class="panel-body"
         .row
-            .col-xs-2
+            .col-lg-7 
+                strong
+                    'Nome:
+                = @funcionario.pessoa.specific.nome
+            .col-lg-5
                  strong
                     'Codigo:
                  = @funcionario.cod
-            .col-xs-4
-                strong
-                    'Cargo:
-                = @funcionario.cargo.descricao
-            .col-xs-3
-                strong
-                    'Carteira Trabalho:
-                = @funcionario.carteira_trabalho
-            .col-xs-3
-                strong
-                    'Carga horaria:
-                = @funcionario.carga_horaria
-        br
         .row
-            .col-xs-2
-                strong
-                    'Salario:
-                = "R$ #{@funcionario.salario}"
-
             -if @funcionario.pessoa.estado_type == 'PessoaFisica'
-                .col-xs-2
+                .col-lg-3
                     strong
                         'Cpf:
                     = @funcionario.pessoa.specific.cpf
-                .col-xs-2
+                .col-lg-4
                     strong
                         'Rg:
                     = @funcionario.pessoa.specific.rg
-                .col-xs-3
+                .col-lg-3
                      strong
                         'Data nascimento:
                      = @funcionario.pessoa.specific.data_nascimento
             - else
-                .col-xs-3
+                .col-lg-3
                     strong
                         'CNPJ:
                     = @funcionario.pessoa.specific.cnpj
-                .col-xs-3
+                .col-lg-4
                     strong
                         'Inscricao estadual:
                     = @funcionario.pessoa.specific.inscricao_estadual
-                .col-xs-3
+                .col-lg-3
                     strong
                         'Data abertura:
                     = @funcionario.pessoa.specific.data_abertura
 
-            .col-xs-3
+        .row
+            .col-lg-3
+                strong
+                    'Salario:
+                = number_to_currency(@funcionario.salario, unit: 'R$', separator: ",", delimiter: ".")
+            .col-lg-4
                 strong
                     'Data admissao:
                 = @funcionario.data_admissao
+            .col-lg-4
+                strong
+                    'Carteira de Trabalho:
+                = @funcionario.carteira_trabalho
+        .row
+            .col-lg-3
+                strong
+                    'Cargo:
+                = @funcionario.cargo.descricao
+           
+            .col-lg-3
+                strong
+                    'Carga horaria:
+                = @funcionario.carga_horaria
 
-        br
-        == render partial: 'pessoas/show', locals: {pessoa: @funcionario.pessoa}
+== render partial: 'pessoas/show', locals: {pessoa: @funcionario.pessoa}
 
 - if !@funcionario.pedidos.blank?
     .row
@@ -92,4 +96,27 @@ div class="panel panel-default"
                                 td = venda.data
                                 td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
                                 td = link_to 'Abrir', pedido_path(venda)
+
+      .col-lg-5
+          div class="panel panel-default"
+                div class="panel-body"
+                    .col-xs-6
+                        h4
+                            'Ultimos pontos
+                    .col-xs-6
+                        = link_to 'Todos Pontos', pedidos_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs right'
+                    table class="table table-striped"
+                        thead
+                            tr
+                                th Entrada.
+                                th Saida.
+                        tbody
+                            - @funcionario.pontos.order('pontos.created_at desc').limit(5).each do |ponto|
+                                tr
+                                    td = "#{ponto.data_entrada} #{ponto.hora_entrada}"
+                                    td = "#{ponto.data_saida} #{ponto.hora_saida}"
+
+
+
+
 

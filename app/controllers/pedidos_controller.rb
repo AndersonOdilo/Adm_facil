@@ -3,12 +3,9 @@ class PedidosController < ApplicationController
   before_action :set_pedido, only: [:show, :edit, :update, :destroy]
 
   def add_item
-    item_pedido = ItemPedido.new
     produto = Produto.find(params[:produto])
     if produto.quantidade_estoque >= params[:quantidade].to_i
-      item_pedido.produto_id = produto.id
-      item_pedido.preco = produto.valor_venda
-      item_pedido.quantidade = params[:quantidade]
+      item_pedido = ItemPedido.new(produto_id: produto.id, preco: produto.valor_venda, quantidade: params[:quantidade])
       session[:sub_total_venda] = session[:sub_total_venda].to_f + item_pedido.preco_total
       render locals: {item_pedido: item_pedido, sub_total: session[:sub_total_venda].to_f }
     else
@@ -23,8 +20,7 @@ class PedidosController < ApplicationController
   end
 
   def calcular_parcela
-    valor_parcela = (session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i
-    valor_parcela.round(2)
+    valor_parcela = ((session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i).round(2)
     render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json
   end
 
@@ -34,34 +30,32 @@ class PedidosController < ApplicationController
   end
 
   def finalizar
-      if session[:sub_total_venda].to_f > 0
-        if params[:cliente] != ""
-          if params[:forma_pagamento].to_i == 5
-            if Cliente.find(params[:cliente]).limite_credito >= session[:sub_total_venda].to_f
-              render 'pagamento', locals: {entrega: params[:entrega]}
-            else
-              render 'erro', locals: {msg: 'Nao limite' }
-            end
-          else
-            render 'finalizar', locals: {entrega: params[:entrega]}
-          end
+    if !params[:cliente].blank? and session[:sub_total_venda].to_f > 0 
+      if params[:forma_pagamento].to_i == 2
+        if Cliente.find(params[:cliente]).limite_credito >= session[:sub_total_venda].to_f 
+          render 'pagamento', locals: {entrega: params[:entrega], cliente: params[:cliente]}
         else
-          render 'erro', locals: {msg: 'Busque ou cadastre um cliente' }
+          render 'erro', locals: {msg: 'Não a limite' }
         end
+      elsif params[:entrega].to_i == 2
+        render 'endereco_entrega', locals: {cliente: params[:cliente]}
       else
-        render 'erro', locals: {msg: 'Adicione produtos ao pedido.'}
+        render 'finalizar', locals: {entrega: params[:entrega]}
       end
+    else
+      render 'erro', locals: {msg: 'Busque ou cadastre um cliente, ou adicione intens ao pedido' }
+    end
   end
 
   # GET /pedidos
   # GET /pedidos.json
   def index
     if params[:cliente]
-      @pedido = Pedido.includes(cliente: [:pessoa]).cliente(params[:cliente]).paginate(page: params[:page], per_page: 10).order("pedidos.created_at desc")
+      @pedido = Pedido.all.includes(cliente: [:pessoa]).cliente(params[:cliente]).order("pedidos.created_at desc")
     elsif params[:funcionario]
-      @pedido = Pedido.includes(cliente: [:pessoa]).funcionario(params[:funcionario]).paginate(page: params[:page], per_page: 10).order("pedidos.created_at desc")
+      @pedido = Pedido.all.includes(cliente: [:pessoa]).funcionario(params[:funcionario]).order("pedidos.created_at desc")
     else
-      @pedido = Pedido.includes(cliente: [:pessoa]).paginate(page: params[:page], per_page: 10).order("pedidos.created_at desc")
+      @pedido = Pedido.all.includes(cliente: [:pessoa]).order("pedidos.created_at desc")
     end
   end
 

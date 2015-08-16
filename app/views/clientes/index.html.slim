@@ -1,14 +1,14 @@
 .page-header
-    .row
-        .col-lg-8
-            h1 Clientes
-        .col-lg-4
-          br
-          = link_to 'Cadastrar Cliente', new_cliente_path, class: "btn btn-primary btn-md right"
+  .row
+    .col-lg-8
+      h1 Clientes
+    .col-lg-4
+      br
+      = link_to 'Cadastrar Cliente', new_cliente_path, class: "btn btn-primary btn-sm right"
 
 div class="panel panel-default"
   div class="panel-body"
-    table class="table  table-hover"
+    table id="tabela" class="display" cellspacing="0" width="100%"
       thead
         tr
           th Nome
@@ -28,9 +28,3 @@ div class="panel panel-default"
             td = (number_to_currency(cliente.limite_credito, unit: 'R$', separator: ",", delimiter: "."))
             td = link_to 'Abrir', cliente
             td = link_to 'Excluir', cliente, data: {:confirm => "Deseja excluir o cliente #{cliente.pessoa.nome}?"}, :method => :delete
-
-div class="digg_pagination"
-    div class="page_info"
-      = page_entries_info @clientes
-= will_paginate @clientes
-

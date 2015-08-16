@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data_entrada: 2015-06-15
+  hora_entrada: 2015-06-15 13:45:07
+  data_saida: 2015-06-15
+  hora_saida: 2015-06-15 13:45:07
+  funcionario_id: 
+
+two:
+  data_entrada: 2015-06-15
+  hora_entrada: 2015-06-15 13:45:07
+  data_saida: 2015-06-15
+  hora_saida: 2015-06-15 13:45:07
+  funcionario_id: 

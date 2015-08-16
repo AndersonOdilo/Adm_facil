@@ -2,18 +2,16 @@ class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
   def autocomplete
-    @clientes = Cliente.joins("LEFT OUTER JOIN pessoas on pessoa_id = pessoas.id where (pessoas.nome ILIKE '#{params[:term]}%')")
-    clientes = []
-    @clientes.each do |cliente|
-      clientes <<  { value: cliente.id , label: cliente.pessoa.specific.nome}
-    end
-    render json: clientes
+    clientes = Cliente.joins("LEFT OUTER JOIN pessoas on pessoa_id = pessoas.id where (pessoas.nome ILIKE '#{params[:term]}%')")
+    clientes_json = []
+    clientes.collect{|cliente| clientes_json <<  { value: cliente.id , label: cliente.pessoa.specific.nome}}
+    render json: clientes_json
   end
 
   # GET /clientes
   # GET /clientes.json
   def index
-    @clientes = Cliente.includes(:pessoa).paginate(page: params[:page], per_page: 10)
+    @clientes = Cliente.all.includes(:pessoa)
   end
 
   # GET /clientes/1

@@ -8,7 +8,7 @@ class Pedido < ActiveRecord::Base
 
   accepts_nested_attributes_for :itens_pedidos
 
-  before_save :baixar_estoque
+  after_save :baixar_estoque
 
   scope :cliente, ->(id) {where(cliente_id: id)}
   scope :funcionario, ->(id) {where(funcionario_id: id)}
@@ -38,15 +38,15 @@ class Pedido < ActiveRecord::Base
         pagamento.data_pagamento = Date.today
         pagamento.valor = entrada
         self.pagamentos_vendas << pagamento
-        total = total - entrada
+        total -= entrada
       end
       data = Date.today
       valor_parcela =  total  / numero_parcelas
       for i in 1..numero_parcelas
         pagamento = PagamentoVenda.new
         pagamento.numero_parcela = i
-        pagamento.data_vencimento = data + intervalo_parcela.day
-        data = data + intervalo_parcela.day
+        data += intervalo_parcela.day
+        pagamento.data_vencimento = data
         pagamento.valor = valor_parcela
         self.pagamentos_vendas << pagamento
       end
@@ -60,19 +60,11 @@ class Pedido < ActiveRecord::Base
   end
 
   def self.total_geral
-    total = 0
-    Pedido.all.each do |venda|
-      total += venda.total
-    end
-    return total
+    Pedido.all.collect {|pedido| pedido.total}.sum
   end
 
   def total
-    total = 0
-    self.itens_pedidos.each do |item|
-      total += item.quantidade * item.preco.to_f
-    end
-    return total
+    self.itens_pedidos.collect {|item| item.preco_total}.sum
   end
 
   def total_desconto

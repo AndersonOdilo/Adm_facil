@@ -2,7 +2,7 @@
     .row
         .col-lg-8
             h1
-                = @cliente.pessoa.specific.nome
+                'Cliente
         .col-lg-4
           br
           = link_to 'Editar', edit_cliente_path(@cliente), class: 'btn btn-warning right'
@@ -11,38 +11,50 @@ div class="panel panel-default"
     div class="panel-body"
         .row
             -if @cliente.pessoa.estado_type == 'PessoaFisica'
-                .col-xs-2
+                .col-lg-7
+                    strong
+                        'Nome:
+                    = @cliente.pessoa.specific.nome
+                .col-lg-5
                     strong
                         'Cpf:
                     = @cliente.pessoa.specific.cpf
-                .col-xs-2
+                .col-lg-4
                     strong
                         'Rg:
                     = @cliente.pessoa.specific.rg
-                .col-xs-3
+                .col-lg-3
                      strong
                         'Data nascimento:
                      = @cliente.pessoa.specific.data_nascimento
             -else
-                .col-xs-3
+                .col-lg-6
+                    strong
+                        'Razão Social:
+                    = @cliente.pessoa.specific.nome
+                .col-lg-3
                     strong
                         'CNPJ:
                     = @cliente.pessoa.specific.cnpj
-                .col-xs-3
+                .col-lg-6
+                    strong
+                        'Nome fantasia:
+                    = @cliente.pessoa.specific.nome_fantasia
+                .col-lg-6
                     strong
                         'Inscricao estadual:
                     = @cliente.pessoa.specific.inscricao_estadual
-                .col-xs-3
+                .col-lg-6
                      strong
                         'Data abertura:
                      = @cliente.pessoa.specific.data_abertura
-            .col-xs-3
+            .col-lg-3
                 strong
                     'Limite credito:
                 = number_to_currency(@cliente.limite_credito, unit: 'R$', separator: ",", delimiter: ".")
 
-        br
-        == render partial: 'pessoas/show', locals: {pessoa: @cliente.pessoa}
+        
+== render partial: 'pessoas/show', locals: {pessoa: @cliente.pessoa}
 
 .row
   - if !PagamentoVenda.vencido(@cliente.id).blank?
@@ -61,18 +73,18 @@ div class="panel panel-default"
                             th
                             th
                     tbody
-                            - PagamentoVenda.vencido(@cliente.id).each do |pagamento|
-                              tr class="danger" id="tr_#{pagamento.id}"
-                                td = pagamento.numero_parcela
-                                td = pagamento.data_vencimento
-                                td id="data_pagamento_#{pagamento.id}"
-                                  = pagamento.data_pagamento
-                                td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
-                                td
-                                    = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
-                                       data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
-                                       remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
-                                td = link_to "Pedido", venda_path(pagamento.venda.id), class: "btn btn-default btn-xs"
+                        - PagamentoVenda.vencido(@cliente.id).each do |pagamento|
+                          tr class="danger" id="tr_#{pagamento.id}"
+                            td = pagamento.numero_parcela
+                            td = pagamento.data_vencimento
+                            td id="data_pagamento_#{pagamento.id}"
+                              = pagamento.data_pagamento
+                            td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
+                            td
+                                = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
+                                   data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
+                                   remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
+                            td = link_to "Pedido", venda_path(pagamento.venda.id), class: "btn btn-default btn-xs"
 
   .col-lg-5
     div class="panel panel-default"

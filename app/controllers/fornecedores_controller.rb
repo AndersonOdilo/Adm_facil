@@ -4,7 +4,7 @@ class FornecedoresController < ApplicationController
   # GET /fornecedores
   # GET /fornecedores.json
   def index
-    @fornecedores = Fornecedor.includes(:pessoa).paginate(page: params[:page], per_page: 10)
+    @fornecedores = Fornecedor.all.includes(:pessoa)
   end
 
   # GET /fornecedores/1

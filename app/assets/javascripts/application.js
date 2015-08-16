@@ -1,31 +1,18 @@
-  // This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
-//
+
 //= require jquery
 //= require jquery-ui.min
 //= require jquery_ujs
 //= require jquery.mask.min
 //= require jquery-price.min
 //= require jquery.validate.min
+//= require jquery.dataTables
 //= require jquery.turbolinks
 //= require turbolinks
 //= require cocoon
 //= require_tree .
 //= require bootstrap.min
 
-
-var ready;
-ready = (function() {
-
+var ready = (function() {
   jQuery.extend(jQuery.validator.messages, {
         required: "Campo obrigatorio.",
         remote: "Please fix this field.",
@@ -47,11 +34,38 @@ ready = (function() {
   });
 
   $(document).on('cocoon:after-insert', function(e, insertedItem) {
-    $(".cpf").mask("999.999.999-99")
-    $(".rg").mask("99.999.999-9")
-    $(".fone").mask("(99)9999-9999")
+    $(".cpf").mask("999.999.999-99");
+    $(".rg").mask("99.999.999-9");
+    $(".fone").mask("(99)9999-9999");
     $(".cnpj").mask("99.999.999/9999-99");
-    $(".inscricao_estadual").mask("99999999-99")
+    $(".inscricao_estadual").mask("99999999-99");
+  });
+
+  $('#tabela').DataTable({
+    "language": {
+        "sEmptyTable": "Nenhum registro encontrado",
+        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sInfoThousands": ".",
+        "sLengthMenu": "_MENU_ resultados por página",
+        "sLoadingRecords": "Carregando...",
+        "sProcessing": "Processando...",
+        "sZeroRecords": "Nenhum registro encontrado",
+        "sSearch": "Pesquisar",
+        "oPaginate": {
+            "sNext": "Próximo",
+            "sPrevious": "Anterior",
+            "sFirst": "Primeiro",
+            "sLast": "Último"
+        },
+        "oAria": {
+            "sSortAscending": ": Ordenar colunas de forma ascendente",
+            "sSortDescending": ": Ordenar colunas de forma descendente"
+        }
+    },
+    "bDestroy": true
   });
 
 });

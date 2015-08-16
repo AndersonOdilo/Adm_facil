@@ -4,7 +4,7 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios
   # GET /funcionarios.json
   def index
-    @funcionarios = Funcionario.includes(:pessoa).paginate(page: params[:page], per_page: 10)
+    @funcionarios = Funcionario.all.includes(:pessoa)
   end
 
   # GET /funcionarios/1
@@ -27,11 +27,7 @@ class FuncionariosController < ApplicationController
   # POST /funcionarios.json
   def create
     @funcionario = Funcionario.new
-    if params[:type] == "PessoaFisica"
-      @funcionario.pessoa = PessoaFisica.new
-    else
-      @funcionario.pessoa = PessoaJuridica.new
-    end
+    @funcionario.pessoa = PessoaFisica.new
     @funcionario.update(funcionario_params)
 
     respond_to do |format|

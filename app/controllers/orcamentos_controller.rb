@@ -1,13 +1,10 @@
-class OrcamentosController < ApplicationController
+  class OrcamentosController < ApplicationController
   include ActionView::Helpers::NumberHelper
   before_action :set_orcamento, only: [:show, :edit, :update, :destroy]
 
   def add_item
-    item_orcamento = ItemOrcamento.new
     produto = Produto.find(params[:produto])
-    item_orcamento.produto_id = produto.id
-    item_orcamento.preco = produto.valor_venda
-    item_orcamento.quantidade = params[:quantidade]
+    item_orcamento = ItemOrcamento.new(produto_id: produto.id, preco: produto.valor_venda, quantidade: params[:quantidade])
     session[:sub_total] = session[:sub_total].to_f + item_orcamento.preco_total
     render locals: {item_orcamento: item_orcamento, sub_total: session[:sub_total] }
   end
@@ -26,7 +23,7 @@ class OrcamentosController < ApplicationController
   # GET /orcamentos
   # GET /orcamentos.json
   def index
-    @orcamentos = Orcamento.includes(cliente: [:pessoa]).paginate(page: params[:page], per_page: 10).order("orcamentos.created_at desc")
+    @orcamentos = Orcamento.all.includes(cliente: [:pessoa]).order("orcamentos.created_at desc")
   end
 
   # GET /orcamentos/1
