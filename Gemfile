@@ -25,7 +25,6 @@ gem 'has_scope'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'coffee-script-source', '1.8.0'
 gem 'rails_admin'
-gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
