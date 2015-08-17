@@ -79,4 +79,4 @@ div class="panel panel-default"
                                     td = produto.descricao
                                     td = produto.marca.nome
                                     td = number_to_currency(produto.valor_custo, unit: 'R$', separator: ",", delimiter: ".")
-                                    td = link_to 'Abrir', produto_path(produto.id)
+                                    td = link_to 'Abrir', produto_path(produto.id), class: 'btn btn-primary btn-xs'

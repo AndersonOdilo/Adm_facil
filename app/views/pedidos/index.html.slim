@@ -1,27 +1,26 @@
 .page-header
-    .row
-        .col-lg-8
-            h1 Vendas
-        .col-lg-4
-          br
-          = link_to 'Iniciar Venda', new_pedido_path, class: 'btn btn-primary right'
+  .row
+    .col-lg-8
+      h1 Vendas
+    .col-lg-4
+      br
+      = link_to 'Iniciar Venda', new_pedido_path, class: 'btn btn-primary right'
 
-div class="panel panel-default"
-  div class="panel-body"
-    table id="tabela" class="display" cellspacing="0" width="100%"
-      thead
-        tr
-          th Cliente
-          th Data
-          th Total
-          th Obs
-          th
 
-      tbody
-        - @pedido.each do |venda|
-          tr
-            td = venda.cliente.pessoa.specific.nome rescue ""
-            td = venda.data
-            td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
-            td = venda.obs
-            td = link_to 'Abrir', venda
+table id="tabela" class="display" cellspacing="0" width="100%"
+  thead
+    tr
+      th Cliente
+      th Data 
+      th Total
+      th Observação
+      th
+
+  tbody
+    - @pedido.each do |venda|
+      tr
+        td = venda.cliente.pessoa.specific.nome rescue ""
+        td = venda.data
+        td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
+        td = venda.obs
+        td = link_to 'Abrir', venda, class: 'btn btn-primary btn-xs'

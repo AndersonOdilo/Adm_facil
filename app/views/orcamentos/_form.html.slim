@@ -20,7 +20,7 @@
       .row
         .col-lg-2
           .form-group
-            = f.label :data
+            = f.label 'Data emissão'
             = f.date_field :data, class:  'form-control input-sm', value: Time.now.strftime('%Y-%m-%d')
         .col-lg-2
           .form-group

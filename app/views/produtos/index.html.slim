@@ -1,39 +1,36 @@
 .page-header
-    .row
-        .col-lg-8
-            h1 Produtos
-        .col-lg-4
-          br
-          = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-primary right'
+  .row
+    .col-lg-8
+      h1 Produtos
+    .col-lg-4
+      br
+      = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-primary right'
 
-div class="panel panel-default"
-  div class="panel-body"
-    table id="tabela" class="display" cellspacing="0" width="100%"
-      thead
+.table-responsive
+  table id="tabela" class="display" cellspacing="0" width="100%"
+    thead
+      tr
+        th Cod
+        th Nome
+        th Descrição
+        th Valor venda
+        th Marca
+        th Categoria produto
+        th Fornecedor
+        th
+        th
+        th
+
+    tbody
+      - @produtos.order("quantidade_estoque desc").each do |produto|
         tr
-          th Cod
-          th Nome
-          th Descricao
-          th Valor custo
-          th Valor venda
-          th Marca
-          th Categoria produto
-          th Fornecedor
-          th
-          th
-          th
-
-      tbody
-        - @produtos.order("quantidade_estoque desc").each do |produto|
-          tr
-            td = produto.cod
-            td = produto.nome
-            td = produto.descricao
-            td = number_to_currency(produto.valor_custo, unit: 'R$', separator: ",", delimiter: ".")
-            td = number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: ".")
-            td = produto.marca.nome
-            td = produto.categoria_produto.descricao
-            td = produto.fornecedor.pessoa.nome
-            td = link_to 'Abrir', produto
-            td = link_to 'Edit', edit_produto_path(produto)
-            td = link_to 'Excluir', produto, data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete
+          td = produto.cod
+          td = produto.nome
+          td = produto.descricao
+          td = number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: ".")
+          td = produto.marca.nome
+          td = produto.categoria_produto.descricao
+          td = produto.fornecedor.pessoa.nome
+          td = link_to 'Abrir', produto, class: 'btn btn-primary btn-xs'
+          td = link_to 'Edit', edit_produto_path(produto), class: 'btn btn-warning btn-xs'
+          td = link_to 'Excluir', produto, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete

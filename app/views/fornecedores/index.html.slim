@@ -1,28 +1,30 @@
 .page-header
-    .row
-        .col-lg-8
-            h1 Fornecedores
-        .col-lg-4
-          br
-          = link_to 'Cadastrar Fornecedor', new_fornecedor_path, class: "btn btn-primary right"
+  .row
+    .col-lg-8
+      h1 Fornecedores
+    .col-lg-4
+      br
+      = link_to 'Cadastrar Fornecedor', new_fornecedor_path, class: "btn btn-primary right"
 
-div class="panel panel-default"
-  div class="panel-body"
-    table id="tabela" class="display" cellspacing="0" width="100%"
-      thead
-        tr
-          th Nome
-          th CPF/CNPJ
-          th
-          th
 
-      tbody
-        - @fornecedores.each do |fornecedor|
-          tr
-            td = fornecedor.pessoa.specific.nome
-            - if fornecedor.pessoa.estado_type == 'PessoaJuridica'
-              td = fornecedor.pessoa.specific.cnpj
-            - else
-              td = fornecedor.pessoa.specific.cpf
-            td = link_to 'abrir', fornecedor
-            td = link_to 'Excluir', fornecedor, data: {:confirm => "Deseja excluir o fornecedor #{fornecedor.pessoa.nome}?"}, :method => :delete
+table id="tabela" class="display" cellspacing="0" width="100%"
+  thead
+    tr
+      th Nome
+      th CPF/CNPJ
+      th RG/IE
+      th
+      th
+
+  tbody
+    - @fornecedores.each do |fornecedor|
+      tr
+        - if fornecedor.pessoa.estado_type == 'PessoaJuridica'
+          td #{fornecedor.pessoa.specific.nome}, #{fornecedor.pessoa.specific.nome_fantasia}
+          td = fornecedor.pessoa.specific.cnpj
+          td = fornecedor.pessoa.specific.inscricao_estadual
+        - else
+          td = fornecedor.pessoa.specific.cpf
+          td = fornecedor.pessoa.specific.rg
+        td = link_to 'abrir', fornecedor, class: 'btn btn-primary btn-xs'
+        td = link_to 'Excluir', fornecedor, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o fornecedor #{fornecedor.pessoa.nome}?"}, :method => :delete

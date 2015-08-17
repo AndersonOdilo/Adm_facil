@@ -1,29 +1,30 @@
 .page-header
   .row
-      .col-lg-8
-          h1 Orçamentos
-      .col-lg-4
-        br
-        = link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-primary right'
+    .col-lg-8
+      h1 Orçamentos
+    .col-lg-4
+      br
+      = link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-primary right'
 
-div class="panel panel-default"
-  div class="panel-body"
-    table id="tabela" class="display" cellspacing="0" width="100%"
-      thead
-        tr
-          th Cliente
-          th Data
-          th Total
-          th Obs
-          th
-          th
 
-      tbody
-        - @orcamentos.each do |orcamento|
-          tr
-            td = orcamento.cliente.pessoa.specific.nome rescue ""
-            td = orcamento.data
-            td = number_to_currency(orcamento.total, unit: 'R$', separator: ",", delimiter: ".")
-            td = orcamento.obs
-            td = link_to 'Abrir', orcamento
-            td = link_to 'Excluir', orcamento, data: {:confirm => 'Are you sure?'}, :method => :delete
+table id="tabela" class="display" cellspacing="0" width="100%"
+  thead
+    tr
+      th Cliente
+      th Data emissão
+      th Data validade
+      th Total
+      th Observação
+      th
+      th
+
+  tbody
+    - @orcamentos.each do |orcamento|
+      tr
+        td = orcamento.cliente.pessoa.specific.nome rescue ""
+        td = orcamento.data
+        td = orcamento.data_validade
+        td = number_to_currency(orcamento.total, unit: 'R$', separator: ",", delimiter: ".")
+        td = orcamento.obs
+        td = link_to 'Abrir', orcamento, class: 'btn btn-primary btn-xs'
+        td = link_to 'Excluir', orcamento, class: 'btn btn-danger btn-xs', data: {:confirm => 'Are you sure?'}, :method => :delete

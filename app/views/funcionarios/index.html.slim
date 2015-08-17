@@ -6,27 +6,26 @@
           br
           = link_to 'Cadastrar Funcionario', new_funcionario_path, class: "btn btn-primary right"
 
-div class="panel panel-default"
-  div class="panel-body"
-    table id="tabela" class="display" cellspacing="0" width="100%"
-      thead
-        tr
-          th Cod
-          th Nome
-          th CPF
-          th Data admissao
-          th
-          th
 
-      tbody
-        - @funcionarios.each do |funcionario|
-          tr
-            td = funcionario.cod
-            td = funcionario.pessoa.specific.nome
-            - if funcionario.pessoa.estado_type == "PessoaFisica"
-              td = funcionario.pessoa.specific.cpf
-            - else
-              td = funcionario.pessoa.specific.cnpj
-            td = funcionario.data_admissao
-            td = link_to 'Abrir', funcionario
-            td = link_to 'Excluir', funcionario, data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete
+table id="tabela" class="display" cellspacing="0" width="100%"
+  thead
+    tr
+      th Cod
+      th Nome
+      th CPF
+      th Data admissao
+      th
+      th
+
+  tbody
+    - @funcionarios.each do |funcionario|
+      tr
+        td = funcionario.cod
+        td = funcionario.pessoa.specific.nome
+        - if funcionario.pessoa.estado_type == "PessoaFisica"
+          td = funcionario.pessoa.specific.cpf
+        - else
+          td = funcionario.pessoa.specific.cnpj
+        td = funcionario.data_admissao
+        td = link_to 'Abrir', funcionario, class: 'btn btn-primary btn-xs'
+        td = link_to 'Excluir', funcionario, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete

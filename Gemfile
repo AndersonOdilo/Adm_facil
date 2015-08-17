@@ -15,7 +15,6 @@ gem 'jquery-turbolinks'
 gem 'active_record-acts_as'
 gem 'nested_form'
 gem 'devise'
-gem 'will_paginate', '~> 3.0.6'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem "chartkick"
@@ -25,6 +24,8 @@ gem 'cocoon'
 gem 'has_scope'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'coffee-script-source', '1.8.0'
+gem 'rails_admin'
+gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
