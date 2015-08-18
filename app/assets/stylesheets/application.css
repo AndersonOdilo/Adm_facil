@@ -1,8 +1,8 @@
 /*
- *= require bootstrap.min
+ *= require bootstrap
  *= require jquery-ui.min
  *= require simple-sidebar
- *= require jquery.dataTables
+ *= require dataTables.bootstrap
  *= require_tree
  *= require_self
  */

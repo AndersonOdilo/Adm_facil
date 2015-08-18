@@ -6,6 +6,7 @@
 //= require jquery-price.min
 //= require jquery.validate.min
 //= require jquery.dataTables
+//= require dataTables.bootstrap
 //= require jquery.turbolinks
 //= require turbolinks
 //= require cocoon
