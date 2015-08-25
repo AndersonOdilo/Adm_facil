@@ -14,7 +14,7 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
       th RG/IE
       th Limite credito
       th
-      th
+      
 
   tbody
     - @clientes.each do |cliente|
@@ -28,5 +28,7 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
           td = cliente.pessoa.specific.cnpj
           td = cliente.pessoa.specific.inscricao_estadual
         td = (number_to_currency(cliente.limite_credito, unit: 'R$', separator: ",", delimiter: "."))
-        td = link_to 'Abrir', cliente, class: 'btn btn-primary btn-xs'
-        td = link_to 'Excluir', cliente, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o cliente #{cliente.pessoa.nome}?"}, :method => :delete
+        td 
+          .btn-group
+            = link_to 'Abrir', cliente, class: 'btn btn-primary btn-xs'
+            = link_to 'Excluir', cliente, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o cliente #{cliente.pessoa.nome}?"}, :method => :delete

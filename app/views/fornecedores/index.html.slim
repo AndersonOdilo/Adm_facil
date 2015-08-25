@@ -14,7 +14,6 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
       th CPF/CNPJ
       th RG/IE
       th
-      th
 
   tbody
     - @fornecedores.each do |fornecedor|
@@ -24,7 +23,10 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
           td = fornecedor.pessoa.specific.cnpj
           td = fornecedor.pessoa.specific.inscricao_estadual
         - else
+          td = fornecedor.pessoa.specific.nome
           td = fornecedor.pessoa.specific.cpf
           td = fornecedor.pessoa.specific.rg
-        td = link_to 'abrir', fornecedor, class: 'btn btn-primary btn-xs'
-        td = link_to 'Excluir', fornecedor, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o fornecedor #{fornecedor.pessoa.nome}?"}, :method => :delete
+        td 
+          .btn-group
+            = link_to 'abrir', fornecedor, class: 'btn btn-primary btn-xs'
+            = link_to 'Excluir', fornecedor, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o fornecedor #{fornecedor.pessoa.nome}?"}, :method => :delete

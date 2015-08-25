@@ -10,6 +10,6 @@ $(function() {
     return $('#nova_categoria').modal('hide');
   });
   $('#new_categoria_produto').bind("ajax:error", function(event, data, status, xhr) {
-    return alert('Este cargo ja existe');
+    return alert('Esta categoria já existe');
   });
 });

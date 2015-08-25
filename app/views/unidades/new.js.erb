@@ -1,6 +1,6 @@
- $("#unidade_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
- $('#nova_unidade').modal('show');
- $(function() {
+$("#unidade_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
+$('#nova_unidade').modal('show');
+$(function() {
   $('#add_unidade').on("click", function() {
     $('#new_unidade').validate();
     return $('#new_unidade').submit();
@@ -10,7 +10,7 @@
     return $('#nova_unidade').modal('hide');
   });
   $('#new_unidade').bind("ajax:error", function(event, data, status, xhr) {
-    return alert('Esta unidade ja existe');
+    return alert('Esta unidade já existe');
   });
 });
 

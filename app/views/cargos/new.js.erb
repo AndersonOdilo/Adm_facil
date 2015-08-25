@@ -1,6 +1,6 @@
- $("#cargo_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
- $('#novo_cargo').modal('show');
- $(function() {
+$("#cargo_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
+$('#novo_cargo').modal('show');
+$(function() {
   $('#add_cargo').on("click", function() {
     $('#new_cargo').validate();
     return $('#new_cargo').submit();
@@ -10,6 +10,6 @@
     return $('#novo_cargo').modal('hide');
   });
   $('#new_cargo').bind("ajax:error", function(event, data, status, xhr) {
-    return alert('Cargo ja existe');
+    return alert('Cargo já existe');
   });
 });

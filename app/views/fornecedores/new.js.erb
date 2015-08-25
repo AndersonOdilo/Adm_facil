@@ -1,5 +1,15 @@
- $("#fornecedor_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
- $('#novo_fornecedor').modal('show');
-
-
-
+$('#fornecedor_modal').html("<%= escape_javascript(render partial: 'form_modal') %>");
+$('#novo_fornecedor').modal('show');
+$(function() {
+ 	$('#salvar_fornecedor').on("click", function() { 
+    $('#new_fornecedor').validate();
+    return $('#new_fornecedor').submit();
+  });
+ 	$('#new_fornecedor').bind("ajax:success", function(event, data, status, xhr) {
+	  $('#produto_fornecedor_id').append($("<option/>").attr("value", data.id).text(data.pessoa.nome).attr("selected", "selected"));
+	  return $('#novo_fornecedor').modal('hide');
+	});
+	$('#new_fornecedor').bind("ajax:error", function(event, data, status, xhr) {
+	  return alert("Erro ao salver fornecedor");
+	});
+});

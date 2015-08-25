@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
   get 'pontos/registro'
 
   resources :despesas
 
   resources :pedidos
 
-  resources :formas_pagamentos
-
   resources :orcamentos
 
   resources :cargos
-
+ 
   devise_for :usuarios
 
   resources :unidades
@@ -38,9 +37,9 @@ Rails.application.routes.draw do
 
   resources :enderecos
 
-  match 'estado/cidades/:id', to: "estados#buscar_cidades", via: [:get]
+  get 'estado/cidades/:id' => 'estados#buscar_cidades'
 
-  match 'cidade/ruas/:id', to: "cidades#buscar_ruas", via: [:get]
+  get 'cidade/ruas/:id' => "cidades#buscar_ruas"
 
   match 'orcamento/add_item', to: "orcamentos#add_item", via: [:post]
 

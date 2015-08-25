@@ -4,11 +4,6 @@ $ ->
     $('#cliente_limite_credito').val($('#cliente_limite_credito').unmask())
     $('#new_cliente').submit()
 
-  $('#new_cliente').bind 'ajax:success', (event, data, status, xhr) ->
-    $('#cliente_nome').val(data.pessoa.nome)
-    $('#pedido_cliente_id').val(data.id)
-    $('#novo_cliente').modal('hide')
-
   $('.cliente_nome_autocomplete').autocomplete
     source: '/clientes/autocomplete.json'
     select: (event, ui) ->

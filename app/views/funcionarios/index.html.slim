@@ -15,7 +15,6 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
       th CPF
       th Data admissao
       th
-      th
 
   tbody
     - @funcionarios.each do |funcionario|
@@ -27,5 +26,7 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
         - else
           td = funcionario.pessoa.specific.cnpj
         td = funcionario.data_admissao
-        td = link_to 'Abrir', funcionario, class: 'btn btn-primary btn-xs'
-        td = link_to 'Excluir', funcionario, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete
+        td 
+          .btn-group
+            = link_to 'Abrir', funcionario, class: 'btn btn-primary btn-xs'
+            = link_to 'Excluir', funcionario, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete

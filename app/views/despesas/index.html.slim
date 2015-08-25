@@ -13,8 +13,6 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
       th Tipo despesa
       th Forma pagamento
       th
-      th
-      th
 
   tbody
     - @despesas.each do |despesa|
@@ -22,7 +20,9 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
         td = despesa.descricao
         td = despesa.tipo_despesa.descricao
         td = despesa.forma_pagamento.descricao
-        td = link_to 'Abrir', despesa, class: 'btn btn-primary btn-xs'
-        td = link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-warning btn-xs'
-        td = link_to 'Excluir', despesa, class: 'btn btn-danger btn-xs', data: {:confirm => 'Are you sure?'}, :method => :delete
+        td
+          .btn-group
+            = link_to 'Abrir', despesa, class: 'btn btn-primary btn-xs'
+            = link_to 'Edit', edit_despesa_path(despesa), class: 'btn btn-warning btn-xs'
+            = link_to 'Excluir', despesa, class: 'btn btn-danger btn-xs', data: {:confirm => 'Are you sure?'}, :method => :delete
 

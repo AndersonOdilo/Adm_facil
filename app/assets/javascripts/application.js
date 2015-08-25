@@ -12,6 +12,7 @@
 //= require cocoon
 //= require_tree .
 //= require bootstrap.min
+//= require pace
 
 var ready = (function() {
   jQuery.extend(jQuery.validator.messages, {

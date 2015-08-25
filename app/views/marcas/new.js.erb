@@ -1,6 +1,6 @@
- $("#marca_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
- $('#nova_marca').modal('show');
- $(function() {
+$("#marca_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
+$('#nova_marca').modal('show');
+$(function() {
   $('#add_marca').on("click", function() {
     $('#new_marca').validate();
     return $('#new_marca').submit();
@@ -10,6 +10,6 @@
     return $('#nova_marca').modal('hide');
   });
   $('#new_marca').bind("ajax:error", function(event, data, status, xhr) {
-    return alert('Esta marca ja existe');
+    return alert('Esta marca já existe');
   });
 });

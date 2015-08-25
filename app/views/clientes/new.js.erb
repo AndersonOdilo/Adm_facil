@@ -1,5 +1,19 @@
- $("#cliente_modal").html("<%= escape_javascript(render partial: 'form_modal') %>");
- $('#novo_cliente').modal('show');
-
+$('#cliente_modal').html("<%= escape_javascript(render partial: 'form_modal') %>");
+$('#novo_cliente').modal('show');
+$(function(){
+	$('#salvar_cliente').on("click", function(){
+    $('#new_cliente').validate();
+    $('#cliente_limite_credito').val($('#cliente_limite_credito').unmask());
+    return $('#new_cliente').submit();
+  });
+	$('#new_cliente').bind('ajax:success', function(event, data, status, xhr){
+    $('#cliente_nome').val(data.pessoa.nome);
+    $('#pedido_cliente_id').val(data.id);
+    return $('#novo_cliente').modal('hide');
+  });
+  $('#new_cliente').bind('ajax:error', function(event, data, status, xhr){
+  	return alert("Erro ao cadastrar o cliente");
+  });
+})
 
 
