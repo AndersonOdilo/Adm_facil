@@ -1,12 +1,11 @@
 class ProdutosController < ApplicationController
-  include ActionView::Helpers::NumberHelper
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
   def autocomplete
     produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
     produtos_json = []
-    produtos.collect{|produto|  produtos_json <<  { value: produto.id, label: "#{produto.nome}, #{produto.marca.nome}", preco: number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: "."),
-        quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}}
+    produtos.collect{|produto|  produtos_json <<  { id: produto.id, value: "#{produto.nome}, #{produto.marca.nome}", 
+    preco: produto.valor_venda, quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}}
     render json: produtos_json
   end
 
@@ -41,8 +40,7 @@ class ProdutosController < ApplicationController
 
     respond_to do |format|
       if @produto.save
-        flash[:success] = "Produto salvo com sucesso"
-        format.html { redirect_to action: "index", success: 'Produto salvo com sucesso.' }
+        format.html { redirect_to action: "index", notice: 'Produto salvo com sucesso.' }
         format.json { render :show, status: :created, location: @produto }
       else
         format.html { render :new }
@@ -56,8 +54,7 @@ class ProdutosController < ApplicationController
   def update
     respond_to do |format|
       if @produto.update(produto_params)
-        flash[:success] = "Produto foi alterado com sucesso"
-        format.html { redirect_to @produto}
+        format.html { redirect_to @produto, notice: 'Produto alterado com sucesso.'}
         format.json { render :show, status: :ok, location: @produto }
       else
         format.html { render :edit }
@@ -71,8 +68,7 @@ class ProdutosController < ApplicationController
   def destroy
     @produto.destroy
     respond_to do |format|
-      flash[:success] = "Produto foi excluido com sucesso"
-      format.html { redirect_to produtos_url}
+      format.html { redirect_to produtos_url, notice: "Produto foi excluido com sucesso"}
       format.json { head :no_content }
     end
   end

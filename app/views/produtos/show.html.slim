@@ -45,8 +45,8 @@ div class="panel panel-default"
       .col-lg-3
         strong
           'Valor custo:
-        = number_to_currency(@produto.valor_custo, unit: 'R$', separator: ",", delimiter: ".")
+        = number_to_currency_br(@produto.valor_custo)
       .col-lg-4
         strong
           'Valor venda:
-        = number_to_currency(@produto.valor_venda, unit: 'R$', separator: ",", delimiter: ".")
+        = number_to_currency_br(@produto.valor_venda)

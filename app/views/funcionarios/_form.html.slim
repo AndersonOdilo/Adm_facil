@@ -6,10 +6,8 @@
         - @funcionario.errors.full_messages.each do |message|
           li = message
 
-
   = f.simple_fields_for :pessoa do |pessoa|
     = render '/pessoas_fisicas/form', f: pessoa
-
 
   div class="panel panel-default"
     div class="panel-body"

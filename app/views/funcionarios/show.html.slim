@@ -94,7 +94,7 @@ div class="panel panel-default"
                             tr
                                 td = venda.cliente.pessoa.specific.nome
                                 td = venda.data
-                                td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
+                                td = number_to_currency_br(venda.total)
                                 td = link_to 'Abrir', pedido_path(venda), class: 'btn btn-primary btn-xs'
 
       .col-lg-5

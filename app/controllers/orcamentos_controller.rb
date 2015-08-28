@@ -1,5 +1,4 @@
   class OrcamentosController < ApplicationController
-  include ActionView::Helpers::NumberHelper
   before_action :set_orcamento, only: [:show, :edit, :update, :destroy]
 
   def add_item
@@ -12,12 +11,12 @@
   def remover_item
     produto = Produto.find(params[:produto])
     session[:sub_total] = session[:sub_total].to_f - produto.valor_venda * params[:quantidade].to_f
-    render json: (number_to_currency(session[:sub_total].to_f, unit: 'R$', separator: ",", delimiter: ".")).to_json
+    render json: session[:sub_total].to_f.to_json
   end
 
   def calcular_desconto
     desconto = session[:sub_total].to_f - (session[:sub_total].to_f * params[:desconto].to_f / 100)
-    render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json
+    render json: desconto.to_json
   end
 
   # GET /orcamentos
@@ -53,14 +52,14 @@
     respond_to do |format|
       if !@orcamento.itens_orcamentos.blank?
         if @orcamento.save
-          format.html { redirect_to @orcamento, notice: 'Orcamento was successfully created.' }
+          format.html { redirect_to @orcamento, notice: 'Orçamento salvo com sucesso' }
           format.json { render :show, status: :created, location: @orcamento }
         else
           format.html { render :new }
           format.json { render json: @orcamento.errors, status: :unprocessable_entity }
         end
       else
-          flash[:danger] = 'Adicione itens ao Orçamento'
+          flash[:alert] = 'Adicione itens ao Orçamento'
           format.html { render :new }
       end
     end
@@ -71,7 +70,7 @@
   def update
     respond_to do |format|
       if @orcamento.update(orcamento_params)
-        format.html { redirect_to @orcamento, notice: 'Orcamento was successfully updated.' }
+        format.html { redirect_to @orcamento, notice: 'Orçamento alterado com sucesso' }
         format.json { render :show, status: :ok, location: @orcamento }
       else
         format.html { render :edit }
@@ -85,7 +84,7 @@
   def destroy
     @orcamento.destroy
     respond_to do |format|
-      format.html { redirect_to orcamentos_url, notice: 'Orcamento was successfully destroyed.' }
+      format.html { redirect_to orcamentos_url, notice: 'Orçamento excluido com sucesso' }
       format.json { head :no_content }
     end
   end

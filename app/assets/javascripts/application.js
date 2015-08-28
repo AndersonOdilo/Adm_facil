@@ -1,12 +1,11 @@
-
 //= require jquery
 //= require jquery-ui.min
 //= require jquery_ujs
 //= require jquery.mask.min
-//= require jquery-price.min
 //= require jquery.validate.min
 //= require jquery.dataTables
 //= require dataTables.bootstrap
+//= require accounting.min
 //= require jquery.turbolinks
 //= require turbolinks
 //= require cocoon
@@ -33,6 +32,24 @@ var ready = (function() {
         range: jQuery.validator.format("Please enter a value between {0} and {1}."),
         max: jQuery.validator.format("O valor deve ser menor ou igual a {0}."),
         min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+  });
+
+  $.validator.setDefaults({
+    highlight: function(element) {
+      $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function(element) {
+      $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function(error, element) {
+      if(element.parent('.input-group').length) {
+        error.insertAfter(element.parent());
+      } else {
+        error.insertAfter(element);
+      }
+    }
   });
 
   $(document).on('cocoon:after-insert', function(e, insertedItem) {
@@ -68,6 +85,43 @@ var ready = (function() {
         }
     },
     "bDestroy": true
+  });
+
+  $.rails.allowAction = function(link) {
+    if (!link.attr('data-confirm')) {
+        return true;
+    }
+    $.rails.showConfirmDialog(link);
+    return false;
+  };
+
+  $.rails.confirmed = function(link) {
+    link.removeAttr('data-confirm');
+    return link.trigger('click.rails');
+  };
+
+  $.rails.showConfirmDialog = function(link) {
+    var html, message;
+    message = link.attr('data-confirm');
+    html = "<div class=\"modal\" id=\"confirmationDialog\">\n  <div class=\"modal-dialog\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <a class=\"close\" data-dismiss=\"modal\">×</a>\n        <h1>Confirmaçao</h1>\n      </div>\n      <div class=\"modal-body\">\n         <h3>" + message + "</h3>\n      </div>\n      <div class=\"modal-footer\">\n        <a data-dismiss=\"modal\" class=\"btn btn-primary\">Cancelar</a>\n        <a data-dismiss=\"modal\" class=\"btn btn-danger confirm\">Confirmar</a>\n      </div>\n    </div>\n  </div>\n</div>";
+    $(html).modal();
+    return $('#confirmationDialog .confirm').on('click', function() {
+      return $.rails.confirmed(link);
+    });
+  };
+
+  $('.numero').keypress(function(event) {
+    var tecla;
+    tecla = window.event ? event.keyCode : event.which;
+    if (tecla > 47 && tecla < 58) {
+      return true;
+    } else {
+        if (tecla !== 8) {
+          return false;
+        } else {
+          return true;
+        }
+    }
   });
 
   $("#menu-toggle").click(function(e) {

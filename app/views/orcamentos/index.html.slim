@@ -23,9 +23,9 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
         td = orcamento.cliente.pessoa.specific.nome rescue ""
         td = orcamento.data
         td = orcamento.data_validade
-        td = number_to_currency(orcamento.total, unit: 'R$', separator: ",", delimiter: ".")
+        td = number_to_currency_br(orcamento.total)
         td = orcamento.obs
         td 
           .btn-group
             = link_to 'Abrir', orcamento, class: 'btn btn-primary btn-xs'
-            = link_to 'Excluir', orcamento, class: 'btn btn-danger btn-xs', data: {:confirm => 'Are you sure?'}, :method => :delete
+            = link_to 'Excluir', orcamento, class: 'btn btn-danger btn-xs', data: {:confirm => 'Dejesa excluir este orçamento?'}, :method => :delete

@@ -21,6 +21,6 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
       tr
         td = venda.cliente.pessoa.specific.nome rescue ""
         td = venda.data
-        td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
+        td = number_to_currency_br(venda.total)
         td = venda.obs
         td = link_to 'Abrir', venda, class: 'btn btn-primary btn-xs'

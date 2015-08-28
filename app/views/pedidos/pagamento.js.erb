@@ -32,7 +32,7 @@ $('#finalizar_pagamento').on("click", function() {
   if ($("#numero_parcela").val() !== "") {
     return $('#new_pedido').submit();
   } else {
-    return alert('Selecione o numero de parcelas');
+    return alert('Selecione o número de parcelas');
   }
 });
 
@@ -42,6 +42,6 @@ $('#endereco_entrega').on("click", function() {
     $("#endereco_entrega_modal").html("<%= escape_javascript(render partial: 'enderecos/endereco_entrega', locals: {cliente: cliente}) %>");
     return $('#entrega_modal').modal('show');
   } else {
-    return alert('Selecione o numero de parcelas');
+    return alert('Selecione o número de parcelas');
   }
 });

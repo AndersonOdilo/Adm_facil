@@ -17,7 +17,7 @@ $ ->
                 produto: produto
                 quantidade: quantidade
             success: (data) ->
-                $('#valor_total').html(data)
+                $('#valor_total').html(accounting.formatMoney(data, "R$", 2, ".", ","))
                 elemento.parentElement.parentElement.remove()
     window.remover_item = remover_item
 
@@ -32,7 +32,7 @@ $ ->
                 data:
                     desconto: valor
                 success: (data) ->
-                    $('#valor_total_desconto').html(data)
+                    $('#valor_total_desconto').html(accounting.formatMoney(data, "R$", 2, ".", ","))
         else
             $('#valor_total_desconto').html('')
 

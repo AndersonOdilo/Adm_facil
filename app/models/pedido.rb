@@ -31,12 +31,9 @@ class Pedido < ActiveRecord::Base
     else
       total = self.total
     end
-    if self.forma_pagamento.id == 5
+    if self.forma_pagamento.id == 2
       if entrada > 0
-        pagamento = PagamentoVenda.new
-        pagamento.data_vencimento = Date.today
-        pagamento.data_pagamento = Date.today
-        pagamento.valor = entrada
+        pagamento = PagamentoVenda.new(data_vencimento: Date.today, data_pagamento: Date.today, valor: entrada)
         self.pagamentos_vendas << pagamento
         total -= entrada
       end
@@ -51,10 +48,7 @@ class Pedido < ActiveRecord::Base
         self.pagamentos_vendas << pagamento
       end
     else
-      pagamento = PagamentoVenda.new
-      pagamento.data_vencimento = Date.today
-      pagamento.data_pagamento = Date.today
-      pagamento.valor = total
+      pagamento = PagamentoVenda.new(data_vencimento: Date.today, data_pagamento: Date.today, valor: total)
       self.pagamentos_vendas << pagamento
     end
   end

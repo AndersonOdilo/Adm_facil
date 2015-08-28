@@ -19,19 +19,9 @@ $ ->
                 data:
                     desconto: valor
                 success: (data) ->
-                    $('#valor_total_desconto').html(data)
+                    $('#valor_total_desconto').html(accounting.formatMoney(data, "R$", 2, ".", ","))
         else
             $('#valor_total_desconto').html('')
-
-    $('#finalizar_pedido'). on "click", ->
-        $.ajax
-            url: '/pedido/finalizar/'
-            type: 'post'
-            dataType: 'script'
-            data:
-                forma_pagamento: $('#pedido_forma_pagamento_id').val()
-                cliente: $('#cliente_id').val()
-                entrega: $('#forma_entrega').val()
 
    remover_item_venda =(elemento, produto, quantidade) ->
       $.ajax
@@ -42,7 +32,16 @@ $ ->
             produto: produto
             quantidade: quantidade
         success: (data) ->
-            $('#valor_total').html(data)
+            $('#valor_total').html(accounting.formatMoney(data, "R$", 2, ".", ","))
             elemento.parentElement.parentElement.remove()
     window.remover_item_venda = remover_item_venda
 
+   $('#finalizar_pedido'). on "click", ->
+        $.ajax
+            url: '/pedido/finalizar/'
+            type: 'post'
+            dataType: 'script'
+            data:
+                forma_pagamento: $('#pedido_forma_pagamento_id').val()
+                cliente: $('#cliente_id').val()
+                entrega: $('#forma_entrega').val()

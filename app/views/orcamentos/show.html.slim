@@ -47,10 +47,10 @@ div class="panel panel-default"
             tr
               td = item.produto.cod
               td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-              td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
+              td = number_to_currency_br(item.preco)
               td = item.quantidade
               td = item.produto.unidade.sigla
-              td = (number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: "."))
+              td = number_to_currency_br(item.preco_total)
   div class="panel-footer"
     .row
       - if @orcamento.desconto
@@ -59,15 +59,15 @@ div class="panel panel-default"
             = "Desconto: #{number_to_percentage(@orcamento.desconto, precision: 0)}"
         .col-lg-4
           h4 class="right"
-            ="Total desc.  #{number_to_currency(@orcamento.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
+            ="Total desc.  #{number_to_currency_br(@orcamento.total_desconto)}"
         .col-lg-3
           h4 class="right"
-            = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
+            = "Total #{number_to_currency_br(@orcamento.total)}"
       - else
         .col-lg-8
         .col-lg-3
           h4 class="right"
-            = "Total #{number_to_currency(@orcamento.total, unit: 'R$', separator: ",", delimiter: ".")}"
+            = "Total #{number_to_currency_br(@orcamento.total)}"
 
 - if !@orcamento.obs.blank?
   .col-lg-5

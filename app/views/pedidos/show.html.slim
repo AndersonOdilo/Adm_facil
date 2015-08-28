@@ -47,10 +47,10 @@ div class="panel panel-default"
             tr
               td = item.produto.cod
               td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-              td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
+              td = number_to_currency_br(item.preco)
               td = item.quantidade
               td = item.produto.unidade.sigla
-              td = (number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: "."))
+              td = number_to_currency_br(item.preco_total)
   div class="panel-footer"
     .row
       - if @pedido.desconto
@@ -59,15 +59,15 @@ div class="panel panel-default"
             = "Desconto: #{number_to_percentage(@pedido.desconto, precision: 0)}"
         .col-lg-4
           h4 class="right"
-            ="Total: desc.  #{number_to_currency(@pedido.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
+            ="Total: desc.  #{number_to_currency_br(@pedido.total_desconto)}"
         .col-lg-3
           h4 class="right"
-            = "Total: #{number_to_currency(@pedido.total, unit: 'R$', separator: ",", delimiter: ".")}"
+            = "Total: #{number_to_currency_br(@pedido.total)}"
       - else
         .col-lg-7
         .col-lg-5
           h4 class="right"
-            = "Total: #{number_to_currency(@pedido.total, unit: 'R$', separator: ",", delimiter: ".")}"
+            = "Total: #{number_to_currency_br(@pedido.total)}"
 
 .row
   .col-lg-7
@@ -98,12 +98,11 @@ div class="panel panel-default"
                   td = pagamento.data_vencimento
                   td id="data_pagamento_#{pagamento.id}"
                     = pagamento.data_pagamento
-                  td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
+                  td = number_to_currency_br(pagamento.valor)
                   td
                     -if !pagamento.data_pagamento?
                        = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
-                        data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
-                       remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
+                        data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency_br(pagamento.valor)}?"}, remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
 
 - if !@pedido.obs.blank?
   .col-lg-5

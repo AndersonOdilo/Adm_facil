@@ -4,5 +4,5 @@ $("#produto_id" ).val("");
 $("#preco").html("");
 $('#quantidade_estoque').html("");
 $('#produto_quantidade').val("");
-$('#valor_total').html("<h4>R$ "+<%= sub_total %>+"</h4>");
+$('#valor_total').html("<h4>"+accounting.formatMoney(<%= sub_total %>, "R$", 2, ".", ",")+"</h4>");
 

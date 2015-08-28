@@ -2,9 +2,9 @@ class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
 
   def autocomplete
-    clientes = Cliente.joins("LEFT OUTER JOIN pessoas on pessoa_id = pessoas.id where (pessoas.nome ILIKE '#{params[:term]}%')")
+    clientes = Cliente.joins("LEFT OUTER JOIN pessoas on pessoa_id = pessoas.id where (pessoas.nome ILIKE '%#{params[:term]}%')")
     clientes_json = []
-    clientes.collect{|cliente| clientes_json <<  { value: cliente.id , label: cliente.pessoa.specific.nome}}
+    clientes.collect{|cliente| clientes_json <<  { id: cliente.id , value: cliente.pessoa.specific.nome}}
     render json: clientes_json
   end
 
@@ -46,8 +46,7 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
-        flash[:success] = "Cliente cadastrado com sucesso."
-        format.html { redirect_to action: "index"}
+        format.html { redirect_to action: "index", notice: "Cliente salvo com sucesso"}
         format.json { render json: @cliente.to_json(include: [:pessoa]) }
       else
         format.html { render :new }
@@ -62,8 +61,7 @@ class ClientesController < ApplicationController
     @cliente.pessoa = @cliente.pessoa.specific
     respond_to do |format|
       if @cliente.update(cliente_params)
-        flash[:success] = "Cliente alterado com sucesso."
-        format.html { redirect_to @cliente}
+        format.html { redirect_to @cliente, notice: "Cliente alterado com sucesso"}
         format.json { render :show, status: :ok, location: @cliente }
       else
         format.html { render :edit }
@@ -77,8 +75,7 @@ class ClientesController < ApplicationController
   def destroy
     @cliente.destroy
     respond_to do |format|
-      flash[:success] = "Cliente excluido com sucesso."
-      format.html { redirect_to clientes_url}
+      format.html { redirect_to clientes_url, notice: "Cliente excluido com sucesso"}
       format.json { head :no_content }
     end
   end

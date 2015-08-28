@@ -44,14 +44,18 @@ div class="panel panel-default"
                     strong
                         'Inscricao estadual:
                     = @cliente.pessoa.specific.inscricao_estadual
-                .col-lg-6
+                .col-lg-3
                      strong
                         'Data abertura:
                      = @cliente.pessoa.specific.data_abertura
             .col-lg-3
                 strong
                     'Limite credito:
-                = number_to_currency(@cliente.limite_credito, unit: 'R$', separator: ",", delimiter: ".")
+                = number_to_currency_br(@cliente.limite_credito)
+            .col-lg-4
+                strong
+                    'Limite credito disponivel:
+                = number_to_currency_br(@cliente.limite_disponivel)
 
         
 == render partial: 'pessoas/show', locals: {pessoa: @cliente.pessoa}
@@ -79,11 +83,10 @@ div class="panel panel-default"
                             td = pagamento.data_vencimento
                             td id="data_pagamento_#{pagamento.id}"
                               = pagamento.data_pagamento
-                            td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
+                            td = number_to_currency_br(pagamento.valor)
                             td
                                 = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
-                                   data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")}?"},
-                                   remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
+                                   data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency_br(pagamento.valor)}?"}, remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
                             td = link_to "Pedido", venda_path(pagamento.venda.id), class: "btn btn-default btn-xs"
 
   .col-lg-5
@@ -105,7 +108,7 @@ div class="panel panel-default"
                     - @cliente.pedidos.order("pedidos.created_at desc").limit(5).each do |venda|
                         tr
                             td = venda.data
-                            td = number_to_currency(venda.total, unit: 'R$', separator: ",", delimiter: ".")
+                            td = number_to_currency_br(venda.total)
                             td = link_to "Abrir", pedido_path(venda), class: 'btn btn-primary btn-xs'
 
 

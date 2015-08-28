@@ -25,7 +25,7 @@ table id="tabela" class="table table-striped table-bordered" cellspacing="0" wid
         td = produto.cod
         td = produto.nome
         td = produto.descricao
-        td = number_to_currency(produto.valor_venda, unit: 'R$', separator: ",", delimiter: ".")
+        td = number_to_currency_br(produto.valor_venda)
         td = produto.marca.nome
         td = produto.categoria_produto.descricao
         td = produto.fornecedor.pessoa.nome

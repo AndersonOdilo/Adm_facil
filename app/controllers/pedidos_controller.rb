@@ -1,5 +1,4 @@
 class PedidosController < ApplicationController
-  include ActionView::Helpers::NumberHelper
   before_action :set_pedido, only: [:show, :edit, :update, :destroy]
 
   def add_item
@@ -9,24 +8,24 @@ class PedidosController < ApplicationController
       session[:sub_total_venda] = session[:sub_total_venda].to_f + item_pedido.preco_total
       render locals: {item_pedido: item_pedido, sub_total: session[:sub_total_venda].to_f }
     else
-        render 'erro', locals: {msg: 'Nao a estoque suficiente.'}
+        render 'erro', locals: {msg: 'Não a estoque suficiente.'}
     end
   end
 
   def remover_item
     produto = Produto.find(params[:produto])
     session[:sub_total_venda] = session[:sub_total_venda].to_f - produto.valor_venda * params[:quantidade].to_f
-    render json: number_to_currency(session[:sub_total_venda].to_f, unit: 'R$', separator: ",", delimiter: ".").to_json
+    render json: session[:sub_total_venda].to_f.to_json
   end
 
   def calcular_parcela
     valor_parcela = ((session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i).round(2)
-    render json: number_to_currency(valor_parcela, unit: 'R$', separator: ",", delimiter: ".").to_json
+    render json: valor_parcela.to_json
   end
 
   def calcular_desconto
     desconto = session[:sub_total_venda].to_f - (session[:sub_total_venda].to_f * params[:desconto].to_f / 100)
-    render json: number_to_currency(desconto, unit: 'R$', separator: ",", delimiter: ".").to_json
+    render json: desconto.to_json
   end
 
   def finalizar
@@ -85,7 +84,7 @@ class PedidosController < ApplicationController
     @pedido.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i)
     respond_to do |format|
       if @pedido.save
-        format.html { redirect_to @pedido, notice: 'Pedido was successfully created.' }
+        format.html { redirect_to @pedido, notice: "Pedido salvo com sucesso"}
         format.json { render :show, status: :created, location: @pedido }
       else
         format.html { render :new }
@@ -99,7 +98,7 @@ class PedidosController < ApplicationController
   def update
     respond_to do |format|
       if @pedido.update(pedido_params)
-        format.html { redirect_to @pedido, notice: 'Pedido was successfully updated.' }
+        format.html { redirect_to @pedido, notice: 'Pedido alterado com sucesso' }
         format.json { render :show, status: :ok, location: @pedido }
       else
         format.html { render :edit }
@@ -113,7 +112,7 @@ class PedidosController < ApplicationController
   def destroy
     @pedido.destroy
     respond_to do |format|
-      format.html { redirect_to pedidos_url, notice: 'Pedido was successfully destroyed.' }
+      format.html { redirect_to pedidos_url, notice: 'Pedido excluido com sucesso' }
       format.json { head :no_content }
     end
   end
