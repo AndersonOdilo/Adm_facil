@@ -1,6 +1,10 @@
-.col-lg-4
-  strong E-mails:
-  ul class="list-group"
-    - emails.each do |email|
-      li class="list-group-item"
-        = email.descricao
+.col-md-4
+  .box
+  	div class="box-header with-border"
+  		h3 class="box-title"
+  			'E-mails:
+    div class="box-body"
+		  ul class="list-group"
+		    - emails.each do |email|
+		      li class="list-group-item"
+		        = email.descricao

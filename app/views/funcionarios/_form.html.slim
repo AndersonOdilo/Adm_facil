@@ -1,45 +1,48 @@
 = simple_form_for @funcionario, html: {id: 'new_funcionario'} do |f|
   - if @funcionario.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@funcionario.errors.count, "error")} prohibited this funcionario from being saved:"
-      ul
-        - @funcionario.errors.full_messages.each do |message|
-          li = message
+    div class="alert alert-warning alert-dismissable"
+      button type="button" class="close" data-dismiss="alert" aria-hidden="true" ×
+      h4
+        i class="icon fa fa-ban" Erro!
+      - @funcionario.errors.full_messages.each do |message|
+        = message
 
   = f.simple_fields_for :pessoa do |pessoa|
     = render '/pessoas_fisicas/form', f: pessoa
 
-  div class="panel panel-default"
-    div class="panel-body"
-      .row
-        .col-lg-3
-          .form-group
-            = f.label :cod
-            = f.text_field :cod, class: 'form-control input-sm'
-        .col-lg-3
-          .form-group
-            = f.label 'Carteira de trabalho*'
-            = f.text_field :carteira_trabalho, class: 'form-control input-sm', required: true
-        .col-lg-3
-          .form-group
-            = f.label :salario
-            = f.text_field :salario, class: 'form-control input-sm moeda'
+  .row
+    .col-md-12
+      .box
+        div class="box-body"
+          .row
+            .col-lg-3
+              .form-group
+                = f.label :cod
+                = f.text_field :cod, class: 'form-control input-sm'
+            .col-lg-3
+              .form-group
+                = f.label 'Carteira de trabalho*'
+                = f.text_field :carteira_trabalho, class: 'form-control input-sm', required: true
+            .col-lg-3
+              .form-group
+                = f.label :salario
+                = f.text_field :salario, class: 'form-control input-sm moeda'
 
-      .row
-        .col-lg-3
-          .form-group
-            = f.label 'Data de admissão*'
-            = f.date_field :data_admissao, class: 'form-control', required: true
-        .col-lg-3
-          .form-group
-            = f.label :carga_horaria
-            = f.text_field :carga_horaria, class: 'form-control input-sm'
-        .col-lg-4
-          .form-group
-            = f.label 'Cargo*'
-            = f.collection_select :cargo_id, Cargo.all, :id, :descricao,{}, class: 'form-control input-sm', required: true
-        .col-lg-1
-          = link_to 'Novo Cargo', new_cargo_path, remote: true, class: "btn btn-primary btn-xs"
+          .row
+            .col-lg-3
+              .form-group
+                = f.label 'Data de admissão*'
+                = f.date_field :data_admissao, class: 'form-control', required: true
+            .col-lg-3
+              .form-group
+                = f.label :carga_horaria
+                = f.text_field :carga_horaria, class: 'form-control input-sm'
+            .col-lg-4
+              .form-group
+                = f.label 'Cargo*'
+                = f.collection_select :cargo_id, Cargo.all, :id, :descricao,{}, class: 'form-control input-sm', required: true
+            .col-lg-1
+              = link_to 'Novo Cargo', new_cargo_path, remote: true, class: "btn btn-primary btn-xs"
 
       = f.hidden_field :pessoa_id, id: 'pessoa_id'
 

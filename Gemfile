@@ -13,10 +13,8 @@ gem 'spring',        group: :development
 gem 'slim-rails'
 gem 'jquery-turbolinks'
 gem 'active_record-acts_as'
-gem 'nested_form'
 gem 'devise'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
 gem "chartkick"
 gem "rails_12factor", group: :production
 gem 'simple_form'

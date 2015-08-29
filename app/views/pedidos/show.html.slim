@@ -1,115 +1,120 @@
-.page-header
+section class="content-header"
+  h1
+    'Venda #{@pedido.id}
+  = link_to 'Imprimir', pedido_path(@pedido, format: 'pdf'), class: 'btn btn-warning btn-md right', target: "_blank"
+section class="content"
   .row
-    .col-lg-8
-      h1 Venda #{@pedido.id}
-    .col-lg-4
-      br
-      = link_to 'Imprimir', pedido_path(@pedido, format: 'pdf'), class: 'btn btn-warning btn-md right', target: "_blank"
-
-div class="panel panel-default"
-  div class="panel-body"
-    .row
-      .col-lg-6
-        strong
-          'Cliente:
-        =link_to @pedido.cliente.pessoa.nome, cliente_path(@pedido.cliente.id)
-      .col-lg-4
-        strong
-          'Data emissao:
-        = @pedido.data
-    .row
-      .col-lg-6
-        strong
-          'Funcionario:
-        = link_to @pedido.funcionario.pessoa.specific.nome, funcionario_path(@pedido.funcionario.id)
-      .col-lg-4
-          strong
-            'Forma pagamento:
-          = @pedido.forma_pagamento.descricao
+    .col-md-12
+      .box
+        div class="box-body"
+          .row
+            .col-lg-6
+              strong
+                'Cliente:
+              =link_to @pedido.cliente.pessoa.nome, cliente_path(@pedido.cliente.id)
+            .col-lg-4
+              strong
+                'Data emissao:
+              = @pedido.data
+          .row
+            .col-lg-6
+              strong
+                'Funcionario:
+              = link_to @pedido.funcionario.pessoa.specific.nome, funcionario_path(@pedido.funcionario.id)
+            .col-lg-4
+                strong
+                  'Forma pagamento:
+                = @pedido.forma_pagamento.descricao
 
 
-div class="panel panel-default"
-  div class="panel-body"
-    h3 class="panel-title"
-      'Itens Pedido
-    .table-responsive
-      table class="table table-striped"
-        thead
-          tr
-            th Cod.
-            th Nome
-            th Valor Unid.
-            th Quant.
-            th Unid.
-            th Valor Total
-        tbody id="itens"
-          - @pedido.itens_pedidos.each do |item|
-            tr
-              td = item.produto.cod
-              td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-              td = number_to_currency_br(item.preco)
-              td = item.quantidade
-              td = item.produto.unidade.sigla
-              td = number_to_currency_br(item.preco_total)
-  div class="panel-footer"
-    .row
-      - if @pedido.desconto
-        .col-lg-4
-          h4
-            = "Desconto: #{number_to_percentage(@pedido.desconto, precision: 0)}"
-        .col-lg-4
-          h4 class="right"
-            ="Total: desc.  #{number_to_currency_br(@pedido.total_desconto)}"
-        .col-lg-3
-          h4 class="right"
-            = "Total: #{number_to_currency_br(@pedido.total)}"
-      - else
-        .col-lg-7
-        .col-lg-5
-          h4 class="right"
-            = "Total: #{number_to_currency_br(@pedido.total)}"
+  .row
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'Itens Pedido
+        div class="box-body"
+          .table-responsive
+            table class="table table-striped"
+              thead
+                tr
+                  th Cod.
+                  th Nome
+                  th Valor Unid.
+                  th Quant.
+                  th Unid.
+                  th Valor Total
+              tbody id="itens"
+                - @pedido.itens_pedidos.each do |item|
+                  tr
+                    td = item.produto.cod
+                    td ="#{item.produto.nome}, #{item.produto.marca.nome}"
+                    td = number_to_currency_br(item.preco)
+                    td = item.quantidade
+                    td = item.produto.unidade.sigla
+                    td = number_to_currency_br(item.preco_total)
+        div class="panel-footer"
+          .row
+            - if @pedido.desconto
+              .col-lg-4
+                h4
+                  = "Desconto: #{number_to_percentage(@pedido.desconto, precision: 0)}"
+              .col-lg-4
+                h4 class="right"
+                  ="Total: desc.  #{number_to_currency_br(@pedido.total_desconto)}"
+              .col-lg-3
+                h4 class="right"
+                  = "Total: #{number_to_currency_br(@pedido.total)}"
+            - else
+              .col-lg-7
+              .col-lg-5
+                h4 class="right"
+                  = "Total: #{number_to_currency_br(@pedido.total)}"
 
-.row
-  .col-lg-7
-    div class="panel panel-default"
-      div class="panel-body"
-        h4
-          'Pagamentos
-        .table-responsive
-          table class="table table-striped"
-            thead
-              tr
-                th N°.
-                th Data vencimento
-                th Data pagamento
-                th Valor
-                th
-            tbody id="itens"
-              - @pedido.pagamentos_vendas.order(:id).each do |pagamento|
-                - if pagamento.data_pagamento != nil
-                  - classe = "success"
-                - elsif pagamento.data_vencimento < Date.today
-                  -classe ="warning"
-                - else
-                  - classe ="info"
+  .row
+    .col-md-7
+      .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'Pagamentos
+        div class="box-body"
+          .table-responsive
+            table class="table table-striped"
+              thead
+                tr
+                  th N°.
+                  th Data vencimento
+                  th Data pagamento
+                  th Valor
+                  th
+              tbody id="itens"
+                - @pedido.pagamentos_vendas.order(:id).each do |pagamento|
+                  - if pagamento.data_pagamento != nil
+                    - classe = "success"
+                  - elsif pagamento.data_vencimento < Date.today
+                    -classe ="warning"
+                  - else
+                    - classe ="info"
 
-                tr class="#{classe}" id="tr_#{pagamento.id}"
-                  td = pagamento.numero_parcela
-                  td = pagamento.data_vencimento
-                  td id="data_pagamento_#{pagamento.id}"
-                    = pagamento.data_pagamento
-                  td = number_to_currency_br(pagamento.valor)
-                  td
-                    -if !pagamento.data_pagamento?
-                       = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
-                        data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency_br(pagamento.valor)}?"}, remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
+                  tr class="#{classe}" id="tr_#{pagamento.id}"
+                    td = pagamento.numero_parcela
+                    td = pagamento.data_vencimento
+                    td id="data_pagamento_#{pagamento.id}"
+                      = pagamento.data_pagamento
+                    td = number_to_currency_br(pagamento.valor)
+                    td
+                      -if !pagamento.data_pagamento?
+                         = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
+                          data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency_br(pagamento.valor)}?"}, remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
 
-- if !@pedido.obs.blank?
-  .col-lg-5
-    div class="panel panel-default"
-      div class="panel-body"
-        h4
-          'Observações
-        p
-          = @pedido.obs
+  .row
+    - if !@pedido.obs.blank?
+      .col-md-5
+        .box
+          div class="box-header with-border"
+            h3 class="box-title"
+              'Observações
+          div class="box-body"
+            p
+              = @pedido.obs
 

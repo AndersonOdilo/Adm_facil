@@ -46,7 +46,7 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
-        format.html { redirect_to action: "index", notice: "Cliente salvo com sucesso"}
+        format.html { redirect_to action: "index"}
         format.json { render json: @cliente.to_json(include: [:pessoa]) }
       else
         format.html { render :new }
@@ -61,7 +61,7 @@ class ClientesController < ApplicationController
     @cliente.pessoa = @cliente.pessoa.specific
     respond_to do |format|
       if @cliente.update(cliente_params)
-        format.html { redirect_to @cliente, notice: "Cliente alterado com sucesso"}
+        format.html { redirect_to act@cliente, notice: "Cliente alterado com sucesso"}
         format.json { render :show, status: :ok, location: @cliente }
       else
         format.html { render :edit }

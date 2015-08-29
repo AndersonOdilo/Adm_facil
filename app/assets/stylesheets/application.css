@@ -1,20 +1,12 @@
 /*
- *= require jquery-ui.min
- *= require simple-sidebar
  *= require dataTables.bootstrap
  *= require pace
+ *= require AdminLTE.min
+ *= require all-skins.min
  *= require_tree
  *= require_self
  *= require bootstrap.min
  */
-
-.page-header {
-  margin-top: 0px !important;
-  border-top:1px solid #eeeeee;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:2px;
-}
 
 .right {
     float: right !important;

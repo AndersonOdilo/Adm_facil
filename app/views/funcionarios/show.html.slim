@@ -1,110 +1,106 @@
-.page-header
-    .row
-        .col-lg-8
-            h1
-                'Funcionario
-        .col-lg-4
-          br
-          = link_to 'Editar', edit_funcionario_path(@funcionario), class: 'btn btn-warning right'
-
-div class="panel panel-default"
-    div class="panel-body"
-        .row
-            .col-lg-7 
-                strong
-                    'Nome:
-                = @funcionario.pessoa.specific.nome
-            .col-lg-5
-                 strong
-                    'Codigo:
-                 = @funcionario.cod
-        .row
-            -if @funcionario.pessoa.estado_type == 'PessoaFisica'
-                .col-lg-3
+section class="content-header"
+    h1
+        'Funcionario
+    = link_to 'Editar', edit_funcionario_path(@funcionario), class: 'btn btn-warning right' 
+section class="content"
+  .row
+    .col-md-12
+      .box
+        div class="box-body"
+            .row
+                .col-lg-7 
                     strong
-                        'Cpf:
-                    = @funcionario.pessoa.specific.cpf
-                .col-lg-4
-                    strong
-                        'Rg:
-                    = @funcionario.pessoa.specific.rg
-                .col-lg-3
+                        'Nome:
+                    = @funcionario.pessoa.specific.nome
+                .col-lg-5
                      strong
-                        'Data nascimento:
-                     = @funcionario.pessoa.specific.data_nascimento
-            - else
+                        'Codigo:
+                     = @funcionario.cod
+            .row
+                -if @funcionario.pessoa.estado_type == 'PessoaFisica'
+                    .col-lg-3
+                        strong
+                            'Cpf:
+                        = @funcionario.pessoa.specific.cpf
+                    .col-lg-4
+                        strong
+                            'Rg:
+                        = @funcionario.pessoa.specific.rg
+                    .col-lg-3
+                         strong
+                            'Data nascimento:
+                         = @funcionario.pessoa.specific.data_nascimento
+                - else
+                    .col-lg-3
+                        strong
+                            'CNPJ:
+                        = @funcionario.pessoa.specific.cnpj
+                    .col-lg-4
+                        strong
+                            'Inscricao estadual:
+                        = @funcionario.pessoa.specific.inscricao_estadual
+                    .col-lg-3
+                        strong
+                            'Data abertura:
+                        = @funcionario.pessoa.specific.data_abertura
+
+            .row
                 .col-lg-3
                     strong
-                        'CNPJ:
-                    = @funcionario.pessoa.specific.cnpj
+                        'Salario:
+                    = number_to_currency(@funcionario.salario, unit: 'R$', separator: ",", delimiter: ".")
                 .col-lg-4
                     strong
-                        'Inscricao estadual:
-                    = @funcionario.pessoa.specific.inscricao_estadual
+                        'Data admissao:
+                    = @funcionario.data_admissao
+                .col-lg-4
+                    strong
+                        'Carteira de Trabalho:
+                    = @funcionario.carteira_trabalho
+            .row
                 .col-lg-3
                     strong
-                        'Data abertura:
-                    = @funcionario.pessoa.specific.data_abertura
+                        'Cargo:
+                    = @funcionario.cargo.descricao
+               
+                .col-lg-3
+                    strong
+                        'Carga horaria:
+                    = @funcionario.carga_horaria
 
-        .row
-            .col-lg-3
-                strong
-                    'Salario:
-                = number_to_currency(@funcionario.salario, unit: 'R$', separator: ",", delimiter: ".")
-            .col-lg-4
-                strong
-                    'Data admissao:
-                = @funcionario.data_admissao
-            .col-lg-4
-                strong
-                    'Carteira de Trabalho:
-                = @funcionario.carteira_trabalho
-        .row
-            .col-lg-3
-                strong
-                    'Cargo:
-                = @funcionario.cargo.descricao
-           
-            .col-lg-3
-                strong
-                    'Carga horaria:
-                = @funcionario.carga_horaria
+  == render partial: 'pessoas/show', locals: {pessoa: @funcionario.pessoa}
 
-== render partial: 'pessoas/show', locals: {pessoa: @funcionario.pessoa}
-
-- if !@funcionario.pedidos.blank?
-    .row
-      .col-lg-7
-        div class="panel panel-default"
-            div class="panel-body"
-                .col-xs-6
-                    h4
+  .row
+    - if !@funcionario.pedidos.blank?
+        .col-md-7
+            .box
+                div class="box-header with-border"
+                    h3 class="box-title"
                         'Ultimas Vendas
-                .col-xs-6
                     = link_to 'Todas Vendas', pedidos_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs right'
-                table class="table table-striped"
-                    thead
-                        tr
-                            th Cliente
-                            th Data
-                            th Total
-                            th
-                    tbody
-                        - @funcionario.pedidos.order('pedidos.created_at desc').limit(5).each do |venda|
+                div class="box-body"
+                    table class="table table-striped"
+                        thead
                             tr
-                                td = venda.cliente.pessoa.specific.nome
-                                td = venda.data
-                                td = number_to_currency_br(venda.total)
-                                td = link_to 'Abrir', pedido_path(venda), class: 'btn btn-primary btn-xs'
+                                th Cliente
+                                th Data
+                                th Total
+                                th
+                        tbody
+                            - @funcionario.pedidos.order('pedidos.created_at desc').limit(5).each do |venda|
+                                tr
+                                    td = venda.cliente.pessoa.specific.nome
+                                    td = venda.data
+                                    td = number_to_currency_br(venda.total)
+                                    td = link_to 'Abrir', pedido_path(venda), class: 'btn btn-primary btn-xs'
 
-      .col-lg-5
-          div class="panel panel-default"
-                div class="panel-body"
-                    .col-xs-6
-                        h4
-                            'Ultimos pontos
-                    .col-xs-6
-                        = link_to 'Todos Pontos', pedidos_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs right'
+    .col-md-5
+        .box
+            div class="box-header with-border"
+                h3 class="box-title"
+                    'Ultimos pontos
+                = link_to 'Todos Pontos', pedidos_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs right'
+                div class="box-body"    
                     table class="table table-striped"
                         thead
                             tr

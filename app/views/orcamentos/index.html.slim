@@ -1,31 +1,33 @@
-.page-header
+section class="content-header"
+  h1
+    'Orçamentos
+      
+section class="content"
   .row
-    .col-lg-8
-      h1 Orçamentos
-    .col-lg-4
-      br
-      = link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-primary right'
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          = link_to 'Novo Orçamento', new_orcamento_path, class: 'btn btn-info btn-xs right'
+        div class="box-body"
+          table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
+            thead
+              tr
+                th Cliente
+                th Data emissão
+                th Data validade
+                th Total
+                th Observação
+                th
 
-
-table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
-  thead
-    tr
-      th Cliente
-      th Data emissão
-      th Data validade
-      th Total
-      th Observação
-      th
-
-  tbody
-    - @orcamentos.each do |orcamento|
-      tr
-        td = orcamento.cliente.pessoa.specific.nome rescue ""
-        td = orcamento.data
-        td = orcamento.data_validade
-        td = number_to_currency_br(orcamento.total)
-        td = orcamento.obs
-        td 
-          .btn-group
-            = link_to 'Abrir', orcamento, class: 'btn btn-primary btn-xs'
-            = link_to 'Excluir', orcamento, class: 'btn btn-danger btn-xs', data: {:confirm => 'Dejesa excluir este orçamento?'}, :method => :delete
+            tbody
+              - @orcamentos.each do |orcamento|
+                tr
+                  td = orcamento.cliente.pessoa.specific.nome rescue ""
+                  td = orcamento.data
+                  td = orcamento.data_validade
+                  td = number_to_currency_br(orcamento.total)
+                  td = orcamento.obs
+                  td 
+                    .btn-group
+                      = link_to 'Abrir', orcamento, class: 'btn btn-primary btn-xs'
+                      = link_to 'Excluir', orcamento, class: 'btn btn-danger btn-xs', data: {:confirm => 'Dejesa excluir este orçamento?'}, :method => :delete

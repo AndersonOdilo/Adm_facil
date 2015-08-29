@@ -1,11 +1,15 @@
 .row
-  .col-lg-12  
-    strong Endereços:
-    ul class="list-group"
-      - enderecos.each do |endereco|
-        li class="list-group-item"
-          = "Logradouro: #{endereco.logradouro.nome},
-           Nº #{endereco.numero},
-           Complemento: #{endereco.complemento},
-            Bairro: #{endereco.bairro},
-            Cidade: #{endereco.cidade} - #{endereco.estado} - #{endereco.pais} "
+  .col-md-12
+    .box
+      div class="box-header with-border"
+        h3 class="box-title"
+          'Endereços:
+      div class="box-body"
+        ul class="list-group"
+          - enderecos.each do |endereco|
+            li class="list-group-item"
+              = "Logradouro: #{endereco.logradouro.nome},
+               Nº #{endereco.numero},
+               Complemento: #{endereco.complemento},
+                Bairro: #{endereco.bairro},
+                Cidade: #{endereco.cidade} - #{endereco.estado} - #{endereco.pais} "

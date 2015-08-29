@@ -1,26 +1,28 @@
-.page-header
+section class="content-header"
+  h1
+    'Pedidos
+      
+section class="content"
   .row
-    .col-lg-8
-      h1 Vendas
-    .col-lg-4
-      br
-      = link_to 'Iniciar Venda', new_pedido_path, class: 'btn btn-primary right'
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          = link_to 'Novo Pedido', new_pedido_path, class: 'btn btn-info btn-xs right'
+        div class="box-body"
+          table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
+            thead
+              tr
+                th Cliente
+                th Data 
+                th Total
+                th Observação
+                th
 
-
-table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
-  thead
-    tr
-      th Cliente
-      th Data 
-      th Total
-      th Observação
-      th
-
-  tbody
-    - @pedido.each do |venda|
-      tr
-        td = venda.cliente.pessoa.specific.nome rescue ""
-        td = venda.data
-        td = number_to_currency_br(venda.total)
-        td = venda.obs
-        td = link_to 'Abrir', venda, class: 'btn btn-primary btn-xs'
+            tbody
+              - @pedido.each do |venda|
+                tr
+                  td = venda.cliente.pessoa.specific.nome rescue ""
+                  td = venda.data
+                  td = number_to_currency_br(venda.total)
+                  td = venda.obs
+                  td = link_to 'Abrir', venda, class: 'btn btn-primary btn-xs'

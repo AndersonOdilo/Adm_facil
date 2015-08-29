@@ -4,6 +4,6 @@ class PessoaFisica < ActiveRecord::Base
     has_many :fones, through: :pessoa
     has_many :emails, through: :pessoa
 
-    validates_uniqueness_of :cpf, allow_blank: true, message: 'ja existe'
-    validates_uniqueness_of :rg, allow_blank: true, message: 'ja existe'
+    validates_uniqueness_of :cpf, allow_blank: true, message: 'já existe'
+    validates_uniqueness_of :rg, allow_blank: true, message: 'já existe'
 end

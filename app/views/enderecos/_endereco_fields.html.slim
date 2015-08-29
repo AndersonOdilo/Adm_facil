@@ -1,35 +1,39 @@
 .nested-fields
-  div class="panel panel-default"
-    div class="panel-body"
-      = label_tag 'Endereço'
-      .row
-        .col-lg-2
-          .form-group
-            = label_tag 'Pais'
-            = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla, f.object.id ? f.object.logradouro.cidade.estado.pais.id : nil), class: 'form-control input-sm', prompt: 'Selecione um pais'
-        .col-lg-2
-          .form-group
-            = label_tag 'Estado'
-            = select_tag :select_estado, options_from_collection_for_select(f.object.id ? Pais.find(f.object.logradouro.cidade.estado.pais).estados : {}, :id, :sigla, f.object.id ? f.object.logradouro.cidade.estado.id : nil), prompt: 'Selecione um estados', class: 'form-control input-sm'
-        .col-lg-4
-          .form-group
-            = label_tag 'Cidade'
-            = select_tag :select_cidade, options_from_collection_for_select(f.object.id ? Estado.find(f.object.logradouro.cidade.estado).cidades : {}, :id, :nome, f.object.id ? f.object.logradouro.cidade.id : nil), {class: 'form-control input-sm'}
-        .col-lg-4
-          .form-group
-            = label_tag 'Logradouro'
-            = f.collection_select :logradouro_id, f.object.id ? Cidade.find(f.object.logradouro.cidade).logradouros : {}, :id, :nome, {}, {class: 'form-control input-sm', id: 'select_rua'}
-      .row
-        .col-lg-4
-          .form-group
-            = label_tag 'Bairro'
-            = f.text_field :bairro, class: 'form-control input-sm'
-        .col-lg-2
-          .form-group
-            = label_tag 'Número'
-            = f.number_field :numero, class: 'form-control input-sm'
-        .col-lg-6
-          .form-group
-            = label_tag 'Complemento'
-            = f.text_field :complemento, class: 'form-control input-sm'
-      = link_to_remove_association 'Excluir', f, class: 'btn btn-danger btn-xs'
+  .row
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'Endereço
+        div class="box-body"
+          .row
+            .col-lg-2
+              .form-group
+                = label_tag 'Pais'
+                = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla, f.object.id ? f.object.logradouro.cidade.estado.pais.id : nil), class: 'form-control input-sm', prompt: 'Selecione um pais'
+            .col-lg-2
+              .form-group
+                = label_tag 'Estado'
+                = select_tag :select_estado, options_from_collection_for_select(f.object.id ? Pais.find(f.object.logradouro.cidade.estado.pais).estados : {}, :id, :sigla, f.object.id ? f.object.logradouro.cidade.estado.id : nil), prompt: 'Selecione um estados', class: 'form-control input-sm'
+            .col-lg-4
+              .form-group
+                = label_tag 'Cidade'
+                = select_tag :select_cidade, options_from_collection_for_select(f.object.id ? Estado.find(f.object.logradouro.cidade.estado).cidades : {}, :id, :nome, f.object.id ? f.object.logradouro.cidade.id : nil), {class: 'form-control input-sm'}
+            .col-lg-4
+              .form-group
+                = label_tag 'Logradouro'
+                = f.collection_select :logradouro_id, f.object.id ? Cidade.find(f.object.logradouro.cidade).logradouros : {}, :id, :nome, {}, {class: 'form-control input-sm', id: 'select_rua'}
+          .row
+            .col-lg-4
+              .form-group
+                = label_tag 'Bairro'
+                = f.text_field :bairro, class: 'form-control input-sm'
+            .col-lg-2
+              .form-group
+                = label_tag 'Número'
+                = f.number_field :numero, class: 'form-control input-sm'
+            .col-lg-6
+              .form-group
+                = label_tag 'Complemento'
+                = f.text_field :complemento, class: 'form-control input-sm'
+          = link_to_remove_association 'Excluir', f, class: 'btn btn-danger btn-xs'

@@ -1,66 +1,69 @@
 = form_for @produto, html: {id: 'new_produto'} do |f|
   - if @produto.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@produto.errors.count, "error")} prohibited this produto from being saved:"
-      ul
-        - @produto.errors.full_messages.each do |message|
-          li = message
+    div class="alert alert-warning alert-dismissable"
+      button type="button" class="close" data-dismiss="alert" aria-hidden="true" ×
+      h4
+        i class="icon fa fa-ban" Erro!
+      - @produto.errors.full_messages.each do |message|
+        = message
 
-  div class="panel panel-default"
-    div class="panel-body"
-      .row
-        .col-lg-4
-          .form-group
-            = f.label :cod
-            = f.text_field :cod, class: 'form-control input-sm'
-        .col-lg-8
-          .form-group
-            = f.label 'Fornecedor*'
-            = f.collection_select :fornecedor_id, Fornecedor.all, :id, :nome, {}, class: 'form-control input-sm', required: true
-            = link_to 'Novo Fornecedor', new_fornecedor_path, remote: true, class: "btn btn-primary btn-xs"
+  .row
+    .col-md-12
+      .box
+        div class="box-body"
+          .row
+            .col-lg-4
+              .form-group
+                = f.label :cod
+                = f.text_field :cod, class: 'form-control input-sm'
+            .col-lg-8
+              .form-group
+                = f.label 'Fornecedor*'
+                = f.collection_select :fornecedor_id, Fornecedor.all, :id, :nome, {}, class: 'form-control input-sm', required: true
+                = link_to 'Novo Fornecedor', new_fornecedor_path, remote: true, class: "btn btn-primary btn-xs"
 
-      .row
-        .col-lg-4
-          .form-group
-            = f.label 'Marca*'
-            = f.collection_select :marca_id, Marca.all, :id, :nome, {}, class: 'form-control input-sm', required: true
-            = link_to 'Nova Marca', new_marca_path, remote: true, class: "btn btn-primary btn-xs"
-        .col-lg-8
-          .form-group
-            = f.label 'Categoria Produto*'
-            = f.collection_select :categoria_produto_id, CategoriaProduto.all, :id, :descricao, {}, class: 'form-control input-sm', required: true
-            = link_to 'Nova Categoria', new_categoria_produto_path, remote: true, class: "btn btn-primary btn-xs"
+          .row
+            .col-lg-4
+              .form-group
+                = f.label 'Marca*'
+                = f.collection_select :marca_id, Marca.all, :id, :nome, {}, class: 'form-control input-sm', required: true
+                = link_to 'Nova Marca', new_marca_path, remote: true, class: "btn btn-primary btn-xs"
+            .col-lg-8
+              .form-group
+                = f.label 'Categoria Produto*'
+                = f.collection_select :categoria_produto_id, CategoriaProduto.all, :id, :descricao, {}, class: 'form-control input-sm', required: true
+                = link_to 'Nova Categoria', new_categoria_produto_path, remote: true, class: "btn btn-primary btn-xs"
 
-      .row
-        .col-lg-12
-          .form-group
-            = f.label 'Nome*'
-            = f.text_field :nome, class: 'form-control input-sm', required: true
+          .row
+            .col-lg-12
+              .form-group
+                = f.label 'Nome*'
+                = f.text_field :nome, class: 'form-control input-sm', required: true
 
-      .row
-        .col-lg-12
-          .form-group
-            = f.label 'Descrição'
-            = f.text_field :descricao, class: 'form-control input-sm'
+          .row
+            .col-lg-12
+              .form-group
+                = f.label 'Descrição'
+                = f.text_field :descricao, class: 'form-control input-sm'
 
-      .row
-        .col-lg-2
-          .form-group
-            = f.label 'Unidade*'
-            = f.collection_select :unidade_id, Unidade.all, :id, :descricao, {}, class: 'form-control input-sm', required: true
-            = link_to 'Nova Unidade', new_unidade_path, remote: true, class: "btn btn-primary btn-xs"
-        .col-lg-2
-          .form-group
-            = f.label 'Quantidade estoque*'
-            = f.number_field :quantidade_estoque, class: 'form-control input-sm numero', min: 0, required: true
-        .col-lg-2
-          .form-group
-            = f.label 'Valor Custo*'
-            = f.text_field :valor_custo, class: 'form-control input-sm', required: true
-        .col-lg-2
-          .form-group
-            = f.label 'Valor Venda*'
-            = f.text_field :valor_venda, class: 'form-control input-sm', required: true
+          .row
+            .col-lg-2
+              .form-group
+                = f.label 'Unidade*'
+                = f.collection_select :unidade_id, Unidade.all, :id, :descricao, {}, class: 'form-control input-sm', required: true
+                = link_to 'Nova Unidade', new_unidade_path, remote: true, class: "btn btn-primary btn-xs"
+            .col-lg-2
+              .form-group
+                = f.label 'Quantidade estoque*'
+                = f.number_field :quantidade_estoque, class: 'form-control input-sm numero', min: 0, required: true
+            .col-lg-2
+              .form-group
+                = f.label 'Valor Custo*'
+                = f.text_field :valor_custo, class: 'form-control input-sm', required: true
+            .col-lg-2
+              .form-group
+                = f.label 'Valor Venda*'
+                = f.text_field :valor_venda, class: 'form-control input-sm', required: true
 
   = link_to 'Salvar', '#', class: "btn btn-success btn-lg btn-block", id: "salvar_produto"
 

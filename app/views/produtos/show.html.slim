@@ -1,52 +1,51 @@
-.page-header
+section class="content-header"
+    h1
+      'Produto
+
+section class="content"
   .row
-    .col-lg-8
-      h1 Produto
-    .col-lg-4
-      br
-      = link_to 'Editar', edit_produto_path(@produto), class: 'btn btn-warning right'
+    .col-md-12
+      .box
+        div class="box-body"
+          .row
+            .col-lg-5
+              strong
+                'Cod:
+              = @produto.cod
+            .col-lg-7
+              strong
+                'Nome:
+              = @produto.nome
 
-div class="panel panel-default"
-  div class="panel-body"
-    .row
-      .col-lg-5
-        strong
-          'Cod:
-        = @produto.cod
-      .col-lg-7
-        strong
-          'Nome:
-        = @produto.nome
+          .row
+            .col-lg-5
+              strong
+                'Marca:
+              = @produto.marca.nome
+            .col-lg-7
+              strong
+                'Descriçao:
+              = @produto.descricao
+          .row
+            .col-lg-5
+              strong
+                'Categoria produto:
+              = @produto.categoria_produto.descricao
+            .col-lg-7
+              strong
+                'Fornecedor:
+              = link_to @produto.fornecedor.nome, fornecedor_path(@produto.fornecedor)
 
-    .row
-      .col-lg-5
-        strong
-          'Marca:
-        = @produto.marca.nome
-      .col-lg-7
-        strong
-          'Descriçao:
-        = @produto.descricao
-    .row
-      .col-lg-5
-        strong
-          'Categoria produto:
-        = @produto.categoria_produto.descricao
-      .col-lg-7
-        strong
-          'Fornecedor:
-        = link_to @produto.fornecedor.nome, fornecedor_path(@produto.fornecedor)
-
-    .row
-      .col-lg-5
-        strong
-          'Quantidade estoque:
-        = "#{@produto.quantidade_estoque} #{@produto.unidade.sigla}"
-      .col-lg-3
-        strong
-          'Valor custo:
-        = number_to_currency_br(@produto.valor_custo)
-      .col-lg-4
-        strong
-          'Valor venda:
-        = number_to_currency_br(@produto.valor_venda)
+          .row
+            .col-lg-5
+              strong
+                'Quantidade estoque:
+              = "#{@produto.quantidade_estoque} #{@produto.unidade.sigla}"
+            .col-lg-3
+              strong
+                'Valor custo:
+              = number_to_currency_br(@produto.valor_custo)
+            .col-lg-4
+              strong
+                'Valor venda:
+              = number_to_currency_br(@produto.valor_venda)

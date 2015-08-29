@@ -40,7 +40,8 @@ class ProdutosController < ApplicationController
 
     respond_to do |format|
       if @produto.save
-        format.html { redirect_to action: "index", notice: 'Produto salvo com sucesso.' }
+        flash[:notice] = "Produto salvo com sucesso"
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :created, location: @produto }
       else
         format.html { render :new }
@@ -54,7 +55,8 @@ class ProdutosController < ApplicationController
   def update
     respond_to do |format|
       if @produto.update(produto_params)
-        format.html { redirect_to @produto, notice: 'Produto alterado com sucesso.'}
+        flash[:notice] = "Produto alterado com sucesso"
+        format.html { redirect_to action: "index"}
         format.json { render :show, status: :ok, location: @produto }
       else
         format.html { render :edit }
@@ -66,10 +68,13 @@ class ProdutosController < ApplicationController
   # DELETE /produtos/1
   # DELETE /produtos/1.json
   def destroy
-    @produto.destroy
-    respond_to do |format|
-      format.html { redirect_to produtos_url, notice: "Produto foi excluido com sucesso"}
-      format.json { head :no_content }
+    begin
+      @produto.destroy
+      flash[:notice] = "Produto foi excluido com sucesso" 
+    rescue ActiveRecord::DeleteRestrictionError => e
+      flash[:error] = "O Produto não pode ser excluido"
+    ensure
+      redirect_to produtos_url
     end
   end
 

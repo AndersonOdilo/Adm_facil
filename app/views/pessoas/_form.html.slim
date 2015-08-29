@@ -5,23 +5,27 @@
     = link_to_add_association 'Novo endereço', p, :enderecos,
       partial: 'enderecos/endereco_fields',  class: 'btn btn-primary btn-xs'
 
-.form-group
-  div class="panel panel-default"
-    div class="panel-body"
-      = p.label :fones
-      .row
-        .col-lg-12
+.row
+  .form-group
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'Fones
+        div class="box-body"
           = p.simple_fields_for :fones do |fone|
             =render '/fones/fone_fields', f: fone
           .links
             = link_to_add_association 'Novo fone', p, :fones, partial: 'fones/fone_fields', class: 'btn btn-primary btn-xs'
 
-.form-group
-  div class="panel panel-default"
-    div class="panel-body"
-      = p.label :emails
-      .row
-        .col-lg-12
+.row
+  .form-group
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'E-mails
+        div class="box-body"
           = p.simple_fields_for :emails do |email|
             =render '/emails/email_fields', f: email
           .links

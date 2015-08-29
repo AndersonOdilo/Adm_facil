@@ -1,36 +1,38 @@
-.page-header
+section class="content-header"
+  h1
+    'Produtos
+      
+section class="content"
   .row
-    .col-lg-8
-      h1 Produtos
-    .col-lg-4
-      br
-      = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-primary right'
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-info btn-xs right'
+        div class="box-body"
+          table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
+            thead
+              tr
+                th Cod
+                th Nome
+                th Descrição
+                th Valor venda
+                th Marca
+                th Categoria produto
+                th Fornecedor
+                th
 
-
-table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
-  thead
-    tr
-      th Cod
-      th Nome
-      th Descrição
-      th Valor venda
-      th Marca
-      th Categoria produto
-      th Fornecedor
-      th
-
-  tbody
-    - @produtos.order("quantidade_estoque desc").each do |produto|
-      tr
-        td = produto.cod
-        td = produto.nome
-        td = produto.descricao
-        td = number_to_currency_br(produto.valor_venda)
-        td = produto.marca.nome
-        td = produto.categoria_produto.descricao
-        td = produto.fornecedor.pessoa.nome
-        td 
-          .btn-group
-            = link_to 'Abrir', produto, class: 'btn btn-primary btn-xs'
-            = link_to 'Edit', edit_produto_path(produto), class: 'btn btn-warning btn-xs'
-            = link_to 'Excluir', produto, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete
+            tbody
+              - @produtos.order("quantidade_estoque desc").each do |produto|
+                tr
+                  td = produto.cod
+                  td = produto.nome
+                  td = produto.descricao
+                  td = number_to_currency_br(produto.valor_venda)
+                  td = produto.marca.nome
+                  td = produto.categoria_produto.descricao
+                  td = produto.fornecedor.pessoa.nome
+                  td 
+                    .btn-group
+                      = link_to 'Abrir', produto, class: 'btn btn-primary btn-xs'
+                      = link_to 'Edit', edit_produto_path(produto), class: 'btn btn-warning btn-xs'
+                      = link_to 'Excluir', produto, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete

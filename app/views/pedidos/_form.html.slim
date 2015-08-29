@@ -6,94 +6,105 @@
         - @pedido.errors.full_messages.each do |message|
           li = message
 
-  div class="panel panel-default"
-    div class="panel-body"
+  .row
+    .col-md-12
+      .box
+        div class="box-body"
+          .row
+            .col-lg-10
+              .form-group
+                = f.label :cliente
+                = text_field_tag :cliente_nome, nil, class: 'form-control input-sm cliente_nome_autocomplete'
+            .col-lg-1
+              = link_to 'Cadastrar Novo Cliente', new_cliente_path, remote: true, class: 'btn btn-primary btn-xs'
 
-      .row
-        .col-lg-10
-          .form-group
-            = f.label :cliente
-            = text_field_tag :cliente_nome, nil, class: 'form-control input-sm cliente_nome_autocomplete'
-        .col-lg-1
-          = link_to 'Cadastrar Novo Cliente', new_cliente_path, remote: true, class: 'btn btn-primary btn-xs'
+          .row
+            .col-lg-2
+              .form-group
+                = f.label :data
+                = f.date_field :data, class:  'form-control input-sm', value: Time.now.strftime('%Y-%m-%d')
+            .col-lg-2
+              .form-group
+                = f.label :forma_pagamento
+                = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control'
+            .col-lg-3
+              .form-group
+                = label_tag 'Entrega'
+                = select_tag :forma_entrega, options_for_select([["Retirar no local", "1"], ["Entrega domicilio", "2"]]), class: 'form-control'
 
-      .row
-        .col-lg-2
-          .form-group
-            = f.label :data
-            = f.date_field :data, class:  'form-control input-sm', value: Time.now.strftime('%Y-%m-%d')
-        .col-lg-2
-          .form-group
-            = f.label :forma_pagamento
-            = f.collection_select :forma_pagamento_id, FormaPagamento.all, :id, :descricao, {}, class: 'form-control'
-        .col-lg-3
-          .form-group
-            = label_tag 'Entrega'
-            = select_tag :forma_entrega, options_for_select([["Retirar no local", "1"], ["Entrega domicilio", "2"]]), class: 'form-control'
+  .row
+    .col-md-12
+      .box
+        div class="box-body"
+          .row
+            .col-lg-5
+              .form-group
+                = hidden_field_tag :produto_id
+                = label_tag 'Buscar Produto'
+                = text_field_tag :produto_nome, params[:query], class: 'form-control input-sm produto_nome_autocomplete'
+            .col-lg-2
+              strong Preço
+              h4 id="preco"
 
-  div class="panel panel-default"
-    div class="panel-body"
-      .row
-        .col-lg-5
-          .form-group
-            = hidden_field_tag :produto_id
-            = label_tag 'Buscar Produto'
-            = text_field_tag :produto_nome, params[:query], class: 'form-control input-sm produto_nome_autocomplete'
-        .col-lg-2
-          strong Preço
-          h4 id="preco"
+            .col-lg-2
+              strong
+                'Quant. estoq.
+              h4 id="quantidade_estoque"
 
-        .col-lg-2
-          strong
-            'Quant. estoq.
-          h4 id="quantidade_estoque"
+            .col-lg-2
+              .form-group
+                = label_tag 'Quant.'
+                = number_field_tag :produto_quantidade, nil, class: 'form-control input-sm numero', min: 0
+            .col-lg-1
+              = link_to 'Add item', '#', class: 'btn btn-primary btn-xs', id: 'add_item_venda'
 
-        .col-lg-2
-          .form-group
-            = label_tag 'Quant.'
-            = number_field_tag :produto_quantidade, nil, class: 'form-control input-sm numero', min: 0
-        .col-lg-1
-          = link_to 'Add item', '#', class: 'btn btn-primary btn-xs', id: 'add_item_venda'
+  .row
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'Itens Pedido
+        div class="box-body"
+          table class="table table-hover"
+            thead
+              tr
+                th Cod.
+                th Nome
+                th Valor Unid.
+                th Quant.
+                th Unid.
+                th Valor Total
+                th
+            tbody id="itens-pedido"
 
-  div class="panel panel-default"
-    div class="panel-body"
-      h3 Itens Pedido
-      table class="table table-hover"
-        thead
-          tr
-            th Cod.
-            th Nome
-            th Valor Unid.
-            th Quant.
-            th Unid.
-            th Valor Total
-            th
-        tbody id="itens-pedido"
+        div class="panel-footer"
+          .row
+            .col-lg-3
+              div class="input-group"
+                = f.text_field :desconto, class: 'form-control', placeholder: "Desconto"
+                span class="input-group-addon" id="sizing-addon3"
+                  '%
+            .col-lg-2
+              h4
+                'Total desconto:
+            .col-lg-3
+              h4 id="valor_total_desconto"
+            .col-lg-1
+              h4 Total:
+            .col-lg-2
+              h4 id="valor_total"
 
-    div class="panel-footer"
-      .row
-        .col-lg-3
-          div class="input-group"
-            = f.text_field :desconto, class: 'form-control', placeholder: "Desconto"
-            span class="input-group-addon" id="sizing-addon3"
-              '%
-        .col-lg-2
-          h4
-            'Total desconto:
-        .col-lg-3
-          h4 id="valor_total_desconto"
-        .col-lg-1
-          h4 Total:
-        .col-lg-2
-          h4 id="valor_total"
-
-  div class="panel panel-default"
-    div class="panel-body"
-      .row
-        .col-lg-12
-          .form-group
-            = f.label 'Observações'
-            = f.text_area :obs, class: 'form-control input-sm'
+  .row
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'Observações
+          div class="box-body"
+            .row
+              .col-lg-12
+                .form-group
+                  = f.text_area :obs, class: 'form-control input-sm'
 
   = f.hidden_field :funcionario_id, value: current_usuario.funcionario_id
   = f.hidden_field :cliente_id, id: 'cliente_id'

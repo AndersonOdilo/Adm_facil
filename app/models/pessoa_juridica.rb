@@ -4,7 +4,7 @@ class PessoaJuridica < ActiveRecord::Base
     has_many :fones, through: :pessoa
     has_many :emails, through: :pessoa
 
-    validates_uniqueness_of :cnpj, allow_blank: true, message: 'ja existe'
-    validates_uniqueness_of :inscricao_estadual, allow_blank: true, message: 'ja existe'
+    validates_uniqueness_of :cnpj, allow_blank: true, message: 'já existe'
+    validates_uniqueness_of :inscricao_estadual, allow_blank: true, message: 'já existe'
 
 end

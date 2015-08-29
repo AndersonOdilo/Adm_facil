@@ -1,48 +1,113 @@
 <div id="wrapper">
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="/">
-                    AdmFacil
-                </a>
-            </li>
-            <li>
-                <%= link_to 'Clientes', clientes_path %>
-            </li>
-            <li>
-                <%= link_to 'Funcionarios', funcionarios_path %>
-            </li>
-            <li>
-                <%= link_to 'Fornecedores', fornecedores_path %>
-            </li>
-             <li>
-                <%= link_to 'Pedidos', pedidos_path %>
-            </li>
-            <li>
-                <%= link_to 'Orçamentos', orcamentos_path %>
-            </li>
-            <li>
-                <%= link_to 'Produtos', produtos_path %>
-            </li>
-              <li>
-                <%= link_to 'Despesas', despesas_path %>
-            </li>
-            <li>
-                <%= link_to 'Registrar Ponto', pontos_registro_path %>
-            </li>
-            <li>
-                <%= link_to('Sair', destroy_usuario_session_path, method: :delete) %>
-            </li>
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
-
-     <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <%= flash_messages %>
-            <%= yield %>
+    <header class="main-header">
+        <!-- Logo -->
+        <div class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>A</b>DM</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Alpha</b>ADM</span>
         </div>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="hidden-xs"><%= current_usuario.funcionario.pessoa.specific.nome%></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <p>
+                      <%= current_usuario.funcionario.pessoa.specific.nome%> - <%= current_usuario.funcionario.cargo.descricao%>
+                      <small><%= Date.current%></small>
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-right">
+                      <%= link_to('Sair', destroy_usuario_session_path, method: :delete, class: "btn btn-default btn-flat") %>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </header>
+
+     <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">CADASTROS</li>
+            <li>
+              <a href=<%=clientes_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Clientes</span>
+              </a>
+            </li>
+            <li>
+              <a href=<%=pedidos_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Pedidos</span>
+              </a>
+            </li>
+            <li>
+              <a href=<%=orcamentos_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Orçamentos</span>
+              </a>
+            </li>
+            <li>
+            <a href=<%=produtos_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Produtos</span>
+              </a>
+            </li>
+            <li>
+              <a href=<%=fornecedores_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Fornecedores</span>
+              </a>
+            </li>
+            <li>
+              <a href=<%=funcionarios_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Funcionarios</span>
+              </a>
+            </li>  
+            <li>
+              <a href=<%=pontos_registro_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Registrar Ponto</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <div class="content-wrapper">
+        <%= flash_messages %>
+        <%= yield %>
     </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Versão</b> 1.0
+        </div>
+        <strong>Copyright &copy; 2015 <a href="http://github.com/AndersonOdilo">Anderson Odilo</a>.</strong> 
+    </footer>
+
 </div>

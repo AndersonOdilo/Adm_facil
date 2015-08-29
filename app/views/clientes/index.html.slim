@@ -1,34 +1,36 @@
-.page-header
+section class="content-header"
+  h1
+    'Clientes
+section class="content"
   .row
-    .col-lg-8
-      h1 Clientes
-    .col-lg-4
-      br
-      = link_to 'Cadastrar Cliente', new_cliente_path, class: "btn btn-primary btn-sm right"
+    .col-md-12
+      .box
+        div class="box-header with-border"
+          = link_to 'Cadastrar Cliente', new_cliente_path, class: 'btn btn-info btn-xs right'
+        div class="box-body"
+          table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
+            thead
+              tr
+                th Nome
+                th CPF/CNPJ
+                th RG/IE
+                th Limite credito
+                th
+                
 
-table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
-  thead
-    tr
-      th Nome
-      th CPF/CNPJ
-      th RG/IE
-      th Limite credito
-      th
-      
-
-  tbody
-    - @clientes.each do |cliente|
-      tr
-        - if cliente.pessoa.estado_type == 'PessoaFisica'
-          td = cliente.pessoa.specific.nome
-          td = cliente.pessoa.specific.cpf
-          td = cliente.pessoa.specific.rg
-        - else
-          td #{cliente.pessoa.specific.nome}, #{cliente.pessoa.specific.nome_fantasia} 
-          td = cliente.pessoa.specific.cnpj
-          td = cliente.pessoa.specific.inscricao_estadual
-        td = number_to_currency_br(cliente.limite_credito)
-        td 
-          .btn-group
-            = link_to 'Abrir', cliente, class: 'btn btn-primary btn-xs'
-            = link_to 'Excluir', cliente, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o cliente #{cliente.pessoa.nome}?"}, :method => :delete
+            tbody
+              - @clientes.each do |cliente|
+                tr
+                  - if cliente.pessoa.estado_type == 'PessoaFisica'
+                    td = cliente.pessoa.specific.nome
+                    td = cliente.pessoa.specific.cpf
+                    td = cliente.pessoa.specific.rg
+                  - else
+                    td #{cliente.pessoa.specific.nome}, #{cliente.pessoa.specific.nome_fantasia} 
+                    td = cliente.pessoa.specific.cnpj
+                    td = cliente.pessoa.specific.inscricao_estadual
+                  td = number_to_currency_br(cliente.limite_credito)
+                  td 
+                    .btn-group
+                      = link_to 'Abrir', cliente, class: 'btn btn-primary btn-xs'
+                      = link_to 'Excluir', cliente, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o cliente #{cliente.pessoa.nome}?"}, :method => :delete

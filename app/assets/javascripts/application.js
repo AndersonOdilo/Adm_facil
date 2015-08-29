@@ -7,6 +7,8 @@
 //= require dataTables.bootstrap
 //= require accounting.min
 //= require jquery.turbolinks
+//= require app.min
+//= require demo
 //= require turbolinks
 //= require cocoon
 //= require_tree .
