@@ -9,10 +9,11 @@ $(function(){
 	$('#new_cliente').bind('ajax:success', function(event, data, status, xhr){
     $('#cliente_nome').val(data.pessoa.nome);
     $('#pedido_cliente_id').val(data.id);
-    return $('#novo_cliente').modal('hide');
+    $('#novo_cliente').modal('hide');
+    return sweetAlert("Ok...", "Cliente salvo com sucesso", "success");
   });
   $('#new_cliente').bind('ajax:error', function(event, data, status, xhr){
-  	return alert("Erro ao cadastrar o cliente");
+  	return sweetAlert("Oops...", "Erro ao salvar cliente", "error");
   });
 })
 

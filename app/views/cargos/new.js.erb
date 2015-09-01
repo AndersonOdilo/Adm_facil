@@ -7,9 +7,11 @@ $(function() {
   });
   $('#new_cargo').bind("ajax:success", function(event, data, status, xhr) {
     $('#funcionario_cargo_id').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected", "selected"));
-    return $('#novo_cargo').modal('hide');
+    $('#novo_cargo').modal('hide');
+    return sweetAlert("Ok...", "Cargo salvo com sucesso", "success");
   });
   $('#new_cargo').bind("ajax:error", function(event, data, status, xhr) {
-    return alert('Cargo já existe');
+    $('#novo_cargo').modal('hide');
+    return sweetAlert("Oops...", "Esse cargo já existe", "error");
   });
 });

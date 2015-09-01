@@ -87,7 +87,7 @@ section class="content"
                                 th Total
                                 th
                         tbody
-                            - @funcionario.pedidos.order('pedidos.created_at desc').limit(5).each do |venda|
+                            - @funcionario.pedidos.includes(:itens_pedidos).order('pedidos.created_at desc').limit(5).each do |venda|
                                 tr
                                     td = venda.cliente.pessoa.specific.nome
                                     td = venda.data

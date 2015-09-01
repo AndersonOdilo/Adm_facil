@@ -43,6 +43,7 @@
 
   # GET /orcamentos/1/edit
   def edit
+    session[:sub_total] = @orcamento.total
   end
 
   # POST /orcamentos
@@ -52,7 +53,8 @@
     respond_to do |format|
       if !@orcamento.itens_orcamentos.blank?
         if @orcamento.save
-          format.html { redirect_to @orcamento, notice: 'Orçamento salvo com sucesso' }
+          flash[:notice] = "Orçamento salvo com sucesso"
+          format.html { redirect_to @orcamento}
           format.json { render :show, status: :created, location: @orcamento }
         else
           format.html { render :new }
@@ -69,12 +71,17 @@
   # PATCH/PUT /orcamentos/1.json
   def update
     respond_to do |format|
-      if @orcamento.update(orcamento_params)
-        format.html { redirect_to @orcamento, notice: 'Orçamento alterado com sucesso' }
-        format.json { render :show, status: :ok, location: @orcamento }
+      if !@orcamento.itens_orcamentos.blank?
+        if @orcamento.update(orcamento_params)
+          format.html { redirect_to @orcamento, notice: 'Orçamento alterado com sucesso' }
+          format.json { render :show, status: :ok, location: @orcamento }
+        else
+          format.html { render :edit }
+          format.json { render json: @orcamento.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @orcamento.errors, status: :unprocessable_entity }
+        flash[:alert] = 'Adicione itens ao Orçamento'
+        format.html { render :new }
       end
     end
   end
@@ -84,7 +91,8 @@
   def destroy
     @orcamento.destroy
     respond_to do |format|
-      format.html { redirect_to orcamentos_url, notice: 'Orçamento excluido com sucesso' }
+      flash[:notice] = "Orçamento excluido com sucesso"
+      format.html { redirect_to orcamentos_url}
       format.json { head :no_content }
     end
   end

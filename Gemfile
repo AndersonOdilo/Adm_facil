@@ -15,7 +15,6 @@ gem 'jquery-turbolinks'
 gem 'active_record-acts_as'
 gem 'devise'
 gem 'wicked_pdf'
-gem "chartkick"
 gem "rails_12factor", group: :production
 gem 'simple_form'
 gem 'cocoon'
@@ -23,6 +22,7 @@ gem 'has_scope'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'coffee-script-source', '1.8.0'
 gem 'rails_admin'
+gem 'puma'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

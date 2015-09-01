@@ -21,7 +21,7 @@ calcular_parcela = function(valor_entrada, numero_parcelas) {
       numero_parcelas: numero_parcelas
     },
     success: function(data) {
-      return $('#valor_parcela').html(data);
+      return $('#valor_parcela').html(accounting.formatMoney(data, "R$", 2, ".", ","));
     }
   });
 };
@@ -29,19 +29,19 @@ calcular_parcela = function(valor_entrada, numero_parcelas) {
 window.calcular_parcela = calcular_parcela;
 
 $('#finalizar_pagamento').on("click", function() {
-  if ($("#numero_parcela").val() !== "") {
+  if ($("#numero_parcela").val()) {
     return $('#new_pedido').submit();
   } else {
-    return alert('Selecione o número de parcelas');
+    return sweetAlert('Selecione o número de parcelas');
   }
 });
 
 $('#endereco_entrega').on("click", function() {
-  if ($("#numero_parcela").val() !== "") {
+  if ($("#numero_parcela").val()) {
     $('#pagamento_modal').modal('hide');
     $("#endereco_entrega_modal").html("<%= escape_javascript(render partial: 'enderecos/endereco_entrega', locals: {cliente: cliente}) %>");
     return $('#entrega_modal').modal('show');
   } else {
-    return alert('Selecione o número de parcelas');
+    return sweetAlert('Selecione o número de parcelas');
   }
 });

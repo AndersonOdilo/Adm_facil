@@ -14,7 +14,7 @@
             .col-lg-10
               .form-group
                 = f.label :cliente
-                = text_field_tag :cliente_nome, nil, class: 'form-control input-sm cliente_nome_autocomplete'
+                = text_field_tag :cliente_nome, @orcamento.cliente ? @orcamento.cliente.pessoa.specific.nome : '', class: 'form-control input-sm cliente_nome_autocomplete'
             .col-lg-1
               = link_to 'Cadastrar Novo Cliente', new_cliente_path, remote: true, class: 'btn btn-primary btn-xs'
 

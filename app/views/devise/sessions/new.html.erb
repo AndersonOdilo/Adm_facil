@@ -1,101 +1,43 @@
-<style type="text/css">
-/**
- * parallax.css
- * @Author Original @msurguy -> http://bootsnipp.com/snippets/featured/parallax-login-form
- * @Reworked By @kaptenn_com
- * @package PARALLAX LOGIN.
- */
+<div class="login-box">
+  <div class="login-logo">
+    <a href=""><b>Alpha</b>ADM</a>
+  </div><!-- /.login-logo -->
+  <div class="login-box-body">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <p class="login-box-msg"><%= notice %> <%= alert %></p>
+      <div class="form-group has-feedback">
+        <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email", required: true %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Senha", required: true%>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <% if devise_mapping.rememberable? -%>
+              <label><%= f.check_box :remember_me %>Mantenha-me conectado</label>
+            <% end -%>
+          </div>
+        </div><!-- /.col -->
+        <div class="col-xs-4">
+          <%= f.submit "Entrar", class: "btn btn-primary btn-block btn-flat" %>
+        </div><!-- /.col -->
+      </div>
+    <% end %>
 
-    body {
-        background-color: #444;
-        background: url();
+    <%= render "devise/shared/links" %>
 
-    }
-    .form-signin input[type="text"] {
-        margin-bottom: 5px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    .form-signin input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-    .form-signin .form-control {
-        position: relative;
-        font-size: 16px;
-        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-        height: auto;
-        padding: 10px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    .vertical-offset-100 {
-        padding-top: 100px;
-    }
-    .img-responsive {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: auto;
-    }
-    .panel {
-    margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.75);
-    border: 1px solid transparent;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    }
-</style>
+  </div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
 
-<script type="text/javascript">
-    $(document).ready(function() {
-    $(document).mousemove(function(event) {
-        TweenLite.to($("body"),
-        .5, {
-            css: {
-                backgroundPosition: "" + parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / '12') + "px, " + parseInt(event.pageX / '15') + "px " + parseInt(event.pageY / '15') + "px, " + parseInt(event.pageX / '30') + "px " + parseInt(event.pageY / '30') + "px",
-                "background-position": parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / 12) + "px, " + parseInt(event.pageX / 15) + "px " + parseInt(event.pageY / 15) + "px, " + parseInt(event.pageX / 30) + "px " + parseInt(event.pageY / 30) + "px"
-            }
-        })
-    })
-})
+<script type="text/script">
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
 </script>
-
-<script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
-<div class="container">
-    <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="row-fluid user-row">
-                        <img src="http://s11.postimg.org/7kzgji28v/logo_sm_2_mr_1.png" class="img-responsive" alt="Conxole Admin"/>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                        <%= devise_error_messages! %>
-                        <fieldset>
-                            <label class="panel-login">
-                                <div class="login_result">
-                                </div>
-                            </label>
-                            <%= f.text_field :email, autofocus: true, class: 'form-control', placeholder: "E-mail" %>
-                            <br>
-                            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Senha"  %>
-                            <br>
-                            <% if devise_mapping.rememberable? -%>
-                                <div><%= f.check_box :remember_me %> <%= label_tag 'Mantenhame conectado'%>
-                            <% end -%>
-                            </br>
-                            <%= f.submit "Logar", class:'btn btn-lg btn-success btn-block' %>
-                            <%= render "devise/shared/links" %>
-                        </fieldset>
-                    <% end %>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

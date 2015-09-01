@@ -16,8 +16,8 @@ section class="content"
                 th Nome
                 th Descrição
                 th Valor venda
+                th Quant.
                 th Marca
-                th Categoria produto
                 th Fornecedor
                 th
 
@@ -28,11 +28,11 @@ section class="content"
                   td = produto.nome
                   td = produto.descricao
                   td = number_to_currency_br(produto.valor_venda)
+                  td = produto.quantidade_estoque
                   td = produto.marca.nome
-                  td = produto.categoria_produto.descricao
                   td = produto.fornecedor.pessoa.nome
                   td 
                     .btn-group
-                      = link_to 'Abrir', produto, class: 'btn btn-primary btn-xs'
-                      = link_to 'Edit', edit_produto_path(produto), class: 'btn btn-warning btn-xs'
-                      = link_to 'Excluir', produto, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), produto, class: 'btn btn-primary btn-xs', title: 'Abrir'
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_produto_path(produto), class: 'btn btn-warning btn-xs', title: 'Editar'
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), produto, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o produto #{produto.nome}"}, :method => :delete, title: 'Excluir'

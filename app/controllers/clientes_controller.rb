@@ -42,8 +42,7 @@ class ClientesController < ApplicationController
     else
       @cliente.pessoa = PessoaJuridica.new
     end
-    @cliente.update(cliente_params)
-
+    @cliente.assign_attributes(cliente_params)
     respond_to do |format|
       if @cliente.save
         format.html { redirect_to action: "index"}

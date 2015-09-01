@@ -7,10 +7,12 @@ $(function() {
   });
   $('#new_unidade').bind("ajax:success", function(event, data, status, xhr) {
     $('#produto_unidade_id').append($("<option/>").attr("value", data.id).text(data.descricao).attr("selected", "selected"));
-    return $('#nova_unidade').modal('hide');
+    $('#nova_unidade').modal('hide');
+    return sweetAlert("Ok...", "Unidade salva com sucesso", "success");
   });
   $('#new_unidade').bind("ajax:error", function(event, data, status, xhr) {
-    return alert('Esta unidade já existe');
+    $('#nova_unidade').modal('hide');
+    return sweetAlert("Oops...", "Essa unidade já existe", "error");
   });
 });
 

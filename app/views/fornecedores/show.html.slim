@@ -69,7 +69,7 @@ section class="content"
                                 th Valor custo
                                 th
                         tbody
-                            - @fornecedor.produtos.order('produtos.created_at desc').limit(5).each do |produto|
+                            - @fornecedor.produtos.includes(:marca).order('produtos.created_at desc').limit(5).each do |produto|
                                 tr
                                     td = produto.cod
                                     td = produto.nome

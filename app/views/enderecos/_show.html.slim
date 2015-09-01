@@ -6,7 +6,7 @@
           'Endereços:
       div class="box-body"
         ul class="list-group"
-          - enderecos.each do |endereco|
+          - enderecos.includes(logradouro:[cidade:[estado:[:pais]]]).each do |endereco|
             li class="list-group-item"
               = "Logradouro: #{endereco.logradouro.nome},
                Nº #{endereco.numero},

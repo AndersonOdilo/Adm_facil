@@ -25,4 +25,4 @@ section class="content"
                   td = venda.data
                   td = number_to_currency_br(venda.total)
                   td = venda.obs
-                  td = link_to 'Abrir', venda, class: 'btn btn-primary btn-xs'
+                  td = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), venda, class: 'btn btn-primary btn-xs'

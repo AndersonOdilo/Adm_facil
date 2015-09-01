@@ -3,3 +3,4 @@ $("#tr_"+<%= pagamento.id %>+"").addClass("success");
 var data = new Date(""+<%=data.year%>+","+<%=data.month%>+","+<%=data.day%>+"");
 $("#data_pagamento_"+<%= pagamento.id %>+"").html(data.getDate()+"/"+(data.getMonth()+1)+"/"+data.getFullYear());
 $("#botao_"+<%= pagamento.id %>+"").remove();
+return sweetAlert("Ok...", "Pagamento efetuado com sucesso", "success");

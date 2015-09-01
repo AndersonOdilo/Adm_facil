@@ -14,7 +14,7 @@ development:
 production:
   <<: *default
   database: adm_facil_production
-  username: postgress
+  username: postgres
   password: 13101994
   host: localhost
   port: 5432

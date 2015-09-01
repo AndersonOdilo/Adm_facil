@@ -1,15 +1,17 @@
 /*
  *= require dataTables.bootstrap
  *= require pace
+ *= require sweetalert
  *= require AdminLTE.min
- *= require all-skins.min
+ *= require skin-purple
+ *= require purple
  *= require_tree
  *= require_self
  *= require bootstrap.min
  */
 
 .right {
-    float: right !important;
+  float: right !important;
 }
 
 .modal .modal-body {

@@ -29,5 +29,5 @@ section class="content"
                   td = orcamento.obs
                   td 
                     .btn-group
-                      = link_to 'Abrir', orcamento, class: 'btn btn-primary btn-xs'
-                      = link_to 'Excluir', orcamento, class: 'btn btn-danger btn-xs', data: {:confirm => 'Dejesa excluir este orçamento?'}, :method => :delete
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), orcamento, class: 'btn btn-primary btn-xs', title: 'Abrir'
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), orcamento, class: 'btn btn-danger btn-xs', data: {:confirm => 'Dejesa excluir este orçamento?'}, :method => :delete, title: 'Excluir' 

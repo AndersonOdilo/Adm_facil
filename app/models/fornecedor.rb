@@ -4,6 +4,12 @@ class Fornecedor < ActiveRecord::Base
 
   accepts_nested_attributes_for :pessoa
 
+  before_save :alter_id
+  
+  def alter_id
+    self.pessoa_id = self.pessoa.acting_as.id
+  end
+
   def nome
     "#{self.pessoa.specific.nome}"
   end

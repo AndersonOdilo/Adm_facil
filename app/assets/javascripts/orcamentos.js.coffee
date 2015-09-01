@@ -1,12 +1,18 @@
 $ ->
     $('#add_item_orcamento').on "click", ->
-        $.ajax
-            url: '/orcamento/add_item'
-            type: 'post'
-            dataType: 'script'
-            data:
-                produto: $('#produto_id').val()
-                quantidade: $('#produto_quantidade').val()
+        if $('#produto_id').val()
+            if  $('#produto_quantidade').val() > 0
+                $.ajax
+                    url: '/orcamento/add_item'
+                    type: 'post'
+                    dataType: 'script'
+                    data:
+                        produto: $('#produto_id').val()
+                        quantidade: $('#produto_quantidade').val()
+            else 
+                sweetAlert('Quantidade deve ser maior que 0')
+        else
+            sweetAlert('Selecione um Produto')
 
     remover_item =(elemento, produto, quantidade) ->
           $.ajax

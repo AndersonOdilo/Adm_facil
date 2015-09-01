@@ -9,4 +9,4 @@ $ ->
           chave: $(this).val()
         success: (data) ->
           $("#chaveiro").val("")
-          alert(data)
+          sweetAlert(data);

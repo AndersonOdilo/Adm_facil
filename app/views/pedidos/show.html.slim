@@ -45,7 +45,7 @@ section class="content"
                   th Unid.
                   th Valor Total
               tbody id="itens"
-                - @pedido.itens_pedidos.each do |item|
+                - @pedido.itens_pedidos.includes(produto:[:unidade]).each do |item|
                   tr
                     td = item.produto.cod
                     td ="#{item.produto.nome}, #{item.produto.marca.nome}"

@@ -28,11 +28,11 @@ class FuncionariosController < ApplicationController
   def create
     @funcionario = Funcionario.new
     @funcionario.pessoa = PessoaFisica.new
-    @funcionario.update(funcionario_params)
-
+    @funcionario.assign_attributes(funcionario_params)
     respond_to do |format|
-      if @funcionario.save
-        format.html { redirect_to actions: "index", notice: "Funcionario salvo com sucesso"}
+      if  @funcionario.save
+        flash[:notice] = "Funcionario salvo com sucesso"
+        format.html { redirect_to actions: "index"}
         format.json { render :show, status: :created, location: @funcionario }
       else
         format.html { render :new }
@@ -47,7 +47,8 @@ class FuncionariosController < ApplicationController
     @funcionario.pessoa = @funcionario.pessoa.specific
     respond_to do |format|
       if @funcionario.update(funcionario_params)
-        format.html { redirect_to @funcionario, notice: "Funcionario alterado com sucesso"}
+        flash[:notice] = "Funcionario alterado com sucesso"
+        format.html { redirect_to @funcionario}
         format.json { render :show, status: :ok, location: @funcionario }
       else
         format.html { render :edit }
@@ -61,7 +62,8 @@ class FuncionariosController < ApplicationController
   def destroy
     @funcionario.destroy
     respond_to do |format|
-      format.html { redirect_to funcionarios_url, notice: 'Funcionario excluido com sucesso' }
+      flash[:notice] = "Funcionario excluido com sucesso"
+      format.html { redirect_to funcionarios_url}
       format.json { head :no_content }
     end
   end

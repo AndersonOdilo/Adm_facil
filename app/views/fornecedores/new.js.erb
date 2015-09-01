@@ -7,9 +7,10 @@ $(function() {
   });
  	$('#new_fornecedor').bind("ajax:success", function(event, data, status, xhr) {
 	  $('#produto_fornecedor_id').append($("<option/>").attr("value", data.id).text(data.pessoa.nome).attr("selected", "selected"));
-	  return $('#novo_fornecedor').modal('hide');
+	  $('#novo_fornecedor').modal('hide');
+	  return sweetAlert("Ok...", "Fornecedor salvo com sucesso", "success");
 	});
 	$('#new_fornecedor').bind("ajax:error", function(event, data, status, xhr) {
-	  return alert("Erro ao salver fornecedor");
+	  return sweetAlert("Oops...", "Erro ao salvar fornecedor", "error");
 	});
 });

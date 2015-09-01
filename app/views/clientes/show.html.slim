@@ -49,11 +49,11 @@ section class="content"
                 .col-lg-3
                     strong
                         'Limite credito:
-                    = number_to_currency_br(@cliente.limite_credito)
+                    = number_to_currency_br(@cliente.limite_credito) rescue ""
                 .col-lg-4
                     strong
                         'Limite credito disponivel:
-                    = number_to_currency_br(@cliente.limite_disponivel)
+                    = number_to_currency_br(@cliente.limite_disponivel) rescue ""
 
         
   == render partial: 'pessoas/show', locals: {pessoa: @cliente.pessoa}
@@ -102,7 +102,7 @@ section class="content"
                                 th Valor Total
                                 th
                         tbody
-                            - @cliente.pedidos.order("pedidos.created_at desc").limit(5).each do |venda|
+                            - @cliente.pedidos.includes(:itens_pedidos).order("pedidos.created_at desc").limit(5).each do |venda|
                                 tr
                                     td = venda.data
                                     td = number_to_currency_br(venda.total)

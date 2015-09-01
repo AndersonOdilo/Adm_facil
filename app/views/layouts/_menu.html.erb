@@ -21,18 +21,21 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="hidden-xs"><%= current_usuario.funcionario.pessoa.specific.nome%></span>
+                  <span class="glyphicon glyphicon-user"></span><%= current_usuario.funcionario.pessoa.specific.nome rescue 'Admin'%>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <p>
-                      <%= current_usuario.funcionario.pessoa.specific.nome%> - <%= current_usuario.funcionario.cargo.descricao%>
+                      <%= current_usuario.funcionario.pessoa.specific.nome rescue 'Admin'%> - <%= current_usuario.funcionario.cargo.descricao rescue ''%>
                       <small><%= Date.current%></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="/admin" class="btn btn-default btn-flat">Admin</a>
+                    </div>
                     <div class="pull-right">
                       <%= link_to('Sair', destroy_usuario_session_path, method: :delete, class: "btn btn-default btn-flat") %>
                     </div>
@@ -50,7 +53,20 @@
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">CADASTROS</li>
+            <li class="header">NOVO</li>
+             <li>
+              <a href=<%=new_pedido_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Pedido</span>
+              </a>
+            </li>
+             <li>
+              <a href=<%=new_orcamento_path%>>
+                <i class="fa fa-edit"></i>
+                <span>Orçamento</span>
+              </a>
+            </li>
+            <li class="header">INFORMAÇÕES</li>
             <li>
               <a href=<%=clientes_path%>>
                 <i class="fa fa-edit"></i>
@@ -86,12 +102,14 @@
                 <i class="fa fa-edit"></i>
                 <span>Funcionarios</span>
               </a>
-            </li>  
+            </li> 
+            <li class="header">Registrar Ponto</li> 
             <li>
-              <a href=<%=pontos_registro_path%>>
-                <i class="fa fa-edit"></i>
-                <span>Registrar Ponto</span>
-              </a>
+              <div class="sidebar-form">
+                <div class="input-group">
+                  <input id="chaveiro" type="text" name="Registrar Ponto" class="form-control" placeholder="Chaveiro...">
+                </div>
+              </div>
             </li>
           </ul>
         </section>

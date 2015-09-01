@@ -30,5 +30,5 @@ section class="content"
                   td = funcionario.data_admissao
                   td 
                     .btn-group
-                      = link_to 'Abrir', funcionario, class: 'btn btn-primary btn-xs'
-                      = link_to 'Excluir', funcionario, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), funcionario, class: 'btn btn-primary btn-xs', title: 'Abrir'
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), funcionario, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete, title: 'Excluir'

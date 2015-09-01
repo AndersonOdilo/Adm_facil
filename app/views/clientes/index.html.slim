@@ -32,5 +32,5 @@ section class="content"
                   td = number_to_currency_br(cliente.limite_credito)
                   td 
                     .btn-group
-                      = link_to 'Abrir', cliente, class: 'btn btn-primary btn-xs'
-                      = link_to 'Excluir', cliente, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o cliente #{cliente.pessoa.nome}?"}, :method => :delete
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), cliente, class: 'btn btn-primary btn-xs', title: 'Abrir'
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), cliente, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o cliente #{cliente.pessoa.nome}?"}, :method => :delete, title: 'Excluir'

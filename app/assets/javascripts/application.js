@@ -7,6 +7,7 @@
 //= require dataTables.bootstrap
 //= require accounting.min
 //= require jquery.turbolinks
+//= require sweetalert.min
 //= require app.min
 //= require demo
 //= require turbolinks
@@ -19,7 +20,7 @@ var ready = (function() {
   jQuery.extend(jQuery.validator.messages, {
         required: "Campo obrigatorio.",
         remote: "Please fix this field.",
-        email: "Please enter a valid email address.",
+        email: "Informe um e-mail valido.",
         url: "Please enter a valid URL.",
         date: "Data deve ser",
         dateISO: "Please enter a valid date (ISO).",
@@ -29,11 +30,11 @@ var ready = (function() {
         equalTo: "Please enter the same value again.",
         accept: "Please enter a value with a valid extension.",
         maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
-        minlength: jQuery.validator.format("Please enter at least {0} characters."),
+        minlength: jQuery.validator.format("Tamanho de {0} caracteres."),
         rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
         range: jQuery.validator.format("Please enter a value between {0} and {1}."),
         max: jQuery.validator.format("O valor deve ser menor ou igual a {0}."),
-        min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+        min: jQuery.validator.format("O tamanho é de {0} caracteres.")
   });
 
   $.validator.setDefaults({
@@ -88,6 +89,12 @@ var ready = (function() {
     },
     "bDestroy": true
   });
+
+  var url = window.location;
+  $('ul.sidebar-menu a[href="'+ url +'"]').parent().addClass('active');
+  $('ul.sidebar-menu a').filter(function() {
+    return this.href == url;
+  }).parent().addClass('active');
 
   $.rails.allowAction = function(link) {
     if (!link.attr('data-confirm')) {

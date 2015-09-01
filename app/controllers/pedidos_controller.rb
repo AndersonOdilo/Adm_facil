@@ -31,7 +31,7 @@ class PedidosController < ApplicationController
   def finalizar
     if !params[:cliente].blank? and session[:sub_total_venda].to_f > 0 
       if params[:forma_pagamento].to_i == 2
-        if Cliente.find(params[:cliente]).limite_credito >= session[:sub_total_venda].to_f 
+        if Cliente.find(params[:cliente]).limite_disponivel >= session[:sub_total_venda].to_f 
           render 'pagamento', locals: {entrega: params[:entrega], cliente: params[:cliente]}
         else
           render 'erro', locals: {msg: 'Não a limite' }
@@ -84,7 +84,8 @@ class PedidosController < ApplicationController
     @pedido.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i)
     respond_to do |format|
       if @pedido.save
-        format.html { redirect_to @pedido, notice: "Pedido salvo com sucesso"}
+        flash[:notice] = "Pedido salvo com sucesso"
+        format.html { redirect_to @pedido}
         format.json { render :show, status: :created, location: @pedido }
       else
         format.html { render :new }

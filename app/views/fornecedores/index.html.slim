@@ -30,5 +30,5 @@ section class="content"
                     td = fornecedor.pessoa.specific.rg
                   td 
                     .btn-group
-                      = link_to 'abrir', fornecedor, class: 'btn btn-primary btn-xs'
-                      = link_to 'Excluir', fornecedor, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o fornecedor #{fornecedor.pessoa.nome}?"}, :method => :delete
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), fornecedor, class: 'btn btn-primary btn-xs', title: 'Abrir'
+                      = link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), fornecedor, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o fornecedor #{fornecedor.pessoa.nome}?"}, :method => :delete, title: 'Excluir'
