@@ -2,8 +2,8 @@
     == render partial: 'enderecos/show', locals: {enderecos: pessoa.enderecos}
 
 .row
-    - if !pessoa.fones.blank?
-        == render partial: 'fones/show', locals: {fones: pessoa.fones}
+  - if !pessoa.fones.blank?
+      == render partial: 'fones/show', locals: {fones: pessoa.fones}
 
-    - if !pessoa.emails.blank?
-        == render partial: 'emails/show', locals: {emails: pessoa.emails}
+  - if !pessoa.emails.blank?
+      == render partial: 'emails/show', locals: {emails: pessoa.emails}

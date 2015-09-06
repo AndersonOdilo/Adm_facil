@@ -1,0 +1,81 @@
+section class="content-header"
+  h1
+    'Admintração
+
+section class="content"
+  .row 
+    div class="col-lg-4 col-xs-8"
+      div class="small-box bg-aqua"
+        .inner
+          h3
+            = number_to_currency_br(Pedido.total_dia)
+          h4
+            'Total Vendido no Dia
+        .icon
+          i class="fa fa-shopping-cart"
+
+    div class="col-lg-4 col-xs-8"
+      div class="small-box bg-green"
+        .inner
+          h3
+            = number_to_currency_br(Pedido.total_mes)
+          h4
+            'Total Vendido no Mês
+        .icon
+          i class="fa fa-shopping-cart"
+
+    div class="col-lg-4 col-xs-8"
+      div class="small-box bg-yellow"
+        .inner
+          h3
+            = number_to_currency_br(PagamentoVenda.total_receber_mes)
+          h4
+            'Total a Receber no Mês
+        .icon
+          i class="fa fa-shopping-cart"
+
+  .row
+    div class="col-lg-4 col-xs-8"
+      div class="small-box bg-red"
+        .inner
+          h3
+            = number_to_currency_br(PagamentoVenda.total_vencido)
+          h4
+            'Pagamentos Vencidos
+        .icon
+          i class="fa fa-shopping-cart"
+
+    div class="col-lg-4 col-xs-8"
+      div class="small-box bg-aqua"
+        .inner
+          h3
+            = number_to_currency_br(Orcamento.total_mes)
+          h4
+            'Total Orçado no Mês
+        .icon
+          i class="fa fa-shopping-cart"
+
+  .box
+    div class="box-header with-border"
+      h3 class="box-title"
+        'Relatório
+    .box-body
+      .row
+        .col-lg-3
+          .form-grouo
+            = label_tag 'Data Inicial'
+            = date_field_tag :data_inicial, nil, class:'form-control', id: 'data_inicial'
+        .col-lg-3
+          .form-grouo
+            = label_tag 'Data Final'
+            = date_field_tag :data_final, nil, class:'form-control', id: 'data_final'
+        .col-lg-2
+          br
+          button class="btn btn-primary" id="gerar_relatorio"
+            'Gerar Relatório
+        .col-lg-1
+          br
+          a href="" class="btn btn-warning" id="imprimir_relatorio" style="display: none"
+            'imprimir
+
+  #relatorio

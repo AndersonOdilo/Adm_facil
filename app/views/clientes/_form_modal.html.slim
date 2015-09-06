@@ -6,7 +6,7 @@ div class="modal fade" id="novo_cliente" tabindex="-1" role="dialog" aria-labell
             span aria-hidden="true" &times
         h2 class="modal-title" id="myModalLabel"
             'Novo Cliente
-      div class="modal-body"
+      div class="modal-body" style="background-color: #ECF0F5;"
 
        = simple_form_for @cliente,remote: true, format: 'json', html: {id: 'new_cliente'} do |f|
 

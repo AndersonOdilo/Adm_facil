@@ -1,5 +1,7 @@
 class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
+  has_scope :em_falta, type: :boolean
+  has_scope :disponivel, type: :boolean
 
   def autocomplete
     produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
@@ -13,10 +15,14 @@ class ProdutosController < ApplicationController
   # GET /produtos.json
   def index
     if params[:fornecedor]
-      @produtos = Produto.all.includes(:marca, :fornecedor, :categoria_produto).fornecedor(params[:fornecedor])
+      @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).fornecedor(params[:fornecedor])
     else
-      @produtos = Produto.all.includes(:marca, :fornecedor, :categoria_produto)
+      @produtos = apply_scopes(Produto).includes(:marca, :fornecedor, :categoria_produto)
     end
+    respond_to do |format|
+      format.html 
+      format.pdf {render pdf: "Produtos"} 
+    end 
   end
 
   # GET /produtos/1

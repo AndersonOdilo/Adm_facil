@@ -22,7 +22,7 @@
   # GET /orcamentos
   # GET /orcamentos.json
   def index
-    @orcamentos = Orcamento.all.includes(cliente: [:pessoa]).order("orcamentos.created_at desc")
+    @orcamentos = Orcamento.includes(cliente: [:pessoa]).order("orcamentos.created_at desc")
   end
 
   # GET /orcamentos/1

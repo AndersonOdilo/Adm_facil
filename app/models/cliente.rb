@@ -12,7 +12,7 @@ class Cliente < ActiveRecord::Base
   end
 
   def limite_disponivel
-  	total = PagamentoVenda.em_aberto(self.id).collect{|pagamento| pagamento.valor}.sum
+  	total = PagamentoVenda.em_aberto(self.id).sum(:valor)
   	self.limite_credito - total
   end
 

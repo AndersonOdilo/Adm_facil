@@ -6,7 +6,7 @@ div class="modal fade" id="novo_fornecedor" tabindex="-1" role="dialog" aria-lab
             span aria-hidden="true" &times
         h2 class="modal-title" id="myModalLabel"
             'Novo Fornecedor
-      div class="modal-body"
+      div class="modal-body" style="background: #ECF0F5;"
         = simple_form_for @fornecedor, remote: true, format: 'json', html: {id: 'new_fornecedor'} do |f|
 
           == render partial: 'pessoas/pessoa_fisica_ou_juridica', locals: {f: f}

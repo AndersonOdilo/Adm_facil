@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>AdmFacil</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<% if usuario_signed_in? %>
-  <body class="hold-transition skin-purple sidebar-mini" width="100%">
-<%else%>
-  <body class="hold-transition login-page" width="100%">
-<%end%>
-    <% if usuario_signed_in? %>
-        <%= render 'layouts/menu' %>
-    <%else%>
-        <%= yield %>
-    <%end%>
-</body>
+  <head>
+    <title>AdmFacil</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <% if usuario_signed_in? %>
+    <body class="skin-purple sidebar-mini">
+  <%else%>
+    <body class="hold-transition login-page">
+  <%end%>
+      <% if usuario_signed_in? %>
+          <%= render 'layouts/menu' %>
+      <%else%>
+          <%= yield %>
+      <%end%>
+  </body>
 </html>

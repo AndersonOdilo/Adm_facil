@@ -11,7 +11,7 @@ class ClientesController < ApplicationController
   # GET /clientes
   # GET /clientes.json
   def index
-    @clientes = Cliente.all.includes(:pessoa)
+    @clientes = Cliente.includes(:pessoa)
   end
 
   # GET /clientes/1

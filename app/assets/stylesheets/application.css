@@ -1,10 +1,9 @@
 /*
- *= require dataTables.bootstrap
  *= require pace
  *= require sweetalert
+ *= require dataTables.bootstrap
  *= require AdminLTE.min
  *= require skin-purple
- *= require purple
  *= require_tree
  *= require_self
  *= require bootstrap.min

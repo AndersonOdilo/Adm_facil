@@ -9,4 +9,6 @@ class Produto < ActiveRecord::Base
   validates_uniqueness_of :cod, allow_blank: true, message: 'já existe'
 
   scope :fornecedor, ->(id) {where(fornecedor_id: id)}
+  scope :em_falta, -> {where(quantidade_estoque: 0)}
+  scope :disponivel, -> {where('quantidade_estoque > 0')}
 end

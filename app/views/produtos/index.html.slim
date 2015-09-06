@@ -1,12 +1,28 @@
 section class="content-header"
   h1
     'Produtos
-      
 section class="content"
   .row
     .col-md-12
       .box
         div class="box-header with-border"
+          select id="filtro-produtos"
+            option value=""
+              'Todos
+            - if params[:disponivel]
+              option value="?disponivel=true" selected="selected"
+                'Disponiveis
+            - else
+              option value="?disponivel=true"
+                'Disponiveis
+            - if params[:em_falta]
+              option value="?em_falta=true" selected="selected"
+                'Em falta 
+            - else
+              option value="?em_falta=true"
+                'Em falta 
+
+          = link_to 'Imprimir', '', class: 'btn btn-warning btn-xs right', id: 'imprimir-produtos'
           = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-info btn-xs right'
         div class="box-body"
           table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"

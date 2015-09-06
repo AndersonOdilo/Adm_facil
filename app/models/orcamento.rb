@@ -6,8 +6,14 @@ class Orcamento < ActiveRecord::Base
 
   accepts_nested_attributes_for :itens_orcamentos
 
+  scope :do_mes, -> {where('data >= ?', Date.today.beginning_of_month)}
+
   def self.total_geral
-      Orcamento.all.collect {|orcamento| orcamento.total}.sum
+    self.includes(:itens_orcamentos).collect{|oracamento| oracamento.total }.sum
+  end
+
+  def self.total_mes
+    self.do_mes.includes(:itens_orcamentos).collect{|oracamento| oracamento.total }.sum
   end
 
   def total
@@ -15,7 +21,7 @@ class Orcamento < ActiveRecord::Base
   end
 
   def total_desconto
-    total_desconto = self.total - (self.total * desconto / 100)
+    self.total - (self.total * desconto / 100)
   end
 
 end

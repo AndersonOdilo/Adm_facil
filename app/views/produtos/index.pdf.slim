@@ -1,0 +1,32 @@
+.box
+  div class="box-header with-border"
+    h1 
+      - if params[:disponivel]
+        'Produtos em Estoque
+      -elsif params[:em_falta]
+        'Produtos em Falta
+      -else
+        'Todos Pordutos
+  div class="box-body"
+    table id="tabela" class="table"
+      thead
+        tr
+          th Cod
+          th Nome
+          th Descrição
+          th Valor venda
+          th Quant.
+          th Marca
+          th Fornecedor
+
+      tbody
+        - @produtos.order("quantidade_estoque desc").each do |produto|
+          tr
+            td = produto.cod
+            td = produto.nome
+            td = produto.descricao
+            td = number_to_currency_br(produto.valor_venda)
+            td = produto.quantidade_estoque
+            td = produto.marca.nome
+            td = produto.fornecedor.pessoa.nome
+        

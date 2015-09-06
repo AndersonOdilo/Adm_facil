@@ -32,11 +32,11 @@ class Despesa < ActiveRecord::Base
   end
 
   def total
-    self.despesas_pagamentos.collect {|pagamento| pagamento.valor}.sum
+    self.despesas_pagamentos.sum(:valor)
   end
 
   def total_pago
-    self.despesas_pagamentos.reject{|pagamento| !pagamento.data_pagamento.nil}.collect{|pagamento| pagamento.valor}.sum
+    self.despesas_pagamentos.reject{|pagamento| !pagamento.data_pagamento.nil}.sum(:valor)
   end
 
 end

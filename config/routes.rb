@@ -37,6 +37,12 @@ Rails.application.routes.draw do
 
   resources :enderecos
 
+  get 'financeiro' => 'administrativo#index'
+
+  match 'financeiro/relatorio', to: "administrativo#relatorio", via: [:post]
+
+  get 'pais/estados/:id' => 'paises#buscar_estados'
+
   get 'estado/cidades/:id' => 'estados#buscar_cidades'
 
   get 'cidade/ruas/:id' => "cidades#buscar_ruas"

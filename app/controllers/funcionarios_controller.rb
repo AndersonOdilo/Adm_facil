@@ -4,7 +4,7 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios
   # GET /funcionarios.json
   def index
-    @funcionarios = Funcionario.all.includes(:pessoa)
+    @funcionarios = Funcionario.includes(:pessoa)
   end
 
   # GET /funcionarios/1

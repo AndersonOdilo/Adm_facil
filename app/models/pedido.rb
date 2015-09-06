@@ -12,6 +12,12 @@ class Pedido < ActiveRecord::Base
 
   scope :cliente, ->(id) {where(cliente_id: id)}
   scope :funcionario, ->(id) {where(funcionario_id: id)}
+  scope :do_dia, -> {where(data: Date.current)}
+  scope :do_mes, -> {where('data >= ?', Date.today.beginning_of_month)}
+
+  def self.periodo(inicio, fim)
+    where(data: inicio..fim)
+  end
 
   def baixar_estoque
     self.itens_pedidos.each do |item|
@@ -54,7 +60,15 @@ class Pedido < ActiveRecord::Base
   end
 
   def self.total_geral
-    Pedido.all.collect {|pedido| pedido.total}.sum
+    self.includes(:itens_pedidos).collect{|pedido| pedido.total}.sum
+  end
+
+  def self.total_dia
+    self.do_dia.includes(:itens_pedidos).collect{|pedido| pedido.total}.sum
+  end
+
+  def self.total_mes
+    self.do_mes.includes(:itens_pedidos).collect{|pedido| pedido.total}.sum
   end
 
   def total
@@ -62,7 +76,11 @@ class Pedido < ActiveRecord::Base
   end
 
   def total_desconto
-    total_desconto = self.total - (self.total * desconto / 100)
+    self.total - (self.total * desconto / 100)
+  end
+
+  def self.calcular_total(lista)
+    lista.collect {|venda| venda.total}.sum
   end
 
 end

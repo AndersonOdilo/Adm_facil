@@ -50,11 +50,11 @@ class PedidosController < ApplicationController
   # GET /pedidos.json
   def index
     if params[:cliente]
-      @pedido = Pedido.all.includes(cliente: [:pessoa]).cliente(params[:cliente]).order("pedidos.created_at desc")
+      @pedido = Pedido.includes(cliente: [:pessoa]).cliente(params[:cliente]).order("pedidos.created_at desc")
     elsif params[:funcionario]
-      @pedido = Pedido.all.includes(cliente: [:pessoa]).funcionario(params[:funcionario]).order("pedidos.created_at desc")
+      @pedido = Pedido.includes(cliente: [:pessoa]).funcionario(params[:funcionario]).order("pedidos.created_at desc")
     else
-      @pedido = Pedido.all.includes(cliente: [:pessoa]).order("pedidos.created_at desc")
+      @pedido = Pedido.includes(cliente: [:pessoa]).order("pedidos.created_at desc")
     end
   end
 
