@@ -1,6 +1,7 @@
 $ ->
-  $("#chaveiro").on "keypress", ->
-    if $(this).val().length == 10
+  $("#chaveiro").keypress (e) ->
+    tecla = if e.keyCode then e.keyCode else e.which
+    if tecla == 13
       $.ajax
         url: '/pontos/registrar'
         type: 'post'
@@ -10,3 +11,5 @@ $ ->
         success: (data) ->
           $("#chaveiro").val("")
           sweetAlert(data);
+    return
+

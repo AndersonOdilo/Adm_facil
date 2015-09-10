@@ -8,9 +8,9 @@ div class="modal fade" id="entrega_modal" tabindex="-1" role="dialog" aria-label
           'Endereco de Entrega
       div class="modal-body"
         .row
-          strong Selecione uma opçao:
-          ul class="list-group"
-            .col-xs-12
+          .col-xs-12
+            strong Selecione uma opçao:
+            ul class="list-group"
               - Cliente.find(cliente.to_i).pessoa.enderecos.each do |endereco|
                   li class="list-group-item"
                     = radio_button("pedido", "endereco", endereco.id)

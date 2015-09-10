@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709133628) do
+ActiveRecord::Schema.define(version: 20150910003441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(version: 20150709133628) do
     t.integer  "estoque_id"
     t.integer  "unidade_id"
     t.integer  "quantidade_estoque"
+    t.integer  "nivel_alerta"
   end
 
   add_index "produtos", ["categoria_produto_id"], name: "index_produtos_on_categoria_produto_id", using: :btree
@@ -314,6 +315,7 @@ ActiveRecord::Schema.define(version: 20150709133628) do
     t.integer  "funcionario_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
   add_index "usuarios", ["email"], name: "index_usuarios_on_email", unique: true, using: :btree

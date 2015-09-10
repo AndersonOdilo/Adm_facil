@@ -29,7 +29,7 @@ class PedidosController < ApplicationController
   end
 
   def finalizar
-    if !params[:cliente].blank? and session[:sub_total_venda].to_f > 0 
+    if session[:sub_total_venda].to_f > 0 
       if params[:forma_pagamento].to_i == 2
         if Cliente.find(params[:cliente]).limite_disponivel >= session[:sub_total_venda].to_f 
           render 'pagamento', locals: {entrega: params[:entrega], cliente: params[:cliente]}
@@ -42,7 +42,7 @@ class PedidosController < ApplicationController
         render 'finalizar', locals: {entrega: params[:entrega]}
       end
     else
-      render 'erro', locals: {msg: 'Busque ou cadastre um cliente, ou adicione intens ao pedido' }
+      render 'erro', locals: {msg: 'Adicione itens ao pedido' }
     end
   end
 

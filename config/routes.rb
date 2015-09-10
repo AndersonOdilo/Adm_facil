@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   get 'financeiro' => 'administrativo#index'
 
-  match 'financeiro/relatorio', to: "administrativo#relatorio", via: [:post]
+  match 'financeiro/relatorio', to: "administrativo#relatorio", via: [:post, :get]
 
   get 'pais/estados/:id' => 'paises#buscar_estados'
 

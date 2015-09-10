@@ -87,7 +87,7 @@ section class="content"
                                 th Total
                                 th
                         tbody
-                            - @funcionario.pedidos.includes(:itens_pedidos).order('pedidos.created_at desc').limit(5).each do |venda|
+                            - @funcionario.pedidos.includes(:itens_pedidos, cliente:[:pessoa]).order('pedidos.created_at desc').limit(5).each do |venda|
                                 tr
                                     td = venda.cliente.pessoa.specific.nome
                                     td = venda.data
@@ -99,7 +99,7 @@ section class="content"
             div class="box-header with-border"
                 h3 class="box-title"
                     'Ultimos pontos
-                = link_to 'Todos Pontos', pedidos_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs right'
+                = link_to 'Todos Pontos', '', class: 'btn btn-warning btn-xs right'
                 div class="box-body"    
                     table class="table table-striped"
                         thead
@@ -109,8 +109,8 @@ section class="content"
                         tbody
                             - @funcionario.pontos.order('pontos.created_at desc').limit(5).each do |ponto|
                                 tr
-                                    td = "#{ponto.data_entrada} #{ponto.hora_entrada}"
-                                    td = "#{ponto.data_saida} #{ponto.hora_saida}"
+                                    td = "Dia #{ponto.data_entrada} as #{ponto.hora_entrada}"
+                                    td = "Dia #{ponto.data_saida} as #{ponto.hora_saida}"
 
 
 

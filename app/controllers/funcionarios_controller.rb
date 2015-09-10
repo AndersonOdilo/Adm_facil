@@ -1,4 +1,5 @@
 class FuncionariosController < ApplicationController
+  before_filter :usuario_admin
   before_action :set_funcionario, only: [:show, :edit, :update, :destroy]
 
   # GET /funcionarios
