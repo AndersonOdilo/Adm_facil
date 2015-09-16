@@ -13,7 +13,7 @@ div class="modal fade" id="entrega_modal" tabindex="-1" role="dialog" aria-label
             ul class="list-group"
               - Cliente.find(cliente.to_i).pessoa.enderecos.each do |endereco|
                   li class="list-group-item"
-                    = radio_button("pedido", "endereco", endereco.id)
+                    = radio_button("pedido", "endereco_id", endereco.id)
                     = "Logradouro: #{endereco.logradouro.nome},
                      Nº #{endereco.numero},
                      Complemento: #{endereco.complemento},
@@ -23,7 +23,7 @@ div class="modal fade" id="entrega_modal" tabindex="-1" role="dialog" aria-label
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"
           'Fechar
-        = link_to 'Finalizar', '#', class: "btn btn-success", id: 'finalizar_pagamento'
+        = link_to 'Finalizar', '#', class: "btn btn-success", id: 'finalizar_endereco_entrega'
 
 
 

@@ -6,7 +6,7 @@ class Orcamento < ActiveRecord::Base
 
   accepts_nested_attributes_for :itens_orcamentos
 
-  scope :do_mes, -> {where('data >= ?', Date.today.beginning_of_month)}
+  scope :do_mes, -> {where(data: Date.current.beginning_of_month..Date.current.end_of_month)}
 
   def self.total_geral
     self.includes(:itens_orcamentos).collect{|oracamento| oracamento.total }.sum

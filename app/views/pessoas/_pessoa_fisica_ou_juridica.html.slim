@@ -1,4 +1,4 @@
-- if f.object.id.nil?
+- if f.object.id.nil? and !f.object.errors.any?
   .form-group
     div class="btn-group" role="group" aria-label="..."
         = link_to 'Pessoa Fisica', '#', class: 'btn btn-default', id: "add_pessoa_fisica"

@@ -45,3 +45,11 @@ $('#endereco_entrega').on("click", function() {
     return sweetAlert('Selecione o número de parcelas');
   }
 });
+
+$('#finalizar_endereco_entrega').on("click", function(){
+  if ($('#pedido_endereco_entrega').val()){
+    return $('#new_pedido').submit();
+  }else{
+    return sweetAlert('Selecione um endereço de entrega');
+  }
+});

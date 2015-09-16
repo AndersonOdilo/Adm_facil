@@ -55,6 +55,16 @@ section class="content"
         .icon
           i class="fa fa-shopping-cart"
 
+    div class="col-lg-4 col-xs-8"
+      div class="small-box bg-green"
+        .inner
+          h3
+            = number_to_currency_br(PagamentoVenda.total_recebido_mes)
+          h4
+            'Total Recebido no Mês
+        .icon
+          i class="fa fa-shopping-cart"
+
   .box
     div class="box-header with-border"
       h3 class="box-title"

@@ -1,2 +1,10 @@
 $("#endereco_entrega_modal").html("<%= escape_javascript(render partial: 'enderecos/endereco_entrega', locals: {cliente: cliente}) %>");
 $('#entrega_modal').modal('show');
+
+$('#finalizar_endereco_entrega').on("click", function(){
+ 	if ($('#pedido_endereco_entrega').val()){
+    return $('#new_pedido').submit();
+  }else{
+    return sweetAlert('Selecione um endereço de entrega');
+  }
+});

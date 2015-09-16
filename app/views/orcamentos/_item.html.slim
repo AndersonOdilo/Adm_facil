@@ -8,7 +8,8 @@ tr
         = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
         = hidden_field_tag 'orcamento[itens_orcamentos_attributes][][preco]', item.preco
     td
-        = number_field_tag 'orcamento[itens_orcamentos_attributes][][quantidade]', item.quantidade, min: 0
+        = item.quantidade
+        = hidden_field_tag 'orcamento[itens_orcamentos_attributes][][quantidade]', item.quantidade, min: 0
     td
         = item.produto.unidade.sigla
     td

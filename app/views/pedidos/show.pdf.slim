@@ -4,102 +4,111 @@ div class="panel panel-default"
             'Venda #{@pedido.id}
     div class="panel-body"
         h3
-            =@pedido.cliente.pessoa.nome
+            'Cliente #{@pedido.cliente.pessoa.nome}
         .row
-          .col-xs-4
+          .col-xs-8
             strong Funcionario: </strong>
-            = @pedido.funcionario.pessoa.specific.nome
+            = @pedido.funcionario.pessoa.nome
+        .row
+          .col-xs-5
+            strong e-mail: </strong>
+            = @pedido.funcionario.pessoa.emails.first.descricao rescue ''
           .col-xs-3
             strong fone: </strong>
             = @pedido.funcionario.pessoa.fones.first.numero rescue ''
-          .col-xs-4
-            strong e-mail: </strong>
-            = @pedido.funcionario.pessoa.emails.first.descricao rescue ''
 
         .row
+          .col-xs-5
+            strong Forma pagamento: </strog>
+            = @pedido.forma_pagamento.descricao
           .col-xs-4
             strong Data emissao: </strog>
             = @pedido.data
-          .col-xs-4
-            strong Forma pagamento: </strog>
-            = @pedido.forma_pagamento.descricao
 
-        br
-        div class="panel panel-default"
-            div class="panel-body"
-              h4
-                'Itens Pedido
-              #itens_pedido
-                table class="table table-striped"
-                  thead
-                    tr
-                      th Cod.
-                      th Nome
-                      th Valor Unid.
-                      th Quant.
-                      th Unid.
-                      th Valor Total
-                  tbody id="itens"
-                  - @pedido.itens_pedidos.each do |item|
-                    tr
-                        td = item.produto.cod
-                        td ="#{item.produto.nome}, #{item.produto.marca.nome}"
-                        td = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
-                        td = item.quantidade
-                        td = item.produto.unidade.sigla
-                        td = number_to_currency(item.preco_total, unit: 'R$', separator: ",", delimiter: ".")
-            div class="panel-footer"
-              .row
-                - if @pedido.desconto
-                    .col-xs-3
-                        h4
-                            = "Desconto: #{number_to_percentage(@pedido.desconto, precision: 0)}"
-                    .col-xs-4
-                        h4
-                            ="Total desc.  #{number_to_currency(@pedido.total_desconto, unit: 'R$', separator: ",", delimiter: ".")}"
-                    .col-xs-1
+          .col-xs-3
+            - if @pedido.endereco_id.nil?
+              strong 
+                'Retirado no local
+            -else
+              strong
+                'Entrega domicilo
+
+        
+div class="panel panel-default"
+    div class="panel-body"
+      h4
+        'Itens Pedido
+      #itens_pedido
+        table class="table table-striped"
+          thead
+            tr
+              th Cod.
+              th Nome
+              th Valor Unid.
+              th Quant.
+              th Unid.
+              th Valor Total
+          tbody id="itens"
+          - @pedido.itens_pedidos.each do |item|
+            tr
+                td = item.produto.cod
+                td ="#{item.produto.nome}, #{item.produto.marca.nome}"
+                td = number_to_currency_br(item.preco)
+                td = item.quantidade
+                td = item.produto.unidade.sigla
+                td = number_to_currency_br(item.preco_total)
+    div class="panel-footer"
+      .row
+        - if @pedido.desconto
+            .col-xs-3
+                h4
+                    = "Desconto: #{number_to_percentage(@pedido.desconto, precision: 0)}"
+            .col-xs-4
+                h4
+                    ="Total desc.  #{number_to_currency_br(@pedido.total_desconto)}"
+            .col-xs-1
+        - else
+            .col-xs-9
+        .col-xs-1
+          h4 Total
+        .col-xs-2
+          h4
+            = number_to_currency_br(@pedido.total)
+
+.row
+  .col-xs-6
+    div class="panel panel-default"
+        div class="panel-body"
+          h4
+            'Pagamentos
+          table class="table table-striped"
+            thead
+              tr
+                th 
+                th Data vencimento
+                th Data pagamento
+                th Valor
+            tbody id="itens"
+              - @pedido.pagamentos_vendas.includes(:produto).each do |pagamento|
+                - if pagamento.data_pagamento != nil
+                  - classe = "success"
+                - elsif pagamento.data_vencimento < Date.today
+                  -classe ="warning"
                 - else
-                    .col-xs-9
-                .col-xs-1
-                  h4 Total
-                .col-xs-2
-                  h4
-                    = number_to_currency(@pedido.total, unit: 'R$', separator: ",", delimiter: ".")
+                  - classe ="info"
 
-        .row
-          .col-lg-6
-            div class="panel panel-default"
-                div class="panel-body"
-                  h4
-                    'Pagamentos
-                  table class="table table-striped"
-                    thead
-                      tr
-                        th 
-                        th Data vencimento
-                        th Data pagamento
-                        th Valor
-                    tbody id="itens"
-                      - @pedido.pagamentos_vendas.each do |pagamento|
-                        - if pagamento.data_pagamento != nil
-                          - classe = "success"
-                        - elsif pagamento.data_vencimento < Date.today
-                          -classe ="warning"
-                        - else
-                          - classe ="info"
+                tr class="#{classe}"
+                  td = pagamento.id
+                  td = pagamento.data_vencimento
+                  td = pagamento.data_pagamento
+                  td = number_to_currency_br(pagamento.valor)
 
-                        tr class="#{classe}"
-                          td = pagamento.id
-                          td = pagamento.data_vencimento
-                          td = pagamento.data_pagamento
-                          td = number_to_currency(pagamento.valor, unit: 'R$', separator: ",", delimiter: ".")
-
-          - if !@pedido.obs.blank?
-            .col-lg-4
-              div class="panel panel-default"
-                  div class="panel-body"
-                    h4
-                      'Observacoes
-                    p
-                      = @pedido.obs
+  - if !@pedido.obs.blank?
+    .col-xs-4
+      div class="panel panel-default"
+          div class="panel-body"
+            h4
+              'Observacoes
+            p
+              = @pedido.obs
 

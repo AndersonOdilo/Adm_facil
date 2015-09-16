@@ -13,7 +13,7 @@ class Pedido < ActiveRecord::Base
   scope :cliente, ->(id) {where(cliente_id: id)}
   scope :funcionario, ->(id) {where(funcionario_id: id)}
   scope :do_dia, -> {where(data: Date.current)}
-  scope :do_mes, -> {where('data >= ?', Date.today.beginning_of_month)}
+  scope :do_mes, -> {where(data: Date.current.beginning_of_month..Date.current.end_of_month)}
 
   def self.periodo(inicio, fim)
     where(data: inicio..fim)

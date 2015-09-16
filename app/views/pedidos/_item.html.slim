@@ -8,7 +8,8 @@ tr class="item"
         = number_to_currency(item.preco, unit: 'R$', separator: ",", delimiter: ".")
         = hidden_field_tag 'pedido[itens_pedidos_attributes][][preco]', item.preco
     td
-        = number_field_tag 'pedido[itens_pedidos_attributes][][quantidade]', item.quantidade, min: 0
+        = item.quantidade
+        = hiden_field_tag 'pedido[itens_pedidos_attributes][][quantidade]', item.quantidade
     td
         = item.produto.unidade.sigla
     td

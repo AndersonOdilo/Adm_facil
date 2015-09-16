@@ -3,7 +3,7 @@ section class="content-header"
     'Produtos
 section class="content"
   .row
-    .col-md-12
+    .col-lg-12
       .box
         div class="box-header with-border"
           select id="filtro-produtos"
@@ -22,15 +22,16 @@ section class="content"
               option value="?em_falta=true"
                 'Em falta 
 
-          = link_to 'Imprimir', '', class: 'btn btn-warning btn-xs right', id: 'imprimir-produtos'
-          = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-info btn-xs right'
+          div class="btn-group right"
+            = link_to 'Imprimir', '', class: 'btn btn-warning btn-xs', id: 'imprimir-produtos'
+            = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-info btn-xs'
+
         div class="box-body"
-          table id="tabela" class="table table-striped table-bordered" cellspacing="0" width="100%"
+          table id="tabela" class="table table-bordered table-hover dataTable"
             thead
               tr
                 th Cod
                 th Nome
-                th Descrição
                 th Valor venda
                 th Quant.
                 th Marca
@@ -42,7 +43,6 @@ section class="content"
                 tr
                   td = produto.cod
                   td = produto.nome
-                  td = produto.descricao
                   td = number_to_currency_br(produto.valor_venda)
                   td = produto.quantidade_estoque
                   td = produto.marca.nome

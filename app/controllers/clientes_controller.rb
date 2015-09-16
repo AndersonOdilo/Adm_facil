@@ -60,7 +60,7 @@ class ClientesController < ApplicationController
     @cliente.pessoa = @cliente.pessoa.specific
     respond_to do |format|
       if @cliente.update(cliente_params)
-        format.html { redirect_to act@cliente, notice: "Cliente alterado com sucesso"}
+        format.html { redirect_to @cliente, notice: "Cliente alterado com sucesso"}
         format.json { render :show, status: :ok, location: @cliente }
       else
         format.html { render :edit }
