@@ -1,16 +1,12 @@
 class Endereco < ActiveRecord::Base
-  belongs_to :logradouro
   belongs_to :pessoa
-
-  def cidade
-    self.logradouro.cidade.nome
-  end
+  belongs_to :cidade
 
   def estado
-    self.logradouro.cidade.estado.nome
+    self.cidade.estado.sigla
   end
 
   def pais
-    self.logradouro.cidade.estado.pais.nome
+    self.cidade.estado.pais.sigla
   end
 end

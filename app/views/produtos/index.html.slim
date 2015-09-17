@@ -23,7 +23,7 @@ section class="content"
                 'Em falta 
 
           div class="btn-group right"
-            = link_to 'Imprimir', '', class: 'btn btn-warning btn-xs', id: 'imprimir-produtos'
+            = link_to 'Imprimir', produtos_path(disponivel: params[:disponivel], em_falta: params[:em_falta], format: 'pdf'), class: 'btn btn-warning btn-xs', target: '_blank'
             = link_to 'Cadastrar Produto', new_produto_path, class: 'btn btn-info btn-xs'
 
         div class="box-body"

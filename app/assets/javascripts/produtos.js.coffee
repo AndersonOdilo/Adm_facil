@@ -23,6 +23,3 @@ $ ->
 
   $('#filtro-produtos').on "change", ->
     window.location.href = '/produtos'+$(this).val()
-
-  $('#imprimir-produtos').on "click", ->
-    window.location.href = '/produtos.pdf'+$('#filtro-produtos').val()

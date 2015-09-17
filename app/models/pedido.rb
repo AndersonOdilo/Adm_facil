@@ -25,6 +25,10 @@ class Pedido < ActiveRecord::Base
             produto = item.produto
             produto.quantidade_estoque -= item.quantidade
             produto.save
+            if produto.quantidade_estoque <= produto.nivel_alerta
+              notificacao.produto = produto
+              notificacao.save
+            end
         else
             item.destroy
         end

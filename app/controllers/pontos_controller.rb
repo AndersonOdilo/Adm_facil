@@ -1,6 +1,7 @@
 class PontosController < ApplicationController
 
-  def registro
+  def index
+    @pontos = Ponto.where(funcionario_id: params[:funcionario])
   end
 
   def save

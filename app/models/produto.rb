@@ -11,4 +11,8 @@ class Produto < ActiveRecord::Base
   scope :fornecedor, ->(id) {where(fornecedor_id: id)}
   scope :em_falta, -> {where(quantidade_estoque: 0)}
   scope :disponivel, -> {where('quantidade_estoque > 0')}
+
+  def quantidade_vendida
+    self.itens_pedidos.sum(:quantidade)
+  end
 end

@@ -1,1 +1,1 @@
-$('#relatorio').html("<%= escape_javascript(render partial: 'relatorio') %>");
+$('#relatorio').html("<%= escape_javascript(render partial: 'relatorio', locals: {data_inicio: data_inicial, data_fim: data_final}) %>");

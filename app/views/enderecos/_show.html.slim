@@ -6,10 +6,11 @@
           'Endereços:
       div class="box-body"
         ul class="list-group"
-          - enderecos.includes(logradouro:[cidade:[estado:[:pais]]]).each do |endereco|
+          - enderecos.includes(cidade:[estado:[:pais]]).each do |endereco|
             li class="list-group-item"
-              = "Logradouro: #{endereco.logradouro.nome},
+              = "Logradouro: #{endereco.logradouro},
                Nº #{endereco.numero},
-               Complemento: #{endereco.complemento},
                 Bairro: #{endereco.bairro},
-                Cidade: #{endereco.cidade} - #{endereco.estado} - #{endereco.pais} "
+                CEP: #{endereco.cep}, 
+                #{endereco.cidade.nome}, #{endereco.estado} - #{endereco.pais},
+                Complemento: #{endereco.complemento}"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910003441) do
+ActiveRecord::Schema.define(version: 20150916234257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,11 +83,13 @@ ActiveRecord::Schema.define(version: 20150910003441) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pessoa_id"
-    t.integer  "logradouro_id"
     t.string   "bairro"
+    t.integer  "cidade_id"
+    t.string   "logradouro"
+    t.string   "cep"
   end
 
-  add_index "enderecos", ["logradouro_id"], name: "index_enderecos_on_logradouro_id", using: :btree
+  add_index "enderecos", ["cidade_id"], name: "index_enderecos_on_cidade_id", using: :btree
   add_index "enderecos", ["pessoa_id"], name: "index_enderecos_on_pessoa_id", using: :btree
 
   create_table "estados", force: true do |t|
@@ -162,21 +164,20 @@ ActiveRecord::Schema.define(version: 20150910003441) do
   add_index "itens_pedidos", ["pedido_id"], name: "index_itens_pedidos_on_pedido_id", using: :btree
   add_index "itens_pedidos", ["produto_id"], name: "index_itens_pedidos_on_produto_id", using: :btree
 
-  create_table "logradouros", force: true do |t|
-    t.string   "nome"
-    t.string   "cep"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "cidade_id"
-  end
-
-  add_index "logradouros", ["cidade_id"], name: "index_logradouros_on_cidade_id", using: :btree
-
   create_table "marcas", force: true do |t|
     t.string   "nome"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "notificacaos", force: true do |t|
+    t.integer  "produto_id"
+    t.boolean  "visualizado"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notificacaos", ["produto_id"], name: "index_notificacaos_on_produto_id", using: :btree
 
   create_table "orcamentos", force: true do |t|
     t.datetime "created_at"

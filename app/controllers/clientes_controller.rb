@@ -89,7 +89,7 @@ class ClientesController < ApplicationController
     def cliente_params
       params.require(:cliente).permit(:limite_credito,
         pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
-          enderecos_attributes: [:id, :logradouro_id, :bairro, :numero, :complemento, :_destroy],
+          enderecos_attributes: [:id, :logradouro, :bairro, :numero, :complemento, :cep, :_destroy],
           fones_attributes: [:id, :numero, :_destroy],
           emails_attributes: [:id, :descricao, :_destroy]])
     end

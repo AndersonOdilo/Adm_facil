@@ -1,6 +1,9 @@
 .row
   .col-md-12
     .box
+      div class="box-header with-border"
+        = link_to 'Imprimir', financeiro_relatorio_path(data_inicial: data_inicio, data_final: data_fim, format: 'pdf'), class: 'btn btn-warning btn-xs right', target: '_blank'
+
       div class="box-body"
         table class="table"
           thead

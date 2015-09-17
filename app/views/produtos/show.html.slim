@@ -8,14 +8,25 @@ section class="content"
       .box
         div class="box-body"
           .row
-            .col-lg-5
+            .col-lg-12
               strong
                 'Cod:
               = @produto.cod
-            .col-lg-7
+            .col-lg-12
               strong
                 'Nome:
               = @produto.nome
+
+          .row
+            .col-lg-12
+              strong
+                  'Descriçao:
+              = @produto.descricao
+          .row
+            .col-lg-12
+              strong
+                'Fornecedor:
+              = link_to @produto.fornecedor.nome, fornecedor_path(@produto.fornecedor)
 
           .row
             .col-lg-5
@@ -24,28 +35,35 @@ section class="content"
               = @produto.marca.nome
             .col-lg-7
               strong
-                'Descriçao:
-              = @produto.descricao
+                'Categoria produto:
+              = @produto.categoria_produto.descricao
           .row
             .col-lg-5
               strong
-                'Categoria produto:
-              = @produto.categoria_produto.descricao
-            .col-lg-7
+                'Valor custo:
+              = number_to_currency_br(@produto.valor_custo)
+            .col-lg-5
               strong
-                'Fornecedor:
-              = link_to @produto.fornecedor.nome, fornecedor_path(@produto.fornecedor)
-
+                'Valor venda:
+              = number_to_currency_br(@produto.valor_venda)
           .row
             .col-lg-5
               strong
                 'Quantidade estoque:
               = "#{@produto.quantidade_estoque} #{@produto.unidade.sigla}"
-            .col-lg-3
-              strong
-                'Valor custo:
-              = number_to_currency_br(@produto.valor_custo)
-            .col-lg-4
-              strong
-                'Valor venda:
-              = number_to_currency_br(@produto.valor_venda)
+            .col-lg-5
+              Strong
+                'Nivel de Alerta
+              = "#{@produto.nivel_alerta} #{@produto.unidade.sigla}"
+
+  .row 
+    div class="col-lg-4 col-xs-8"
+      div class="small-box bg-aqua"
+        .inner
+          h3
+            = "#{@produto.quantidade_vendida} #{@produto.unidade.sigla}"
+          h4
+            'Quantidade Vendida
+        .icon
+          i class="fa fa-shopping-cart"
+

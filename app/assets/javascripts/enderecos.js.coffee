@@ -1,6 +1,8 @@
 $ ->
   $(document).on 'cocoon:after-insert', (e, insertedItem) ->
 
+    $(".cep").mask("99999-999")
+
     $('#select_pais').on "change", ->
       id = $(this).val()
       if id
@@ -33,21 +35,5 @@ $ ->
              for cidade in data
                 op = $("<option/>").attr("value", cidade.id).text(cidade.nome)
                 $('#select_cidade').append(op)
-          error: (data) ->
-            alert('erro')
-
-    $('#select_cidade').on "change", ->
-      id = $(this).val()
-      if id
-        $.ajax
-          url: '/cidade/ruas/'+id
-          dataType: 'json'
-          type: 'GET'
-          success: (data) ->
-             $('#select_rua').empty()
-             $('#select_rua').append($("<option/>").attr("value", "").text("Selecione uma rua").select())
-             for bairro in data
-                op = $("<option/>").attr("value", bairro.id).text(bairro.nome)
-                $('#select_rua').append(op)
           error: (data) ->
             alert('erro')
