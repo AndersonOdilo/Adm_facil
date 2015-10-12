@@ -13,7 +13,7 @@ div class="modal fade" id="entrega_modal" tabindex="-1" role="dialog" aria-label
             ul class="list-group"
               - Cliente.find(cliente.to_i).pessoa.enderecos.each do |endereco|
                   li class="list-group-item"
-                    = radio_button("pedido", "endereco_id", endereco.id)
+                    = radio_button("pedido", "endereco_id", endereco.id, id:'pedido_edereco_entrega')
                     = "Logradouro: #{endereco.logradouro},
                      Nº #{endereco.numero},
                       Bairro: #{endereco.bairro},

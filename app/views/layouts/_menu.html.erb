@@ -61,6 +61,7 @@
                 <li class="user-footer">
                   <div class="pull-left">
                     <a href="/admin" class="btn btn-default btn-flat">Admin</a>
+                    <%= link_to 'alterar senha', edit_usuario_registration_path, class:"btn btn-default btn-flat" %>
                   </div>
                   <div class="pull-right">
                     <%= link_to('Sair', destroy_usuario_session_path, method: :delete, class: "btn btn-default btn-flat") %>

@@ -9,7 +9,7 @@ tr class="item"
         = hidden_field_tag 'pedido[itens_pedidos_attributes][][preco]', item.preco
     td
         = item.quantidade
-        = hiden_field_tag 'pedido[itens_pedidos_attributes][][quantidade]', item.quantidade
+        = hidden_field_tag 'pedido[itens_pedidos_attributes][][quantidade]', item.quantidade
     td
         = item.produto.unidade.sigla
     td

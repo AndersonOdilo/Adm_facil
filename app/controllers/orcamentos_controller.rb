@@ -22,7 +22,7 @@
   # GET /orcamentos
   # GET /orcamentos.json
   def index
-    @orcamentos = Orcamento.includes(cliente: [:pessoa]).order("orcamentos.created_at desc")
+    @orcamentos = Orcamento.includes(:itens_orcamentos, cliente: [:pessoa]).order("orcamentos.created_at desc")
   end
 
   # GET /orcamentos/1
@@ -50,39 +50,31 @@
   # POST /orcamentos.json
   def create
     @orcamento = Orcamento.new(orcamento_params)
-    respond_to do |format|
-      if !@orcamento.itens_orcamentos.blank?
-        if @orcamento.save
-          flash[:notice] = "Orçamento salvo com sucesso"
-          format.html { redirect_to @orcamento}
-          format.json { render :show, status: :created, location: @orcamento }
-        else
-          format.html { render :new }
-          format.json { render json: @orcamento.errors, status: :unprocessable_entity }
-        end
+    if !@orcamento.itens_orcamentos.blank?
+      if @orcamento.save
+        flash[:notice] = "Orçamento salvo com sucesso"
+        redirect_to @orcamento
       else
-          flash[:alert] = 'Adicione itens ao Orçamento'
-          format.html { render :new }
+        render :new 
       end
+    else
+        flash[:alert] = 'Adicione itens ao Orçamento'
+        render :new
     end
   end
 
   # PATCH/PUT /orcamentos/1
   # PATCH/PUT /orcamentos/1.json
   def update
-    respond_to do |format|
-      if !@orcamento.itens_orcamentos.blank?
-        if @orcamento.update(orcamento_params)
-          format.html { redirect_to @orcamento, notice: 'Orçamento alterado com sucesso' }
-          format.json { render :show, status: :ok, location: @orcamento }
-        else
-          format.html { render :edit }
-          format.json { render json: @orcamento.errors, status: :unprocessable_entity }
-        end
+    if !@orcamento.itens_orcamentos.blank?
+      if @orcamento.update(orcamento_params)
+        redirect_to @orcamento, notice: 'Orçamento alterado com sucesso' 
       else
-        flash[:alert] = 'Adicione itens ao Orçamento'
-        format.html { render :new }
+        render :edit
       end
+    else
+      flash[:alert] = 'Adicione itens ao Orçamento'
+      render :new 
     end
   end
 
@@ -90,11 +82,8 @@
   # DELETE /orcamentos/1.json
   def destroy
     @orcamento.destroy
-    respond_to do |format|
-      flash[:notice] = "Orçamento excluido com sucesso"
-      format.html { redirect_to orcamentos_url}
-      format.json { head :no_content }
-    end
+    flash[:notice] = "Orçamento excluido com sucesso"
+    redirect_to orcamentos_url
   end
 
   private

@@ -10,7 +10,7 @@ class CargosController < ApplicationController
   def create
     @cargo = Cargo.new(cargo_params)
     if @cargo.save
-      render :show, status: :created, location: @cargo 
+      render json: @cargo
     else
       render json: @cargo.errors, status: :unprocessable_entity
     end

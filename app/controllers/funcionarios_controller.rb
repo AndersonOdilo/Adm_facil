@@ -46,15 +46,11 @@ class FuncionariosController < ApplicationController
   # PATCH/PUT /funcionarios/1.json
   def update
     @funcionario.pessoa = @funcionario.pessoa.specific
-    respond_to do |format|
-      if @funcionario.update(funcionario_params)
-        flash[:notice] = "Funcionario alterado com sucesso"
-        format.html { redirect_to @funcionario}
-        format.json { render :show, status: :ok, location: @funcionario }
-      else
-        format.html { render :edit }
-        format.json { render json: @funcionario.errors, status: :unprocessable_entity }
-      end
+    if @funcionario.update(funcionario_params)
+      flash[:notice] = "Funcionario alterado com sucesso"
+      redirect_to @funcionario
+    else
+      render :edit
     end
   end
 
@@ -62,11 +58,8 @@ class FuncionariosController < ApplicationController
   # DELETE /funcionarios/1.json
   def destroy
     @funcionario.destroy
-    respond_to do |format|
-      flash[:notice] = "Funcionario excluido com sucesso"
-      format.html { redirect_to funcionarios_url}
-      format.json { head :no_content }
-    end
+    flash[:notice] = "Funcionario excluido com sucesso"
+    redirect_to funcionarios_url
   end
 
   private

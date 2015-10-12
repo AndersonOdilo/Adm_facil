@@ -51,15 +51,11 @@ class FornecedoresController < ApplicationController
   # PATCH/PUT /fornecedores/1.json
   def update
     @fornecedor.pessoa = @fornecedor.pessoa.specific
-    respond_to do |format|
-      if @fornecedor.update(fornecedor_params)
-        flash[:notice] = "Fornecedor alterado com sucesso"
-        format.html { redirect_to @fornecedor}
-        format.json { render :show, status: :ok, location: @fornecedor }
-      else
-        format.html { render :edit }
-        format.json { render json: @fornecedor.errors, status: :unprocessable_entity }
-      end
+    if @fornecedor.update(fornecedor_params)
+      flash[:notice] = "Fornecedor alterado com sucesso"
+      redirect_to @fornecedor
+    else
+      render :edit 
     end
   end
 
@@ -67,11 +63,8 @@ class FornecedoresController < ApplicationController
   # DELETE /fornecedores/1.json
   def destroy
     @fornecedor.destroy
-    respond_to do |format|
-      flash[:notice] = "Fornecedor excluido com sucesso"
-      format.html { redirect_to fornecedores_url}
-      format.json { head :no_content }
-    end
+    flash[:notice] = "Fornecedor excluido com sucesso"
+    redirect_to fornecedores_url
   end
 
   private

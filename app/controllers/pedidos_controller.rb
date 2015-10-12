@@ -50,11 +50,11 @@ class PedidosController < ApplicationController
   # GET /pedidos.json
   def index
     if params[:cliente]
-      @pedido = Pedido.includes(cliente: [:pessoa]).cliente(params[:cliente]).order("pedidos.created_at desc")
+      @pedido = Pedido.includes(:itens_pedidos, cliente: [:pessoa]).cliente(params[:cliente]).order("pedidos.created_at desc")
     elsif params[:funcionario]
-      @pedido = Pedido.includes(cliente: [:pessoa]).funcionario(params[:funcionario]).order("pedidos.created_at desc")
+      @pedido = Pedido.includes(:itens_pedidos, cliente: [:pessoa]).funcionario(params[:funcionario]).order("pedidos.created_at desc")
     else
-      @pedido = Pedido.includes(cliente: [:pessoa]).order("pedidos.created_at desc")
+      @pedido = Pedido.includes(:itens_pedidos, cliente: [:pessoa]).order("pedidos.created_at desc")
     end
   end
 
@@ -82,29 +82,21 @@ class PedidosController < ApplicationController
   def create
     @pedido = Pedido.new(pedido_params)
     @pedido.gerar_duplicatas(params[:valor_entrada].to_f, params[:numero_parcela].to_i, params[:intervalo_parcela].to_i)
-    respond_to do |format|
-      if @pedido.save
-        flash[:notice] = "Pedido salvo com sucesso"
-        format.html { redirect_to @pedido}
-        format.json { render :show, status: :created, location: @pedido }
-      else
-        format.html { render :new }
-        format.json { render json: @pedido.errors, status: :unprocessable_entity }
-      end
+    if @pedido.save
+      flash[:notice] = "Pedido salvo com sucesso"
+      redirect_to @pedido
+    else
+      render :new 
     end
   end
 
   # PATCH/PUT /pedidos/1
   # PATCH/PUT /pedidos/1.json
   def update
-    respond_to do |format|
-      if @pedido.update(pedido_params)
-        format.html { redirect_to @pedido, notice: 'Pedido alterado com sucesso' }
-        format.json { render :show, status: :ok, location: @pedido }
-      else
-        format.html { render :edit }
-        format.json { render json: @pedido.errors, status: :unprocessable_entity }
-      end
+    if @pedido.update(pedido_params)
+      redirect_to @pedido, notice: 'Pedido alterado com sucesso' 
+    else
+      render :edit
     end
   end
 
@@ -112,10 +104,7 @@ class PedidosController < ApplicationController
   # DELETE /pedidos/1.json
   def destroy
     @pedido.destroy
-    respond_to do |format|
-      format.html { redirect_to pedidos_url, notice: 'Pedido excluido com sucesso' }
-      format.json { head :no_content }
-    end
+      redirect_to pedidos_url, notice: 'Pedido excluido com sucesso'
   end
 
   private

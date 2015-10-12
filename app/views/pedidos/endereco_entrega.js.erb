@@ -2,7 +2,7 @@ $("#endereco_entrega_modal").html("<%= escape_javascript(render partial: 'endere
 $('#entrega_modal').modal('show');
 
 $('#finalizar_endereco_entrega').on("click", function(){
- 	if ($('#pedido_endereco_entrega').val()){
+ 	if ($('#pedido_endereco_entrega').checked()){
     return $('#new_pedido').submit();
   }else{
     return sweetAlert('Selecione um endereço de entrega');

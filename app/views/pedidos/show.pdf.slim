@@ -49,7 +49,7 @@ div class="panel panel-default"
               th Unid.
               th Valor Total
           tbody id="itens"
-          - @pedido.itens_pedidos.each do |item|
+          - @pedido.itens_pedidos.includes(:produto).each do |item|
             tr
                 td = item.produto.cod
                 td ="#{item.produto.nome}, #{item.produto.marca.nome}"
@@ -89,7 +89,7 @@ div class="panel panel-default"
                 th Data pagamento
                 th Valor
             tbody id="itens"
-              - @pedido.pagamentos_vendas.includes(:produto).each do |pagamento|
+              - @pedido.pagamentos_vendas.each do |pagamento|
                 - if pagamento.data_pagamento != nil
                   - classe = "success"
                 - elsif pagamento.data_vencimento < Date.today

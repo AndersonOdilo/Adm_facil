@@ -1,7 +1,12 @@
 class PontosController < ApplicationController
 
   def index
-    @pontos = Ponto.where(funcionario_id: params[:funcionario])
+    if params[:todos]
+      @pontos = Ponto.where(funcionario_id: params[:funcionario])
+    else
+      @pontos = Ponto.where(funcionario_id: params[:funcionario]).do_mes
+    end
+    @funcionario = Funcionario.find(params[:funcionario])
   end
 
   def save

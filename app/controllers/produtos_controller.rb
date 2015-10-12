@@ -44,30 +44,22 @@ class ProdutosController < ApplicationController
   def create
     @produto = Produto.new(produto_params)
 
-    respond_to do |format|
-      if @produto.save
-        flash[:notice] = "Produto salvo com sucesso"
-        format.html { redirect_to action: "index"}
-        format.json { render :show, status: :created, location: @produto }
-      else
-        format.html { render :new }
-        format.json { render json: @produto.errors, status: :unprocessable_entity }
-      end
+    if @produto.save
+      flash[:notice] = "Produto salvo com sucesso"
+      redirect_to action: "index"
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /produtos/1
   # PATCH/PUT /produtos/1.json
   def update
-    respond_to do |format|
-      if @produto.update(produto_params)
-        flash[:notice] = "Produto alterado com sucesso"
-        format.html { redirect_to action: "index"}
-        format.json { render :show, status: :ok, location: @produto }
-      else
-        format.html { render :edit }
-        format.json { render json: @produto.errors, status: :unprocessable_entity }
-      end
+    if @produto.update(produto_params)
+      flash[:notice] = "Produto alterado com sucesso"
+      redirect_to action: "index"
+    else
+      render :edit 
     end
   end
 
