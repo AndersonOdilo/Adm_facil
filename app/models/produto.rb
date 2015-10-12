@@ -1,6 +1,7 @@
 class Produto < ActiveRecord::Base
   has_many :itens_orcamentos, dependent: :restrict_with_exception
   has_many :itens_pedidos, dependent: :restrict_with_exception
+  has_many :notificacaos
   belongs_to :marca
   belongs_to :categoria_produto
   belongs_to :fornecedor

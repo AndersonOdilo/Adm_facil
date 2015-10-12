@@ -31,7 +31,8 @@
                       <% Notificacao.nao_visualizado.includes(:produto).limit(5).each do |notificacao|%>
                         <li>
                           <a href="#">
-                            <i class="fa fa-users text-aqua"></i> <%= notificacao.produto.nome%> está no nivel de alerta
+                            <i class="fa fa-users text-aqua"></i>
+                              <a href="/produtos/<%= notificacao.produto_id%>"><%= notificacao.produto.nome%> está no nivel de alerta </a>
                           </a>
                         </li>
                       <% end %>
