@@ -69,7 +69,7 @@ class ClientesController < ApplicationController
   # DELETE /clientes/1.json
   def destroy
     @cliente.destroy
-    redirect_to clientes_url, notice: "Cliente excluido com sucesso"
+    redirect_to clientes_url
   end
 
   private

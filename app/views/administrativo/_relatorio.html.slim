@@ -14,7 +14,7 @@
               th Total
 
           tbody
-            - @pedidos.each do |venda|
+            - @pedidos.includes(:forma_pagamento).each do |venda|
               tr
                 td = venda.cliente.pessoa.specific.nome rescue ""
                 td = venda.forma_pagamento.descricao

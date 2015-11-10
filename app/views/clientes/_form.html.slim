@@ -16,6 +16,6 @@
   div style="#{style}" id="formulario"
     .form-group
       = f.label :limite_credito
-      = f.text_field :limite_credito, class: "form-control input-sm"
+      = f.text_field :limite_credito, value: (number_with_precision(f.object.limite_credito, precision: 2) || 0), class: "form-control input-sm real"
     = link_to 'Salvar', '#', id: 'salvar_cliente', class: "btn btn-success btn-lg btn-block"
 

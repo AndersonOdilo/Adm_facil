@@ -3,10 +3,10 @@ RailsAdmin.config do |config|
   ### Popular gems integration
 
   ## == Devise ==
-  config.authenticate_with do
-     warden.authenticate! scope: :usuario
+   config.authenticate_with do
+    redirect_to main_app.root_path unless current_usuario.admin?
   end
-  config.current_user_method(&:current_usuario)
+  #config.current_user_method(&:current_usuario)
 
   ## == Cancan ==
   # config.authorize_with :cancan

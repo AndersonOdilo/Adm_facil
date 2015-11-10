@@ -15,7 +15,7 @@ div class="modal fade" id="pagamento_modal" tabindex="-1" role="dialog" aria-lab
           .col-xs-3
             .form-group
               = label_tag "Numero de parcelas:"
-              = select_tag :numero_parcela, options_for_select((2..12).to_a.map{|s| ["#{s}x", s]}), class:  'form-control input-sm datepicker', prompt: 'Selecione N° parcelas'
+              = select_tag :numero_parcela, options_for_select((1..numero_parcela).to_a.map{|s| ["#{s}x", s]}), class:  'form-control input-sm datepicker', prompt: 'Selecione N° parcelas'
           .col-xs-2
             .form-group
               = label_tag "Intervalo:"

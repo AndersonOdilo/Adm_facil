@@ -43,7 +43,7 @@ class Pedido < ActiveRecord::Base
     else
       total = self.total
     end
-    if self.forma_pagamento.id == 2
+    if self.forma_pagamento.parcelado?
       if entrada > 0
         pagamento = PagamentoVenda.new(data_vencimento: Date.today, data_pagamento: Date.today, valor: entrada)
         self.pagamentos_vendas << pagamento

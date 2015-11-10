@@ -15,24 +15,28 @@ class PedidosController < ApplicationController
   def remover_item
     produto = Produto.find(params[:produto])
     session[:sub_total_venda] = session[:sub_total_venda].to_f - produto.valor_venda * params[:quantidade].to_f
-    render json: session[:sub_total_venda].to_f.to_json
+    render json: session[:sub_total_venda].to_json
   end
 
   def calcular_parcela
-    valor_parcela = ((session[:sub_total_venda].to_f  - params[:entrada].to_f) / params[:numero_parcelas].to_i).round(2)
-    render json: valor_parcela.to_json
+    if !session[:sub_total_venda_desconto].nil?
+      sub_total = session[:sub_total_venda_desconto].to_f 
+    else
+      sub_total = session[:sub_total_venda].to_f
+    end
+    render json: (( sub_total - params[:entrada].to_f) / params[:numero_parcelas].to_i).round(2).to_json
   end
 
   def calcular_desconto
-    desconto = session[:sub_total_venda].to_f - (session[:sub_total_venda].to_f * params[:desconto].to_f / 100)
-    render json: desconto.to_json
+    session[:sub_total_venda_desconto] = session[:sub_total_venda].to_f - (session[:sub_total_venda].to_f * params[:desconto].to_f / 100)
+    render json: session[:sub_total_venda_desconto].to_json
   end
 
   def finalizar
     if session[:sub_total_venda].to_f > 0 
-      if params[:forma_pagamento].to_i == 2
+      if FormaPagamento.find(params[:forma_pagamento]).parcelado?
         if Cliente.find(params[:cliente]).limite_disponivel >= session[:sub_total_venda].to_f 
-          render 'pagamento', locals: {entrega: params[:entrega], cliente: params[:cliente]}
+          render 'pagamento', locals: {entrega: params[:entrega], cliente: params[:cliente], numero_parcela: FormaPagamento.find(params[:forma_pagamento]).numero_parcela}
         else
           render 'erro', locals: {msg: 'Não a limite' }
         end
@@ -71,6 +75,7 @@ class PedidosController < ApplicationController
   def new
     @pedido = Pedido.new
     session[:sub_total_venda] = nil
+    session[:sub_total_venda_desconto] = nil
   end
 
   # GET /pedidos/1/edit

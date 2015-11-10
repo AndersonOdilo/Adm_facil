@@ -15,7 +15,10 @@ $ ->
             sweetAlert('Selecione um Produto')
 
     $('#pedido_desconto').keyup (e) ->
-        valor =  $(this).val()
+        calcular_desconto_pedido()
+
+    calcular_desconto_pedido = ->
+        valor =  $('#pedido_desconto').val()
         parseInt(valor)
         if (valor < 100 && valor > 0)
             $.ajax
@@ -28,6 +31,7 @@ $ ->
                     $('#valor_total_desconto').html(accounting.formatMoney(data, "R$", 2, ".", ","))
         else
             $('#valor_total_desconto').html('')
+    window.calcular_desconto_pedido = calcular_desconto_pedido
 
     remover_item_venda =(elemento, produto, quantidade) ->
       $.ajax
@@ -40,6 +44,7 @@ $ ->
         success: (data) ->
             $('#valor_total').html(accounting.formatMoney(data, "R$", 2, ".", ","))
             elemento.parentElement.parentElement.remove()
+            calcular_desconto_pedido()
     window.remover_item_venda = remover_item_venda
 
     $('#finalizar_pedido'). on "click", ->

@@ -6,6 +6,8 @@ class Cliente < ActiveRecord::Base
   before_destroy :pagamentos_em_aberto
 
   before_save :alter_id
+
+  RailsAdmin.config {|c| c.label_methods << :nome_admin}
   
   def alter_id
     self.pessoa_id = self.pessoa.acting_as.id
@@ -23,6 +25,10 @@ class Cliente < ActiveRecord::Base
  		else
  			return true
   	end
+  end
+
+  def nome_admin
+    self.pessoa.nome
   end
   
 end

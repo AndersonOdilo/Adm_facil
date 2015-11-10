@@ -1,15 +1,13 @@
-section class="content-header"
-  h1
-    'Pontos do mês 
-  h2
-    'Funcionario: #{@funcionario.pessoa.nome}
 section class="content"
   .row
   	.col-lg-3
     .col-lg-6
       .box
+        div class="box-header with-border"
+          h3 class="box-title"
+            'Funcionario #{@funcionario.pessoa.nome} pontos registrados
         div class="box-body"
-          = link_to 'Todos', pontos_path(todos: true), class: 'btn btn-md'
+          = link_to 'Todos', pontos_path(todos: true, funcionario: @funcionario.id), class: 'btn btn-primary btn-xs'
           table id="tabela" class="table table-bordered table-hover dataTable"
             thead
               tr
@@ -20,5 +18,5 @@ section class="content"
               - @pontos.each do |ponto|
                 tr
                 	td = "Dia #{ponto.data_entrada} as #{ponto.hora_entrada} h."
-                  	td = "Dia #{ponto.data_saida} as #{ponto.hora_saida} h."
+                    td = "Dia #{ponto.data_saida} as #{ponto.hora_saida} h."
 

@@ -5,6 +5,7 @@
 //= require jquery.validate.min
 //= require jquery.dataTables
 //= require jquery.turbolinks
+//= require jquery.maskMoney
 //= require dataTables.bootstrap
 //= require turbolinks
 //= require accounting.min
@@ -132,6 +133,8 @@ var ready = (function() {
         }
     }
   });
+
+  $('.real').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
 
 });
 

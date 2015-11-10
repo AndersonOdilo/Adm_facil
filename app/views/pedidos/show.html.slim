@@ -107,7 +107,6 @@ section class="content"
                          = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
                           data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency_br(pagamento.valor)}?"}, remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
 
-  .row
     - if !@pedido.obs.blank?
       .col-md-5
         .box

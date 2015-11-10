@@ -26,7 +26,7 @@
             .col-lg-3
               .form-group
                 = f.label :salario
-                = f.text_field :salario, class: 'form-control input-sm moeda'
+                = f.text_field :salario, value: (number_with_precision(f.object.salario, precision: 2) || 0), class: 'form-control input-sm real'
 
           .row
             .col-lg-3

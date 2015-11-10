@@ -4,7 +4,7 @@ class ProdutosController < ApplicationController
   has_scope :disponivel, type: :boolean
 
   def autocomplete
-    produtos = Produto.order(:nome).where("nome ILIKE ?", "#{params[:term]}%")
+    produtos = Produto.order(:nome).where("nome ILIKE ?", "%#{params[:term]}%")
     produtos_json = []
     produtos.collect{|produto|  produtos_json <<  { id: produto.id, value: "#{produto.nome}, #{produto.marca.nome}", 
     preco: produto.valor_venda, quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}}

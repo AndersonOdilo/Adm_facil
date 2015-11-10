@@ -1,4 +1,4 @@
-$("#pagamento_parcelado_modal").html("<%= escape_javascript(render partial: 'pagamentos_vendas/form', locals: {entrega: entrega}) %>");
+$("#pagamento_parcelado_modal").html("<%= escape_javascript(render partial: 'pagamentos_vendas/form', locals: {entrega: entrega, numero_parcela: numero_parcela}) %>");
 $('#pagamento_modal').modal('show');
 
 var calcular_parcela;

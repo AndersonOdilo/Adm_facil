@@ -1,7 +1,9 @@
 $ ->
   $('#salvar_cliente').on "click", ->
-    $('#new_cliente').validate()
-    $('#new_cliente').submit()
+    if $('#new_cliente').valid()
+      valor = $('#cliente_limite_credito').maskMoney('unmasked')[0]
+      $('#cliente_limite_credito').val(valor)
+      $('#new_cliente').submit()
 
   $('.cliente_nome_autocomplete').autocomplete
     source: '/clientes/autocomplete.json'

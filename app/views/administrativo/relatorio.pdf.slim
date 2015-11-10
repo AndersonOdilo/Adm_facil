@@ -9,13 +9,15 @@ h2
           thead
             tr
               th Cliente
+              th Forma Pagamento
               th Data 
               th Total
 
           tbody
-            - @pedidos.each do |venda|
+            - @pedidos.includes(:forma_pagamento).each do |venda|
               tr
                 td = venda.cliente.pessoa.specific.nome rescue ""
+                td = venda.forma_pagamento.descricao
                 td = venda.data
                 td = number_to_currency_br(venda.total)
 

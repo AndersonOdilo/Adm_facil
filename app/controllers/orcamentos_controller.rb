@@ -11,7 +11,7 @@
   def remover_item
     produto = Produto.find(params[:produto])
     session[:sub_total] = session[:sub_total].to_f - produto.valor_venda * params[:quantidade].to_f
-    render json: session[:sub_total].to_f.to_json
+    render json: session[:sub_total].to_json
   end
 
   def calcular_desconto

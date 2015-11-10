@@ -9,10 +9,11 @@ class Pessoa < ActiveRecord::Base
 
     before_save :remover_nulos
 
+    RailsAdmin.config {|c| c.label_methods << :nome}
+
     def remover_nulos
         self.fones.select{|fone| fone.numero.blank?}.collect{|fone| fone.destroy}
         self.emails.select{|email| email.descricao.blank?}.collect{|email| email.destroy}
         self.enderecos.select{|endereco| endereco.blank?}.collect{|endereco| endereco.destroy}
     end
-
 end

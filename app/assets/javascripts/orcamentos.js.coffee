@@ -15,7 +15,7 @@ $ ->
             sweetAlert('Selecione um Produto')
 
     remover_item =(elemento, produto, quantidade) ->
-          $.ajax
+        $.ajax
             url: '/orcamento/remover_item'
             type: 'post'
             dataType: 'json'
@@ -25,9 +25,10 @@ $ ->
             success: (data) ->
                 $('#valor_total').html(accounting.formatMoney(data, "R$", 2, ".", ","))
                 elemento.parentElement.parentElement.remove()
+                calcular_desconto()
     window.remover_item = remover_item
 
-    $('#orcamento_desconto').keyup (e) ->
+    calcular_desconto = ->
         valor =  $('#orcamento_desconto').val()
         parseInt(valor)
         if (valor < 100 && valor > 0)
@@ -41,5 +42,10 @@ $ ->
                     $('#valor_total_desconto').html(accounting.formatMoney(data, "R$", 2, ".", ","))
         else
             $('#valor_total_desconto').html('')
+    window.calcular_desconto = calcular_desconto
 
+
+    $('#orcamento_desconto').keyup (e) ->
+        calcular_desconto()
+        
 

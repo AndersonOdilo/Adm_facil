@@ -1,7 +1,11 @@
 $ ->
   $('#salvar_produto').on "click", ->
-    $('#new_produto').validate()
-    $('#new_produto').submit()
+    if $('#new_produto').valid()
+      valor_venda = $('#produto_valor_venda').maskMoney('unmasked')[0]
+      $('#produto_valor_venda').val(valor_venda)
+      valor_custo = $('#produto_valor_custo').maskMoney('unmasked')[0]
+      $('#produto_valor_custo').val(valor_custo)
+      $('#new_produto').submit()
 
   $('.produto_nome_autocomplete').autocomplete
       source: '/produtos/autocomplete.json'
