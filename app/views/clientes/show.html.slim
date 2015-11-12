@@ -9,22 +9,22 @@ section class="content"
         div class="box-body"
             .row
                 -if @cliente.pessoa.estado_type == 'PessoaFisica'
-                    .col-lg-7
+                    .col-lg-6
                         strong
                             'Nome:
                         = @cliente.pessoa.specific.nome
-                    .col-lg-5
-                        strong
-                            'Cpf:
-                        = @cliente.pessoa.specific.cpf
                     .col-lg-4
-                        strong
-                            'Rg:
-                        = @cliente.pessoa.specific.rg
-                    .col-lg-3
                          strong
                             'Data nascimento:
                          = @cliente.pessoa.specific.data_nascimento
+                    .col-lg-3
+                        strong
+                            'Cpf:
+                        = @cliente.pessoa.specific.cpf
+                    .col-lg-3
+                        strong
+                            'Rg:
+                        = @cliente.pessoa.specific.rg
                 -else
                     .col-lg-6
                         strong

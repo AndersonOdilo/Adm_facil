@@ -2,9 +2,11 @@ $('#cliente_modal').html("<%= escape_javascript(render partial: 'form_modal') %>
 $('#novo_cliente').modal('show');
 $(function(){
 	$('#salvar_cliente').on("click", function(){
-    $('#new_cliente').validate();
-    $('#cliente_limite_credito').val($('#cliente_limite_credito').unmask());
-    return $('#new_cliente').submit();
+    if ($('#new_cliente').valid()){
+      var valor = $('#cliente_limite_credito').maskMoney('unmasked')[0];
+      $('#cliente_limite_credito').val(valor);
+      return $('#new_cliente').submit();
+    }
   });
 	$('#new_cliente').bind('ajax:success', function(event, data, status, xhr){
     $('#cliente_nome').val(data.pessoa.nome);

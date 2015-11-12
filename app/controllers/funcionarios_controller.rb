@@ -73,7 +73,7 @@ class FuncionariosController < ApplicationController
       params.require(:funcionario).permit(:cod, :carteira_trabalho, :salario, :data_admissao, :pessoa_id,
         :cargo_id, :carga_horaria, usuario_attributes: [:email, :password, :funcionario_id, :_destroy],
           pessoa_attributes: [:id, :nome, :cpf, :rg, :data_nascimento, :nome_fantasia, :cnpj, :inscricao_estadual, :data_abertura,
-          enderecos_attributes: [:id, :logradouro, :bairro, :numero, :complemento, :cep, :_destroy],
+          enderecos_attributes: [:id, :logradouro, :bairro, :numero, :complemento, :cidade_id, :cep, :_destroy],
           fones_attributes: [:id, :numero, :_destroy],
           emails_attributes: [:id, :descricao, :_destroy]])
     end

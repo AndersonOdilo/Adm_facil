@@ -3,6 +3,10 @@ $ ->
 
     $(".cep").mask("99999-999")
 
+    carregar_estados()
+    carregar_cidades()
+
+  carregar_estados = ->
     $('#select_pais').on "change", ->
       id = $(this).val()
       if id
@@ -20,7 +24,9 @@ $ ->
               $('#select_estado').append(op)
           error: (data) ->
             alert('erro')
+  window.carregar_estados = carregar_estados
 
+  carregar_cidades = ->
     $('#select_estado').on "change", ->
       id = $(this).val()
       if id
@@ -37,3 +43,4 @@ $ ->
                 $('#select_cidade').append(op)
           error: (data) ->
             alert('erro')
+  window.carregar_cidades = carregar_cidades
