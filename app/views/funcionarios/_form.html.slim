@@ -25,7 +25,7 @@
                 = f.text_field :carteira_trabalho, class: 'form-control input-sm', required: true
             .col-lg-3
               .form-group
-                = f.label :salario
+                = f.label 'Salário'
                 = f.text_field :salario, value: (number_with_precision(f.object.salario, precision: 2) || 0), class: 'form-control input-sm real'
 
           .row
@@ -35,7 +35,7 @@
                 = f.date_field :data_admissao, class: 'form-control', required: true
             .col-lg-3
               .form-group
-                = f.label :carga_horaria
+                = f.label 'Carga horaria'
                 = f.text_field :carga_horaria, class: 'form-control input-sm'
             .col-lg-4
               .form-group

@@ -11,7 +11,7 @@ div class="modal fade" id="nova_marca" tabindex="-1" role="dialog" aria-labelled
         = form_for @marca, remote: true, format: 'json' do |f|
 
           .form-group
-            = f.label :nome
+            = f.label 'Nome*'
             = f.text_field :nome, class: 'form-control input-sm', required: true
 
       div class="modal-footer"

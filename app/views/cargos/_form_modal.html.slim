@@ -11,7 +11,7 @@ div class="modal fade" id="novo_cargo" tabindex="-1" role="dialog" aria-labelled
         = form_for @cargo, remote: true, format: 'json' do |f|
 
           .form-group
-            = f.label :descricao
+            = f.label 'Descrição*'
             = f.text_field :descricao, class: 'form-control input-sm', required: true
 
       div class="modal-footer"

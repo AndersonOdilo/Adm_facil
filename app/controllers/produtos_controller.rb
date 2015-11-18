@@ -28,9 +28,11 @@ class ProdutosController < ApplicationController
   # GET /produtos/1
   # GET /produtos/1.json
   def show
-    if !@produto.notificacaos.last.visualizado?
-      notificacao = @produto.notificacaos.last
-      notificacao.update(visualizado: true)
+    if !@produto.notificacaos.blank?
+      if !@produto.notificacao.last.visualizado?
+        notificacao = @produto.notificacaos.last
+        notificacao.update(visualizado: true)
+      end
     end
   end
 

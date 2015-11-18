@@ -2,6 +2,7 @@ class Pedido < ActiveRecord::Base
   belongs_to :cliente
   belongs_to :funcionario
   belongs_to :forma_pagamento
+  belongs_to :endereco
   has_many :itens_pedidos, dependent: :destroy
   has_many :produtos, through: :itens_pedidos
   has_many :pagamentos_vendas

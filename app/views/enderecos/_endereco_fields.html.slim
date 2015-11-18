@@ -10,25 +10,25 @@
           .row
             .col-lg-2
               .form-group
-                = label_tag 'Pais'
+                = label_tag 'Pais*'
                 = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla, cidade ? cidade.estado.pais.id : nil), class: 'form-control input-sm', prompt: 'Selecione um pais', required: true
             .col-lg-2
               .form-group
-                = label_tag 'Estado'
+                = label_tag 'Estado*'
                 = select_tag :select_estado, options_from_collection_for_select(cidade ? Pais.find(cidade.estado.pais).estados : {}, :id, :sigla, cidade ? cidade.estado.id : nil), class: 'form-control input-sm', required: true
             .col-lg-4
               .form-group
-                = label_tag 'Cidade'
+                = label_tag 'Cidade*'
                 = f.select :cidade_id, options_from_collection_for_select(cidade ? Estado.find(cidade.estado).cidades : {}, :id, :nome, cidade ? cidade.id : nil), {},  {id: 'select_cidade', class: 'form-control input-sm', required: true}
-            .col-lg-4
-              .form-group
-                = label_tag 'Logradouro'
-                = f.text_field :logradouro, class: 'form-control input-sm', required: true
-          .row
             .col-lg-3
               .form-group
-                = label_tag 'Bairro'
+                = label_tag 'Bairro*'
                 = f.text_field :bairro, class: 'form-control input-sm', required: true
+          .row
+            .col-lg-4
+              .form-group
+                = label_tag 'Logradouro*'
+                = f.text_field :logradouro, class: 'form-control input-sm', required: true
             .col-lg-2
               .form-group
                 = label_tag 'Número'
@@ -37,7 +37,7 @@
               .form-group
                 = label_tag 'CEP'
                 = f.text_field :cep, class: 'form-control input-sm cep'    
-            .col-lg-5
+            .col-lg-4
               .form-group
                 = label_tag 'Complemento'
                 = f.text_field :complemento, class: 'form-control input-sm'

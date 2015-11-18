@@ -8,6 +8,7 @@ section class="content"
             'Funcionario #{@funcionario.pessoa.nome} pontos registrados
         div class="box-body"
           = link_to 'Todos', pontos_path(todos: true, funcionario: @funcionario.id), class: 'btn btn-primary btn-xs'
+          = link_to 'Mês', pontos_path(funcionario: @funcionario.id), class: 'btn btn-warning btn-xs'
           table id="tabela" class="table table-bordered table-hover dataTable"
             thead
               tr

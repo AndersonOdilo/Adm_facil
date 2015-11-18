@@ -26,7 +26,21 @@ section class="content"
                   'Forma pagamento:
                 = @pedido.forma_pagamento.descricao
 
-
+  - if !@pedido.endereco.nil?
+    .row
+      .col-md-12
+        .box
+          div class="box-header with-border"
+            h3 class="box-title"
+              'Endereço de Entrega
+          div class="box-body"
+            li class="list-group-item"
+              = "Logradouro: #{@pedido.endereco.logradouro},
+               Nº #{@pedido.endereco.numero},
+                Bairro: #{@pedido.endereco.bairro},
+                CEP: #{@pedido.endereco.cep}, 
+                #{@pedido.endereco.cidade.nome}, #{@pedido.endereco.estado} - #{@pedido.endereco.pais},
+                Complemento: #{@pedido.endereco.complemento}"
   .row
     .col-md-12
       .box

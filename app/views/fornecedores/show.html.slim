@@ -13,24 +13,24 @@ section class="content"
                         strong
                             'Nome:
                         = @fornecedor.pessoa.specific.nome
-                    .col-lg-5
-                        strong
-                            'Cpf:
-                        = @fornecedor.pessoa.specific.cpf
-                    .col-lg-4
-                        strong
-                            'Rg:
-                        = @fornecedor.pessoa.specific.rg
-                    .col-lg-3
+                    .col-lg-6
                          strong
                             'Data nascimento:
                          = @fornecedor.pessoa.specific.data_nascimento
+                    .col-lg-3
+                        strong
+                            'Cpf:
+                        = @fornecedor.pessoa.specific.cpf
+                    .col-lg-3
+                        strong
+                            'Rg:
+                        = @fornecedor.pessoa.specific.rg
                 -else
                     .col-lg-6
                         strong
                             'Razão social:
                         = @fornecedor.pessoa.specific.nome
-                    .col-lg-5
+                    .col-lg-6   
                         strong
                             'CNPJ:
                         = @fornecedor.pessoa.specific.cnpj
@@ -38,7 +38,7 @@ section class="content"
                         strong
                             'Nome fantasia:
                         = @fornecedor.pessoa.specific.nome_fantasia
-                    .col-lg-5
+                    .col-lg-6
                         strong
                             'Inscricao estadual:
                         = @fornecedor.pessoa.specific.inscricao_estadual
