@@ -47,7 +47,7 @@ $('#endereco_entrega').on("click", function() {
 });
 
 $('#finalizar_endereco_entrega').on("click", function(){
-  if ($('#pedido_endereco_entrega').checked()){
+  if (document.getElementById("pedido_endereco_entrega").checked == true){
     return $('#new_pedido').submit();
   }else{
     return sweetAlert('Selecione um endereço de entrega');

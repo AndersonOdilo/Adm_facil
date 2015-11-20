@@ -32,7 +32,7 @@
                         <li>
                           <a href="#">
                             <i class="fa fa-users text-aqua"></i>
-                              <a href="/produtos/<%= notificacao.produto_id%>"><%= notificacao.produto.nome%> está no nivel de alerta </a>
+                              <a href="/produtos/<%= notificacao.produto_id %>?notificacao=<%= notificacao.id %>"><%= notificacao.produto.nome%> está no nivel de alerta </a>
                           </a>
                         </li>
                       <% end %>

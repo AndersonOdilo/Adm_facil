@@ -10,14 +10,10 @@ class EnderecosController < ApplicationController
   def create
     @endereco = Endereco.new(endereco_params)
 
-    respond_to do |format|
-      if @endereco.save
-        format.html { redirect_to @endereco, notice: 'Endereco was successfully created.' }
-        format.json { render json: @endereco }
-      else
-        format.html { render :new }
-        format.json { render json: @endereco.errors, status: :unprocessable_entity }
-      end
+    if @endereco.save
+      render json: @endereco 
+    else
+      render json: @endereco.errors, status: :unprocessable_entity 
     end
   end
 

@@ -28,11 +28,9 @@ class ProdutosController < ApplicationController
   # GET /produtos/1
   # GET /produtos/1.json
   def show
-    if !@produto.notificacaos.blank?
-      if !@produto.notificacao.last.visualizado?
-        notificacao = @produto.notificacaos.last
-        notificacao.update(visualizado: true)
-      end
+    if !params[:notificacao].nil?
+      notificacao = Notificacao.find(params[:notificacao].to_i)
+      notificacao.update(visualizado: true)
     end
   end
 
