@@ -4,11 +4,12 @@ $(function() {
   carregar_estados();
   carregar_cidades();
   $(".cep").mask("99999-999");
-   $('#add_endereco').on("click", function() {
+  $('#add_endereco').on("click", function() {
     $('#new_endereco').validate();
     return $('#new_endereco').submit();
   });
   $('#new_endereco').bind("ajax:success", function(event, data, status, xhr) {
+    $('#lista_enderecos').append("<li class='list-group-item'> <input type='radio' id='pedido_endereco_entrega' name='pedido[endereco_id]' value='"+data.id+"' checked> Logradouro: "+data.logradouro+", Nº  "+data.numero+", Bairro: "+data.bairro+", CEP: "+data.cep+", "+data.cidade.nome+",  "+data.estado+" - "+data.pais+", Complemento: "+data.complemento+"</li>");
     $('#novo_endereco_modal').modal('hide');
     return sweetAlert("Ok...", "Endereço salvo com sucesso", "success");
   });

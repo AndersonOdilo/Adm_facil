@@ -11,7 +11,7 @@ div class="modal fade" id="entrega_modal" tabindex="-1" role="dialog" aria-label
           .col-xs-9
             strong Selecione uma opção:
             ul class="list-group" id="lista_enderecos"
-              - Cliente.find(cliente.to_i).pessoa.enderecos.each do |endereco|
+              - Cliente.find(cliente.to_i).pessoa.enderecos.includes(cidade: [estado: [:pais]]).each do |endereco|
                   li class="list-group-item"
                     = radio_button("pedido", "endereco_id", endereco.id, id:'pedido_endereco_entrega')
                     = "Logradouro: #{endereco.logradouro},

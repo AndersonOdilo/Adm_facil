@@ -12,7 +12,7 @@ class EnderecosController < ApplicationController
     @endereco = Endereco.new(endereco_params)
 
     if @endereco.save
-      render json: @endereco
+      render json: @endereco.to_json(include: {cidade: {include: {estado: {include: :pais}}}})
     else
       render json: @endereco.errors, status: :unprocessable_entity
     end
