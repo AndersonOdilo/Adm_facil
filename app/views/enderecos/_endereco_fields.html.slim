@@ -20,7 +20,7 @@
               .form-group
                 = label_tag 'Cidade*'
                 = f.select :cidade_id, options_from_collection_for_select(cidade ? Estado.find(cidade.estado).cidades : {}, :id, :nome, cidade ? cidade.id : nil), {},  {id: 'select_cidade', class: 'form-control input-sm', required: true}
-            .col-lg-3
+            .col-lg-4
               .form-group
                 = label_tag 'Bairro*'
                 = f.text_field :bairro, class: 'form-control input-sm', required: true
@@ -36,7 +36,7 @@
             .col-lg-2
               .form-group
                 = label_tag 'CEP'
-                = f.text_field :cep, class: 'form-control input-sm cep'    
+                = f.text_field :cep, class: 'form-control input-sm cep'
             .col-lg-4
               .form-group
                 = label_tag 'Complemento'

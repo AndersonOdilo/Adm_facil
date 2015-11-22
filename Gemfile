@@ -20,7 +20,6 @@ gem 'simple_form'
 gem 'cocoon'
 gem 'has_scope'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
-gem 'coffee-script-source', '1.8.0'
 gem 'rails_admin'
 gem 'puma'
 

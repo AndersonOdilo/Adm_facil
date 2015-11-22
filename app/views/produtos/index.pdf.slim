@@ -1,6 +1,6 @@
 .box
   div class="box-header with-border"
-    h1 
+    h1
       - if params[:disponivel]
         'Produtos em Estoque
       -elsif params[:em_falta]
@@ -26,7 +26,6 @@
             td = produto.nome
             td = produto.descricao
             td = number_to_currency_br(produto.valor_venda)
-            td = produto.quantidade_estoque
+            td = "#{produto.quantidade_estoque} #{produto.unidade.sigla}"
             td = produto.marca.nome
             td = produto.fornecedor.pessoa.nome
-        

@@ -20,7 +20,7 @@ class PedidosController < ApplicationController
 
   def calcular_parcela
     if !session[:sub_total_venda_desconto].nil?
-      sub_total = session[:sub_total_venda_desconto].to_f 
+      sub_total = session[:sub_total_venda_desconto].to_f
     else
       sub_total = session[:sub_total_venda].to_f
     end
@@ -33,9 +33,9 @@ class PedidosController < ApplicationController
   end
 
   def finalizar
-    if session[:sub_total_venda].to_f > 0 
+    if session[:sub_total_venda].to_f > 0
       if FormaPagamento.find(params[:forma_pagamento]).parcelado?
-        if Cliente.find(params[:cliente]).limite_disponivel >= session[:sub_total_venda].to_f 
+        if Cliente.find(params[:cliente]).limite_disponivel >= session[:sub_total_venda].to_f
           render 'pagamento', locals: {entrega: params[:entrega], cliente: params[:cliente], numero_parcela: FormaPagamento.find(params[:forma_pagamento]).numero_parcela}
         else
           render 'erro', locals: {msg: 'Não a limite' }
@@ -91,7 +91,7 @@ class PedidosController < ApplicationController
       flash[:notice] = "Pedido salvo com sucesso"
       redirect_to @pedido
     else
-      render :new 
+      render :new
     end
   end
 
@@ -99,7 +99,7 @@ class PedidosController < ApplicationController
   # PATCH/PUT /pedidos/1.json
   def update
     if @pedido.update(pedido_params)
-      redirect_to @pedido, notice: 'Pedido alterado com sucesso' 
+      redirect_to @pedido, notice: 'Pedido alterado com sucesso'
     else
       render :edit
     end
@@ -115,7 +115,7 @@ class PedidosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pedido
-      @pedido = Pedido.includes(:pagamentos_vendas, :itens_pedidos, cliente: [:pessoa], funcionario:[:pessoa]).find(params[:id])
+      @pedido = Pedido.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

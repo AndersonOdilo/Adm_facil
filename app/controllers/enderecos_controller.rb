@@ -3,6 +3,7 @@ class EnderecosController < ApplicationController
   # GET /enderecos/new
   def new
     @endereco = Endereco.new
+    render locals: {pessoa: params[:pessoa]}
   end
 
   # POST /enderecos
@@ -11,15 +12,15 @@ class EnderecosController < ApplicationController
     @endereco = Endereco.new(endereco_params)
 
     if @endereco.save
-      render json: @endereco 
+      render json: @endereco
     else
-      render json: @endereco.errors, status: :unprocessable_entity 
+      render json: @endereco.errors, status: :unprocessable_entity
     end
   end
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def endereco_params
-      params.require(:endereco).permit(:numero, :complemento, :rua_id)
+      params.require(:endereco).permit(:cep, :numero, :complemento, :logradouro, :bairro, :cidade_id, :pessoa_id, )
     end
 end

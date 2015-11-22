@@ -5,7 +5,7 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios
   # GET /funcionarios.json
   def index
-    @funcionarios = Funcionario.includes(:pessoa)
+    @funcionarios = Funcionario.includes(:pessoa, :cargo)
   end
 
   # GET /funcionarios/1
@@ -30,15 +30,11 @@ class FuncionariosController < ApplicationController
     @funcionario = Funcionario.new
     @funcionario.pessoa = PessoaFisica.new
     @funcionario.assign_attributes(funcionario_params)
-    respond_to do |format|
-      if  @funcionario.save
-        flash[:notice] = "Funcionario salvo com sucesso"
-        format.html { redirect_to actions: "index"}
-        format.json { render :show, status: :created, location: @funcionario }
-      else
-        format.html { render :new }
-        format.json { render json: @funcionario.errors, status: :unprocessable_entity }
-      end
+    if  @funcionario.save
+      flash[:notice] = "Funcionario salvo com sucesso"
+      redirect_to actions: "index"
+    else
+      render :new
     end
   end
 
@@ -65,7 +61,7 @@ class FuncionariosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_funcionario
-      @funcionario = Funcionario.includes(pessoa: [:fones, :enderecos, :emails]).find(params[:id])
+      @funcionario = Funcionario.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

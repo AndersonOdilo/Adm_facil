@@ -27,7 +27,7 @@ div class="panel panel-default"
                 strong
                   'Data validade:
                 = @orcamento.data_validade
-        
+
 div class="panel panel-default"
     div class="panel-body"
       h3 class="panel-title"
@@ -43,7 +43,7 @@ div class="panel panel-default"
               th Unid.
               th Valor Total
           tbody id="itens"
-          - @orcamento.itens_orcamentos.includes(:produto).each do |item|
+          - @orcamento.itens_orcamentos.includes(produto: [:unidade, :marca]).each do |item|
             tr
                 td = item.produto.cod
                 td ="#{item.produto.nome}, #{item.produto.marca.nome}"

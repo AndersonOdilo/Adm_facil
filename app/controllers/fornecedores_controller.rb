@@ -55,7 +55,7 @@ class FornecedoresController < ApplicationController
       flash[:notice] = "Fornecedor alterado com sucesso"
       redirect_to @fornecedor
     else
-      render :edit 
+      render :edit
     end
   end
 
@@ -70,7 +70,7 @@ class FornecedoresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_fornecedor
-      @fornecedor = Fornecedor.includes(pessoa: [:fones, :enderecos, :emails]).find(params[:id])
+      @fornecedor = Fornecedor.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

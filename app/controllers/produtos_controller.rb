@@ -6,7 +6,7 @@ class ProdutosController < ApplicationController
   def autocomplete
     produtos = Produto.order(:nome).where("nome ILIKE ?", "%#{params[:term]}%")
     produtos_json = []
-    produtos.collect{|produto|  produtos_json <<  { id: produto.id, value: "#{produto.nome}, #{produto.marca.nome}", 
+    produtos.collect{|produto|  produtos_json <<  { id: produto.id, value: "#{produto.nome}, #{produto.marca.nome}",
     preco: produto.valor_venda, quantidade: produto.quantidade_estoque, unidade: produto.unidade.sigla}}
     render json: produtos_json
   end
@@ -17,12 +17,12 @@ class ProdutosController < ApplicationController
     if params[:fornecedor]
       @produtos = Produto.includes(:marca, :fornecedor, :categoria_produto).fornecedor(params[:fornecedor])
     else
-      @produtos = apply_scopes(Produto).includes(:marca, :fornecedor, :categoria_produto)
+      @produtos = apply_scopes(Produto).includes(:marca, :unidade, fornecedor: [:pessoa])
     end
     respond_to do |format|
-      format.html 
-      format.pdf {render pdf: "Produtos"} 
-    end 
+      format.html
+      format.pdf {render pdf: "Produtos"}
+    end
   end
 
   # GET /produtos/1
@@ -63,7 +63,7 @@ class ProdutosController < ApplicationController
       flash[:notice] = "Produto alterado com sucesso"
       redirect_to action: "index"
     else
-      render :edit 
+      render :edit
     end
   end
 
@@ -72,7 +72,7 @@ class ProdutosController < ApplicationController
   def destroy
     begin
       @produto.destroy
-      flash[:notice] = "Produto foi excluido com sucesso" 
+      flash[:notice] = "Produto foi excluido com sucesso"
     rescue ActiveRecord::DeleteRestrictionError => e
       flash[:error] = "O Produto não pode ser excluido"
     ensure
@@ -83,7 +83,7 @@ class ProdutosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_produto
-      @produto = Produto.includes(:unidade, :fornecedor, :marca, :categoria_produto).find(params[:id])
+      @produto = Produto.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

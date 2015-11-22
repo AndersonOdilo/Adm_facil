@@ -1,0 +1,19 @@
+$("#novo_endereco_entrega").html("<%= escape_javascript(render partial: 'form', locals: {pessoa: pessoa}) %>");
+$('#novo_endereco_modal').modal('show');
+$(function() {
+  carregar_estados();
+  carregar_cidades();
+  $(".cep").mask("99999-999");
+   $('#add_endereco').on("click", function() {
+    $('#new_endereco').validate();
+    return $('#new_endereco').submit();
+  });
+  $('#new_endereco').bind("ajax:success", function(event, data, status, xhr) {
+    $('#novo_endereco_modal').modal('hide');
+    return sweetAlert("Ok...", "Endereço salvo com sucesso", "success");
+  });
+  $('#new_endereco').bind("ajax:error", function(event, data, status, xhr) {
+    $('#novo_endereco_modal').modal('hide');
+    return sweetAlert("Oops...", "Falha ao cadastrar endereço", "error");
+  });
+});

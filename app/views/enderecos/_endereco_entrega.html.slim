@@ -8,18 +8,20 @@ div class="modal fade" id="entrega_modal" tabindex="-1" role="dialog" aria-label
           'Endereco de Entrega
       div class="modal-body"
         .row
-          .col-xs-12
-            strong Selecione uma opçao:
-            ul class="list-group"
+          .col-xs-9
+            strong Selecione uma opção:
+            ul class="list-group" id="lista_enderecos"
               - Cliente.find(cliente.to_i).pessoa.enderecos.each do |endereco|
                   li class="list-group-item"
                     = radio_button("pedido", "endereco_id", endereco.id, id:'pedido_endereco_entrega')
                     = "Logradouro: #{endereco.logradouro},
                      Nº #{endereco.numero},
                       Bairro: #{endereco.bairro},
-                      CEP: #{endereco.cep}, 
+                      CEP: #{endereco.cep},
                       #{endereco.cidade.nome}, #{endereco.estado} - #{endereco.pais},
                       Complemento: #{endereco.complemento}"
+          .col-xs-3
+            = link_to 'Cadastrar Novo Endereço', new_endereco_path(pessoa: Cliente.find(cliente.to_i).pessoa_id), remote: true, class: "btn btn-primary btn-xs"
 
       div class="modal-footer"
         button type="button" class="btn btn-default" data-dismiss="modal"

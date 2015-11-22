@@ -61,7 +61,7 @@ class ClientesController < ApplicationController
     if @cliente.update(cliente_params)
         redirect_to @cliente, notice: "Cliente alterado com sucesso"
     else
-      render :edit 
+      render :edit
     end
   end
 
@@ -75,7 +75,7 @@ class ClientesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cliente
-      @cliente = Cliente.includes(:pessoa).find(params[:id])
+      @cliente = Cliente.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

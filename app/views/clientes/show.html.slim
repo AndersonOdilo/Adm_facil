@@ -1,7 +1,7 @@
 section class="content-header"
     h1
         'Cliente
-    = link_to 'Editar', edit_cliente_path(@cliente), class: 'btn btn-warning right' 
+    = link_to 'Editar', edit_cliente_path(@cliente), class: 'btn btn-warning right'
 section class="content"
   .row
     .col-md-12
@@ -55,7 +55,7 @@ section class="content"
                         'Limite credito disponivel:
                     = number_to_currency_br(@cliente.limite_disponivel) rescue ""
 
-        
+
   == render partial: 'pessoas/show', locals: {pessoa: @cliente.pessoa}
 
   .row
@@ -86,7 +86,7 @@ section class="content"
                                 td
                                     = link_to 'Pagar', "/pagamentos_vendas/efetuar_pagamento/#{pagamento.id}",
                                        data: {:confirm => "Deseja efetuar o pagamento no valor de #{number_to_currency_br(pagamento.valor)}?"}, remote: true, class: "btn btn-default btn-xs", id: "botao_#{pagamento.id}"
-                                td = link_to "Pedido", pedido_path(pagamento.pedido.id), class: "btn btn-default btn-xs"
+                                td = link_to "Pedido", pedido_path(pagamento.pedido_id), class: "btn btn-default btn-xs"
 
     .col-md-5
         .box

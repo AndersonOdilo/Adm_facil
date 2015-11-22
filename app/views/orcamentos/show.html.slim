@@ -45,7 +45,7 @@ section class="content"
                   th Unid.
                   th Valor Total
               tbody id="itens"
-                - @orcamento.itens_orcamentos.includes(produto:[:unidade]).each do |item|
+                - @orcamento.itens_orcamentos.includes(produto:[:unidade, :marca]).each do |item|
                   tr
                     td = item.produto.cod
                     td ="#{item.produto.nome}, #{item.produto.marca.nome}"
@@ -78,7 +78,7 @@ section class="content"
           div class="box-header with-border"
             h3 class="box-title"
               'Observações
-          div class="box-body"  
+          div class="box-body"
             p
               = @orcamento.obs
 

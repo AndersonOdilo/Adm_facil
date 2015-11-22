@@ -17,10 +17,10 @@ section class="content"
                 'Disponiveis
             - if params[:em_falta]
               option value="?em_falta=true" selected="selected"
-                'Em falta 
+                'Em falta
             - else
               option value="?em_falta=true"
-                'Em falta 
+                'Em falta
 
           div class="btn-group right"
             = link_to 'Imprimir', produtos_path(disponivel: params[:disponivel], em_falta: params[:em_falta], format: 'pdf'), class: 'btn btn-warning btn-xs', target: '_blank'
@@ -44,10 +44,10 @@ section class="content"
                   td = produto.cod
                   td = produto.nome
                   td = number_to_currency_br(produto.valor_venda)
-                  td = produto.quantidade_estoque
+                  td = "#{produto.quantidade_estoque} #{produto.unidade.sigla}"
                   td = produto.marca.nome
                   td = produto.fornecedor.pessoa.nome
-                  td 
+                  td
                     .btn-group
                       = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), produto, class: 'btn btn-primary btn-xs', title: 'Abrir'
                       = link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_produto_path(produto), class: 'btn btn-warning btn-xs', title: 'Editar'

@@ -1,31 +1,60 @@
-= form_for @endereco do |f|
-  - if @endereco.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@endereco.errors.count, "error")} prohibited this endereco from being saved:"
-      ul
-        - @endereco.errors.full_messages.each do |message|
-          li = message
+div class="modal fade" id="novo_endereco_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  div class="modal-dialog modal-lg"
+    div class="modal-content"
+      div class="modal-header"
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times
+        h2 class="modal-title" id="myModalLabel"
+            'Novo Endereço Entrega
+      div class="modal-body"
+        = form_for @endereco, remote: true, format: 'json' do |f|
+          - if @endereco.errors.any?
+            #error_explanation
+              h2 = "#{pluralize(@endereco.errors.count, "error")} prohibited this endereco from being saved:"
+              ul
+                - @endereco.errors.full_messages.each do |message|
+                  li = message
 
-  .form-group
-    = f.label :numero
-    = f.number_field :numero, class: "form-control"
-  .form-group
-    = f.label :complemento
-    = f.text_field :complemento, class: "form-control"
-  .form-group
-    = f.label :rua
-    = f.collection_select :rua, Logradouro.all, :id, :nome, {}, {class: "form-control"}
-  .form-group
-   = label_tag 'Bairro'
-   = select_tag :select_bairro, {}, {class: "form-control"}
-  .form-group
-    = label_tag 'Cidade'
-    = select_tag :select_cidade, {}, {class: "form-control"}
-  .form-group
-    = label_tag 'Estado'
-    = select_tag :select_estado, options_from_collection_for_select(Pais.first.estados, :id, :sigla), prompt: 'Selecione um estados', class: 'form-control input-sm'
-  .form-group
-      = label_tag 'Pais'
-      = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla), class: 'form-control input-sm'
+          .box
+            div class="box-body"
+              .row
+                .col-lg-2
+                  .form-group
+                    = label_tag 'Pais*'
+                    = select_tag :select_pais, options_from_collection_for_select(Pais.all, :id, :sigla, nil), class: 'form-control input-sm', prompt: 'Selecione um pais', required: true
+                .col-lg-2
+                  .form-group
+                    = label_tag 'Estado*'
+                    = select_tag :select_estado, options_from_collection_for_select({}, :id, :sigla, nil), class: 'form-control input-sm', required: true
+                .col-lg-4
+                  .form-group
+                    = label_tag 'Cidade*'
+                    = f.select :cidade_id, options_from_collection_for_select({}, :id, :nome, nil), {},  {id: 'select_cidade', class: 'form-control input-sm', required: true}
+                .col-lg-4
+                  .form-group
+                    = label_tag 'Bairro*'
+                    = f.text_field :bairro, class: 'form-control input-sm', required: true
+              .row
+                .col-lg-4
+                  .form-group
+                    = label_tag 'Logradouro*'
+                    = f.text_field :logradouro, class: 'form-control input-sm', required: true
+                .col-lg-2
+                  .form-group
+                    = label_tag 'Número'
+                    = f.number_field :numero, class: 'form-control input-sm'
+                .col-lg-2
+                  .form-group
+                    = label_tag 'CEP'
+                    = f.text_field :cep, class: 'form-control input-sm cep'
+                .col-lg-4
+                  .form-group
+                    = label_tag 'Complemento'
+                    = f.text_field :complemento, class: 'form-control input-sm'
 
-  = f.submit 'Save'
+                = f.hidden_field :pessoa_id, value: pessoa
+
+      div class="modal-footer"
+        button type="button" class="btn btn-default" data-dismiss="modal"
+            'Fechar
+        = link_to 'Salvar', '#', class: "btn btn-success", id: 'add_endereco'

@@ -38,7 +38,7 @@ section class="content"
               = "Logradouro: #{@pedido.endereco.logradouro},
                Nº #{@pedido.endereco.numero},
                 Bairro: #{@pedido.endereco.bairro},
-                CEP: #{@pedido.endereco.cep}, 
+                CEP: #{@pedido.endereco.cep},
                 #{@pedido.endereco.cidade.nome}, #{@pedido.endereco.estado} - #{@pedido.endereco.pais},
                 Complemento: #{@pedido.endereco.complemento}"
   .row
@@ -59,7 +59,7 @@ section class="content"
                   th Unid.
                   th Valor Total
               tbody id="itens"
-                - @pedido.itens_pedidos.includes(produto:[:unidade]).each do |item|
+                - @pedido.itens_pedidos.includes(produto:[:unidade, :marca]).each do |item|
                   tr
                     td = item.produto.cod
                     td ="#{item.produto.nome}, #{item.produto.marca.nome}"

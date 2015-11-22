@@ -55,7 +55,7 @@
         flash[:notice] = "Orçamento salvo com sucesso"
         redirect_to @orcamento
       else
-        render :new 
+        render :new
       end
     else
         flash[:alert] = 'Adicione itens ao Orçamento'
@@ -68,13 +68,13 @@
   def update
     if !@orcamento.itens_orcamentos.blank?
       if @orcamento.update(orcamento_params)
-        redirect_to @orcamento, notice: 'Orçamento alterado com sucesso' 
+        redirect_to @orcamento, notice: 'Orçamento alterado com sucesso'
       else
         render :edit
       end
     else
       flash[:alert] = 'Adicione itens ao Orçamento'
-      render :new 
+      render :new
     end
   end
 
@@ -89,7 +89,7 @@
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_orcamento
-      @orcamento = Orcamento.includes(:itens_orcamentos, cliente: [:pessoa], funcionario:[:pessoa]).find(params[:id])
+      @orcamento = Orcamento.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

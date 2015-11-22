@@ -1,7 +1,7 @@
 section class="content-header"
   h1
     'Funcionarios
-      
+
 section class="content"
   .row
     .col-md-12
@@ -14,6 +14,7 @@ section class="content"
               tr
                 th Cod
                 th Nome
+                th Cargo
                 th CPF
                 th Data admissao
                 th
@@ -23,12 +24,13 @@ section class="content"
                 tr
                   td = funcionario.cod
                   td = funcionario.pessoa.specific.nome
+                  td = funcionario.cargo.descricao
                   - if funcionario.pessoa.estado_type == "PessoaFisica"
                     td = funcionario.pessoa.specific.cpf
                   - else
                     td = funcionario.pessoa.specific.cnpj
                   td = funcionario.data_admissao
-                  td 
+                  td
                     .btn-group
                       = link_to content_tag(:span, '', class: 'glyphicon glyphicon-search'), funcionario, class: 'btn btn-primary btn-xs', title: 'Abrir'
                       = link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), funcionario, class: 'btn btn-danger btn-xs', data: {:confirm => "Deseja excluir o funcionario #{funcionario.pessoa.nome}"}, :method => :delete, title: 'Excluir'

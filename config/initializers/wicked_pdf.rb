@@ -1,4 +1,4 @@
 WickedPdf.config = {
   layout: "application.pdf.erb",
-  exe_path: 'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+  exe_path:  '/usr/local/bin/wkhtmltopdf'
 }

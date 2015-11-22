@@ -27,7 +27,7 @@ div class="panel panel-default"
 
           .col-xs-3
             - if @pedido.endereco_id.nil?
-              strong 
+              strong
                 'Retirado no local
             -else
               strong
@@ -45,10 +45,10 @@ div class="panel panel-default"
             = "Logradouro: #{@pedido.endereco.logradouro},
              Nº #{@pedido.endereco.numero},
               Bairro: #{@pedido.endereco.bairro},
-              CEP: #{@pedido.endereco.cep}, 
+              CEP: #{@pedido.endereco.cep},
               #{@pedido.endereco.cidade.nome}, #{@pedido.endereco.estado} - #{@pedido.endereco.pais},
               Complemento: #{@pedido.endereco.complemento}"
-        
+
 div class="panel panel-default"
     div class="panel-body"
       h4
@@ -64,7 +64,7 @@ div class="panel panel-default"
               th Unid.
               th Valor Total
           tbody id="itens"
-          - @pedido.itens_pedidos.includes(:produto).each do |item|
+          - @pedido.itens_pedidos.includes(produto: [:unidade, :marca]).each do |item|
             tr
                 td = item.produto.cod
                 td ="#{item.produto.nome}, #{item.produto.marca.nome}"
@@ -99,7 +99,7 @@ div class="panel panel-default"
           table class="table table-striped"
             thead
               tr
-                th 
+                th
                 th Data vencimento
                 th Data pagamento
                 th Valor

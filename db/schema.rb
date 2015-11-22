@@ -16,19 +16,19 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cargos", force: true do |t|
+  create_table "cargos", force: :cascade do |t|
     t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "categorias_produtos", force: true do |t|
+  create_table "categorias_produtos", force: :cascade do |t|
     t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "cidades", force: true do |t|
+  create_table "cidades", force: :cascade do |t|
     t.string   "nome"
     t.integer  "estado_id"
     t.datetime "created_at"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "cidades", ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
 
-  create_table "clientes", force: true do |t|
+  create_table "clientes", force: :cascade do |t|
     t.decimal  "limite_credito"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "clientes", ["pessoa_id"], name: "index_clientes_on_pessoa_id", using: :btree
 
-  create_table "despesas", force: true do |t|
+  create_table "despesas", force: :cascade do |t|
     t.string   "descricao"
     t.integer  "tipo_despesa_id"
     t.integer  "forma_pagamento_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "despesas", ["forma_pagamento_id"], name: "index_despesas_on_forma_pagamento_id", using: :btree
   add_index "despesas", ["tipo_despesa_id"], name: "index_despesas_on_tipo_despesa_id", using: :btree
 
-  create_table "despesas_pagamentos", force: true do |t|
+  create_table "despesas_pagamentos", force: :cascade do |t|
     t.date     "data_vencimento"
     t.date     "data_pagamento"
     t.decimal  "valor",           precision: 15, scale: 2
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "despesas_pagamentos", ["despesa_id"], name: "index_despesas_pagamentos_on_despesa_id", using: :btree
 
-  create_table "emails", force: true do |t|
+  create_table "emails", force: :cascade do |t|
     t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "emails", ["pessoa_id"], name: "index_emails_on_pessoa_id", using: :btree
 
-  create_table "enderecos", force: true do |t|
+  create_table "enderecos", force: :cascade do |t|
     t.string   "numero"
     t.string   "complemento"
     t.datetime "created_at"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "enderecos", ["cidade_id"], name: "index_enderecos_on_cidade_id", using: :btree
   add_index "enderecos", ["pessoa_id"], name: "index_enderecos_on_pessoa_id", using: :btree
 
-  create_table "estados", force: true do |t|
+  create_table "estados", force: :cascade do |t|
     t.string   "nome"
     t.string   "sigla"
     t.integer  "pais_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "estados", ["pais_id"], name: "index_estados_on_pais_id", using: :btree
 
-  create_table "fones", force: true do |t|
+  create_table "fones", force: :cascade do |t|
     t.string   "numero"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "fones", ["pessoa_id"], name: "index_fones_on_pessoa_id", using: :btree
 
-  create_table "formas_pagamentos", force: true do |t|
+  create_table "formas_pagamentos", force: :cascade do |t|
     t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
     t.integer  "numero_parcela"
   end
 
-  create_table "fornecedores", force: true do |t|
+  create_table "fornecedores", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pessoa_id"
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "fornecedores", ["pessoa_id"], name: "index_fornecedores_on_pessoa_id", using: :btree
 
-  create_table "funcionarios", force: true do |t|
+  create_table "funcionarios", force: :cascade do |t|
     t.string   "cod"
     t.string   "carteira_trabalho"
     t.decimal  "salario"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "funcionarios", ["cargo_id"], name: "index_funcionarios_on_cargo_id", using: :btree
   add_index "funcionarios", ["pessoa_id"], name: "index_funcionarios_on_pessoa_id", using: :btree
 
-  create_table "itens_orcamentos", force: true do |t|
+  create_table "itens_orcamentos", force: :cascade do |t|
     t.integer  "quantidade"
     t.decimal  "preco"
     t.integer  "orcamento_id"
@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "itens_orcamentos", ["orcamento_id"], name: "index_itens_orcamentos_on_orcamento_id", using: :btree
   add_index "itens_orcamentos", ["produto_id"], name: "index_itens_orcamentos_on_produto_id", using: :btree
 
-  create_table "itens_pedidos", force: true do |t|
+  create_table "itens_pedidos", force: :cascade do |t|
     t.integer  "produto_id"
     t.integer  "pedido_id"
     t.integer  "quantidade"
@@ -166,13 +166,13 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "itens_pedidos", ["pedido_id"], name: "index_itens_pedidos_on_pedido_id", using: :btree
   add_index "itens_pedidos", ["produto_id"], name: "index_itens_pedidos_on_produto_id", using: :btree
 
-  create_table "marcas", force: true do |t|
+  create_table "marcas", force: :cascade do |t|
     t.string   "nome"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "notificacaos", force: true do |t|
+  create_table "notificacaos", force: :cascade do |t|
     t.integer  "produto_id"
     t.boolean  "visualizado"
     t.datetime "created_at"
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "notificacaos", ["produto_id"], name: "index_notificacaos_on_produto_id", using: :btree
 
-  create_table "orcamentos", force: true do |t|
+  create_table "orcamentos", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "data"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "orcamentos", ["cliente_id"], name: "index_orcamentos_on_cliente_id", using: :btree
   add_index "orcamentos", ["funcionario_id"], name: "index_orcamentos_on_funcionario_id", using: :btree
 
-  create_table "pagamentos_vendas", force: true do |t|
+  create_table "pagamentos_vendas", force: :cascade do |t|
     t.date     "data_vencimento"
     t.date     "data_pagamento"
     t.decimal  "valor",           precision: 15, scale: 2
@@ -207,14 +207,14 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "pagamentos_vendas", ["pedido_id"], name: "index_pagamentos_vendas_on_pedido_id", using: :btree
 
-  create_table "paises", force: true do |t|
+  create_table "paises", force: :cascade do |t|
     t.string   "nome"
     t.string   "sigla"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "pedidos", force: true do |t|
+  create_table "pedidos", force: :cascade do |t|
     t.date     "data"
     t.decimal  "desconto"
     t.string   "obs"
@@ -231,7 +231,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "pedidos", ["forma_pagamento_id"], name: "index_pedidos_on_forma_pagamento_id", using: :btree
   add_index "pedidos", ["funcionario_id"], name: "index_pedidos_on_funcionario_id", using: :btree
 
-  create_table "pessoas", force: true do |t|
+  create_table "pessoas", force: :cascade do |t|
     t.string   "nome"
     t.integer  "estado_id"
     t.string   "estado_type"
@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
     t.datetime "updated_at"
   end
 
-  create_table "pessoas_fisicas", force: true do |t|
+  create_table "pessoas_fisicas", force: :cascade do |t|
     t.string   "cpf"
     t.string   "rg"
     t.date     "data_nascimento"
@@ -247,7 +247,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
     t.datetime "updated_at"
   end
 
-  create_table "pessoas_juridicas", force: true do |t|
+  create_table "pessoas_juridicas", force: :cascade do |t|
     t.string   "nome_fantasia"
     t.string   "cnpj"
     t.string   "inscricao_estadual"
@@ -256,7 +256,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
     t.date     "data_abertura"
   end
 
-  create_table "pontos", force: true do |t|
+  create_table "pontos", force: :cascade do |t|
     t.date     "data_entrada"
     t.time     "hora_entrada"
     t.date     "data_saida"
@@ -268,7 +268,7 @@ ActiveRecord::Schema.define(version: 20151101215750) do
 
   add_index "pontos", ["funcionario_id"], name: "index_pontos_on_funcionario_id", using: :btree
 
-  create_table "produtos", force: true do |t|
+  create_table "produtos", force: :cascade do |t|
     t.string   "cod"
     t.string   "nome"
     t.string   "descricao"
@@ -291,20 +291,20 @@ ActiveRecord::Schema.define(version: 20151101215750) do
   add_index "produtos", ["marca_id"], name: "index_produtos_on_marca_id", using: :btree
   add_index "produtos", ["unidade_id"], name: "index_produtos_on_unidade_id", using: :btree
 
-  create_table "tipos_despesas", force: true do |t|
+  create_table "tipos_despesas", force: :cascade do |t|
     t.string   "descricao"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "unidades", force: true do |t|
+  create_table "unidades", force: :cascade do |t|
     t.string   "descricao"
     t.string   "sigla"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "usuarios", force: true do |t|
+  create_table "usuarios", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

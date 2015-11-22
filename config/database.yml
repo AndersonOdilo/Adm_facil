@@ -6,7 +6,7 @@ default: &default
 development:
   <<: *default
   database: adm_facil_development
-  username: postgres
+  username: anderson
   password: 13101994
   host: localhost
   port: 5432
@@ -14,7 +14,7 @@ development:
 production:
   <<: *default
   database: adm_facil_production
-  username: postgres
+  username: anderson
   password: 13101994
   host: localhost
   port: 5432

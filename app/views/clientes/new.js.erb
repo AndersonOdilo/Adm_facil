@@ -10,7 +10,7 @@ $(function(){
   });
 	$('#new_cliente').bind('ajax:success', function(event, data, status, xhr){
     $('#cliente_nome').val(data.pessoa.nome);
-    $('#pedido_cliente_id').val(data.id);
+    $('#cliente_id').val(data.id);
     $('#novo_cliente').modal('hide');
     return sweetAlert("Ok...", "Cliente salvo com sucesso", "success");
   });
